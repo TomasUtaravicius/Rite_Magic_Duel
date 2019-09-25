@@ -91,7 +91,7 @@ public class GestureController : MonoBehaviour
             Debug.Log("Failed to load sample gesture database file");
         }
         Debug.Log(gr.loadFromFile(LoadGesturesFile) + "Gesture file load");
-
+        Debug.Log(Application.streamingAssetsPath.ToString()+ "Path");
         // Set the welcome message.
         HUDText = GameObject.Find("HUDText").GetComponent<Text>();
         HUDText.text = "Welcome to MARUI Gesture Plug-in!\n"

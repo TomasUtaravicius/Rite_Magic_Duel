@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerRotator : MonoBehaviour
 {
+    
     public GameObject cameraObject;
     public PhotonView photonView;
     public Transform spellCastingPoint;

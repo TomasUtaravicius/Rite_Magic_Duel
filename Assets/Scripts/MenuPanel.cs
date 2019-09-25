@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class MenuPanel : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,7 @@ public class MenuPanel : MonoBehaviour
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
+        this.gameObject.transform.parent.gameObject.SetActive(false);
         PhotonNetwork.Disconnect();
     }
 }

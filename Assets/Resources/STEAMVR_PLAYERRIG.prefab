@@ -88,6 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1743563448}
+  - component: {fileID: 123557039}
   m_Layer: 0
   m_Name: BufferedSpellSlot
   m_TagString: Untagged
@@ -110,6 +111,20 @@ Transform:
   m_Father: {fileID: 8747751568807313072}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &123557039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743563447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6397cc7839be1e449aa65ce6b9c759f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellManager: {fileID: 8718860467619618324}
+  animatedSpellSlot: {fileID: 8880871191296415744}
 --- !u!1 &1826287906
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,8 +454,8 @@ MonoBehaviour:
     needsReinit: 0
   handType: 2
   shouldTrain: 1
-  LoadGesturesFile: Assets/GestureRecognition/Sample_OneHanded_MyGestures.dat
-  SaveGesturesFile: Assets/GestureRecognition/Sample_OneHanded_MyGestures.dat
+  LoadGesturesFile: Assets/GestureRecognition/Thomas_fix.dat
+  SaveGesturesFile: Assets/GestureRecognition/Thomas_fix.dat
   spellManager: {fileID: 8718860467619618324}
 --- !u!114 &1255217219
 MonoBehaviour:
@@ -7593,11 +7608,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 25
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9043010021247146394, guid: 55df17b312880834ca0cffe712f2fb8d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 55df17b312880834ca0cffe712f2fb8d, type: 3}
 --- !u!4 &2938274741297468774 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2974483350148434790, guid: 55df17b312880834ca0cffe712f2fb8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 108549937421131264}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8880871191296415744 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8844670392449205760, guid: 55df17b312880834ca0cffe712f2fb8d,
     type: 3}
   m_PrefabInstance: {fileID: 108549937421131264}
   m_PrefabAsset: {fileID: 0}
@@ -7685,9 +7707,9 @@ PrefabInstance:
       objectReference: {fileID: 4100150321218379253}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d1abc4b0071e5547a9375d0ede5ee31, type: 3}
---- !u!20 &6743094303483794249 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 4942162452639488807, guid: 9d1abc4b0071e5547a9375d0ede5ee31,
+--- !u!4 &8979808668414601357 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7321989268163158243, guid: 9d1abc4b0071e5547a9375d0ede5ee31,
     type: 3}
   m_PrefabInstance: {fileID: 1802106266760579182}
   m_PrefabAsset: {fileID: 0}
@@ -7697,9 +7719,9 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1802106266760579182}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &8979808668414601357 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7321989268163158243, guid: 9d1abc4b0071e5547a9375d0ede5ee31,
+--- !u!20 &6743094303483794249 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4942162452639488807, guid: 9d1abc4b0071e5547a9375d0ede5ee31,
     type: 3}
   m_PrefabInstance: {fileID: 1802106266760579182}
   m_PrefabAsset: {fileID: 0}
