@@ -1273,7 +1273,7 @@ GameObject:
   - component: {fileID: 8100183831808599420}
   - component: {fileID: 8100183831808599421}
   m_Layer: 5
-  m_Name: UI
+  m_Name: MenuUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7608,8 +7608,7 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 25
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 9043010021247146394, guid: 55df17b312880834ca0cffe712f2fb8d, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55df17b312880834ca0cffe712f2fb8d, type: 3}
 --- !u!4 &2938274741297468774 stripped
 Transform:
