@@ -453,7 +453,7 @@ MonoBehaviour:
     actionPath: /actions/default/in/Squeeze
     needsReinit: 0
   handType: 2
-  shouldTrain: 1
+  shouldTrain: 0
   LoadGesturesFile: Assets/GestureRecognition/Thomas_fix.dat
   SaveGesturesFile: Assets/GestureRecognition/Thomas_fix.dat
   spellManager: {fileID: 8718860467619618324}
