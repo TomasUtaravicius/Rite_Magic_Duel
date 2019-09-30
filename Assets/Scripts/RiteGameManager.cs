@@ -12,7 +12,7 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
 
     [SerializeField]
     private GameObject steamVrPlayerPrefab;
-
+    private GameObject spawnPoints;
     public List<NetworkedPlayer> playerList;
     public List<NetworkedPlayer> alivePlayerList;
 
@@ -142,20 +142,23 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
         int number = PhotonNetwork.LocalPlayer.ActorNumber;
         int positionIndex = (int)PhotonNetwork.LocalPlayer.CustomProperties["position"];
 
-        //Vector3 spawnPoint = playerSpawnPoints.GetChild(positionIndex).position;
         GameObject spawnPoint = playerSpawnPoints.GetChild(positionIndex).GetChild(0).gameObject;
         spawnPoint.GetComponent<MeshRenderer>().material.color = RiteGame.GetColor(positionIndex);
-        photonView.RPC("UpdateSpawnPoint", RpcTarget.Others, positionIndex);
-        GameObject go = PhotonNetwork.Instantiate(steamVrPlayerPrefab.name, spawnPoint.transform.position, Quaternion.identity, 0) as GameObject;
+        photonView.RPC("UpdateSpawnPointColor", RpcTarget.Others, positionIndex);
+        spawnPoint.transform.GetChild(0).gameObject.SetActive(enabled);
+
+       
+        //GameObject go = PhotonNetwork.Instantiate(steamVrPlayerPrefab.name, spawnPoint.transform.position, Quaternion.identity, 0) as GameObject;
 
         if (PhotonNetwork.IsMasterClient)
         {
         }
     }
     [PunRPC]
-    void UpdateSpawnPoint(int positionIndex)
+    void UpdateSpawnPointColor(int positionIndex)
     {
         GameObject spawnPoint = playerSpawnPoints.GetChild(positionIndex).GetChild(0).gameObject;
+        spawnPoint.transform.GetChild(0).gameObject.SetActive(enabled);
         spawnPoint.GetComponent<MeshRenderer>().material.color = RiteGame.GetColor(positionIndex);
     }
 
@@ -290,7 +293,6 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
         IncrementPlayerScore(playerID);
         Invoke("RoundStart", 3f);
 
-        //photonView.RPC("RoundStart", PhotonTargets.AllBuffered);
     }
     void IncrementPlayerScore(int playerID)
     {

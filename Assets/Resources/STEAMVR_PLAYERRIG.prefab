@@ -1879,7 +1879,7 @@ Transform:
   m_GameObject: {fileID: 8749147360060370006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.69, y: 0, z: -1.66}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 100, z: 1}
   m_Children:
   - {fileID: 6459792537675181090}
   - {fileID: 8753021438846540750}
@@ -1948,7 +1948,7 @@ MonoBehaviour:
   enableMouseControl: 1
   enableShootSpells: 1
   lobbyMode: 0
-  testMode: 0
+  testMode: 1
 --- !u!1 &8749157946996739444
 GameObject:
   m_ObjectHideFlags: 0
