@@ -8,8 +8,7 @@ public class UIController : MonoBehaviour
 {
     [SerializeField]
     private GameObject menuUI;
-    [SerializeField]
-    private GestureController gestureController;
+    
     public SteamVR_Action_Boolean menuToggle;
     public SteamVR_Input_Sources handType;
     public GameObject pointer;
@@ -36,13 +35,13 @@ public class UIController : MonoBehaviour
     private void DisableUI()
     {
         menuUI.SetActive(false);
-        gestureController.enabled = true;
+
         pointer.SetActive(false);
     }
     private void EnableUI()
     {
         menuUI.SetActive(true);
-        gestureController.enabled = false;
+        
         pointer.SetActive(true);
     }
 

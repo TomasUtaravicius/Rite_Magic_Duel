@@ -58,6 +58,7 @@ public class AvatarStateController : MonoBehaviour {
         }
         aliveAvatar.SetActive(true);
         deadAvatar.SetActive(false);
+
         aliveAvatar.GetComponent<SpawnInfo>().playerReference = this.gameObject;
         aliveAvatar.GetComponent<SpawnInfo>().AwakeAvatar();
         sManager.canCastSpells = true;

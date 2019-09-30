@@ -196,6 +196,7 @@
     <Compile Include="Assets\GestureRecognition\Sample_Military.cs" />
     <Compile Include="Assets\GestureRecognition\Sample_OneHanded.cs" />
     <Compile Include="Assets\GestureRecognition\Sample_TwoHanded.cs" />
+    <Compile Include="Assets\GestureSetup.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\Common\EventSystemSpawner.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\Common\OnStartDelete.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\Common\TextButtonTransition.cs" />

@@ -316,8 +316,8 @@ GameObject:
   - component: {fileID: 6459792537676470008}
   - component: {fileID: 6459792537668292504}
   - component: {fileID: 8035708519752962083}
-  - component: {fileID: 1255217213}
   - component: {fileID: 1255217219}
+  - component: {fileID: 1453294300809407490}
   m_Layer: 0
   m_Name: '[CameraRig]'
   m_TagString: Untagged
@@ -437,26 +437,6 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &1255217213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6459792537675464154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7356cda5890125248b90b9c75409a830, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerValue:
-    actionPath: /actions/default/in/Squeeze
-    needsReinit: 0
-  handType: 2
-  shouldTrain: 0
-  LoadGesturesFile: Assets/GestureRecognition/Thomas_fix.dat
-  SaveGesturesFile: Assets/GestureRecognition/Thomas_fix.dat
-  spellManager: {fileID: 8718860467619618324}
 --- !u!114 &1255217219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,13 +457,13 @@ MonoBehaviour:
   file_load_combinations: Assets/GestureRecognition/Sample_TwoHanded_Gestures.dat
   file_load_subgestures: Assets/GestureRecognition/Sample_TwoHanded_GesturesLeft.dat
   file_load_subgestures_i: 0
-  file_load_gestures: Assets/GestureRecognition/Sample_OneHanded_MyGestures.dat
+  file_load_gestures: Assets/GestureRecognition/Tomas_fix_v2.dat
   file_save_combinations: Assets/GestureRecognition/Sample_TwoHanded_MyGestures.dat
-  file_save_gestures: Assets/GestureRecognition/Sample_OneHanded_MyGestures.dat
+  file_save_gestures: Assets/GestureRecognition/Tomas_fix_v2.dat
   create_combination_name: (new gesture combination name)
   create_gesture_name: (new gesture name)
   create_gesture_names: []
-  record_gesture_id: 1
+  record_gesture_id: 4
   record_combination_id: -1
   lefthand_combination_part: 0
   righthand_combination_part: 1
@@ -492,6 +472,21 @@ MonoBehaviour:
   copy_gesture_id: 0
   copy_gesture_mirror: 1
   stroke_index: 0
+--- !u!114 &1453294300809407490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6459792537675464154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19213ff7b4f241743830505f12521c1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadGesturesFile: Assets/GestureRecognition/Tomas_fix_v2.dat
+  SaveGesturesFile: Assets/GestureRecognition/Tomas_fix_v2.dat
+  spellManager: {fileID: 8718860467619618324}
 --- !u!1 &6459792537675464422
 GameObject:
   m_ObjectHideFlags: 0
@@ -4323,7 +4318,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuUI: {fileID: 8100183831808599411}
-  gestureController: {fileID: 1255217213}
   menuToggle:
     actionPath: /actions/default/in/MenuToggle
     needsReinit: 0

@@ -44,12 +44,12 @@ public class GestureController : MonoBehaviour
     
     // The file from which to load gestures on startup.
     // For example: "Assets/GestureRecognition/sample_gestures.dat"
-    [SerializeField] private string LoadGesturesFile;
+    [SerializeField] public string LoadGesturesFile;
 
     // File where to save recorded gestures.
     // For example: "Assets/GestureRecognition/my_custom_gestures.dat"
-    [SerializeField] private string SaveGesturesFile;
-    [SerializeField] private SpellManager spellManager;
+    [SerializeField] public string SaveGesturesFile;
+    [SerializeField] public SpellManager spellManager;
     // The gesture recognition object:
     // You can have as many of these as you want simultaneously.
     private GestureRecognition gr = new GestureRecognition();
@@ -86,12 +86,15 @@ public class GestureController : MonoBehaviour
     void Start()
     {
         // Load the default set of gestures.
-        if (gr.loadFromFile(LoadGesturesFile) == false)
+        /*if (gr.loadFromFile(LoadGesturesFile) == false)
         {
             Debug.Log("Failed to load sample gesture database file");
-        }
-        Debug.Log(gr.loadFromFile(LoadGesturesFile) + "Gesture file load");
-        Debug.Log(Application.streamingAssetsPath.ToString()+ "Path");
+        }*/
+        Invoke("LoadTheFile", 0.3f);
+        Invoke("LoadTheFile", 0.4f);
+        Invoke("LoadTheFile", 0.5f);
+        Invoke("LoadTheFile", 1f);
+        //Debug.Log(Application.streamingAssetsPath.ToString()+ "Path");
         // Set the welcome message.
         HUDText = GameObject.Find("HUDText").GetComponent<Text>();
         HUDText.text = "Welcome to MARUI Gesture Plug-in!\n"
@@ -116,7 +119,20 @@ public class GestureController : MonoBehaviour
              gr.startTraining();*/
             StartTraining();
         }
+
        
+        
+    }
+    private void LoadTheFile()
+    {
+        if(gr.loadFromFile(LoadGesturesFile))
+        {
+            Debug.LogWarning("Successful load");
+        }
+        else
+        {
+            Debug.LogWarning("Unsuccessful load");
+        }
         
     }
     private void StartTraining()
