@@ -12,25 +12,45 @@ public class UIController : MonoBehaviour
     public SteamVR_Action_Boolean menuToggle;
     public SteamVR_Input_Sources handType;
     public GameObject pointer;
-    
+    private bool menuValue;
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
+    public void ResetMenu()
+    {
+        menuValue = false;
+        DisableUI();
+    }
     // Update is called once per frame
     void Update()
     {
         
-        if (menuToggle.GetState(handType)==true)
+        if(menuToggle.GetStateDown(handType))
         {
-            EnableUI();
+            menuValue = !menuValue;
+            if (menuValue)
+            {
+                EnableUI();
+            }
+            else
+            {
+                DisableUI();
+            }
+        }
+        /*if (menuToggle.GetState(handType)==true)
+        {
+            
+            
         }
         if (menuToggle.GetState(handType)==false)
         {
-            DisableUI();
-        }
+            menuValue = false;
+            
+        }*/
+       
     }
     private void DisableUI()
     {

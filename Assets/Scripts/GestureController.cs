@@ -92,8 +92,7 @@ public class GestureController : MonoBehaviour
         }*/
         Invoke("LoadTheFile", 0.3f);
         Invoke("LoadTheFile", 0.4f);
-        Invoke("LoadTheFile", 0.5f);
-        Invoke("LoadTheFile", 1f);
+        
         //Debug.Log(Application.streamingAssetsPath.ToString()+ "Path");
         // Set the welcome message.
         HUDText = GameObject.Find("HUDText").GetComponent<Text>();
@@ -111,21 +110,35 @@ public class GestureController : MonoBehaviour
         RenderSettings.skybox.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f, 1.0f));
         if(shouldTrain)
         {
-            Debug.Log("Start training");
-            /* gr.setTrainingUpdateCallback(trainingUpdateCallback);
-             gr.setTrainingUpdateCallbackMetadata((IntPtr)me);
-             gr.setTrainingFinishCallback(trainingFinishCallback);
-             gr.setTrainingFinishCallbackMetadata((IntPtr)me);
-             gr.startTraining();*/
-            StartTraining();
+            //Invoke("StartTraining", 1f);
+            
+            //StartTraining();
         }
 
        
         
     }
+    private void LoadTheOtherFile()
+    {
+        if (gr.loadFromFile("Assets/GestureRecognition/GestureSet2.dat"))
+        {
+            Debug.LogWarning("Successful load");
+        }
+        else
+        {
+            Debug.LogWarning("Unsuccessful load");
+        }
+
+    }
     private void LoadTheFile()
     {
-        if(gr.loadFromFile(LoadGesturesFile))
+/*#if UNITY_EDITOR
+        gr.loadFromFile(LoadGesturesFile);
+#else
+        gr.loadFromFile(Application.streamingAssetsPath + "/GestureSet1.dat");
+#endif*/
+
+        if (gr.loadFromFile(LoadGesturesFile))
         {
             Debug.LogWarning("Successful load");
         }
@@ -137,8 +150,12 @@ public class GestureController : MonoBehaviour
     }
     private void StartTraining()
     {
+        Debug.Log("Start training");
+        gr.setTrainingUpdateCallback(trainingUpdateCallback);
+        gr.setTrainingUpdateCallbackMetadata((IntPtr)me);
+        gr.setTrainingFinishCallback(trainingFinishCallback);
+        gr.setTrainingFinishCallbackMetadata((IntPtr)me);
         gr.startTraining();
-        Invoke("FinishTraining", 10f);
     }
     private void FinishTraining()
     {
@@ -155,7 +172,18 @@ public class GestureController : MonoBehaviour
     // Update:
     void Update()
     {
-        
+        if (Input.GetKeyDown("s"))
+        {
+            Debug.LogError("Pressed the S key");
+            Invoke("StartTraining", 1f);
+            
+        }
+        if (Input.GetKeyDown("l"))
+        {
+            Debug.LogError("Pressed the L key");
+            
+            LoadTheOtherFile();
+        }
         //Debug.Log(last_performance_report * 100.0);
         float trigger_left = Input.GetAxis("LeftControllerTrigger");
         float trigger_right = SteamVR_Actions.default_Squeeze.GetAxis(handType);
@@ -286,6 +314,7 @@ public class GestureController : MonoBehaviour
         GestureController me = (obj.Target as GestureController);
         // Update the performance indicator with the latest estimate.
         me.last_performance_report = performance;
+        Debug.LogError(performance);
     }
    
 
@@ -302,6 +331,7 @@ public class GestureController : MonoBehaviour
         me.recording_gesture = -3;
         // Save the data to file. 
         me.gr.saveToFile(me.SaveGesturesFile);
+        Debug.LogError("Training finished");
 
     }
 

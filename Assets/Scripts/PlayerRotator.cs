@@ -47,8 +47,8 @@ public class PlayerRotator : MonoBehaviour
                 transform.Translate(new Vector3(x, 0f, z));
                 if (enableMouseControl)
                 {
-                    rotation.y += Input.GetAxis("Mouse X");
-                    rotation.x += -Input.GetAxis("Mouse Y");
+                    rotation.x += Input.GetAxis("Mouse X");
+                    rotation.y += -Input.GetAxis("Mouse Y");
                     transform.eulerAngles = (Vector2)rotation * speed;
                 }
             }

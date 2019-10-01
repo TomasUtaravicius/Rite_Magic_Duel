@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 public class MenuPanel : MonoBehaviour
 {
-
+    [SerializeField]
+    private UIController uIController;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +23,8 @@ public class MenuPanel : MonoBehaviour
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
+        uIController.ResetMenu();
+        
         this.gameObject.transform.parent.gameObject.SetActive(false);
         PhotonNetwork.Disconnect();
     }

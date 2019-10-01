@@ -37,7 +37,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
     public Button StartGameButton;
     public GameObject PlayerListEntryPrefab;
 
-    [Header("Inside Room Panel")]
+    
     public Keyboard keyboard;
 
     private Dictionary<string, RoomInfo> cachedRoomList;
@@ -248,6 +248,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LocalPlayer.NickName = playerName;
             PhotonNetwork.ConnectUsingSettings();
+            keyboard.gameObject.SetActive(false);
         }
         else
         {
