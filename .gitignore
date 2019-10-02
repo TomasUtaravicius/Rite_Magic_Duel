@@ -34,8 +34,3 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
-
-# Maya
-ExternalResources/
-!FBX
-!MayaScene
