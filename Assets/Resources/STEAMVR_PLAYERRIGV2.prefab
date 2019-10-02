@@ -3575,6 +3575,7 @@ MonoBehaviour:
   sManager: {fileID: 801833619509887931}
   playerCamera: {fileID: 3043858258029376973}
   aliveAvatarBody: {fileID: 771168002771386109}
+  gestureController: {fileID: 1248399004}
   listGO:
   - {fileID: 771074484535818741}
   - {fileID: 771292986797239863}
@@ -7077,9 +7078,8 @@ GameObject:
   - component: {fileID: 3061032800969771863}
   - component: {fileID: 3061032800959566391}
   - component: {fileID: 2043403164333837708}
-  - component: {fileID: 8349447258800031212}
-  - component: {fileID: 7490631305985241517}
   - component: {fileID: 1248399004}
+  - component: {fileID: 795362990}
   m_Layer: 0
   m_Name: '[CameraRig]'
   m_TagString: Untagged
@@ -7199,7 +7199,29 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &8349447258800031212
+--- !u!114 &1248399004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3061032800970793077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7356cda5890125248b90b9c75409a830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerValue:
+    actionPath: /actions/default/in/Squeeze
+    needsReinit: 0
+  handType: 2
+  shouldTrain: 0
+  LoadGesturesFile: Assets/StreamingAssets/GestureSet1.dat
+  wandEnd: {fileID: 770848740348407733}
+  head: {fileID: 3060605638323186057}
+  SaveGesturesFile: Assets/StreamingAssets/GestureSet1.dat
+  spellManager: {fileID: 801833619509887931}
+--- !u!114 &795362990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7219,13 +7241,13 @@ MonoBehaviour:
   file_load_combinations: Assets/GestureRecognition/Sample_TwoHanded_Gestures.dat
   file_load_subgestures: Assets/GestureRecognition/Sample_TwoHanded_GesturesLeft.dat
   file_load_subgestures_i: 0
-  file_load_gestures: Assets/GestureRecognition/Tomas_fix_v2.dat
+  file_load_gestures: Assets/StreamingAssets/GestureSet1.dat
   file_save_combinations: Assets/GestureRecognition/Sample_TwoHanded_MyGestures.dat
-  file_save_gestures: Assets/GestureRecognition/Tomas_fix_v2.dat
+  file_save_gestures: Assets/StreamingAssets/GestureSet1.dat
   create_combination_name: (new gesture combination name)
   create_gesture_name: (new gesture name)
   create_gesture_names: []
-  record_gesture_id: 4
+  record_gesture_id: -1
   record_combination_id: -1
   lefthand_combination_part: 0
   righthand_combination_part: 1
@@ -7234,41 +7256,6 @@ MonoBehaviour:
   copy_gesture_id: 0
   copy_gesture_mirror: 1
   stroke_index: 0
---- !u!114 &7490631305985241517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3061032800970793077}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19213ff7b4f241743830505f12521c1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LoadGesturesFile: Assets/GestureRecognition/Tomas_fix_v2.dat
-  SaveGesturesFile: Assets/GestureRecognition/Tomas_fix_v2.dat
-  spellManager: {fileID: 801833619509887931}
---- !u!114 &1248399004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3061032800970793077}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7356cda5890125248b90b9c75409a830, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerValue:
-    actionPath: /actions/default/in/Squeeze
-    needsReinit: 0
-  handType: 2
-  shouldTrain: 0
-  LoadGesturesFile: Assets/GestureRecognition/GestureSet2.dat
-  SaveGesturesFile: Assets/GestureRecognition/GestureSet2.dat
-  spellManager: {fileID: 801833619509887931}
 --- !u!1 &3061032800970793801
 GameObject:
   m_ObjectHideFlags: 0
@@ -7837,12 +7824,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4936c82034d6bac4c91a4a752ac5ff1e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d1abc4b0071e5547a9375d0ede5ee31, type: 3}
---- !u!20 &3335894646813298406 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 4942162452639488807, guid: 9d1abc4b0071e5547a9375d0ede5ee31,
-    type: 3}
-  m_PrefabInstance: {fileID: 7700429758759605697}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1099303145879696674 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7321989268163158243, guid: 9d1abc4b0071e5547a9375d0ede5ee31,
@@ -7852,6 +7833,12 @@ Transform:
 --- !u!1 &7274222738197266997 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1021849939269375988, guid: 9d1abc4b0071e5547a9375d0ede5ee31,
+    type: 3}
+  m_PrefabInstance: {fileID: 7700429758759605697}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &3335894646813298406 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4942162452639488807, guid: 9d1abc4b0071e5547a9375d0ede5ee31,
     type: 3}
   m_PrefabInstance: {fileID: 7700429758759605697}
   m_PrefabAsset: {fileID: 0}

@@ -45,7 +45,8 @@ public class GestureController : MonoBehaviour
     // The file from which to load gestures on startup.
     // For example: "Assets/GestureRecognition/sample_gestures.dat"
     [SerializeField] public string LoadGesturesFile;
-
+    [SerializeField] private GameObject wandEnd;
+    [SerializeField] private GameObject head;
     // File where to save recorded gestures.
     // For example: "Assets/GestureRecognition/my_custom_gestures.dat"
     [SerializeField] public string SaveGesturesFile;
@@ -92,7 +93,9 @@ public class GestureController : MonoBehaviour
         }*/
         Invoke("LoadTheFile", 0.3f);
         Invoke("LoadTheFile", 0.4f);
-        
+        gr.ignoreHeadRotationLeftRight = true;
+       /* gr.ignoreHeadRotationTilt = true;
+        gr.ignoreHeadRotationUpDown = true;*/
         //Debug.Log(Application.streamingAssetsPath.ToString()+ "Path");
         // Set the welcome message.
         HUDText = GameObject.Find("HUDText").GetComponent<Text>();
@@ -132,20 +135,20 @@ public class GestureController : MonoBehaviour
     }
     private void LoadTheFile()
     {
-/*#if UNITY_EDITOR
-        gr.loadFromFile(LoadGesturesFile);
-#else
-        gr.loadFromFile(Application.streamingAssetsPath + "/GestureSet1.dat");
-#endif*/
+        #if UNITY_EDITOR
+                gr.loadFromFile(LoadGesturesFile);
+        #else
+                gr.loadFromFile(Application.streamingAssetsPath + "/GestureSet1.dat");
+        #endif
 
-        if (gr.loadFromFile(LoadGesturesFile))
+        /*if (gr.loadFromFile(LoadGesturesFile))
         {
             Debug.LogWarning("Successful load");
         }
         else
         {
             Debug.LogWarning("Unsuccessful load");
-        }
+        }*/
         
     }
     private void StartTraining()
@@ -225,10 +228,8 @@ public class GestureController : MonoBehaviour
             Quaternion q = active_controller.transform.rotation;
             gr.contdStroke(p, q);
             // Show the stroke by instatiating new objects
-            GameObject star_instance = Instantiate(GameObject.Find("star"));
+
             GameObject star = new GameObject("stroke_" + stroke_index++);
-            star_instance.name = star.name + "_instance";
-            star_instance.transform.SetParent(star.transform, false);
             System.Random random = new System.Random();
             star.transform.localPosition = new Vector3(p.x + (float)random.NextDouble() / 80, p.y + (float)random.NextDouble() / 80, p.z + (float)random.NextDouble() / 80);
             star.transform.localRotation = new Quaternion((float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f).normalized;
@@ -276,7 +277,11 @@ public class GestureController : MonoBehaviour
         }
         else if (gesture_id == 1)
         {
-            HUDText.text = "V" + (similarity * 100.0);
+            HUDText.text = "circle" + (similarity * 100.0);
+            if (spellManager.canCastSpells)
+            {
+                spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
+            }
 
         }
         else if (gesture_id == 2)
