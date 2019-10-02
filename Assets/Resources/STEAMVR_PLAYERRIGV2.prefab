@@ -6144,7 +6144,7 @@ MonoBehaviour:
   speed: 3
   enableMouseControl: 1
   enableShootSpells: 1
-  lobbyMode: 1
+  lobbyMode: 0
   testMode: 1
 --- !u!1 &771261022294155917
 GameObject:
