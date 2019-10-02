@@ -3575,6 +3575,7 @@ MonoBehaviour:
   sManager: {fileID: 801833619509887931}
   playerCamera: {fileID: 3043858258029376973}
   aliveAvatarBody: {fileID: 771168002771386109}
+  gestureController: {fileID: 1248399004}
   listGO:
   - {fileID: 771074484535818741}
   - {fileID: 771292986797239863}
@@ -6131,7 +6132,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771247072837005817}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f80b4da077bb8f4e9afa6a67309846e, type: 3}
   m_Name: 
@@ -7219,13 +7220,13 @@ MonoBehaviour:
   file_load_combinations: Assets/GestureRecognition/Sample_TwoHanded_Gestures.dat
   file_load_subgestures: Assets/GestureRecognition/Sample_TwoHanded_GesturesLeft.dat
   file_load_subgestures_i: 0
-  file_load_gestures: Assets/GestureRecognition/Tomas_fix_v2.dat
+  file_load_gestures: Assets/GestureRecognition/GestureSet2.dat
   file_save_combinations: Assets/GestureRecognition/Sample_TwoHanded_MyGestures.dat
-  file_save_gestures: Assets/GestureRecognition/Tomas_fix_v2.dat
+  file_save_gestures: Assets/GestureRecognition/GestureSet2.dat
   create_combination_name: (new gesture combination name)
   create_gesture_name: (new gesture name)
   create_gesture_names: []
-  record_gesture_id: 4
+  record_gesture_id: 1
   record_combination_id: -1
   lefthand_combination_part: 0
   righthand_combination_part: 1
@@ -7256,7 +7257,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3061032800970793077}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7356cda5890125248b90b9c75409a830, type: 3}
   m_Name: 
@@ -7265,6 +7266,7 @@ MonoBehaviour:
     actionPath: /actions/default/in/Squeeze
     needsReinit: 0
   handType: 2
+  photonView: {fileID: 2043403164333837708}
   shouldTrain: 0
   LoadGesturesFile: Assets/GestureRecognition/GestureSet2.dat
   SaveGesturesFile: Assets/GestureRecognition/GestureSet2.dat

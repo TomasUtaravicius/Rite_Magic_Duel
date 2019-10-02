@@ -21,6 +21,8 @@ public class AvatarStateController : MonoBehaviour {
     [SerializeField]
     private GameObject aliveAvatarBody;
     [SerializeField]
+    private GestureController gestureController;
+    [SerializeField]
     private List<GameObject> listGO;
     private int positionIndex;
 
@@ -51,6 +53,7 @@ public class AvatarStateController : MonoBehaviour {
         if(!photonView.IsMine)
         {
             playerCamera.enabled = false;
+            gestureController.enabled = false;
         }
         else
         {

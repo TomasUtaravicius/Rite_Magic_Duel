@@ -37,18 +37,19 @@ public class PlayerRotator : MonoBehaviour
 
             if (photonView.IsMine || lobbyMode)
             {
+               
                 var x = Input.GetAxis("Horizontal") * Time.deltaTime * 5.0f;
                 var z = Input.GetAxis("Vertical") * Time.deltaTime * 5.0f;
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     transform.Translate(0, 2f, 0);
                 }
-                transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, cameraObject.transform.localEulerAngles.y, transform.localEulerAngles.z);
+               
                 transform.Translate(new Vector3(x, 0f, z));
                 if (enableMouseControl)
                 {
-                    rotation.x += Input.GetAxis("Mouse X");
-                    rotation.y += -Input.GetAxis("Mouse Y");
+                    rotation.y += Input.GetAxis("Mouse X");
+                    rotation.x += -Input.GetAxis("Mouse Y");
                     transform.eulerAngles = (Vector2)rotation * speed;
                 }
             }

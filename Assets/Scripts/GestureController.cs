@@ -40,6 +40,8 @@ public class GestureController : MonoBehaviour
 {
     public SteamVR_Action_Single triggerValue = SteamVR_Actions.default_Squeeze;
     public SteamVR_Input_Sources handType = SteamVR_Input_Sources.RightHand;
+    [SerializeField]
+    private PhotonView photonView;
     public bool shouldTrain;
     
     // The file from which to load gestures on startup.
@@ -85,38 +87,42 @@ public class GestureController : MonoBehaviour
     // Initialization:
     void Start()
     {
-        // Load the default set of gestures.
-        /*if (gr.loadFromFile(LoadGesturesFile) == false)
+        if(photonView.IsMine)
         {
-            Debug.Log("Failed to load sample gesture database file");
-        }*/
-        Invoke("LoadTheFile", 0.3f);
-        Invoke("LoadTheFile", 0.4f);
-        
-        //Debug.Log(Application.streamingAssetsPath.ToString()+ "Path");
-        // Set the welcome message.
-        HUDText = GameObject.Find("HUDText").GetComponent<Text>();
-        HUDText.text = "Welcome to MARUI Gesture Plug-in!\n"
-                      + "Press the trigger to draw a gesture. Available gestures:\n"
-                      + "1 - a circle/ring (creates a cylinder)\n"
-                      + "2 - swipe left/right (rotate object)\n"
-                      + "3 - shake (delete object)\n"
-                      + "4 - draw a sword from your hip,\nhold it over your head (magic)\n"
-                      + "or: press 'A'/'X'/Menu button\nto create new gesture.";
+            // Load the default set of gestures.
+            /*if (gr.loadFromFile(LoadGesturesFile) == false)
+            {
+                Debug.Log("Failed to load sample gesture database file");
+            }*/
+            Invoke("LoadTheFile", 0.3f);
+            Invoke("LoadTheFile", 0.4f);
 
-        me = GCHandle.Alloc(this);
+            //Debug.Log(Application.streamingAssetsPath.ToString()+ "Path");
+            // Set the welcome message.
+            HUDText = GameObject.Find("HUDText").GetComponent<Text>();
+            HUDText.text = "Welcome to MARUI Gesture Plug-in!\n"
+                          + "Press the trigger to draw a gesture. Available gestures:\n"
+                          + "1 - a circle/ring (creates a cylinder)\n"
+                          + "2 - swipe left/right (rotate object)\n"
+                          + "3 - shake (delete object)\n"
+                          + "4 - draw a sword from your hip,\nhold it over your head (magic)\n"
+                          + "or: press 'A'/'X'/Menu button\nto create new gesture.";
 
-        // Reset the skybox tint color
-        RenderSettings.skybox.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f, 1.0f));
-        if(shouldTrain)
-        {
-            //Invoke("StartTraining", 1f);
-            
-            //StartTraining();
+            me = GCHandle.Alloc(this);
+
+            // Reset the skybox tint color
+            RenderSettings.skybox.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f, 1.0f));
+            if (shouldTrain)
+            {
+                //Invoke("StartTraining", 1f);
+
+                //StartTraining();
+            }
+
         }
 
-       
-        
+
+
     }
     private void LoadTheOtherFile()
     {
@@ -132,20 +138,20 @@ public class GestureController : MonoBehaviour
     }
     private void LoadTheFile()
     {
-/*#if UNITY_EDITOR
+#if UNITY_EDITOR
         gr.loadFromFile(LoadGesturesFile);
 #else
-        gr.loadFromFile(Application.streamingAssetsPath + "/GestureSet1.dat");
-#endif*/
+        gr.loadFromFile(Application.streamingAssetsPath + "/GestureSet2.dat");
+#endif
 
-        if (gr.loadFromFile(LoadGesturesFile))
+        /*if (gr.loadFromFile(LoadGesturesFile))
         {
             Debug.LogWarning("Successful load");
         }
         else
         {
             Debug.LogWarning("Unsuccessful load");
-        }
+        }*/
         
     }
     private void StartTraining()
@@ -172,138 +178,140 @@ public class GestureController : MonoBehaviour
     // Update:
     void Update()
     {
-        if (Input.GetKeyDown("s"))
+        if(photonView.IsMine)
         {
-            Debug.LogError("Pressed the S key");
-            Invoke("StartTraining", 1f);
-            
-        }
-        if (Input.GetKeyDown("l"))
-        {
-            Debug.LogError("Pressed the L key");
-            
-            LoadTheOtherFile();
-        }
-        //Debug.Log(last_performance_report * 100.0);
-        float trigger_left = Input.GetAxis("LeftControllerTrigger");
-        float trigger_right = SteamVR_Actions.default_Squeeze.GetAxis(handType);
-
-
-        // If the user is not yet dragging (pressing the trigger) on either controller, he hasn't started a gesture yet.
-        if (active_controller == null)
-        {
-            // If the user presses either controller's trigger, we start a new gesture.
-            if (trigger_right > 0.8)
+            if (Input.GetKeyDown("s"))
             {
-                // Right controller trigger pressed.
-                active_controller = GameObject.Find("ControllerR");
+                Debug.LogError("Pressed the S key");
+                Invoke("StartTraining", 1f);
+
             }
-            else if (trigger_left > 0.8)
+            if (Input.GetKeyDown("l"))
             {
-                // Left controller trigger pressed.
-                active_controller = GameObject.Find("Left Hand");
+                Debug.LogError("Pressed the L key");
+
+                LoadTheFile();
+            }
+            //Debug.Log(last_performance_report * 100.0);
+            float trigger_left = Input.GetAxis("LeftControllerTrigger");
+            float trigger_right = SteamVR_Actions.default_Squeeze.GetAxis(handType);
+
+
+            // If the user is not yet dragging (pressing the trigger) on either controller, he hasn't started a gesture yet.
+            if (active_controller == null)
+            {
+                // If the user presses either controller's trigger, we start a new gesture.
+                if (trigger_right > 0.8)
+                {
+                    // Right controller trigger pressed.
+                    active_controller = GameObject.Find("ControllerR");
+                }
+                else if (trigger_left > 0.8)
+                {
+                    // Left controller trigger pressed.
+                    active_controller = GameObject.Find("Left Hand");
+                }
+                else
+                {
+                    // If we arrive here, the user is pressing neither controller's trigger:
+                    // nothing to do.
+                    return;
+                }
+                // If we arrive here: either trigger was pressed, so we start the gesture.
+                GameObject hmd = GameObject.Find("Camera"); // alternative: Camera.main.gameObject
+                Vector3 hmd_p = hmd.transform.localPosition;
+                Quaternion hmd_q = hmd.transform.localRotation;
+                gr.startStroke(hmd_p, hmd_q, recording_gesture);
+            }
+
+            // If we arrive here, the user is currently dragging with one of the controllers.
+            // Check if the user is still dragging or if he let go of the trigger button.
+            if (trigger_left > 0.3 || trigger_right > 0.3)
+            {
+                // The user is still dragging with the controller: continue the gesture.
+                Vector3 p = active_controller.transform.position;
+                Quaternion q = active_controller.transform.rotation;
+                gr.contdStroke(p, q);
+                // Show the stroke by instatiating new objects
+                GameObject star = new GameObject("stroke_" + stroke_index++);
+                
+                System.Random random = new System.Random();
+                star.transform.localPosition = new Vector3(p.x + (float)random.NextDouble() / 80, p.y + (float)random.NextDouble() / 80, p.z + (float)random.NextDouble() / 80);
+                star.transform.localRotation = new Quaternion((float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f).normalized;
+                //star.transform.localRotation.Normalize();
+                float star_scale = (float)random.NextDouble() + 0.3f;
+                star.transform.localScale = new Vector3(star_scale, star_scale, star_scale);
+                stroke.Add(star.name);
+                return;
+            }
+            // else: if we arrive here, the user let go of the trigger, ending a gesture.
+            active_controller = null;
+
+            // Delete the objectes that we used to display the gesture.
+            foreach (string star in stroke)
+            {
+                Destroy(GameObject.Find(star));
+                stroke_index = 0;
+            }
+
+            Vector3 pos = Vector3.zero; // This will receive the position where the gesture was performed.
+            double scale = 0; // This will receive the scale at which the gesture was performed.
+            Vector3 dir0 = Vector3.zero; // This will receive the primary direction in which the gesture was performed (greatest expansion).
+            Vector3 dir1 = Vector3.zero; // This will receive the secondary direction of the gesture.
+            Vector3 dir2 = Vector3.zero; // This will receive the minor direction of the gesture (direction of smallest expansion).
+            double similarity = 0;
+            int gesture_id = gr.endStroke(ref similarity, ref pos, ref scale, ref dir0, ref dir1, ref dir2);
+
+
+            if (gesture_id < 0)
+            {
+                // Error trying to identify any gesture
+                HUDText.text = "Failed to identify gesture.";
+            }
+            else if (gesture_id == 0)
+            {
+                HUDText.text = "Sandtimer" + (similarity * 100.0);
+                if (spellManager.canCastSpells)
+                {
+                    spellManager.SetBufferedSpell(SpellManager.Spells.BLUELIGHTNING);
+
+                }
+
+
+
+            }
+            else if (gesture_id == 1)
+            {
+                HUDText.text = "V" + (similarity * 100.0);
+
+            }
+            else if (gesture_id == 2)
+            {
+                HUDText.text = "Right flick" + (similarity * 100.0);
+
+            }
+            else if (gesture_id == 3)
+            {
+                HUDText.text = "left flick" + (similarity * 100.0);
+
+            }
+            else if (gesture_id == 4)
+            {
+                HUDText.text = "circle" + (similarity * 100.0);
+                if (spellManager.canCastSpells)
+                {
+                    spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
+                }
+
+
             }
             else
             {
-                // If we arrive here, the user is pressing neither controller's trigger:
-                // nothing to do.
-                return;
+                // Other ID: one of the user-registered gestures:
+                HUDText.text = " identified custom registered gesture " + (gesture_id - 3);
             }
-            // If we arrive here: either trigger was pressed, so we start the gesture.
-            GameObject hmd = GameObject.Find("Camera"); // alternative: Camera.main.gameObject
-            Vector3 hmd_p = hmd.transform.localPosition;
-            Quaternion hmd_q = hmd.transform.localRotation;
-            gr.startStroke(hmd_p, hmd_q, recording_gesture);
         }
-
-        // If we arrive here, the user is currently dragging with one of the controllers.
-        // Check if the user is still dragging or if he let go of the trigger button.
-        if (trigger_left > 0.3 || trigger_right > 0.3)
-        {
-            // The user is still dragging with the controller: continue the gesture.
-            Vector3 p = active_controller.transform.position;
-            Quaternion q = active_controller.transform.rotation;
-            gr.contdStroke(p, q);
-            // Show the stroke by instatiating new objects
-            GameObject star_instance = Instantiate(GameObject.Find("star"));
-            GameObject star = new GameObject("stroke_" + stroke_index++);
-            star_instance.name = star.name + "_instance";
-            star_instance.transform.SetParent(star.transform, false);
-            System.Random random = new System.Random();
-            star.transform.localPosition = new Vector3(p.x + (float)random.NextDouble() / 80, p.y + (float)random.NextDouble() / 80, p.z + (float)random.NextDouble() / 80);
-            star.transform.localRotation = new Quaternion((float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f).normalized;
-            //star.transform.localRotation.Normalize();
-            float star_scale = (float)random.NextDouble() + 0.3f;
-            star.transform.localScale = new Vector3(star_scale, star_scale, star_scale);
-            stroke.Add(star.name);
-            return;
-        }
-        // else: if we arrive here, the user let go of the trigger, ending a gesture.
-        active_controller = null;
-
-        // Delete the objectes that we used to display the gesture.
-        foreach (string star in stroke)
-        {
-            Destroy(GameObject.Find(star));
-            stroke_index = 0;
-        }
-
-        Vector3 pos = Vector3.zero; // This will receive the position where the gesture was performed.
-        double scale = 0; // This will receive the scale at which the gesture was performed.
-        Vector3 dir0 = Vector3.zero; // This will receive the primary direction in which the gesture was performed (greatest expansion).
-        Vector3 dir1 = Vector3.zero; // This will receive the secondary direction of the gesture.
-        Vector3 dir2 = Vector3.zero; // This will receive the minor direction of the gesture (direction of smallest expansion).
-        double similarity = 0;
-        int gesture_id = gr.endStroke(ref similarity, ref pos, ref scale, ref dir0, ref dir1, ref dir2);
-
-
-        if (gesture_id < 0)
-        {
-            // Error trying to identify any gesture
-            HUDText.text = "Failed to identify gesture.";
-        }
-        else if (gesture_id == 0)
-        {
-            HUDText.text = "Sandtimer" + (similarity * 100.0);
-            if (spellManager.canCastSpells)
-            {
-                spellManager.SetBufferedSpell(SpellManager.Spells.BLUELIGHTNING);
-                
-            }
-            
-            
-
-        }
-        else if (gesture_id == 1)
-        {
-            HUDText.text = "V" + (similarity * 100.0);
-
-        }
-        else if (gesture_id == 2)
-        {
-            HUDText.text = "Right flick" + (similarity * 100.0);
-
-        }
-        else if (gesture_id == 3)
-        {
-            HUDText.text = "left flick" + (similarity * 100.0);
-
-        }
-        else if (gesture_id == 4)
-        {
-            HUDText.text = "circle" + (similarity * 100.0);
-            if(spellManager.canCastSpells)
-            {
-                spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
-            }
-            
-
-        }
-        else
-        {
-            // Other ID: one of the user-registered gestures:
-            HUDText.text = " identified custom registered gesture " + (gesture_id - 3);
-        }
+        
     }
 
     // Callback function to be called by the gesture recognition plug-in during the learning process.
