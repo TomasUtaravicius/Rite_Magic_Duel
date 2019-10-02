@@ -221,6 +221,11 @@ namespace Valve.VR
         {
             InitAfterDeserialize();
         }
+
+        public static implicit operator SteamVR_Action_Boolean(bool v)
+        {
+            throw new NotImplementedException();
+        }
     }
     
     public class SteamVR_Action_Boolean_Source_Map : SteamVR_Action_In_Source_Map<SteamVR_Action_Boolean_Source>

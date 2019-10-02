@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.pun2steamvr22019.2multiplayertest.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Rite\\Rite_Magic_Duel\\actions.json",
+      "action_manifest_path": "C:\\Users\\EONSupport\\Desktop\\Rite_Magic_Duel\\actions.json",
       "strings": {
         "en_us": {
           "name": "PUN2 SteamVR2 2019.2 Multiplayer test [Testing]"

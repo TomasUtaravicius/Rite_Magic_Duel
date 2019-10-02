@@ -145,10 +145,10 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
         GameObject spawnPoint = playerSpawnPoints.GetChild(positionIndex).GetChild(0).gameObject;
         spawnPoint.GetComponent<MeshRenderer>().material.color = RiteGame.GetColor(positionIndex);
         photonView.RPC("UpdateSpawnPointColor", RpcTarget.Others, positionIndex);
-        spawnPoint.transform.GetChild(0).gameObject.SetActive(enabled);
+        
 
        
-        //GameObject go = PhotonNetwork.Instantiate(steamVrPlayerPrefab.name, spawnPoint.transform.position, Quaternion.identity, 0) as GameObject;
+        GameObject go = PhotonNetwork.Instantiate(steamVrPlayerPrefab.name, spawnPoint.transform.position, spawnPoint.transform.rotation, 0) as GameObject;
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -158,7 +158,7 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
     void UpdateSpawnPointColor(int positionIndex)
     {
         GameObject spawnPoint = playerSpawnPoints.GetChild(positionIndex).GetChild(0).gameObject;
-        spawnPoint.transform.GetChild(0).gameObject.SetActive(enabled);
+        //spawnPoint.transform.GetChild(0).gameObject.SetActive(enabled);
         spawnPoint.GetComponent<MeshRenderer>().material.color = RiteGame.GetColor(positionIndex);
     }
 
