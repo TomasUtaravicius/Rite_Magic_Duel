@@ -151,8 +151,8 @@ public class GestureController : MonoBehaviour
         {
             Debug.LogWarning("Unsuccessful load");
         }*/
-        gr.ignoreHeadRotationLeftRight = true;
-        //gr.ignoreHeadRotationTilt = true;
+        //gr.ignoreHeadRotationLeftRight = true;
+       // gr.ignoreHeadRotationTilt = true;
         //gr.ignoreHeadRotationUpDown = true;
 
     }
@@ -204,7 +204,7 @@ public class GestureController : MonoBehaviour
             if (trigger_right > 0.8)
             {
                 // Right controller trigger pressed.
-                active_controller = GameObject.Find("ControllerR");
+                active_controller = wandEnd;
             }
             else if (trigger_left > 0.8)
             {
@@ -218,7 +218,7 @@ public class GestureController : MonoBehaviour
                 return;
             }
             // If we arrive here: either trigger was pressed, so we start the gesture.
-            GameObject hmd = GameObject.Find("Camera"); // alternative: Camera.main.gameObject
+            GameObject hmd = head; // alternative: Camera.main.gameObject
             Vector3 hmd_p = hmd.transform.localPosition;
             Quaternion hmd_q = hmd.transform.localRotation;
             gr.startStroke(hmd_p, hmd_q, recording_gesture);

@@ -10,13 +10,13 @@ using UnityEngine;
         public PhotonView photonView;
         [SerializeField]
         Transform _holderTarget;
-    [SerializeField]
-    public Vector3 offset;
+        [SerializeField]
+        public Vector3 offset;
 
         protected void Awake()
         {
             
-            /*if (!photonView.IsMine)
+            if (!photonView.IsMine)
             {
                 Destroy(this);
             
@@ -25,7 +25,7 @@ using UnityEngine;
             {
             Debug.Log("Destroying target holder target null");
             Destroy(this);
-            }*/
+            }
         }
 
         void Update()

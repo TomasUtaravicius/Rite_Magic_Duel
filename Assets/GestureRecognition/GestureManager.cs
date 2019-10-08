@@ -188,7 +188,7 @@ public class GestureManager : MonoBehaviour
                 if (trigger_right > 0.8)
                 {
                     // Right controller trigger pressed.
-                    active_controller = GameObject.Find("ControllerR");
+                    active_controller = GameObject.Find("EndPoint");
                 }
                 else if (trigger_left > 0.8)
                 {
@@ -419,10 +419,10 @@ public class GestureManager : MonoBehaviour
     // Helper function to add a new star to the stroke trail.
     public void addToStrokeTrail(Vector3 p)
     {
-        GameObject star_instance = Instantiate(GameObject.Find("star"));
+        
         GameObject star = new GameObject("stroke_" + stroke_index++);
-        star_instance.name = star.name + "_instance";
-        star_instance.transform.SetParent(star.transform, false);
+        
+       
         System.Random random = new System.Random();
         star.transform.localPosition = new Vector3((float)random.NextDouble() / 80, (float)random.NextDouble() / 80, (float)random.NextDouble() / 80) + p;
         star.transform.localRotation = new Quaternion((float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f).normalized;
