@@ -2025,7 +2025,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 0}
-  viewIdField: 0
+  viewIdField: 8
   InstantiationId: -1
   isRuntimeInstantiated: 0
 --- !u!64 &744089629158740443
@@ -2186,7 +2186,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 801802470837987565}
-  viewIdField: 0
+  viewIdField: 5
   InstantiationId: -1
   isRuntimeInstantiated: 0
 --- !u!114 &801802470837987565
@@ -2669,7 +2669,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 0}
-  viewIdField: 0
+  viewIdField: 7
   InstantiationId: -1
   isRuntimeInstantiated: 0
 --- !u!64 &743406859058544291
@@ -2948,8 +2948,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 767805533192964229}
-  - component: {fileID: 801981891284228167}
-  - component: {fileID: 802224492975309415}
   m_Layer: 0
   m_Name: Wand
   m_TagString: Untagged
@@ -2964,52 +2962,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770680203518847485}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0.18228234, y: 0.37775117, z: 0.6572028, w: -0.6262283}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 772776077047341855}
   - {fileID: 767515664337891441}
-  m_Father: {fileID: 3061032800970537379}
-  m_RootOrder: 3
+  m_Father: {fileID: 772421711928482795}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &801981891284228167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 770680203518847485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 802224492975309415}
-  viewIdField: 0
-  InstantiationId: -1
-  isRuntimeInstantiated: 0
---- !u!114 &802224492975309415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 770680203518847485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
 --- !u!1 &770680893748309949
 GameObject:
   m_ObjectHideFlags: 0
@@ -3631,7 +3592,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 801932057883542159}
-  viewIdField: 0
+  viewIdField: 9
   InstantiationId: -1
   isRuntimeInstantiated: 0
 --- !u!114 &5228670284155185712
@@ -4256,7 +4217,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 801927779324572869}
-  viewIdField: 0
+  viewIdField: 3
   InstantiationId: -1
   isRuntimeInstantiated: 0
 --- !u!114 &801927779324572869
@@ -5077,9 +5038,10 @@ Transform:
   m_LocalRotation: {x: 0.18228234, y: -0.37775117, z: -0.6572028, w: -0.6262283}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 767805533192964229}
   m_Father: {fileID: 3061032800970537379}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -46.45, y: 19.528002, z: 84.355}
 --- !u!114 &802090186640629395
 MonoBehaviour:
@@ -5100,7 +5062,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 802231844734689763}
-  viewIdField: 0
+  viewIdField: 2
   InstantiationId: -1
   isRuntimeInstantiated: 0
 --- !u!114 &802231844734689763
@@ -6107,7 +6069,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 802356266870093479}
-  viewIdField: 0
+  viewIdField: 10
   InstantiationId: -1
   isRuntimeInstantiated: 0
 --- !u!114 &802356266870093479
@@ -7017,7 +6979,6 @@ Transform:
   - {fileID: 3061032800970576111}
   - {fileID: 1099303145879696674}
   - {fileID: 5420534005665579099}
-  - {fileID: 767805533192964229}
   - {fileID: 772421711928482795}
   m_Father: {fileID: 3061032800970518925}
   m_RootOrder: 1
@@ -7196,7 +7157,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 0}
-  viewIdField: 0
+  viewIdField: 6
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &1248399004
@@ -7216,10 +7177,10 @@ MonoBehaviour:
     needsReinit: 0
   handType: 2
   shouldTrain: 0
-  LoadGesturesFile: Assets/StreamingAssets/GestureSet1.dat
+  LoadGesturesFile: Assets/StreamingAssets/GestureSet2.dat
   wandEnd: {fileID: 770848740348407733}
   head: {fileID: 3060605638323186057}
-  SaveGesturesFile: Assets/StreamingAssets/GestureSet1.dat
+  SaveGesturesFile: Assets/StreamingAssets/GestureSet2.dat
   spellManager: {fileID: 801833619509887931}
 --- !u!114 &795362990
 MonoBehaviour:
@@ -7241,9 +7202,9 @@ MonoBehaviour:
   file_load_combinations: Assets/GestureRecognition/Sample_TwoHanded_Gestures.dat
   file_load_subgestures: Assets/GestureRecognition/Sample_TwoHanded_GesturesLeft.dat
   file_load_subgestures_i: 0
-  file_load_gestures: Assets/StreamingAssets/GestureSet1.dat
+  file_load_gestures: Assets/StreamingAssets/GestureSet2.dat
   file_save_combinations: Assets/GestureRecognition/Sample_TwoHanded_MyGestures.dat
-  file_save_gestures: Assets/StreamingAssets/GestureSet1.dat
+  file_save_gestures: Assets/StreamingAssets/GestureSet2.dat
   create_combination_name: (new gesture combination name)
   create_gesture_name: (new gesture name)
   create_gesture_names: []
@@ -7603,6 +7564,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 029f5957bc149474c952f24614f244b9, type: 3}
+--- !u!4 &5420534005665579099 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8896661435728234539, guid: 029f5957bc149474c952f24614f244b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 3480948831919589488}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5420534005665579098 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8896661435728234538, guid: 029f5957bc149474c952f24614f244b9,
@@ -7615,12 +7582,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67210b999a00c9f4b976e487ef22e76f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &5420534005665579099 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8896661435728234539, guid: 029f5957bc149474c952f24614f244b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 3480948831919589488}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6675825445721420656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7830,15 +7791,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7700429758759605697}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7274222738197266997 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1021849939269375988, guid: 9d1abc4b0071e5547a9375d0ede5ee31,
-    type: 3}
-  m_PrefabInstance: {fileID: 7700429758759605697}
-  m_PrefabAsset: {fileID: 0}
 --- !u!20 &3335894646813298406 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 4942162452639488807, guid: 9d1abc4b0071e5547a9375d0ede5ee31,
+    type: 3}
+  m_PrefabInstance: {fileID: 7700429758759605697}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7274222738197266997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1021849939269375988, guid: 9d1abc4b0071e5547a9375d0ede5ee31,
     type: 3}
   m_PrefabInstance: {fileID: 7700429758759605697}
   m_PrefabAsset: {fileID: 0}

@@ -94,6 +94,8 @@ public class GestureController : MonoBehaviour
         Invoke("LoadTheFile", 0.3f);
         Invoke("LoadTheFile", 0.4f);
         gr.ignoreHeadRotationLeftRight = true;
+       gr.ignoreHeadRotationTilt = true;
+        gr.ignoreHeadRotationUpDown = true;
        /* gr.ignoreHeadRotationTilt = true;
         gr.ignoreHeadRotationUpDown = true;*/
         //Debug.Log(Application.streamingAssetsPath.ToString()+ "Path");
@@ -137,9 +139,9 @@ public class GestureController : MonoBehaviour
     {
         #if UNITY_EDITOR
                 gr.loadFromFile(LoadGesturesFile);
-        #else
-                gr.loadFromFile(Application.streamingAssetsPath + "/GestureSet1.dat");
-        #endif
+#else
+                gr.loadFromFile(Application.streamingAssetsPath + "/GestureSet2.dat");
+#endif
 
         /*if (gr.loadFromFile(LoadGesturesFile))
         {
@@ -149,7 +151,10 @@ public class GestureController : MonoBehaviour
         {
             Debug.LogWarning("Unsuccessful load");
         }*/
-        
+        gr.ignoreHeadRotationLeftRight = true;
+        //gr.ignoreHeadRotationTilt = true;
+        //gr.ignoreHeadRotationUpDown = true;
+
     }
     private void StartTraining()
     {
