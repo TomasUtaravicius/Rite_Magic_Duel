@@ -1,19 +1,41 @@
+using Photon.Pun;
 using System;
 using UnityEngine;
 
 
 namespace UnityStandardAssets.Utility
 {
-    public class FollowTarget : MonoBehaviour
+    public class FollowTarget : Holder
     {
-        public Transform target;
-        
+        [SerializeField]
+        Transform _holderTarget;
+        [SerializeField]
 
 
-        private void Update()
+        protected override void Awake()
         {
-            transform.position = target.position;
-            transform.rotation = target.rotation;
+            base.Awake();
+            if (!photonView.IsMine)
+            {
+                Destroy(this);
+            }
+            if (_holderTarget == null)
+            {
+                Destroy(this);
+            }
+        }
+
+        void Update()
+        {
+            //Syncrhoize transform with target transform
+            if (_holderTarget == null)
+            {
+                return;
+            }
+
+            transform.position = _holderTarget.position;
+            transform.rotation = _holderTarget.rotation;
+
         }
     }
 }
