@@ -94,8 +94,6 @@ public class GestureController : MonoBehaviour
         Invoke("LoadTheFile", 0.3f);
         Invoke("LoadTheFile", 0.4f);
        
-       /* gr.ignoreHeadRotationTilt = true;
-        gr.ignoreHeadRotationUpDown = true;*/
         //Debug.Log(Application.streamingAssetsPath.ToString()+ "Path");
         // Set the welcome message.
         HUDText = GameObject.Find("HUDText").GetComponent<Text>();
@@ -108,6 +106,7 @@ public class GestureController : MonoBehaviour
                       + "or: press 'A'/'X'/Menu button\nto create new gesture.";
 
         me = GCHandle.Alloc(this);
+
 
         // Reset the skybox tint color
         RenderSettings.skybox.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f, 1.0f));
@@ -149,9 +148,9 @@ public class GestureController : MonoBehaviour
         {
             Debug.LogWarning("Unsuccessful load");
         }*/
-        //gr.ignoreHeadRotationLeftRight = true;
-       // gr.ignoreHeadRotationTilt = true;
-        //gr.ignoreHeadRotationUpDown = true;
+        gr.ignoreHeadRotationLeftRight = false;
+        gr.ignoreHeadRotationTilt = false;
+        gr.ignoreHeadRotationUpDown = false;
 
     }
     private void StartTraining()
@@ -259,7 +258,7 @@ public class GestureController : MonoBehaviour
         Vector3 dir2 = Vector3.zero; // This will receive the minor direction of the gesture (direction of smallest expansion).
         double similarity = 0;
         int gesture_id = gr.endStroke(ref similarity, ref pos, ref scale, ref dir0, ref dir1, ref dir2);
-
+        
 
         if (gesture_id < 0)
         {

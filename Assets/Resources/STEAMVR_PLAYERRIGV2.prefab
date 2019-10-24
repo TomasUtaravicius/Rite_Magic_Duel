@@ -7618,10 +7618,10 @@ MonoBehaviour:
     needsReinit: 0
   handType: 2
   shouldTrain: 0
-  LoadGesturesFile: Assets/StreamingAssets/GestureSet2.dat
+  LoadGesturesFile: Assets/StreamingAssets/GestureSetIgnoreDisabled3.dat
   wandEnd: {fileID: 770848740348407733}
   head: {fileID: 3060605638323186057}
-  SaveGesturesFile: Assets/StreamingAssets/GestureSet2.dat
+  SaveGesturesFile: Assets/StreamingAssets/GestureSetIgnoreDisabled3.dat
   spellManager: {fileID: 801833619509887931}
 --- !u!114 &795362990
 MonoBehaviour:
@@ -7643,9 +7643,9 @@ MonoBehaviour:
   file_load_combinations: Assets/GestureRecognition/Sample_TwoHanded_Gestures.dat
   file_load_subgestures: Assets/GestureRecognition/Sample_TwoHanded_GesturesLeft.dat
   file_load_subgestures_i: 0
-  file_load_gestures: Assets/StreamingAssets/GestureSet2.dat
+  file_load_gestures: Assets/StreamingAssets/GestureSetIgnoreDisabled3.dat
   file_save_combinations: Assets/GestureRecognition/Sample_TwoHanded_MyGestures.dat
-  file_save_gestures: Assets/StreamingAssets/GestureSet2.dat
+  file_save_gestures: Assets/StreamingAssets/GestureSetIgnoreDisabled3.dat
   create_combination_name: (new gesture combination name)
   create_gesture_name: (new gesture name)
   create_gesture_names: []
@@ -8277,6 +8277,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 9102137947321249419, guid: 2b9ecd4646692d948aed49fe2105c150,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9102137947321249419, guid: 2b9ecd4646692d948aed49fe2105c150,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 9060788905094133731, guid: 2b9ecd4646692d948aed49fe2105c150,
         type: 3}
       propertyPath: moveWithTransform
@@ -8302,16 +8312,6 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.g
       value: 0.6533134
       objectReference: {fileID: 0}
-    - target: {fileID: 9102137947321249419, guid: 2b9ecd4646692d948aed49fe2105c150,
-        type: 3}
-      propertyPath: m_RenderMode
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 9102137947321249419, guid: 2b9ecd4646692d948aed49fe2105c150,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b9ecd4646692d948aed49fe2105c150, type: 3}
 --- !u!1001 &7700429758759605697
@@ -8594,6 +8594,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 9102137947321249419, guid: 2b9ecd4646692d948aed49fe2105c150,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9102137947321249419, guid: 2b9ecd4646692d948aed49fe2105c150,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 9060788905094133731, guid: 2b9ecd4646692d948aed49fe2105c150,
         type: 3}
       propertyPath: moveWithTransform
@@ -8619,16 +8629,6 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.g
       value: 0.6533134
       objectReference: {fileID: 0}
-    - target: {fileID: 9102137947321249419, guid: 2b9ecd4646692d948aed49fe2105c150,
-        type: 3}
-      propertyPath: m_RenderMode
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 9102137947321249419, guid: 2b9ecd4646692d948aed49fe2105c150,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b9ecd4646692d948aed49fe2105c150, type: 3}
 --- !u!1001 &8349447258778137000
