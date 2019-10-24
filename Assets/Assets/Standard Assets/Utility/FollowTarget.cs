@@ -12,7 +12,7 @@ namespace UnityStandardAssets.Utility
         [SerializeField]
 
 
-        protected override void Awake()
+        protected void Awake()
         {
             base.Awake();
             if (!photonView.IsMine)
