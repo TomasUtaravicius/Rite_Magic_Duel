@@ -93,9 +93,7 @@ public class GestureController : MonoBehaviour
         }*/
         Invoke("LoadTheFile", 0.3f);
         Invoke("LoadTheFile", 0.4f);
-        gr.ignoreHeadRotationLeftRight = true;
-       gr.ignoreHeadRotationTilt = true;
-        gr.ignoreHeadRotationUpDown = true;
+       
        /* gr.ignoreHeadRotationTilt = true;
         gr.ignoreHeadRotationUpDown = true;*/
         //Debug.Log(Application.streamingAssetsPath.ToString()+ "Path");
