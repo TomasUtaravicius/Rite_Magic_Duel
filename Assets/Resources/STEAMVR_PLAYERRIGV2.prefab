@@ -7619,7 +7619,7 @@ MonoBehaviour:
   handType: 2
   shouldTrain: 0
   LoadGesturesFile: Assets/StreamingAssets/GestureSetIgnoreDisabled3.dat
-  wandEnd: {fileID: 770848740348407733}
+  wandEnd: {fileID: 3061032800970781445}
   head: {fileID: 3060605638323186057}
   SaveGesturesFile: Assets/StreamingAssets/GestureSetIgnoreDisabled3.dat
   spellManager: {fileID: 801833619509887931}
@@ -7643,7 +7643,7 @@ MonoBehaviour:
   file_load_combinations: Assets/GestureRecognition/Sample_TwoHanded_Gestures.dat
   file_load_subgestures: Assets/GestureRecognition/Sample_TwoHanded_GesturesLeft.dat
   file_load_subgestures_i: 0
-  file_load_gestures: Assets/StreamingAssets/GestureSetIgnoreDisabled3.dat
+  file_load_gestures: Assets/StreamingAssets/GestureSetLocalController.dat
   file_save_combinations: Assets/GestureRecognition/Sample_TwoHanded_MyGestures.dat
   file_save_gestures: Assets/StreamingAssets/GestureSetIgnoreDisabled3.dat
   create_combination_name: (new gesture combination name)

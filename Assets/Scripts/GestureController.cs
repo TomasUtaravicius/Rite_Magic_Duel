@@ -148,9 +148,7 @@ public class GestureController : MonoBehaviour
         {
             Debug.LogWarning("Unsuccessful load");
         }*/
-        gr.ignoreHeadRotationLeftRight = false;
-        gr.ignoreHeadRotationTilt = false;
-        gr.ignoreHeadRotationUpDown = false;
+       
 
     }
     private void StartTraining()
@@ -226,8 +224,9 @@ public class GestureController : MonoBehaviour
         if (trigger_left > 0.3 || trigger_right > 0.3)
         {
             // The user is still dragging with the controller: continue the gesture.
-            Vector3 p = active_controller.transform.position;
-            Quaternion q = active_controller.transform.rotation;
+            Vector3 p = active_controller.transform.localPosition;
+            p.z = p.z + 0.5f;
+            Quaternion q = active_controller.transform.localRotation;
             gr.contdStroke(p, q);
             // Show the stroke by instatiating new objects
 
@@ -267,7 +266,7 @@ public class GestureController : MonoBehaviour
         }
         else if (gesture_id == 0)
         {
-            HUDText.text = "Sandtimer" + (similarity * 100.0);
+            HUDText.text = "Sandtimer" + (similarity * 100).ToString("#.0") + " pos: " + pos;
             if (spellManager.canCastSpells)
             {
                 spellManager.SetBufferedSpell(SpellManager.Spells.BLUELIGHTNING);
@@ -279,7 +278,8 @@ public class GestureController : MonoBehaviour
         }
         else if (gesture_id == 1)
         {
-            HUDText.text = "circle" + (similarity * 100.0);
+            
+            HUDText.text = "circle" + (similarity * 100).ToString("#.0") + " pos: " + pos;
             if (spellManager.canCastSpells)
             {
                 spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
