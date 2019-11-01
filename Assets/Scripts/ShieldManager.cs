@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ShieldManager : MonoBehaviour
 {
-    public GameObject deflect;
+    public GameObject deflectedSpell;
     public PhotonView photonView;
     public GameObject ripplePrefab;
     public Material shieldMat;
+    public float manaCost;
     private IEnumerator increaseCoroutine = null;
     private IEnumerator decreaseCoroutine = null;
 
@@ -36,20 +37,14 @@ public class ShieldManager : MonoBehaviour
     {
         if (other.gameObject.tag == "OffensiveSpell")
         {
-            /*if (other.GetComponent<PhotonView>().isMine)
-
-            {
-                PhotonNetwork.Destroy(other.GetComponent<PhotonView>().gameObject);
-            }*/
             if (photonView.IsMine && !other.gameObject.GetComponent<Information>().hasHit)
             {
                 other.gameObject.GetComponent<Information>().hasHit = true;
-                Debug.Log(other.gameObject.GetComponent<Information>().hasHit + " checking has hit");
-                // Debug.Log(other.gameObject.name+ " checking name");
-                other.gameObject.GetComponent<PhotonView>().RPC("DestroyItself", RpcTarget.Others);
-                //photonView.RPC("SetToHit", PhotonTargets.All, other.GetComponent<PhotonView>().viewID);
-                PhotonNetwork.Instantiate(deflect.name, photonView.gameObject.transform.position, photonView.gameObject.transform.rotation, 0);
-                photonView.RPC("TurnOffShield", RpcTarget.All);
+              
+                other.gameObject.GetComponent<PhotonView>().RPC("DestroyItself", RpcTarget.AllViaServer);
+
+                PhotonNetwork.Instantiate(deflectedSpell.name, other.gameObject.transform.position, photonView.gameObject.transform.rotation, 0);
+                photonView.RPC("TurnOffShield", RpcTarget.AllViaServer);
             }
         }
     }

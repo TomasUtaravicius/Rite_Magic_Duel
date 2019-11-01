@@ -35,6 +35,7 @@ public class SpellManager : MonoBehaviour {
     public bool castLethal;
     [HideInInspector]
     public bool castProtego;
+    private ResourceManager resourceManager;
     private void Start()
     {
         Expelliarmus = ExpelliarmusPrefab.GetComponent<Information>();
@@ -44,6 +45,7 @@ public class SpellManager : MonoBehaviour {
         castStupefy = false;
         castLethal = false;
         castProtego = false;
+        resourceManager = GetComponent<ResourceManager>();
     }
     
     private void Update()
@@ -52,12 +54,9 @@ public class SpellManager : MonoBehaviour {
         {
             if(photonView.IsMine)
             {
-                if(gripPressed.GetStateDown(handType))
-                {
-                    Debug.LogError("GripPressed");
-                }
                 if(bufferedSpell!=Spells.NULL && gripPressed.GetStateDown(handType))
                 {
+
                     if (bufferedSpell==Spells.BLUELIGHTNING)
                     {
                         CastBlueLightining();
@@ -89,9 +88,17 @@ public class SpellManager : MonoBehaviour {
     public void CastBlueLightining()
     {
         //Instatiate a spell over the network.
-        PhotonNetwork.Instantiate("Expelliarmus", spellCastingPoint.transform.position,spellCastingPoint.transform.rotation, 0);
-
-        SetBufferedSpell(Spells.NULL);
+        if(resourceManager.mana>=Expelliarmus.manaCost)
+        {
+            PhotonNetwork.Instantiate(ExpelliarmusPrefab.name, spellCastingPoint.transform.position, spellCastingPoint.transform.rotation, 0);
+            SetBufferedSpell(Spells.NULL);
+            resourceManager.mana -= Expelliarmus.manaCost;
+        }
+        else
+        {
+            NotEnoughMana();
+        }
+       
        
         
     }
@@ -119,10 +126,21 @@ public class SpellManager : MonoBehaviour {
     [PunRPC]
     public void CastShield()
     {
-        //Instatiate a spell over the network.
-        PhotonNetwork.Instantiate(ProtegoPrefab.name, headTransform.position, RotationOfProtego.transform.rotation, 0);
+        if(resourceManager.mana>=ProtegoPrefab.GetComponent<ShieldManager>().manaCost)
+        {
+            PhotonNetwork.Instantiate(ProtegoPrefab.name, headTransform.position, RotationOfProtego.transform.rotation, 0);
+            SetBufferedSpell(Spells.NULL);
+            resourceManager.mana -= ProtegoPrefab.GetComponent<ShieldManager>().manaCost;
+        }
+        else
+        {
+            NotEnoughMana();
+        }
+        
 
-        SetBufferedSpell(Spells.NULL);
+    }
+    private void NotEnoughMana()
+    {
 
     }
 }

@@ -12,7 +12,7 @@ public class AvatarStateController : MonoBehaviour {
     public Transform leftArm;
     public Transform rightArm;
     public PhotonView photonView;
-    public HealthManager hManager;
+    public ResourceManager resourceManager;
     public GameObject aliveAvatar;
     public GameObject deadAvatar;
     public SpellManager sManager;
@@ -36,11 +36,8 @@ public class AvatarStateController : MonoBehaviour {
        
         if(photonView.IsMine)
         {
-           
             positionIndex = (int)PhotonNetwork.LocalPlayer.CustomProperties["position"];
             photonView.RPC("SpawnAvatarBody", RpcTarget.AllViaServer);
-            
-
         }
         
 
@@ -66,7 +63,8 @@ public class AvatarStateController : MonoBehaviour {
         aliveAvatar.GetComponent<SpawnInfo>().playerReference = this.gameObject;
         aliveAvatar.GetComponent<SpawnInfo>().AwakeAvatar();
         sManager.canCastSpells = true;
-        hManager.health = 100f;
+        resourceManager.health = 100f;
+        resourceManager.mana = 100f;
         avatarScript = aliveAvatar.GetComponent<VRIK>();
         avatarScript.solver.spine.headTarget = head;
         avatarScript.solver.leftArm.target = leftArm;

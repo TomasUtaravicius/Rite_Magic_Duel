@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-public class HealthManager : MonoBehaviourPun,IPunObservable {
+public class ResourceManager : MonoBehaviourPun,IPunObservable {
     [SerializeField]
     public float health;
+    [SerializeField]
+    public float mana;
     private EnemyController eController;
     private AvatarStateController avatarStateController;
     public delegate void PlayerDeathEvent();
@@ -46,9 +48,10 @@ public class HealthManager : MonoBehaviourPun,IPunObservable {
     [PunRPC]
     public void TakeDamage(float amount)
     {
-        health -= amount;
+       
         if(photonView.IsMine)
         {
+            health -= amount;
             Debug.LogError("TakeDamage");
             if (health <= 0f)
             {

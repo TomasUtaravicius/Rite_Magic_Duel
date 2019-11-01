@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NetworkedPlayer : MonoBehaviour {
 
-    public HealthManager healthManager;
+    public ResourceManager healthManager;
     public AvatarStateController avatarStateController;
     public SpawnInfo spawnInfo;
     public string name;

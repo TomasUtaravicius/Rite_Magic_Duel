@@ -17,13 +17,12 @@ public class Information : MonoBehaviourPun, IPunObservable
     public float explosionPower;
     public GameObject spellModel;
     public bool isLethal;
-    public GameObject ripplePrefab;
     public bool hasHit;
+    public float manaCost;
 
     private void Start()
     {
         GetComponent<Rigidbody>().velocity = transform.forward * speed;
-        //gameObject.GetComponent<PhotonTransformView>().SetSynchronizedValues(transform.forward * speed, 0f);
         audioForFlight.Play();
     }
     
@@ -68,7 +67,7 @@ public class Information : MonoBehaviourPun, IPunObservable
             }
             if (other.gameObject.tag == "Environment")
             {
-                Debug.LogError("Collision with environment");
+               
                 Transform explosionTransform = gameObject.transform;
                 GameObject explosionPrefabObject = PhotonNetwork.Instantiate(explosionPrefab.name, gameObject.transform.position, gameObject.transform.rotation, 0);
 

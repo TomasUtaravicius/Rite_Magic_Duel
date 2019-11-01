@@ -85,11 +85,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7a4cfa8b6bc1947a080c6e5e4e5df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deflect: {fileID: 1380230993872502, guid: a000cb9a553d5f44492d4c84864110f1, type: 3}
+  deflectedSpell: {fileID: 1380230993872502, guid: a000cb9a553d5f44492d4c84864110f1,
+    type: 3}
   photonView: {fileID: 114682147501014950}
   ripplePrefab: {fileID: 1939137499140762, guid: 2775c8afb3100b049aa70ed2ce1d9163,
     type: 3}
   shieldMat: {fileID: 2100000, guid: 70cc334ccba0dd64a83565c3d1acd426, type: 2}
+  manaCost: 10
 --- !u!54 &54421052276682862
 Rigidbody:
   m_ObjectHideFlags: 0

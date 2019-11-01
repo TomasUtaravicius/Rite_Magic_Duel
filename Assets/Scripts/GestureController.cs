@@ -1,10 +1,10 @@
 ﻿/*
  * Advaced Gesture Recognition - Unity Plug-In
- * 
+ *
  * Copyright (c) 2019 MARUI-PlugIn (inc.)
  * This software is free to use for non-commercial purposes.
  * You may use this software in part or in full for any project
- * that does not pursue financial gain, including free software 
+ * that does not pursue financial gain, including free software
  * and projectes completed for evaluation or educational purposes only.
  * Any use for commercial purposes is prohibited.
  * You may not sell or rent any software that includes
@@ -13,44 +13,45 @@
  * If you wish to use this software in a commercial application,
  * please contact us at support@marui-plugin.com to obtain
  * a commercial license.
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY 
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
+ * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR;
 using Valve.VR;
-using Photon.Pun;
 
 public class GestureController : MonoBehaviour
 {
     public SteamVR_Action_Single triggerValue = SteamVR_Actions.default_Squeeze;
     public SteamVR_Input_Sources handType = SteamVR_Input_Sources.RightHand;
     public bool shouldTrain;
-    
+
     // The file from which to load gestures on startup.
     // For example: "Assets/GestureRecognition/sample_gestures.dat"
     [SerializeField] public string LoadGesturesFile;
+
     [SerializeField] private GameObject wandEnd;
     [SerializeField] private GameObject head;
+
     // File where to save recorded gestures.
     // For example: "Assets/GestureRecognition/my_custom_gestures.dat"
     [SerializeField] public string SaveGesturesFile;
+
     [SerializeField] public SpellManager spellManager;
+
     // The gesture recognition object:
     // You can have as many of these as you want simultaneously.
     private GestureRecognition gr = new GestureRecognition();
@@ -72,19 +73,19 @@ public class GestureController : MonoBehaviour
     private double last_performance_report = 0;
 
     // Temporary storage for objects to display the gesture stroke.
-    List<string> stroke = new List<string>();
+    private List<string> stroke = new List<string>();
 
     // Temporary counter variable when creating objects for the stroke display:
-    int stroke_index = 0;
+    private int stroke_index = 0;
 
     // List of Objects created with gestures:
-    List<GameObject> created_objects = new List<GameObject>();
+    private List<GameObject> created_objects = new List<GameObject>();
 
     // Handle to this object/script instance, so that callbacks from the plug-in arrive at the correct instance.
-    GCHandle me;
+    private GCHandle me;
 
     // Initialization:
-    void Start()
+    private void Start()
     {
         // Load the default set of gestures.
         /*if (gr.loadFromFile(LoadGesturesFile) == false)
@@ -93,7 +94,7 @@ public class GestureController : MonoBehaviour
         }*/
         Invoke("LoadTheFile", 0.3f);
         Invoke("LoadTheFile", 0.4f);
-       
+
         //Debug.Log(Application.streamingAssetsPath.ToString()+ "Path");
         // Set the welcome message.
         HUDText = GameObject.Find("HUDText").GetComponent<Text>();
@@ -107,19 +108,16 @@ public class GestureController : MonoBehaviour
 
         me = GCHandle.Alloc(this);
 
-
         // Reset the skybox tint color
         RenderSettings.skybox.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f, 1.0f));
-        if(shouldTrain)
+        if (shouldTrain)
         {
             //Invoke("StartTraining", 1f);
-            
+
             //StartTraining();
         }
-
-       
-        
     }
+
     private void LoadTheOtherFile()
     {
         if (gr.loadFromFile("Assets/GestureRecognition/GestureSet2.dat"))
@@ -130,14 +128,14 @@ public class GestureController : MonoBehaviour
         {
             Debug.LogWarning("Unsuccessful load");
         }
-
     }
+
     private void LoadTheFile()
     {
-        #if UNITY_EDITOR
-                gr.loadFromFile(LoadGesturesFile);
+#if UNITY_EDITOR
+        gr.loadFromFile(LoadGesturesFile);
 #else
-                gr.loadFromFile(Application.streamingAssetsPath + "/GestureSet2.dat");
+                gr.loadFromFile(Application.streamingAssetsPath + "/GestureSetIgnoreDisabled3.dat");
 #endif
 
         /*if (gr.loadFromFile(LoadGesturesFile))
@@ -148,9 +146,8 @@ public class GestureController : MonoBehaviour
         {
             Debug.LogWarning("Unsuccessful load");
         }*/
-       
-
     }
+
     private void StartTraining()
     {
         Debug.Log("Start training");
@@ -160,37 +157,37 @@ public class GestureController : MonoBehaviour
         gr.setTrainingFinishCallbackMetadata((IntPtr)me);
         gr.startTraining();
     }
+
     private void FinishTraining()
     {
         Debug.Log("Stop training");
         gr.stopTraining();
         Invoke("SaveToFile", 2f);
-       
     }
+
     private void SaveToFile()
     {
         Debug.Log("Save to file");
         gr.saveToFile(SaveGesturesFile);
     }
+
     // Update:
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown("s"))
         {
             Debug.LogError("Pressed the S key");
             Invoke("StartTraining", 1f);
-            
         }
         if (Input.GetKeyDown("l"))
         {
             Debug.LogError("Pressed the L key");
-            
+
             LoadTheOtherFile();
         }
         //Debug.Log(last_performance_report * 100.0);
         float trigger_left = Input.GetAxis("LeftControllerTrigger");
         float trigger_right = SteamVR_Actions.default_Squeeze.GetAxis(handType);
-
 
         // If the user is not yet dragging (pressing the trigger) on either controller, he hasn't started a gesture yet.
         if (active_controller == null)
@@ -225,30 +222,14 @@ public class GestureController : MonoBehaviour
         {
             // The user is still dragging with the controller: continue the gesture.
             Vector3 p = active_controller.transform.localPosition;
-            p.z = p.z + 0.5f;
+            p.z += 0.5f;
             Quaternion q = active_controller.transform.localRotation;
             gr.contdStroke(p, q);
-            // Show the stroke by instatiating new objects
 
-            GameObject star = new GameObject("stroke_" + stroke_index++);
-            System.Random random = new System.Random();
-            star.transform.localPosition = new Vector3(p.x + (float)random.NextDouble() / 80, p.y + (float)random.NextDouble() / 80, p.z + (float)random.NextDouble() / 80);
-            star.transform.localRotation = new Quaternion((float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f).normalized;
-            //star.transform.localRotation.Normalize();
-            float star_scale = (float)random.NextDouble() + 0.3f;
-            star.transform.localScale = new Vector3(star_scale, star_scale, star_scale);
-            stroke.Add(star.name);
             return;
         }
         // else: if we arrive here, the user let go of the trigger, ending a gesture.
         active_controller = null;
-
-        // Delete the objectes that we used to display the gesture.
-        foreach (string star in stroke)
-        {
-            Destroy(GameObject.Find(star));
-            stroke_index = 0;
-        }
 
         Vector3 pos = Vector3.zero; // This will receive the position where the gesture was performed.
         double scale = 0; // This will receive the scale at which the gesture was performed.
@@ -257,59 +238,51 @@ public class GestureController : MonoBehaviour
         Vector3 dir2 = Vector3.zero; // This will receive the minor direction of the gesture (direction of smallest expansion).
         double similarity = 0;
         int gesture_id = gr.endStroke(ref similarity, ref pos, ref scale, ref dir0, ref dir1, ref dir2);
-        
 
         if (gesture_id < 0)
         {
             // Error trying to identify any gesture
             HUDText.text = "Failed to identify gesture.";
         }
-        else if (gesture_id == 0)
+        if (similarity > 0.60)
         {
-            HUDText.text = "Sandtimer" + (similarity * 100).ToString("#.0") + " pos: " + pos;
-            if (spellManager.canCastSpells)
+            if (gesture_id == 0)
             {
-                spellManager.SetBufferedSpell(SpellManager.Spells.BLUELIGHTNING);
-                
+                HUDText.text = "Sandtimer" + (similarity * 100).ToString("#.0") + " pos: " + pos;
+                if (spellManager.canCastSpells)
+                {
+                    spellManager.SetBufferedSpell(SpellManager.Spells.BLUELIGHTNING);
+                }
             }
-            
-            
-
-        }
-        else if (gesture_id == 1)
-        {
-            
-            HUDText.text = "circle" + (similarity * 100).ToString("#.0") + " pos: " + pos;
-            if (spellManager.canCastSpells)
+            else if (gesture_id == 1)
             {
-                spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
+                HUDText.text = "circle" + (similarity * 100).ToString("#.0") + " pos: " + pos;
+                if (spellManager.canCastSpells)
+                {
+                    spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
+                }
             }
-
-        }
-        else if (gesture_id == 2)
-        {
-            HUDText.text = "Right flick" + (similarity * 100.0);
-
-        }
-        else if (gesture_id == 3)
-        {
-            HUDText.text = "left flick" + (similarity * 100.0);
-
-        }
-        else if (gesture_id == 4)
-        {
-            HUDText.text = "circle" + (similarity * 100.0);
-            if(spellManager.canCastSpells)
+            else if (gesture_id == 2)
             {
-                spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
+                HUDText.text = "Right flick" + (similarity * 100.0);
             }
-            
-
+            else if (gesture_id == 3)
+            {
+                HUDText.text = "left flick" + (similarity * 100.0);
+            }
+            else if (gesture_id == 4)
+            {
+                HUDText.text = "circle" + (similarity * 100.0);
+                if (spellManager.canCastSpells)
+                {
+                    spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
+                }
+            }
         }
         else
         {
             // Other ID: one of the user-registered gestures:
-            HUDText.text = " identified custom registered gesture " + (gesture_id - 3);
+            HUDText.text = " not accurate enough : " + (similarity * 100).ToString("#.0");
         }
     }
 
@@ -323,7 +296,6 @@ public class GestureController : MonoBehaviour
         me.last_performance_report = performance;
         Debug.LogError(performance);
     }
-   
 
     // Callback function to be called by the gesture recognition plug-in when the learning process was finished.
     public static void trainingFinishCallback(double performance, IntPtr ptr)
@@ -336,10 +308,9 @@ public class GestureController : MonoBehaviour
         me.last_performance_report = performance;
         // Signal that training was finished.
         me.recording_gesture = -3;
-        // Save the data to file. 
+        // Save the data to file.
         me.gr.saveToFile(me.SaveGesturesFile);
         Debug.LogError("Training finished");
-
     }
 
     // Helper function to find a GameObject in the world based on it's position.

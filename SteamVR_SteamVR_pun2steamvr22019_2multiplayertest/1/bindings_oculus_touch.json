@@ -1,7 +1,5 @@
 {
-   "action_manifest_version" : 0,
-   "alias_info" : {},
-   "app_key" : "application.generated.unity.pun2steamvr22019.2multiplayertest.exe",
+   
    "bindings" : {
       "/actions/buggy" : {
          "sources" : [
@@ -25,27 +23,39 @@
             },
             {
                "inputs" : {
-                  "click" : {
-                     "output" : "/actions/buggy/in/brake"
-                  },
                   "position" : {
                      "output" : "/actions/buggy/in/steering"
                   }
                },
-               "mode" : "trackpad",
-               "path" : "/user/hand/left/input/trackpad"
+               "mode" : "joystick",
+               "path" : "/user/hand/left/input/joystick"
+            },
+            {
+               "inputs" : {
+                  "position" : {
+                     "output" : "/actions/buggy/in/steering"
+                  }
+               },
+               "mode" : "joystick",
+               "path" : "/user/hand/right/input/joystick"
             },
             {
                "inputs" : {
                   "click" : {
                      "output" : "/actions/buggy/in/brake"
-                  },
-                  "position" : {
-                     "output" : "/actions/buggy/in/steering"
                   }
                },
-               "mode" : "trackpad",
-               "path" : "/user/hand/right/input/trackpad"
+               "mode" : "button",
+               "path" : "/user/hand/left/input/x"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/buggy/in/brake"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/x"
             },
             {
                "inputs" : {
@@ -54,7 +64,7 @@
                   }
                },
                "mode" : "button",
-               "path" : "/user/hand/left/input/application_menu"
+               "path" : "/user/hand/left/input/y"
             },
             {
                "inputs" : {
@@ -63,7 +73,25 @@
                   }
                },
                "mode" : "button",
-               "path" : "/user/hand/right/input/application_menu"
+               "path" : "/user/hand/right/input/y"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/buggy/in/brake"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/a"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/buggy/in/reset"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/b"
             }
          ]
       },
@@ -112,13 +140,22 @@
             {
                "inputs" : {
                   "click" : {
+                     "output" : "/actions/default/in/teleport"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/left/input/joystick"
+            },
+            {
+               "inputs" : {
+                  "click" : {
                      "output" : "/actions/default/in/grabgrip"
                   }
                },
                "mode" : "button",
                "parameters" : {
-                  "click_activate_threshold" : "0.05",
-                  "click_deactivate_threshold" : "0",
+                  "click_activate_threshold" : "0.8",
+                  "click_deactivate_threshold" : "0.7",
                   "force_input" : "force"
                },
                "path" : "/user/hand/left/input/grip"
@@ -131,7 +168,7 @@
                },
                "mode" : "button",
                "parameters" : {
-                  "click_activate_threshold" : "0.75",
+                  "click_activate_threshold" : "0.8",
                   "click_deactivate_threshold" : "0.7",
                   "force_input" : "value"
                },
@@ -154,10 +191,19 @@
                },
                "mode" : "button",
                "parameters" : {
-                  "click_activate_threshold" : "0.75",
+                  "click_activate_threshold" : "0.8",
                   "click_deactivate_threshold" : "0.7"
                },
                "path" : "/user/hand/right/input/trigger"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/teleport"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/joystick"
             },
             {
                "inputs" : {
@@ -167,8 +213,8 @@
                },
                "mode" : "button",
                "parameters" : {
-                  "click_activate_threshold" : "0.05",
-                  "click_deactivate_threshold" : "0",
+                  "click_activate_threshold" : "0.8",
+                  "click_deactivate_threshold" : "0.7",
                   "force_input" : "force"
                },
                "path" : "/user/hand/right/input/grip"
@@ -180,7 +226,7 @@
                   }
                },
                "mode" : "trigger",
-               "path" : "/user/hand/left/input/trigger"
+               "path" : "/user/hand/left/input/grip"
             },
             {
                "inputs" : {
@@ -189,35 +235,7 @@
                   }
                },
                "mode" : "trigger",
-               "path" : "/user/hand/right/input/trigger"
-            },
-            {
-               "inputs" : {},
-               "mode" : "none",
-               "path" : "/user/hand/left/input/system"
-            },
-            {
-               "inputs" : {},
-               "mode" : "none",
-               "path" : "/user/hand/right/input/system"
-            },
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/default/in/menutoggle"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/left/input/application_menu"
-            },
-            {
-               "inputs" : {
-                  "click" : {
-                     "output" : "/actions/default/in/menutoggle"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/right/input/application_menu"
+               "path" : "/user/hand/right/input/grip"
             }
          ]
       },
@@ -227,45 +245,30 @@
                "inputs" : {
                   "click" : {
                      "output" : "/actions/platformer/in/jump"
+                  },
+                  "position" : {
+                     "output" : "/actions/platformer/in/move"
                   }
                },
-               "mode" : "button",
-               "path" : "/user/hand/left/input/trackpad"
+               "mode" : "joystick",
+               "path" : "/user/hand/left/input/joystick"
             },
             {
                "inputs" : {
                   "click" : {
                      "output" : "/actions/platformer/in/jump"
-                  }
-               },
-               "mode" : "button",
-               "path" : "/user/hand/right/input/trackpad"
-            },
-            {
-               "inputs" : {
+                  },
                   "position" : {
                      "output" : "/actions/platformer/in/move"
                   }
                },
-               "mode" : "trackpad",
-               "path" : "/user/hand/left/input/trackpad"
-            },
-            {
-               "inputs" : {
-                  "position" : {
-                     "output" : "/actions/platformer/in/move"
-                  }
-               },
-               "mode" : "trackpad",
-               "path" : "/user/hand/right/input/trackpad"
+               "mode" : "joystick",
+               "path" : "/user/hand/right/input/joystick"
             }
          ]
       }
    },
-   "category" : "steamvr_input",
-   "controller_type" : "vive_controller",
+   "controller_type" : "oculus_touch",
    "description" : "",
-   "name" : "My PUN2 SteamVR2 2019.2 Multiplayer test [Testing] configuration for Vive Controller",
-   "options" : {},
-   "simulated_actions" : []
+   "name" : "oculus_touch"
 }
