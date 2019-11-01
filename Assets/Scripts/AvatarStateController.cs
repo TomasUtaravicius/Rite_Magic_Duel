@@ -50,7 +50,6 @@ public class AvatarStateController : MonoBehaviour {
         if(!photonView.IsMine)
         {
             playerCamera.enabled = false;
-            Debug.Log("PhotonView is not mine");
             gestureController.enabled = false;
         }
         else

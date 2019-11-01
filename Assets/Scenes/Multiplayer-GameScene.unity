@@ -3733,7 +3733,7 @@ PrefabInstance:
     - target: {fileID: 3321542907182676526, guid: ac29fba019cabcb489c3e35266075e40,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.23
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 3321542907999480864, guid: ac29fba019cabcb489c3e35266075e40,
         type: 3}
@@ -7183,6 +7183,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 824d3adafd1c2d64b8c82f09ed60bfe7, type: 2}
+    - target: {fileID: 64820798451078254, guid: 93acc49b5a9f4e84b89aa62e0282a2a3,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93acc49b5a9f4e84b89aa62e0282a2a3, type: 3}
 --- !u!1001 &4350718156001362016

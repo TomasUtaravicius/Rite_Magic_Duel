@@ -7,6 +7,8 @@ public class PlayerCollision : MonoBehaviour
 {
     public PhotonView photonView;
     public ResourceManager resourceManager;
+    int count = 0;
+    bool allowDamage = true;
     private PhotonView pViewToKill;
     public void OnTriggerEnter(Collider other)
     {
@@ -17,12 +19,13 @@ public class PlayerCollision : MonoBehaviour
             Debug.Log("Collided with offensive spell");
             if (photonView.IsMine && !other.gameObject.GetComponent<Information>().hasHit)
             {
-                Debug.Log("Instantiating particles");
-                Transform explosionTransform = gameObject.transform;
-                GameObject explosionPrefabObject = PhotonNetwork.Instantiate("Expelliarmus_Explosion_Hit", gameObject.transform.position, gameObject.transform.rotation, 0);
-                AudioSource.PlayClipAtPoint(other.gameObject.GetComponent<Information>().audioForExplosion.clip, gameObject.transform.position);
-                resourceManager.photonView.RPC("TakeDamage", RpcTarget.AllViaServer, other.gameObject.GetComponent<Information>().damage);
-                //other.gameObject.GetComponent<Information>().hasHit = true;
+
+                other.gameObject.GetComponent<Information>().hasHit = true;
+                    Transform explosionTransform = gameObject.transform;
+                    GameObject explosionPrefabObject = PhotonNetwork.Instantiate("Expelliarmus_Explosion_Hit", gameObject.transform.position, gameObject.transform.rotation, 0);
+                    AudioSource.PlayClipAtPoint(other.gameObject.GetComponent<Information>().audioForExplosion.clip, gameObject.transform.position);
+                    resourceManager.photonView.RPC("TakeDamage", RpcTarget.AllViaServer, other.gameObject.GetComponent<Information>().damage);
+               
 
 
 
@@ -35,6 +38,7 @@ public class PlayerCollision : MonoBehaviour
                 Invoke("KillTheSpell", 0.1f);
 
             }
+           
 
         }
 
@@ -43,5 +47,6 @@ public class PlayerCollision : MonoBehaviour
     {
         if (pViewToKill != null)
             PhotonNetwork.Destroy(pViewToKill.gameObject);
+        allowDamage = true;
     }
 }

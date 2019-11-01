@@ -1,108 +1,116 @@
-﻿using Com.UTYStudios.SpellArena;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 using Photon.Pun;
-public class ResourceManager : MonoBehaviourPun,IPunObservable {
+using UnityEngine;
+
+
+public class ResourceManager : MonoBehaviourPun
+{
+
     [SerializeField]
     public float health;
+
     [SerializeField]
     public float mana;
-    private EnemyController eController;
-    private AvatarStateController avatarStateController;
-    public delegate void PlayerDeathEvent();
-    public event PlayerDeathEvent OnPlayerDeath;
-    public GameObject playerParentGO;
+
+    [SerializeField]
+    private PlayerResourceUIController playerResourceUIController;
+
     [SerializeField]
     private NetworkedPlayer nPlayer;
+
+    [SerializeField]
+    private float interval;
+
+    private float time;
+
+    private void FixedUpdate()
+    {
+        time += Time.deltaTime;
+
+        if (time >= interval)
+        {
+            time -= interval;
+
+            if (health < 100f)
+                health += 0.05f;
+            if (mana < 100f)
+                mana += 0.25f;
+            UpdateUI();
+        }
+    }
+
+    private void UpdateUI()
+    {
+        playerResourceUIController.UpdateResourceBars(health, mana);
+    }
+
     public void Start()
     {
-        avatarStateController = this.gameObject.GetComponent<AvatarStateController>();
         health = 100f;
-        if(gameObject.tag=="Enemy")
+
+        if (photonView.IsMine)
         {
-            eController = GetComponent<EnemyController>();
+            photonView.RPC("AddPlayer", Photon.Pun.RpcTarget.AllViaServer, PhotonNetwork.LocalPlayer.ActorNumber);
         }
-        if(photonView.IsMine)
-        {
-            photonView.RPC("AddPlayerRPC", Photon.Pun.RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.ActorNumber);
-        }
-        
-        
     }
+
     [PunRPC]
-    void AddPlayerRPC(int id)
+    private void AddPlayer(int id)
     {
-        Debug.Log("Add player to player list networked player test");
         nPlayer.photonID = id;
-        foreach(Photon.Realtime.Player player in PhotonNetwork.PlayerList)
+        foreach (Photon.Realtime.Player player in PhotonNetwork.PlayerList)
         {
-            if(player.ActorNumber==id)
+            if (player.ActorNumber == id)
             {
-                nPlayer.name =player.NickName;
+                nPlayer.name = player.NickName;
             }
         }
-        
+
         RiteGameManager.Instance.AddPlayerToTheList(nPlayer);
     }
+
     [PunRPC]
     public void TakeDamage(float amount)
     {
-       
+        
         if(photonView.IsMine)
         {
+            Debug.LogError("Take damage");
             health -= amount;
-            Debug.LogError("TakeDamage");
+            UpdateUI();
             if (health <= 0f)
             {
-
                 Die();
             }
         }
+           
         
     }
-    
+
     [PunRPC]
-	void Die()
+    public void ReduceMana(float amount)
     {
-        if(photonView.IsMine)
-        {
-            if (gameObject.tag == "Enemy")
-            {
-                eController.Die();
-            }
-            else
-            {
-
-                avatarStateController.photonView.RPC("ChangeAvatarToDead", Photon.Pun.RpcTarget.AllBuffered);
-
-                
-                photonView.RPC("CallPlayerDeath", Photon.Pun.RpcTarget.AllBuffered, nPlayer.photonID);
-                
-                
-            }
-        }
         
+        if (photonView.IsMine)
+        {
+            UpdateUI();
+            mana -= amount;
+        }
     }
+
+    [PunRPC]
+    private void Die()
+    {
+        if (photonView.IsMine)
+        {
+            photonView.RPC("CallPlayerDeath", Photon.Pun.RpcTarget.AllViaServer, nPlayer.photonID);
+        }
+    }
+
     [PunRPC]
     public void CallPlayerDeath(int id)
     {
-        Debug.LogError("CallPlayerDeath");
-
         RiteGameManager.Instance.PlayerDeath(id);
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        /*if(stream.IsWriting)
-        {
-            Debug.Log("Stream is writing");
-            stream.SendNext(health);
-        }
-        else
-        {
-            Debug.Log("Stream is receiving");
-            health = (float)stream.ReceiveNext();
-        }*/
+        //RiteGameManager.Instance.photonView.RPC("PlayerDeath", RpcTarget.AllViaServer, id);
     }
 }
