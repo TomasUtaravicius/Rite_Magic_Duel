@@ -3,7 +3,7 @@ using Photon.Pun;
 using UnityEngine;
 
 
-public class ResourceManager : MonoBehaviourPun
+public class ResourceManager : MonoBehaviourPun, IPunObservable
 {
 
     [SerializeField]
@@ -112,5 +112,10 @@ public class ResourceManager : MonoBehaviourPun
     {
         RiteGameManager.Instance.PlayerDeath(id);
         //RiteGameManager.Instance.photonView.RPC("PlayerDeath", RpcTarget.AllViaServer, id);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+       
     }
 }
