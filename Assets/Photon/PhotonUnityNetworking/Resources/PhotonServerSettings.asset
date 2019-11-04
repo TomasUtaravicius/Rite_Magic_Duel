@@ -62,5 +62,8 @@ MonoBehaviour:
   - CastBlueLightining
   - CastShield
   - UpdateSpawnPointColor
+  - ReduceMana
+  - KillPlayer
+  - AddPlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 0

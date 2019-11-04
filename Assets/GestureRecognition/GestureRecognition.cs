@@ -500,7 +500,6 @@ public class GestureRecognition {
         double[] _dir2 = new double[3];
         int ret = GestureRecognition_endStrokeAndGetSimilarity(m_gro, _similarity, _pos, _scale, _dir0, _dir1, _dir2);
         similarity = _similarity[0];
-
         pos.x = (float)_pos[0];
         pos.y = (float)_pos[1];
         pos.z = (float)_pos[2];

@@ -100,7 +100,7 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        CheckEndOfGame();
+        
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
@@ -158,7 +158,6 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
     void UpdateSpawnPointColor(int positionIndex)
     {
         GameObject spawnPoint = playerSpawnPoints.GetChild(positionIndex).GetChild(0).gameObject;
-        //spawnPoint.transform.GetChild(0).gameObject.SetActive(enabled);
         spawnPoint.GetComponent<MeshRenderer>().material.color = RiteGame.GetColor(positionIndex);
     }
 
@@ -180,46 +179,6 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
         }
 
         return true;
-    }
-
-    private void CheckEndOfGame()
-    {
-        /*bool allDestroyed = true;
-
-        foreach (Player p in PhotonNetwork.PlayerList)
-        {
-            object lives;
-            /*if (p.CustomProperties.TryGetValue(AsteroidsGame.PLAYER_LIVES, out lives))
-            {
-                if ((int)lives > 0)
-                {
-                    allDestroyed = false;
-                    break;
-                }
-            }*
-        }
-
-        if (allDestroyed)
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                StopAllCoroutines();
-            }
-
-            string winner = "";
-            int score = -1;
-
-            foreach (Player p in PhotonNetwork.PlayerList)
-            {
-                if (p.GetScore() > score)
-                {
-                    winner = p.NickName;
-                    score = p.GetScore();
-                }
-            }
-
-            StartCoroutine(EndOfGame(winner, score));
-        }*/
     }
 
     private void OnCountdownTimerIsExpired()
@@ -256,35 +215,26 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void RemovePlayerFromTheList(NetworkedPlayer nPlayer)
-    {
-        playerList.Remove(nPlayer);
-        alivePlayerList.Remove(nPlayer);
-    }
-
-    [PunRPC]
     public void PlayerDeath(int id)
     {
-        for (int n = 0; n < alivePlayerList.Count; n++)
-        {
-            if (alivePlayerList[n].photonID == id)
+        
+            for (int n = 0; n < alivePlayerList.Count; n++)
             {
-                alivePlayerList.Remove(alivePlayerList[n]);
-                break;
+                if (alivePlayerList[n].photonID == id)
+                {
+                    alivePlayerList[n].GetComponent<AvatarStateController>().ChangeAvatarToDead();
+                    alivePlayerList.Remove(alivePlayerList[n]);
+                }
             }
-        }
 
-        //Debug.Log("Player death " + alivePlayerList);
-
-        if (alivePlayerList.Count == 1)
-        {
-            Debug.LogError("Player " + alivePlayerList[0].photonID + " won");
-            PlayerWinRound(alivePlayerList[0].photonID);
-        }
+            if (alivePlayerList.Count == 1)
+            {
+                PlayerWinRound(alivePlayerList[0].photonID);
+            }
+        
+        
     }
-
-    
-
+ 
     [PunRPC]
     public void PlayerWinRound(int playerID)
     {
@@ -321,7 +271,7 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void ReturnPlayersToPositions()
     {
-        photonView.RPC("ReviveAllPlayers", Photon.Pun.RpcTarget.AllBuffered);
+        photonView.RPC("ReviveAllPlayers", Photon.Pun.RpcTarget.AllViaServer);
         Debug.LogError("Returning players to their original positions");
         for (int j = 0; j < PhotonNetwork.PlayerList.Length; j++)
         {

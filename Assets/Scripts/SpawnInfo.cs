@@ -9,28 +9,20 @@ public class SpawnInfo : MonoBehaviour {
     public PhotonView photonView;
     public GameObject playerReference;
     public VRIK avatarScript;
-    HealthManager hManager;
+    ResourceManager hManager;
     private PhotonView pViewToKill;
     public void AwakeAvatar()
     {
         
-        hManager = playerReference.GetComponent<AvatarStateController>().hManager;
+        hManager = playerReference.GetComponent<AvatarStateController>().resourceManager;
 
     }
     void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        // e.g. store this gameobject as this player's character in PhotonPlayer.TagObject
-        //info.sender.TagObject = this.gameObject;
         
         playerReference = info.photonView.gameObject;
     }
-    private void Update()
-    {
-        /*if(avatarScript.solver.spine.headTarget==null)
-        {
-            this.gameObject.SetActive(false);
-        }*/
-    }
+   
    
     public void OnTriggerEnter(Collider other)
     {

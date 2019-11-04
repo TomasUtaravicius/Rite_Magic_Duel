@@ -76,18 +76,18 @@ public class GestureManager : MonoBehaviour
     private Text HUDText;
 
     // The game object associated with the currently active controller (if any):
-    private GameObject           active_controller = null; 
+    private GameObject active_controller = null;
 
     // Last reported recognition performance (during training).
     // 0 = 0% correctly recognized, 1 = 100% correctly recognized.
-    private double last_performance_report = 0; 
+    private double last_performance_report = 0;
 
     // Temporary storage for objects to display the gesture stroke.
-    List<string> stroke = new List<string>(); 
+    List<string> stroke = new List<string>();
 
     // Temporary counter variable when creating objects for the stroke display:
-    public int stroke_index = 0; 
-    
+    public int stroke_index = 0;
+
     // Handle to this object/script instance, so that callbacks from the plug-in arrive at the correct instance.
     public GCHandle me;
 
@@ -104,7 +104,7 @@ public class GestureManager : MonoBehaviour
     }
 
     // Initialization:
-    void Start ()
+    void Start()
     {
         // Set the welcome message.
         HUDText = GameObject.Find("HUDText").GetComponent<Text>();
@@ -114,7 +114,7 @@ public class GestureManager : MonoBehaviour
                       + "Please use the Inspector for the XR rig.";
 
         me = GCHandle.Alloc(this);
-        
+
         /*GameObject controller_oculus_left = GameObject.Find("controller_oculus_left");
         GameObject controller_oculus_right = GameObject.Find("controller_oculus_right");
         GameObject controller_vive_left = GameObject.Find("controller_vive_left");
@@ -177,7 +177,7 @@ public class GestureManager : MonoBehaviour
 
         float trigger_left = Input.GetAxis("LeftControllerTrigger");
         float trigger_right = SteamVR_Actions.default_Squeeze.GetAxis(handType);
-        
+
         // Single Gesture recognition / 1-handed operation
         if (this.gr != null)
         {
@@ -188,7 +188,7 @@ public class GestureManager : MonoBehaviour
                 if (trigger_right > 0.8)
                 {
                     // Right controller trigger pressed.
-                    active_controller = GameObject.Find("ControllerR");
+                    active_controller = GameObject.Find("EndPoint");
                 }
                 else if (trigger_left > 0.8)
                 {
@@ -255,10 +255,10 @@ public class GestureManager : MonoBehaviour
             }
             else
             {
-                
+
                 string gesture_name = gr.getGestureName(gesture_id);
-                HUDText.text = "Identified gesture " + gesture_name + "(" + gesture_id + ")" + "(" + "Performance: " +(this.last_performance_report * 100).ToString() + ")";
-                
+                HUDText.text = "Identified gesture " + gesture_name + "(" + gesture_id + ")" + "(" + "Performance: " + (this.last_performance_report * 100).ToString() + ")";
+
             }
             return;
         }
@@ -383,7 +383,7 @@ public class GestureManager : MonoBehaviour
             else
             {
                 string combination_name = gc.getGestureCombinationName(recognized_combination_id);
-                HUDText.text = "Identified gesture combination '"+ combination_name+"' ("+ recognized_combination_id + ")";
+                HUDText.text = "Identified gesture combination '" + combination_name + "' (" + recognized_combination_id + ")";
             }
         }
     }
@@ -419,10 +419,10 @@ public class GestureManager : MonoBehaviour
     // Helper function to add a new star to the stroke trail.
     public void addToStrokeTrail(Vector3 p)
     {
-        GameObject star_instance = Instantiate(GameObject.Find("star"));
+
         GameObject star = new GameObject("stroke_" + stroke_index++);
-        star_instance.name = star.name + "_instance";
-        star_instance.transform.SetParent(star.transform, false);
+
+
         System.Random random = new System.Random();
         star.transform.localPosition = new Vector3((float)random.NextDouble() / 80, (float)random.NextDouble() / 80, (float)random.NextDouble() / 80) + p;
         star.transform.localRotation = new Quaternion((float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f).normalized;

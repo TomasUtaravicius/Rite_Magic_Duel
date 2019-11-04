@@ -3,6 +3,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LobbyMainPanel : MonoBehaviourPunCallbacks
@@ -284,7 +285,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
-
+        SceneManager.UnloadSceneAsync("Lobby");
         PhotonNetwork.LoadLevel("Multiplayer-GameScene");
     }
 

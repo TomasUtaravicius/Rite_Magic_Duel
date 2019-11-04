@@ -102,17 +102,6 @@ public class Sample_TwoHanded : MonoBehaviour
     // Initialization:
     void Start ()
     {
-        // Global setting:
-        // Ignore head tilt and roll rotation to approximate torso position.
-        gc.ignoreHeadRotationUpDown = true;
-        gc.ignoreHeadRotationTilt = true;
-        
-        // Load the default set of gestures.
-        if (gc.loadFromFile(LoadGesturesFile) == false)
-        {
-            Debug.Log("Failed to load sample gesture database file");
-        }
-
         // Set the welcome message.
         HUDText = GameObject.Find("HUDText").GetComponent<Text>();
         HUDText.text = "Welcome to 3D Gesture Recognition Plug-in!\n"
@@ -126,6 +115,27 @@ public class Sample_TwoHanded : MonoBehaviour
                       + "or: press 'A'/'X'/Menu button\nto create new gesture.";
 
         me = GCHandle.Alloc(this);
+
+        // Global setting:
+        // Ignore head tilt and roll rotation to approximate torso position.
+        gc.ignoreHeadRotationUpDown = true;
+        gc.ignoreHeadRotationTilt = true;
+
+        // Load the default set of gestures.
+#if UNITY_EDITOR
+        string gesture_file_path = "Assets/GestureRecognition";
+#else
+        string gesture_file_path = Application.streamingAssetsPath;
+#endif
+        if (LoadGesturesFile == null)
+        {
+            LoadGesturesFile = "Sample_TwoHanded_Gestures.dat";
+        }
+        if (gc.loadFromFile(gesture_file_path + "/" + LoadGesturesFile) == false)
+        {
+            HUDText.text = "Failed to load sample gesture database file";
+            return;
+        }
 
         GameObject controller_oculus_left = GameObject.Find("controller_oculus_left");
         GameObject controller_oculus_right = GameObject.Find("controller_oculus_right");
@@ -164,12 +174,26 @@ public class Sample_TwoHanded : MonoBehaviour
             controller_dummy_left.SetActive(true);
             controller_dummy_right.SetActive(true);
         }
+
+        if (ControllerMotionDistanceThreshold == 0)
+        {
+            ControllerMotionDistanceThreshold = 1;
+        }
+        if (ControllerMotionTimeThreshold == 0)
+        {
+            ControllerMotionTimeThreshold = 0.01;
+        }
     }
     
 
     // Update:
     void Update()
     {
+        float escape = Input.GetAxis("escape");
+        if (escape > 0.0f)
+        {
+            Application.Quit();
+        }
         float trigger_left = Input.GetAxis("LeftControllerTrigger");
         float trigger_right = Input.GetAxis("RightControllerTrigger");
         // If recording_gesture is -3, that means that the AI has recently finished learning a new gesture.
@@ -392,11 +416,20 @@ public class Sample_TwoHanded : MonoBehaviour
         // Get the script/scene object back from metadata.
         GCHandle obj = (GCHandle)ptr;
         Sample_TwoHanded me = (obj.Target as Sample_TwoHanded);
+        // Save the data to file.
+#if UNITY_EDITOR
+        string gesture_file_path = "Assets/GestureRecognition";
+#else
+        string gesture_file_path = Application.streamingAssetsPath;
+#endif
+        if (me.SaveGesturesFile == null)
+        {
+            me.SaveGesturesFile = "Sample_TwoHanded_MyRecordedGestures.dat";
+        }
+        me.gc.saveToFile(gesture_file_path + "/" + me.SaveGesturesFile);
         // Update the performance indicator with the latest estimate.
         me.last_performance_report = performance;
         // Signal that training was finished.
         me.recording_gesture = -3;
-        // Save the data to file. 
-        me.gc.saveToFile(me.SaveGesturesFile);
     }
 }

@@ -30,9 +30,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using UnityEngine.UI;
 using UnityEngine.XR;
+using UnityEngine.Networking;
 
 
 public class Sample_Military : MonoBehaviour
@@ -102,16 +104,38 @@ public class Sample_Military : MonoBehaviour
                       + "and perform the gesture displayed.";
 
         // Load the default set of gestures.
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
+        // When running the scene inside the Unity editor,
+        // we can just load the file from the Assets/ folder:
         string gesture_file_path = "Assets/GestureRecognition";
-        #else
-        string gesture_file_path = Application.streamingAssetsPath;
-        #endif
-        if (gc.loadFromFile(gesture_file_path + "/Sample_Military_Gestures.dat") == false)
+#elif UNITY_ANDROID
+        // On android, the file is in the .apk,
+        // so we need to first "download" it to the apps' cache folder.
+        AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+        string gesture_file_path = activity.Call <AndroidJavaObject>("getCacheDir").Call<string>("getCanonicalPath");
+        UnityWebRequest request = UnityWebRequest.Get(Application.streamingAssetsPath + "/Sample_Military_Gestures.dat");
+        request.SendWebRequest();
+        while (!request.isDone) {
+            // wait for file extraction to finish
+        }
+        if (request.isNetworkError)
         {
-            HUDText.text = "Failed to load sample gesture database file";
+            HUDText.text = "Failed to extract sample gesture database file from apk.\n";
             return;
         }
+        File.WriteAllBytes(gesture_file_path + "/Sample_Military_Gestures.dat", request.downloadHandler.data);
+#else
+        // This will be the case when exporting a stand-alone PC app.
+        // In this case, we can load the gesture database file from the streamingAssets folder.
+        string gesture_file_path = Application.streamingAssetsPath;
+#endif
+        if (gc.loadFromFile(gesture_file_path + "/Sample_Military_Gestures.dat") == false)
+        {
+            HUDText.text = "Failed to load sample gesture database file.";
+            return;
+        }
+        
         // Show the first gesture
         illustration = GameObject.Find("GestureIllustration");
         illustration_image = illustration.GetComponent<RawImage>();
@@ -121,6 +145,7 @@ public class Sample_Military : MonoBehaviour
         illustration_image.texture = Resources.Load<Texture>(illustration_path + gestures[0]);
 #endif
 
+        // Hide unused models in the scene
         GameObject controller_oculus_left = GameObject.Find("controller_oculus_left");
         GameObject controller_oculus_right = GameObject.Find("controller_oculus_right");
         GameObject controller_vive_left = GameObject.Find("controller_vive_left");
@@ -158,6 +183,9 @@ public class Sample_Military : MonoBehaviour
             controller_dummy_left.SetActive(true);
             controller_dummy_right.SetActive(true);
         }
+        
+        GameObject ball = GameObject.Find("ball");
+        ball.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
     }
     
 
@@ -311,10 +339,12 @@ public class Sample_Military : MonoBehaviour
         GameObject ball_instance = Instantiate(GameObject.Find("ball"));
         GameObject ball = new GameObject("stroke_" + stroke_index++);
         ball_instance.name = ball.name + "_instance";
+        ball_instance.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         ball_instance.transform.SetParent(ball.transform, false);
         System.Random random = new System.Random();
         ball.transform.localPosition = p;
         ball.transform.localRotation = new Quaternion((float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f, (float)random.NextDouble() - 0.5f).normalized;
+        ball.transform.localScale    = new Vector3(0.5f, 0.5f, 0.5f);
         stroke.Add(ball.name);
     }
     

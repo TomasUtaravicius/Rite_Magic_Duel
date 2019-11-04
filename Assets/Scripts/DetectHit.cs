@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DetectHit : MonoBehaviour {
 
-    public HealthManager hManager;
+    public ResourceManager hManager;
 	// Use this for initialization
 	void Start () {
 		
@@ -14,13 +14,7 @@ public class DetectHit : MonoBehaviour {
 	void Update () {
 		
 	}
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag=="OffensiveSpell")
-        {
-            hManager.TakeDamage(collision.gameObject.GetComponent<Information>().damage);
-        }
-    }*/
+   
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "OffensiveSpell")
