@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class SpellBook : MonoBehaviour
 {
-    [SerializeField] List<SpellData> spellList;    
-    
-    
+    private SpellPool spellPool;
+    [SerializeField] List<SpellData> spellSlots;
+
+
     // Start is called before the first frame update
     void Start()
     {
