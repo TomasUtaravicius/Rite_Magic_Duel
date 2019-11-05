@@ -87,7 +87,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 1359856594959608, guid: 18704d345f6bf0643be7e1d010d3e644,
     type: 3}
   name: Expelliarmus
-  damage: 25
+  damage: 20
   feedback: 500
   speed: 15
   explosionPower: 15

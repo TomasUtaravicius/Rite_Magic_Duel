@@ -25,6 +25,7 @@ public class AvatarStateController : MonoBehaviour {
     [SerializeField]
     private List<GameObject> listGO;
     private int positionIndex;
+    public AvatarRagdollController avatarRagdollController;
 
     VRIK avatarScript;
     VRIK deadAvatarScript;
@@ -51,16 +52,15 @@ public class AvatarStateController : MonoBehaviour {
         {
             playerCamera.enabled = false;
             gestureController.enabled = false;
+
         }
         else
         {
-            aliveAvatarBody.SetActive(false);
+            TurnOffAvatarBodyForLocalPlayer();
         }
         aliveAvatar.SetActive(true);
-        deadAvatar.SetActive(false);
-
-        aliveAvatar.GetComponent<SpawnInfo>().playerReference = this.gameObject;
-        aliveAvatar.GetComponent<SpawnInfo>().AwakeAvatar();
+        //deadAvatar.SetActive(false);
+        avatarRagdollController.TurnOffRagdoll();
         sManager.canCastSpells = true;
         resourceManager.health = 100f;
         resourceManager.mana = 100f;
@@ -71,23 +71,38 @@ public class AvatarStateController : MonoBehaviour {
         
 
     }
+    private void TurnOffAvatarBodyForLocalPlayer()
+    {
+        foreach(SkinnedMeshRenderer meshRenderer in aliveAvatarBody.transform.GetComponentsInChildren<SkinnedMeshRenderer>())
+        {
+            Debug.LogError("Turning off the avatar for local player");
+            meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+        }
+    }
+    private void TurnOnAvatarBodyForLocalPlayer()
+    {
+        foreach (SkinnedMeshRenderer meshRenderer in aliveAvatarBody.transform.GetComponentsInChildren<SkinnedMeshRenderer>())
+        {
+            Debug.LogError("Turning on the avatar for local player");
+            meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+        }
+    }
     [PunRPC]
     public void ChangeAvatarToDead()
     {
         if(photonView.IsMine)
         {
-            aliveAvatarBody.SetActive(true);
+            TurnOnAvatarBodyForLocalPlayer();
         }
+        avatarRagdollController.TurnOnRagdoll();
         sManager.canCastSpells = false;
-        aliveAvatar.SetActive(false);
-        deadAvatar.SetActive(true);
-        deadAvatar.GetComponent<SpawnInfo>().playerReference = this.gameObject;
-        
+        //aliveAvatar.SetActive(false);
+        //deadAvatar.SetActive(true);
 
-        deadAvatarScript = deadAvatar.GetComponent<VRIK>();
+       /* deadAvatarScript = deadAvatar.GetComponent<VRIK>();
         deadAvatarScript.solver.spine.headTarget = head;
         deadAvatarScript.solver.leftArm.target = leftArm;
-        deadAvatarScript.solver.rightArm.target = rightArm;
+        deadAvatarScript.solver.rightArm.target = rightArm;*/
         
     }
    

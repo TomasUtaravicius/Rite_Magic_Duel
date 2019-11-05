@@ -251,10 +251,14 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
             if(nPlayer.photonID==playerID)
             {
                 nPlayer.score++;
+                this.photonView.RPC("UpdateLeaderboard", RpcTarget.AllViaServer);
+                
+                break;
             }
         }
-        UpdateLeaderboard();
+        
     }
+    [PunRPC]
     void UpdateLeaderboard()
     {
         List<string> playerNameList = new List<string>();

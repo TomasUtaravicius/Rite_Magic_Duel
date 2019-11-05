@@ -83,7 +83,7 @@ public class GestureController : MonoBehaviour
 
     // Handle to this object/script instance, so that callbacks from the plug-in arrive at the correct instance.
     private GCHandle me;
-
+    public ResourceManager rManager;
     // Initialization:
     private void Start()
     {
@@ -98,24 +98,19 @@ public class GestureController : MonoBehaviour
         //Debug.Log(Application.streamingAssetsPath.ToString()+ "Path");
         // Set the welcome message.
         HUDText = GameObject.Find("HUDText").GetComponent<Text>();
-        HUDText.text = "Welcome to MARUI Gesture Plug-in!\n"
+        /*HUDText.text = "Welcome to MARUI Gesture Plug-in!\n"
                       + "Press the trigger to draw a gesture. Available gestures:\n"
                       + "1 - a circle/ring (creates a cylinder)\n"
                       + "2 - swipe left/right (rotate object)\n"
                       + "3 - shake (delete object)\n"
                       + "4 - draw a sword from your hip,\nhold it over your head (magic)\n"
-                      + "or: press 'A'/'X'/Menu button\nto create new gesture.";
+                      + "or: press 'A'/'X'/Menu button\nto create new gesture.";*/
 
         me = GCHandle.Alloc(this);
 
         // Reset the skybox tint color
         RenderSettings.skybox.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f, 1.0f));
-        if (shouldTrain)
-        {
-            //Invoke("StartTraining", 1f);
-
-            //StartTraining();
-        }
+        
     }
 
     private void LoadTheOtherFile()
@@ -174,10 +169,12 @@ public class GestureController : MonoBehaviour
     // Update:
     private void Update()
     {
-        if (Input.GetKeyDown("s"))
+
+        if (Input.GetKeyDown("p"))
         {
-            Debug.LogError("Pressed the S key");
-            Invoke("StartTraining", 1f);
+            Debug.LogError("Pressed the p key");
+            Debug.Log("Player took 15 damage");
+            rManager.TakeDamage(15f);
         }
         if (Input.GetKeyDown("l"))
         {
@@ -237,53 +234,95 @@ public class GestureController : MonoBehaviour
         Vector3 dir1 = Vector3.zero; // This will receive the secondary direction of the gesture.
         Vector3 dir2 = Vector3.zero; // This will receive the minor direction of the gesture (direction of smallest expansion).
         double similarity = 0;
-        int gesture_id = gr.endStroke(ref similarity, ref pos, ref scale, ref dir0, ref dir1, ref dir2);
-
+        String gestureName = "";
+        //int gesture_id = gr.endStroke(ref similarity, ref pos, ref scale, ref dir0, ref dir1, ref dir2);
+        double[] grresult = gr.endStrokeAndGetAllProbabilities();
+        List<double> listOfOver30Percent = new List<double>();
+        int gesture_id = -1;
+        for (int i = 0; i < grresult.GetLength(0); i++)
+        {
+            if (i == 0)
+            {
+                gestureName = "Sandtimer";
+            }
+            if (i == 1)
+            {
+                gestureName = "Circle";
+            }
+            if (i == 2)
+            {
+                gestureName = "ThunderBolt";
+            }
+            if (i == 3)
+            {
+                gestureName = "Fish";
+            }
+            if (i == 4)
+            {
+                gestureName = "Fish";
+            }
+            if (grresult[i] > 0.3)
+            {
+                listOfOver30Percent.Add(grresult[i]);
+            }
+            Debug.LogError(grresult[i].ToString() + " " + gestureName);
+            if (grresult[i] > 0.92 && listOfOver30Percent.Count < 2)
+            {
+                gesture_id = i;
+                //break;
+            }
+        }
         if (gesture_id < 0)
         {
             // Error trying to identify any gesture
             HUDText.text = "Failed to identify gesture.";
         }
-        if (similarity > 0.60)
+        //if (similarity > 0.60)
+        // {
+        if (gesture_id == 0)
         {
-            if (gesture_id == 0)
+            HUDText.text = "Sandtimer " + grresult[0];
+            //+ (similarity * 100).ToString("#.0");
+            if (spellManager.canCastSpells)
             {
-                HUDText.text = "Sandtimer" + (similarity * 100).ToString("#.0") + " pos: " + pos;
-                if (spellManager.canCastSpells)
-                {
-                    spellManager.SetBufferedSpell(SpellManager.Spells.BLUELIGHTNING);
-                }
-            }
-            else if (gesture_id == 1)
-            {
-                HUDText.text = "circle" + (similarity * 100).ToString("#.0") + " pos: " + pos;
-                if (spellManager.canCastSpells)
-                {
-                    spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
-                }
-            }
-            else if (gesture_id == 2)
-            {
-                HUDText.text = "Right flick" + (similarity * 100.0);
-            }
-            else if (gesture_id == 3)
-            {
-                HUDText.text = "left flick" + (similarity * 100.0);
-            }
-            else if (gesture_id == 4)
-            {
-                HUDText.text = "circle" + (similarity * 100.0);
-                if (spellManager.canCastSpells)
-                {
-                    spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
-                }
+                spellManager.SetBufferedSpell(SpellManager.Spells.BLUELIGHTNING);
             }
         }
-        else
+        else if (gesture_id == 1)
         {
+            HUDText.text = "Circle " + grresult[1];
+            if (spellManager.canCastSpells)
+            {
+                spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
+            }
+        }
+        else if (gesture_id == 2)
+        {
+            HUDText.text = "ThunderBolt " + grresult[2];
+        }
+        else if (gesture_id == 3)
+        {
+            HUDText.text = "Fish " + grresult[3];
+        }
+        else if (gesture_id == 4)
+        {
+            HUDText.text = "Spike " + grresult[4];
+            /*if (spellManager.canCastSpells)
+            {
+                spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
+            }*/
+        }
+        // }
+        /*else
+        {
+        Debug.LogError("Not recognized");
             // Other ID: one of the user-registered gestures:
-            HUDText.text = " not accurate enough : " + (similarity * 100).ToString("#.0");
-        }
+            //HUDText.text = " not accurate enough : " + (similarity * 100).ToString("#.0") + " gesture id: " + gesture_id;
+            for(int i = 0; i<grresult.GetLength(0);i++)
+            {
+                Debug.LogError(grresult[i].ToString());
+            }
+        }*/
     }
 
     // Callback function to be called by the gesture recognition plug-in during the learning process.
@@ -311,19 +350,5 @@ public class GestureController : MonoBehaviour
         // Save the data to file.
         me.gr.saveToFile(me.SaveGesturesFile);
         Debug.LogError("Training finished");
-    }
-
-    // Helper function to find a GameObject in the world based on it's position.
-    private GameObject getClosestObject(Vector3 pos)
-    {
-        GameObject closest_object = null;
-        foreach (GameObject o in created_objects)
-        {
-            if (closest_object == null || (o.transform.localPosition - pos).magnitude < (closest_object.transform.localPosition - pos).magnitude)
-            {
-                closest_object = o;
-            }
-        }
-        return closest_object;
     }
 }
