@@ -197,7 +197,6 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
                 entry.GetComponent<PlayerListEntry>().SetPlayerReady((bool)isPlayerReady);
             }
         }
-
         StartGameButton.gameObject.SetActive(CheckPlayersReady());
     }
 
@@ -225,7 +224,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         maxPlayers = (byte)Mathf.Clamp(maxPlayers, 2, 8);
 
         RoomOptions options = new RoomOptions { MaxPlayers = maxPlayers };
-
+        
         PhotonNetwork.CreateRoom(roomName, options, null);
     }
 

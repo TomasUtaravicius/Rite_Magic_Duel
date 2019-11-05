@@ -72,9 +72,7 @@ public class ResourceManager : MonoBehaviourPun, IPunObservable
     [PunRPC]
     public void TakeDamage(float amount)
     {
-        
-        if(photonView.IsMine)
-        {
+
             Debug.LogError("Take damage");
             health -= amount;
             UpdateUI();
@@ -82,9 +80,7 @@ public class ResourceManager : MonoBehaviourPun, IPunObservable
             {
                 Die();
             }
-        }
-           
-        
+ 
     }
 
     [PunRPC]

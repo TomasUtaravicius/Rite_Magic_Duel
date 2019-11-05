@@ -92,6 +92,7 @@ MonoBehaviour:
     type: 3}
   shieldMat: {fileID: 2100000, guid: 70cc334ccba0dd64a83565c3d1acd426, type: 2}
   manaCost: 10
+  health: 0
 --- !u!54 &54421052276682862
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -41,6 +41,7 @@ public class RFX4_EffectSettingsInspector : Editor
             script.Speed = EditorGUILayout.FloatField("Speed", script.Speed);
             script.AirDrag = EditorGUILayout.FloatField("AirDrag", script.AirDrag);
             script.UseGravity = EditorGUILayout.Toggle("Use Gravity", script.UseGravity);
+
             EditorGUILayout.EndVertical();
         }
 

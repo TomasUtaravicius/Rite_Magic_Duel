@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCollision : MonoBehaviour
+public class PlayerCollision : MonoBehaviour, IDamagable
 {
     public PhotonView photonView;
     public ResourceManager resourceManager;
     int count = 0;
     bool allowDamage = true;
     private PhotonView pViewToKill;
-    public void OnTriggerEnter(Collider other)
+    /*public void OnTriggerEnter(Collider other)
     {
-
+        /*
         if (other.gameObject.tag == "OffensiveSpell")
         {
 
@@ -39,14 +39,23 @@ public class PlayerCollision : MonoBehaviour
 
             }
            
-
+    
         }
 
-    }
-    public void KillTheSpell()
+    }*/
+   /* public void KillTheSpell()
     {
         if (pViewToKill != null)
             PhotonNetwork.Destroy(pViewToKill.gameObject);
         allowDamage = true;
+    }*/
+
+    public void GetHit(float damage)
+    {
+        if(photonView.IsMine)
+        {
+            Debug.LogWarning("PHOTON VIEW IS MINE AND IM ABOUT TO CALL TAKE DAMAGE");
+            resourceManager.photonView.RPC("TakeDamage", RpcTarget.AllViaServer, damage);
+        }
     }
 }

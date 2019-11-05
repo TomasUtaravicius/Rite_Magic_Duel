@@ -2,22 +2,35 @@
 using System.Collections;
 using UnityEngine;
 
-public class ShieldManager : MonoBehaviour
+public class ShieldManager : MonoBehaviour, IDamagable
 {
     public GameObject deflectedSpell;
     public PhotonView photonView;
     public GameObject ripplePrefab;
     public Material shieldMat;
     public float manaCost;
+    public float health;
     private IEnumerator increaseCoroutine = null;
     private IEnumerator decreaseCoroutine = null;
 
-    [PunRPC]
+    public void GetHit(float damage)
+    {
+        if(photonView.IsMine)
+        {
+            health -= damage;
+            if(health<=0)
+            {
+                photonView.RPC("TurnOffShield", RpcTarget.AllViaServer);
+            }
+        }
+    }
+
+    /*[PunRPC]
     public void DestroyObject(int id)
 
     {
         Destroy(PhotonView.Find(id).gameObject);
-    }
+    }*/
 
     private void Start()
     {
@@ -33,7 +46,7 @@ public class ShieldManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "OffensiveSpell")
         {
@@ -47,7 +60,7 @@ public class ShieldManager : MonoBehaviour
                 photonView.RPC("TurnOffShield", RpcTarget.AllViaServer);
             }
         }
-    }
+    }*/
 
     [PunRPC]
     private void TurnOffShield()
@@ -99,7 +112,7 @@ public class ShieldManager : MonoBehaviour
         }
     }
 
-    [PunRPC]
+    /*[PunRPC]
     private void SetToHit(int id)
     {
         PhotonView pView = PhotonView.Find(id);
@@ -109,5 +122,5 @@ public class ShieldManager : MonoBehaviour
             //pView.gameObject.GetComponent<Information>().hasHit = true;
             PhotonNetwork.Destroy(pView.gameObject);
         }
-    }
+    }*/
 }
