@@ -89,6 +89,47 @@ MonoBehaviour:
   speed: 30
   hasHit: 0
   manaCost: 20
+--- !u!114 &1328692257786021651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799450661579406388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86b6f49c2149194893b813a9c59a56a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3104976550825755579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799450661579406388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 151e5fb4355af6c4ab88423606b59ab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Distance: 30
+  Speed: 15
+  TimeDelay: 0
+  RandomMoveRadius: 0
+  RandomMoveSpeedScale: 1
+  Target: {fileID: 0}
+  CollidesWith:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  EffectsOnCollision:
+  - {fileID: 145962, guid: a61618b17590c45429257dd0092ca327, type: 3}
+  CollisionOffset: 0.09
+  DestroyTimeDelay: 5
+  CollisionEffectInWorldSpace: 1
+  DeactivatedObjectsOnCollision: []
+  HUE: -1
+  CollidedInstances: []
 --- !u!1001 &2801116266182339914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,11 +187,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114503623341167234, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114503623341167234, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
+        type: 3}
       propertyPath: Spell
       value: 
       objectReference: {fileID: 2098068299979516267}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f14e37b24a0f9c41a81220f59ae87f6, type: 3}
+--- !u!1 &2799450661579406388 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1748139164946814, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2801116266182339914}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2796501267954893270 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4709693737692316, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
