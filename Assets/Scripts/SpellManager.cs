@@ -102,6 +102,10 @@ public class SpellManager : MonoBehaviour {
        
         
     }
+    public void CastSpell(Spell spell)
+    {
+
+    }
     [PunRPC]
     public void CastStupefy()
     {

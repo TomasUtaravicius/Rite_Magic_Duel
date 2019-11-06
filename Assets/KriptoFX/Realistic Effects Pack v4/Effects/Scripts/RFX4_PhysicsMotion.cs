@@ -83,7 +83,14 @@ public class RFX4_PhysicsMotion : MonoBehaviour
         if (FreezeRotation) rigid.constraints = RigidbodyConstraints.FreezeRotation;
         rigid.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         rigid.interpolation = RigidbodyInterpolation.Interpolate;
-        rigid.AddForce(transform.forward * (Spell.speed), ForceMode);
+        if(Spell!=null)
+        {
+            rigid.AddForce(transform.forward * (Spell.speed), ForceMode);
+        }
+      else
+        {
+            rigid.AddForce(transform.forward * (Speed), ForceMode);
+        }
         isInitializedForce = true;
     }
 

@@ -69,7 +69,7 @@ Material:
     - _Float2: 3
     - _Fresnel: 3
     - _FresnelIntensity: 61
-    - _FresnelWidth: 0.25000077
+    - _FresnelWidth: 0.00000078231096
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
