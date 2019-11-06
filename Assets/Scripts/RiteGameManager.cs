@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
@@ -52,15 +53,13 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
     public override void OnDisable()
     {
         base.OnDisable();
-
-        CountdownTimer.OnCountdownTimerHasExpired -= OnCountdownTimerIsExpired;
     }
 
     #endregion UNITY
 
     #region COROUTINES
 
-    /*private IEnumerator EndOfGame(string winner, int score)
+    private IEnumerator EndOfGame(string winner, int score)
     {
         float timer = 5.0f;
 
@@ -68,13 +67,13 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
         {
             //InfoText.text = string.Format("Player {0} won with {1} points.\n\n\nReturning to login screen in {2} seconds.", winner, score, timer.ToString("n2"));
 
-            //yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
 
-            //timer -= Time.deltaTime;
+            timer -= Time.deltaTime;
         }
 
         PhotonNetwork.LeaveRoom();
-    }*/
+    }
 
     #endregion COROUTINES
 
@@ -105,11 +104,6 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
-        /*if (changedProps.ContainsKey(AsteroidsGame.PLAYER_LIVES))
-        {
-            CheckEndOfGame();
-            return;
-        }*/
 
         if (!PhotonNetwork.IsMasterClient)
         {
@@ -150,9 +144,6 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
        
         GameObject go = PhotonNetwork.Instantiate(steamVrPlayerPrefab.name, spawnPoint.transform.position, spawnPoint.transform.rotation, 0) as GameObject;
 
-        if (PhotonNetwork.IsMasterClient)
-        {
-        }
     }
     [PunRPC]
     void UpdateSpawnPointColor(int positionIndex)
@@ -180,13 +171,6 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
 
         return true;
     }
-
-    private void OnCountdownTimerIsExpired()
-    {
-        StartGame();
-    }
-
-   
 
     public void Awake()
     {

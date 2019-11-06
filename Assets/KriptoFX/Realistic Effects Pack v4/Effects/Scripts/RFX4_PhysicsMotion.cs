@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,9 @@ using Random = UnityEngine.Random;
 
 public class RFX4_PhysicsMotion : MonoBehaviour
 {
+    
     public bool UseCollisionDetect = true;
+    public Spell Spell;
     public float MaxDistnace = -1;
     public float Mass = 1;
     public float Speed = 10;
@@ -44,6 +47,7 @@ public class RFX4_PhysicsMotion : MonoBehaviour
 
     void OnEnable ()
     {
+        //Speed = Spell.speed;
         effectSettings = GetComponentInParent<RFX4_EffectSettings>();
         foreach (var obj in DeactivateObjectsAfterCollision)
         {
@@ -79,13 +83,26 @@ public class RFX4_PhysicsMotion : MonoBehaviour
         if (FreezeRotation) rigid.constraints = RigidbodyConstraints.FreezeRotation;
         rigid.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         rigid.interpolation = RigidbodyInterpolation.Interpolate;
-        rigid.AddForce(transform.forward * (effectSettings.Speed + currentSpeedOffset), ForceMode);
+        if(Spell!=null)
+        {
+            rigid.AddForce(transform.forward * (Spell.speed), ForceMode);
+        }
+      else
+        {
+            rigid.AddForce(transform.forward * (Speed), ForceMode);
+        }
         isInitializedForce = true;
     }
 
     void OnCollisionEnter(Collision collision)
     {
+        
         if (isCollided && !effectSettings.UseCollisionDetection) return;
+        if(collision.collider.gameObject.GetComponent<PlayerCollision>()!=null && !isCollided)
+        {
+            Debug.Log("we hit a damagable object");
+            collision.collider.gameObject.GetComponent<PlayerCollision>().GetHit(Spell.damage);
+        }
         foreach (ContactPoint contact in collision.contacts)
         {
             if (!isCollided)

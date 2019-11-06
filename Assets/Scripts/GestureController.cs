@@ -130,7 +130,7 @@ public class GestureController : MonoBehaviour
 #if UNITY_EDITOR
         gr.loadFromFile(LoadGesturesFile);
 #else
-                gr.loadFromFile(Application.streamingAssetsPath + "/GestureSetIgnoreDisabled3.dat");
+                gr.loadFromFile(Application.streamingAssetsPath + "/GestureSet5Gestures180Samples.dat");
 #endif
 
         /*if (gr.loadFromFile(LoadGesturesFile))
