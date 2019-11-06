@@ -3,8 +3,15 @@
 [System.Serializable, CreateAssetMenu(fileName = "SpellData", menuName = "Rite/Spell Data", order = 0)]
 public class SpellData : ScriptableObject
 {
+    /*public bool hasHit;
+    public float manaCost;*/
+    
+    
+    
     [Header("Spell")]
     public string spellName = "New Spell";
+
+    [Min(0)] public float manaCost = 10;
 
     /// <summary> Amount of health the spell has </summary>
     [Min(0)] public float health = 10;
@@ -14,6 +21,9 @@ public class SpellData : ScriptableObject
 
     /// <summary> Lifetime of the spell after being cast. Lifetime of 0 is infinite </summary>
     [Min(0)] public float lifetime = 0;
+
+    /// <summary> Spell controller rumble feedback </summary>
+    [Min(0)] public float feedback;
 
     //Spell visuals and audio
     [Space(10)]
