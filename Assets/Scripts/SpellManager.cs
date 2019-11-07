@@ -87,7 +87,7 @@ public class SpellManager : MonoBehaviour {
     [PunRPC]
     public void CastBlueLightining()
     {
-        //Instatiate a spell over the network.
+        //Instantiate a spell over the network.
         if (resourceManager.mana>= ExpelliarmusPrefab.GetComponent<Spell>().manaCost)
         {
             PhotonNetwork.Instantiate(ExpelliarmusPrefab.name, spellCastingPoint.transform.position, spellCastingPoint.transform.rotation, 0);

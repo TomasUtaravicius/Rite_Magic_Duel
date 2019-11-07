@@ -100,7 +100,7 @@ public class RFX4_PhysicsMotion : MonoBehaviour
         if (isCollided && !effectSettings.UseCollisionDetection) return;
         if(collision.collider.gameObject.GetComponent<PlayerCollision>()!=null && !isCollided)
         {
-            Debug.Log("we hit a damagable object");
+            Debug.Log("we hit a damageable object");
             collision.collider.gameObject.GetComponent<PlayerCollision>().GetHit(Spell.damage);
         }
         foreach (ContactPoint contact in collision.contacts)
