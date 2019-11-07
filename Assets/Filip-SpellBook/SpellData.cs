@@ -39,10 +39,6 @@ public class SpellData : ScriptableObject
     [Tooltip("Multiply the color of the materials and particle effects of the Spell object")]
     public Color spellTint = Color.white;
 
-    [Space(5)]
-    [Tooltip("Sound used by the Spell script")]
-    public AudioClip spellSound;
-
     [Header("Projectile")]
     [Min(0)] public float spellSpeed = 10;
 

@@ -20,7 +20,7 @@ public class SpellSpawner : MonoBehaviour
                 Debug.Log("Spell found");
 
                 spell.SetSpellAttributes(spellData.spellName, spellData.hitEffectPrefab.name, spellData.health, spellData.damage, spellData.lifetime);
-                spell.SetSpellVisuals(spellData.spellSound, spellData.shouldTintSpell, spellData.spellTint);
+                spell.SetSpellVisuals(spellData.shouldTintSpell, spellData.spellTint);
 
                 switch (spell.SpellType)
                 {

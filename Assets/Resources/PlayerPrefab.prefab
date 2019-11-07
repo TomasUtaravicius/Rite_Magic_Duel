@@ -9272,7 +9272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellCastingPoint: {fileID: 1875068042887348477}
-  ExpelliarmusPrefab: {fileID: 2098068299979516266, guid: 010f905b6a47b314aadd345e0fb71fb0,
+  BlueBlast: {fileID: 2098068299979516266, guid: 010f905b6a47b314aadd345e0fb71fb0,
     type: 3}
   StupefyPrefab: {fileID: 1538143837293630, guid: e8c454dd649b99d48a43cfd68d452d55,
     type: 3}
