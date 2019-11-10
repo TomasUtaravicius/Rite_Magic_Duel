@@ -1,59 +1,83 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SpellBook : MonoBehaviour
 {
     private SpellPool spellPool;
-    [SerializeField] List<SpellData> spellSlots;
+    [SerializeField] SpellLoadout loadout = null;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        List<string> book = LoadoutManager.LoadSelectedBook();
+        spellPool = GetComponent<SpellPool>();
+        loadout = LoadoutManager.LoadSelectedLoadout();
+        Debug.Log(loadout.ToString());
 
-        for (int i = 0; i < book.Count; i++)
-        {
-            Debug.Log(book[i]);
+        //TestLoadout();
+        PoolSpells();
+    }
 
-            if(i > 1)
+    private void TestLoadout()
+    {
+        SpellData[] spells = loadout.GetSpellArray();
+
+        for (int i = 0; i < spells.Length; i++)
+            if (spells[i])
             {
-                spellSlots.Add(Resources.Load<SpellData>(book[i]));
+                Debug.Log("Spell spawned");
+                SpawnSpell(spells[i], transform, false).FireSpell();
+            }
+            else
+                Debug.LogWarning("Spell " + (i + 1) + " is null");
+    }
+
+    private void PoolSpells()
+    {
+        SpellData[] spells = loadout.GetSpellArray();
+
+        for (int i = 0; i < spells.Length; i++)
+            if (spells[i])
+            {
+                Debug.Log("Spell pooled");
+                spellPool.Destroy(SpawnSpell(spells[i], transform, false).gameObject);
+            }
+            else
+                Debug.LogWarning("Spell " + (i + 1) + " is null");
+    }
+
+    
+
+    private SB_Spell SpawnSpell(SpellData spellData, Transform spawnTransform, bool spawnFromPool)
+    {
+        GameObject spellInstance;
+        if (spawnFromPool)
+            spellInstance = spellPool.Instantiate(spellData.spellName, spawnTransform.position, spawnTransform.rotation);
+        else
+            spellInstance = Instantiate(spellData.spellPrefab, spawnTransform.position, spawnTransform.rotation, null);
+
+        SB_Spell spell = spellInstance.GetComponent<SB_Spell>();
+        if (spell)
+        {
+            Debug.Log("Spell found");
+
+            spell.SetSpellAttributes(spellData.spellName, spellData.hitEffectPrefab.name, spellData.health, spellData.damage, spellData.lifetime);
+            spell.SetSpellVisuals(spellData.shouldTintSpell, spellData.spellTint);
+
+            switch (spell.SpellType)
+            {
+                case SpellType.None:
+                    break;
+
+                case SpellType.Projectile:
+                    ((Projectile)spell).spellSpeed = spellData.spellSpeed;
+                    break;
+
+                case SpellType.Shield:
+                    break;
             }
         }
 
-        for (int i = 0; i < spellSlots.Count; i++)
-        {
-            Debug.Log("Spell spawned");
-            GameObject spellInstance = Instantiate(spellSlots[i].spellPrefab, transform.position, transform.rotation, null);
 
-
-            SB_Spell spell = spellInstance.GetComponent<SB_Spell>();
-            if (spell)
-            {
-                Debug.Log("Spell found");
-
-                spell.SetSpellAttributes(spellSlots[i].spellName, spellSlots[i].hitEffectPrefab.name, spellSlots[i].health, spellSlots[i].damage, spellSlots[i].lifetime);
-                spell.SetSpellVisuals(spellSlots[i].shouldTintSpell, spellSlots[i].spellTint);
-
-                switch (spell.SpellType)
-                {
-                    case SpellType.None:
-                        break;
-
-                    case SpellType.Projectile:
-                        ((Projectile)spell).spellSpeed = spellSlots[i].spellSpeed;
-                        break;
-
-                    case SpellType.Shield:
-                        break;
-                }
-
-
-                spell.FireSpell();
-            }
-
-        }
+        return spell;
     }
 }

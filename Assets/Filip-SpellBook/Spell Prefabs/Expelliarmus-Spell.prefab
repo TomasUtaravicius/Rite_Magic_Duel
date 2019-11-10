@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3466419380886482159}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cee00b59ba08a304a91f04abb97b84df, type: 3}
+  m_Script: {fileID: 11500000, guid: 55fa643032228f44793cc2205aee8840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 3547704624556849109}
+  damage: 10
+  manaCost: 0
+  hitEffectPrefabName: 
   spellSpeed: 10
-  spellLight: {fileID: 3574930181238451425}
-  particleSystem: {fileID: 3665465182005104717}
 --- !u!1001 &3467315314697172653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -102,24 +102,6 @@ PrefabInstance:
 --- !u!1 &3466419380886482159 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1498530607749698, guid: f3092bc74388c214bb5b22b385c758cd,
-    type: 3}
-  m_PrefabInstance: {fileID: 3467315314697172653}
-  m_PrefabAsset: {fileID: 0}
---- !u!108 &3574930181238451425 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 108883431311645260, guid: f3092bc74388c214bb5b22b385c758cd,
-    type: 3}
-  m_PrefabInstance: {fileID: 3467315314697172653}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &3547704624556849109 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 82641936463380856, guid: f3092bc74388c214bb5b22b385c758cd,
-    type: 3}
-  m_PrefabInstance: {fileID: 3467315314697172653}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &3665465182005104717 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 198221888541026016, guid: f3092bc74388c214bb5b22b385c758cd,
     type: 3}
   m_PrefabInstance: {fileID: 3467315314697172653}
   m_PrefabAsset: {fileID: 0}

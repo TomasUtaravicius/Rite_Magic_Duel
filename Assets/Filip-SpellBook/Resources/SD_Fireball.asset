@@ -18,12 +18,11 @@ MonoBehaviour:
   damage: 10
   lifetime: 2
   feedback: 12
-  spellPrefab: {fileID: 3466419380886482159, guid: b49248aa8603cf44aac146cec3c2e9d2,
+  spellPrefab: {fileID: 2098068299979516266, guid: 010f905b6a47b314aadd345e0fb71fb0,
     type: 3}
   spellScale: {x: 1, y: 1, z: 1}
   shouldTintSpell: 1
   spellTint: {r: 1, g: 0.13339981, b: 0.10849059, a: 1}
-  spellSound: {fileID: 8300000, guid: be27c05909607254d904f7c69ec0bf33, type: 3}
   spellSpeed: 10
   hitEffectPrefab: {fileID: 6276298085916153618, guid: cc63bdf410295b844ba15b1aca144f93,
     type: 3}

@@ -15,7 +15,7 @@ public class SpellPool : MonoBehaviour, IPunPrefabPool
     public GameObject Instantiate(string prefabId, Vector3 position, Quaternion rotation)
     {
         GameObject res = null;
-        bool cached = this.ResourceCache.TryGetValue(prefabId, out res);
+        bool cached = ResourceCache.TryGetValue(prefabId, out res);
         if (!cached)
         {
             res = (GameObject)Resources.Load(prefabId, typeof(GameObject));
@@ -32,7 +32,7 @@ public class SpellPool : MonoBehaviour, IPunPrefabPool
         bool wasActive = res.activeSelf;
         if (wasActive) res.SetActive(false);
 
-        GameObject instance = GameObject.Instantiate(res, position, rotation) as GameObject;
+        GameObject instance = Instantiate(res, position, rotation);
 
         if (wasActive) res.SetActive(true);
         return instance;
@@ -42,6 +42,7 @@ public class SpellPool : MonoBehaviour, IPunPrefabPool
     /// <param name="gameObject">The GameObject to get rid of.</param>
     public void Destroy(GameObject gameObject)
     {
-        GameObject.Destroy(gameObject);
+        gameObject.SetActive(false);
+        ResourceCache.Add(gameObject.name, gameObject);
     }
 }

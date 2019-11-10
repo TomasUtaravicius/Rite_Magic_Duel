@@ -56,6 +56,6 @@ public class SB_Spell : MonoBehaviourPun, IPunObservable
 
     protected virtual void TintSpellColors(Color tintColor)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
     }
 }
