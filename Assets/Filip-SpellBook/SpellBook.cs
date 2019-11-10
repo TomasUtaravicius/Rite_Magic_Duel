@@ -35,7 +35,7 @@ public class SpellBook : MonoBehaviour
                 Debug.Log("Spell found");
 
                 spell.SetSpellAttributes(spellSlots[i].spellName, spellSlots[i].hitEffectPrefab.name, spellSlots[i].health, spellSlots[i].damage, spellSlots[i].lifetime);
-                spell.SetSpellVisuals(spellSlots[i].spellSound, spellSlots[i].shouldTintSpell, spellSlots[i].spellTint);
+                spell.SetSpellVisuals(spellSlots[i].shouldTintSpell, spellSlots[i].spellTint);
 
                 switch (spell.SpellType)
                 {

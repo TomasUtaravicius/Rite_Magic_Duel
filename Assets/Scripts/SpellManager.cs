@@ -6,7 +6,7 @@ using Valve.VR;
 
 public class SpellManager : MonoBehaviour {
     public GameObject spellCastingPoint;
-    public GameObject ExpelliarmusPrefab;
+    public GameObject BlueBlast;
     public GameObject StupefyPrefab;
     public GameObject LethalPrefab;
     public GameObject ProtegoPrefab;
@@ -38,7 +38,7 @@ public class SpellManager : MonoBehaviour {
     private ResourceManager resourceManager;
     private void Start()
     {
-        Expelliarmus = ExpelliarmusPrefab.GetComponent<Information>();
+        Expelliarmus = BlueBlast.GetComponent<Information>();
         Stupefy = StupefyPrefab.GetComponent<Information>();
         Lethal = LethalPrefab.GetComponent<Information>();
         castExpelliarmus = false;
@@ -88,11 +88,11 @@ public class SpellManager : MonoBehaviour {
     public void CastBlueLightining()
     {
         //Instantiate a spell over the network.
-        if (resourceManager.mana>= ExpelliarmusPrefab.GetComponent<Spell>().manaCost)
+        if (resourceManager.mana>= BlueBlast.GetComponent<SB_Spell>().manaCost)
         {
-            PhotonNetwork.Instantiate(ExpelliarmusPrefab.name, spellCastingPoint.transform.position, spellCastingPoint.transform.rotation, 0);
+            PhotonNetwork.Instantiate(BlueBlast.name, spellCastingPoint.transform.position, spellCastingPoint.transform.rotation, 0);
             SetBufferedSpell(Spells.NULL);
-            resourceManager.ReduceMana(ExpelliarmusPrefab.GetComponent<Spell>().manaCost);
+            resourceManager.ReduceMana(BlueBlast.GetComponent<SB_Spell>().manaCost);
         }
         else
         {

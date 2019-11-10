@@ -8,6 +8,7 @@ public class RFX1_TransformMotion : MonoBehaviour
 {
     public float Distance = 30;
     public float Speed = 1;
+    public Projectile spellScript;
     //public float Dampeen = 0;
     //public float MinSpeed = 1;
     public float TimeDelay = 0;
