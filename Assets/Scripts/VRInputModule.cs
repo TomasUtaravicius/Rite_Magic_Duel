@@ -15,7 +15,7 @@ public class VRInputModule : BaseInputModule
     //public SteamVR_Controller.Device leftController;
     public SteamVR_Controller.Device rightController { get { return SteamVR_Controller.Input((int)rightControllerTracked.index); } }
     public SteamVR_Controller.Device leftController{ get { return SteamVR_Controller.Input((int)leftControllerTracked.index); } }
-    public GameObject m_CurrentObject = null;
+    private GameObject m_CurrentObject = null;
     private PointerEventData m_Data = null;
     public override void Process()
     {
