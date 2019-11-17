@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Valve.VR;
+
 public class VRInputModule : BaseInputModule
 {
     public Camera m_Camera;
-    public SteamVR_Input_Sources m_targetSource;
-    public SteamVR_Action_Boolean m_ClickAction;
-
-    private GameObject m_CurrentObject = null;
+    [SerializeField]
+    SteamVR_TrackedObject rightControllerTracked;
+    [SerializeField]
+    SteamVR_TrackedObject leftControllerTracked;
+    // public SteamVR_Controller.Device rightController;
+    //public SteamVR_Controller.Device leftController;
+    public SteamVR_Controller.Device rightController { get { return SteamVR_Controller.Input((int)rightControllerTracked.index); } }
+    public SteamVR_Controller.Device leftController{ get { return SteamVR_Controller.Input((int)leftControllerTracked.index); } }
+    public GameObject m_CurrentObject = null;
     private PointerEventData m_Data = null;
     public override void Process()
     {
@@ -25,17 +31,26 @@ public class VRInputModule : BaseInputModule
         // Hover 
         HandlePointerExitAndEnter(m_Data,m_CurrentObject);
         // Press
-        if (m_ClickAction.GetStateDown(m_targetSource) || Input.GetKeyDown(KeyCode.Mouse0))
+        
+        if (rightController.GetPressDown(EVRButtonId.k_EButton_SteamVR_Trigger) || Input.GetKeyDown(KeyCode.Mouse0))
         {
             Debug.Log("Press");
             ProcessPress(m_Data);
             
         }
         // Release
-        if (m_ClickAction.GetStateUp(m_targetSource))
+        if (rightController.GetPressUp(EVRButtonId.k_EButton_SteamVR_Trigger))
         {
             ProcessRelease(m_Data);
         }
+    }
+    private void Update()
+    {
+        if(rightController.GetHairTriggerUp())
+        {
+            Debug.LogError("Right controller trigger press up");
+        }
+      
     }
     protected override void Awake()
     {

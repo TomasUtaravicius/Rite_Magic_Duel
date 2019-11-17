@@ -31,14 +31,18 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
-using Valve.VR;
+
 
 public class GestureController : MonoBehaviour
 {
-    public SteamVR_Action_Single triggerValue = SteamVR_Actions.default_Squeeze;
-    public SteamVR_Input_Sources handType = SteamVR_Input_Sources.RightHand;
+    //public SteamVR_Action_Single triggerValue = SteamVR_Actions.default_Squeeze;
+    //public SteamVR_Input_Sources handType = SteamVR_Input_Sources.RightHand;
     public bool shouldTrain;
-
+    public VRInputModule vRInputModule;
+    public TrailController trailController;
+    [SerializeField]
+    SteamVR_TrackedObject rightControllerTracked;
+    public SteamVR_Controller.Device rightController { get { return SteamVR_Controller.Input((int)rightControllerTracked.index); } }
     // The file from which to load gestures on startup.
     // For example: "Assets/GestureRecognition/sample_gestures.dat"
     [SerializeField] public string LoadGesturesFile;
@@ -182,20 +186,35 @@ public class GestureController : MonoBehaviour
 
             StartTraining();
         }
+        if (vRInputModule.rightController.GetHairTriggerUp())
+        {
+            trailController.TurnOffTrail();
+        }
+        if (spellManager.bufferedSpell!=SpellManager.Spells.NULL)
+        {
+            return;
+        }
         //Debug.Log(last_performance_report * 100.0);
         float trigger_left = Input.GetAxis("LeftControllerTrigger");
-        float trigger_right = SteamVR_Actions.default_Squeeze.GetAxis(handType);
+        float trigger_right = vRInputModule.rightController.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x;
+       
+        //float trigger_right = SteamVR_Actions.default_Squeeze.GetAxis(handType);
 
         // If the user is not yet dragging (pressing the trigger) on either controller, he hasn't started a gesture yet.
         if (active_controller == null)
         {
+            if(vRInputModule.rightController.GetHairTriggerDown())
+            {
+                trailController.TurnOnTrail();
+            }
+            
             // If the user presses either controller's trigger, we start a new gesture.
-            if (trigger_right > 0.8)
+            if (trigger_right > 0.3)
             {
                 // Right controller trigger pressed.
                 active_controller = wandEnd;
             }
-            else if (trigger_left > 0.8)
+            else if (trigger_left > 0.3)
             {
                 // Left controller trigger pressed.
                 active_controller = GameObject.Find("Left Hand");
@@ -217,6 +236,7 @@ public class GestureController : MonoBehaviour
         // Check if the user is still dragging or if he let go of the trigger button.
         if (trigger_left > 0.3 || trigger_right > 0.3 && spellManager.bufferedSpell == SpellManager.Spells.NULL)
         {
+            
             // The user is still dragging with the controller: continue the gesture.
             Vector3 p = active_controller.transform.localPosition;
             p.z += 0.5f;

@@ -2,15 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Valve.VR;
+
 
 public class UIController : MonoBehaviour
 {
     [SerializeField]
     private GameObject menuUI;
     public PhotonView photonView;
-    public SteamVR_Action_Boolean menuToggle;
-    public SteamVR_Input_Sources handType;
+    //public SteamVR_Action_Boolean menuToggle;
+    //public SteamVR_Input_Sources handType;
     public GameObject pointer;
     private bool menuValue;
     // Start is called before the first frame update
@@ -31,7 +31,7 @@ public class UIController : MonoBehaviour
     void Update()
     {
         
-        if(menuToggle.GetStateDown(handType))
+        /*if(menuToggle.GetStateDown(handType))
         {
             menuValue = !menuValue;
             if (menuValue)

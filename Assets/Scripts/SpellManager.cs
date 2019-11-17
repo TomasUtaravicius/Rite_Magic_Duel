@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Valve.VR;
+
 
 public class SpellManager : MonoBehaviour {
     public GameObject spellCastingPoint;
@@ -12,12 +12,13 @@ public class SpellManager : MonoBehaviour {
     public GameObject RotationOfProtego;
     public PhotonView photonView;
     public Transform headTransform;
-    public SteamVR_Action_Boolean gripPressed;
-    public SteamVR_Input_Sources handType;
+    //public SteamVR_Action_Boolean gripPressed;
+    //public SteamVR_Input_Sources handType;
     public delegate void SpellValueChanged();
     public SpellValueChanged OnSpellValueChanged;
     public bool canCastSpells;
     public bool isLobbyMode;
+    public VRInputModule vRInputModule;
     [HideInInspector]
     public enum Spells {BLUELIGHTNING,REDLIGHTNING,SHIELD,NULL };
     public Spells bufferedSpell = Spells.NULL;
@@ -51,10 +52,10 @@ public class SpellManager : MonoBehaviour {
     {
         if(canCastSpells)
         {
-            if(photonView.IsMine || isLobbyMode)
+            if(photonView.IsMine && vRInputModule.rightController.GetPressUp(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger))
             {
-                if(bufferedSpell!=Spells.NULL && gripPressed.GetStateUp(handType))
-                {
+                /*if(bufferedSpell!=Spells.NULL && gripPressed.GetStateUp(handType))
+                {*/
 
                     if (bufferedSpell==Spells.BLUELIGHTNING)
                     {
@@ -69,7 +70,7 @@ public class SpellManager : MonoBehaviour {
                         CastStupefy();
                     }
                     
-                }
+                //}
            }    
         }
         

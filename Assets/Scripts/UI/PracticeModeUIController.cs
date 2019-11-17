@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Valve.VR;
+
 
 public class PracticeModeUIController : MonoBehaviour
 {
     [SerializeField]
     private GameObject menuUI;
-    public SteamVR_Action_Boolean menuToggle;
-    public SteamVR_Input_Sources handType;
+   // public SteamVR_Action_Boolean menuToggle;
+   // public SteamVR_Input_Sources handType;
     public GameObject pointer;
     private bool menuValue;
 
@@ -20,8 +20,8 @@ public class PracticeModeUIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (menuToggle.GetStateDown(handType))
+        
+        /*if (menuToggle.GetStateDown(handType))
         {
             menuValue = !menuValue;
             if (menuValue)
@@ -32,7 +32,7 @@ public class PracticeModeUIController : MonoBehaviour
             {
                 DisableUI();
             }
-        }
+        }*/
 
     }
     private void DisableUI()

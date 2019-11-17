@@ -10,7 +10,7 @@ public class TeleportSpellController : MonoBehaviour {
     [SerializeField]
     private bool shouldMoveInParabola;
     private bool shouldMoveTowardsThePlayer;
-    public TeleportVive teleporter;
+    //public TeleportVive teleporter;
     private Vector3 playerPosition;
     //public SteamVR_TrackedObject device;
     private float timer;

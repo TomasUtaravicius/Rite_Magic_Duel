@@ -7414,7 +7414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpawnPoints: {fileID: 1007377645}
-  steamVrPlayerPrefab: {fileID: 1874105231368808967, guid: c7de2b8b4da39d740ba7ef8efcef9c78,
+  steamVrPlayerPrefab: {fileID: 8508646066459287977, guid: ae43e4d08c8614f4d94e18eaa10a6f75,
     type: 3}
   playerList: []
   alivePlayerList: []
