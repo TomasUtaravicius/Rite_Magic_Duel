@@ -287,6 +287,14 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         SceneManager.UnloadSceneAsync("Lobby");
         PhotonNetwork.LoadLevel("Multiplayer-GameScene");
     }
+    public void OnPracticeButtonClicked()
+    {
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+        SceneManager.UnloadSceneAsync("Lobby");
+        SceneManager.LoadScene("PracticeScene");
+    }
+
 
     #endregion UI CALLBACKS
 

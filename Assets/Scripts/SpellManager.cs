@@ -8,7 +8,6 @@ public class SpellManager : MonoBehaviour {
     public GameObject spellCastingPoint;
     public GameObject BlueBlast;
     public GameObject StupefyPrefab;
-    public GameObject LethalPrefab;
     public GameObject ProtegoPrefab;
     public GameObject RotationOfProtego;
     public PhotonView photonView;
@@ -18,6 +17,7 @@ public class SpellManager : MonoBehaviour {
     public delegate void SpellValueChanged();
     public SpellValueChanged OnSpellValueChanged;
     public bool canCastSpells;
+    public bool isLobbyMode;
     [HideInInspector]
     public enum Spells {BLUELIGHTNING,REDLIGHTNING,SHIELD,NULL };
     public Spells bufferedSpell = Spells.NULL;
@@ -40,7 +40,6 @@ public class SpellManager : MonoBehaviour {
     {
         Expelliarmus = BlueBlast.GetComponent<Information>();
         Stupefy = StupefyPrefab.GetComponent<Information>();
-        Lethal = LethalPrefab.GetComponent<Information>();
         castExpelliarmus = false;
         castStupefy = false;
         castLethal = false;
@@ -52,9 +51,9 @@ public class SpellManager : MonoBehaviour {
     {
         if(canCastSpells)
         {
-            if(photonView.IsMine)
+            if(photonView.IsMine || isLobbyMode)
             {
-                if(bufferedSpell!=Spells.NULL && gripPressed.GetStateDown(handType))
+                if(bufferedSpell!=Spells.NULL && gripPressed.GetStateUp(handType))
                 {
 
                     if (bufferedSpell==Spells.BLUELIGHTNING)
@@ -69,10 +68,7 @@ public class SpellManager : MonoBehaviour {
                     {
                         CastStupefy();
                     }
-                    if (castLethal == true)
-                    {
-                        CastLethal();
-                    }
+                    
                 }
            }    
         }
@@ -114,19 +110,7 @@ public class SpellManager : MonoBehaviour {
         PhotonNetwork.Instantiate("Stupefy", spellCastingPoint.transform.position,
               spellCastingPoint.transform.rotation, 0);
     }
-    public void CastLethal()
-    {
-        castLethal = false;
-        //Instantiate the spell
-        var spell = (GameObject)Instantiate(
-            LethalPrefab,
-            spellCastingPoint.transform.position,
-            spellCastingPoint.transform.rotation);
-        //Fire it
-        spell.GetComponent<Rigidbody>().velocity = spell.transform.forward * Lethal.speed;
-        // Destroy
-        Destroy(spell, 4.0f);
-    }
+    
     [PunRPC]
     public void CastShield()
     {

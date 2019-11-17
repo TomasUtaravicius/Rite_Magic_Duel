@@ -9105,7 +9105,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1874105231368808967}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
@@ -9120,7 +9120,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1874105231368808967}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f80b4da077bb8f4e9afa6a67309846e, type: 3}
   m_Name: 
@@ -9272,11 +9272,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellCastingPoint: {fileID: 1875068042887348477}
-  BlueBlast: {fileID: 2098068299979516266, guid: 010f905b6a47b314aadd345e0fb71fb0,
+  BlueBlast: {fileID: 7517615193761686243, guid: 8d36d450871c16a4ca5a33cebc2dfd76,
     type: 3}
   StupefyPrefab: {fileID: 1538143837293630, guid: e8c454dd649b99d48a43cfd68d452d55,
-    type: 3}
-  LethalPrefab: {fileID: 1874262209046652, guid: 9bd9a46675adf3c44b5f6f3c3dfbdb26,
     type: 3}
   ProtegoPrefab: {fileID: 1977068142064824, guid: 17836edcd70fc444dbdbfd4bf75647d9,
     type: 3}
@@ -9323,6 +9321,7 @@ MonoBehaviour:
   - {fileID: 1874981577980502539}
   - {fileID: 1874063717738395081}
   avatarRagdollController: {fileID: 1204200420584034211}
+  isLobbyMode: 0
 --- !u!114 &1988098520247671153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15569,7 +15568,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: 1
+  m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
@@ -23329,7 +23328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6658239549411403260
 Transform:
   m_ObjectHideFlags: 0

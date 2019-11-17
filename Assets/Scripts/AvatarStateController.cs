@@ -26,7 +26,8 @@ public class AvatarStateController : MonoBehaviour {
     private List<GameObject> listGO;
     private int positionIndex;
     public AvatarRagdollController avatarRagdollController;
-
+    [SerializeField]
+    bool isLobbyMode;
     VRIK avatarScript;
     VRIK deadAvatarScript;
     
@@ -34,8 +35,12 @@ public class AvatarStateController : MonoBehaviour {
     [PunRPC]
     void Start () {
 
-       
-        if(photonView.IsMine)
+
+        if(isLobbyMode)
+        {
+            SpawnAvatarBody();
+        }
+        if (photonView.IsMine)
         {
             positionIndex = (int)PhotonNetwork.LocalPlayer.CustomProperties["position"];
             photonView.RPC("SpawnAvatarBody", RpcTarget.AllViaServer);
@@ -47,17 +52,25 @@ public class AvatarStateController : MonoBehaviour {
     [PunRPC]
     public void SpawnAvatarBody()
     {
-
-        if(!photonView.IsMine)
-        {
-            playerCamera.enabled = false;
-            gestureController.enabled = false;
-
-        }
-        else
+        if(isLobbyMode)
         {
             TurnOffAvatarBodyForLocalPlayer();
         }
+        else
+        {
+            if (!photonView.IsMine)
+            {
+                playerCamera.enabled = false;
+                gestureController.enabled = false;
+
+            }
+            else
+            {
+
+                TurnOffAvatarBodyForLocalPlayer();
+            }
+        }
+        
         aliveAvatar.SetActive(true);
         //deadAvatar.SetActive(false);
         avatarRagdollController.TurnOffRagdoll();
@@ -75,7 +88,6 @@ public class AvatarStateController : MonoBehaviour {
     {
         foreach(SkinnedMeshRenderer meshRenderer in aliveAvatarBody.transform.GetComponentsInChildren<SkinnedMeshRenderer>())
         {
-            Debug.LogError("Turning off the avatar for local player");
             meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
         }
     }

@@ -180,7 +180,7 @@ public class GestureController : MonoBehaviour
         {
             Debug.LogError("Pressed the L key");
 
-            LoadTheOtherFile();
+            StartTraining();
         }
         //Debug.Log(last_performance_report * 100.0);
         float trigger_left = Input.GetAxis("LeftControllerTrigger");
@@ -215,7 +215,7 @@ public class GestureController : MonoBehaviour
 
         // If we arrive here, the user is currently dragging with one of the controllers.
         // Check if the user is still dragging or if he let go of the trigger button.
-        if (trigger_left > 0.3 || trigger_right > 0.3)
+        if (trigger_left > 0.3 || trigger_right > 0.3 && spellManager.bufferedSpell == SpellManager.Spells.NULL)
         {
             // The user is still dragging with the controller: continue the gesture.
             Vector3 p = active_controller.transform.localPosition;
@@ -225,104 +225,95 @@ public class GestureController : MonoBehaviour
 
             return;
         }
-        // else: if we arrive here, the user let go of the trigger, ending a gesture.
-        active_controller = null;
+        if(spellManager.bufferedSpell == SpellManager.Spells.NULL)
+        {
+            // else: if we arrive here, the user let go of the trigger, ending a gesture.
+            active_controller = null;
 
-        Vector3 pos = Vector3.zero; // This will receive the position where the gesture was performed.
-        double scale = 0; // This will receive the scale at which the gesture was performed.
-        Vector3 dir0 = Vector3.zero; // This will receive the primary direction in which the gesture was performed (greatest expansion).
-        Vector3 dir1 = Vector3.zero; // This will receive the secondary direction of the gesture.
-        Vector3 dir2 = Vector3.zero; // This will receive the minor direction of the gesture (direction of smallest expansion).
-        double similarity = 0;
-        String gestureName = "";
-        //int gesture_id = gr.endStroke(ref similarity, ref pos, ref scale, ref dir0, ref dir1, ref dir2);
-        double[] grresult = gr.endStrokeAndGetAllProbabilities();
-        List<double> listOfOver30Percent = new List<double>();
-        int gesture_id = -1;
-        for (int i = 0; i < grresult.GetLength(0); i++)
-        {
-            if (i == 0)
+            Vector3 pos = Vector3.zero; // This will receive the position where the gesture was performed.
+            double scale = 0; // This will receive the scale at which the gesture was performed.
+            Vector3 dir0 = Vector3.zero; // This will receive the primary direction in which the gesture was performed (greatest expansion).
+            Vector3 dir1 = Vector3.zero; // This will receive the secondary direction of the gesture.
+            Vector3 dir2 = Vector3.zero; // This will receive the minor direction of the gesture (direction of smallest expansion).
+            double similarity = 0;
+            String gestureName = "";
+            //int gesture_id = gr.endStroke(ref similarity, ref pos, ref scale, ref dir0, ref dir1, ref dir2);
+            double[] grresult = gr.endStrokeAndGetAllProbabilities();
+            List<double> listOfOver30Percent = new List<double>();
+            int gesture_id = -1;
+            for (int i = 0; i < grresult.GetLength(0); i++)
             {
-                gestureName = "Sandtimer";
+                if (i == 0)
+                {
+                    gestureName = "Sandtimer";
+                }
+                if (i == 1)
+                {
+                    gestureName = "Circle";
+                }
+                if (i == 2)
+                {
+                    gestureName = "ThunderBolt";
+                }
+                if (i == 3)
+                {
+                    gestureName = "Fish";
+                }
+                if (i == 4)
+                {
+                    gestureName = "SwishAndFlick";
+                }
+                if (grresult[i] > 0.3)
+                {
+                    listOfOver30Percent.Add(grresult[i]);
+                }
+                Debug.LogError(grresult[i].ToString() + " " + gestureName);
+                if (grresult[i] > 0.92 && listOfOver30Percent.Count < 2)
+                {
+                    gesture_id = i;
+                    //break;
+                }
             }
-            if (i == 1)
+            if (gesture_id < 0)
             {
-                gestureName = "Circle";
+                // Error trying to identify any gesture
+                HUDText.text = "Failed to identify gesture.";
             }
-            if (i == 2)
+            //if (similarity > 0.60)
+            // {
+            if (gesture_id == 0)
             {
-                gestureName = "ThunderBolt";
+                HUDText.text = "Sandtimer " + grresult[0];
+                //+ (similarity * 100).ToString("#.0");
+                if (spellManager.canCastSpells)
+                {
+                    spellManager.SetBufferedSpell(SpellManager.Spells.BLUELIGHTNING);
+                }
             }
-            if (i == 3)
+            else if (gesture_id == 1)
             {
-                gestureName = "Fish";
+                HUDText.text = "Circle " + grresult[1];
+                if (spellManager.canCastSpells)
+                {
+                    spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
+                }
             }
-            if (i == 4)
+            else if (gesture_id == 2)
             {
-                gestureName = "Fish";
+                HUDText.text = "ThunderBolt " + grresult[2];
             }
-            if (grresult[i] > 0.3)
+            else if (gesture_id == 3)
             {
-                listOfOver30Percent.Add(grresult[i]);
+                HUDText.text = "Fish " + grresult[3];
             }
-            Debug.LogError(grresult[i].ToString() + " " + gestureName);
-            if (grresult[i] > 0.92 && listOfOver30Percent.Count < 2)
+            else if (gesture_id == 4)
             {
-                gesture_id = i;
-                //break;
+                HUDText.text = "Swish " + grresult[4];
+              
             }
+            
         }
-        if (gesture_id < 0)
-        {
-            // Error trying to identify any gesture
-            HUDText.text = "Failed to identify gesture.";
-        }
-        //if (similarity > 0.60)
-        // {
-        if (gesture_id == 0)
-        {
-            HUDText.text = "Sandtimer " + grresult[0];
-            //+ (similarity * 100).ToString("#.0");
-            if (spellManager.canCastSpells)
-            {
-                spellManager.SetBufferedSpell(SpellManager.Spells.BLUELIGHTNING);
-            }
-        }
-        else if (gesture_id == 1)
-        {
-            HUDText.text = "Circle " + grresult[1];
-            if (spellManager.canCastSpells)
-            {
-                spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
-            }
-        }
-        else if (gesture_id == 2)
-        {
-            HUDText.text = "ThunderBolt " + grresult[2];
-        }
-        else if (gesture_id == 3)
-        {
-            HUDText.text = "Fish " + grresult[3];
-        }
-        else if (gesture_id == 4)
-        {
-            HUDText.text = "Spike " + grresult[4];
-            /*if (spellManager.canCastSpells)
-            {
-                spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
-            }*/
-        }
-        // }
-        /*else
-        {
-        Debug.LogError("Not recognized");
-            // Other ID: one of the user-registered gestures:
-            //HUDText.text = " not accurate enough : " + (similarity * 100).ToString("#.0") + " gesture id: " + gesture_id;
-            for(int i = 0; i<grresult.GetLength(0);i++)
-            {
-                Debug.LogError(grresult[i].ToString());
-            }
-        }*/
+
     }
 
     // Callback function to be called by the gesture recognition plug-in during the learning process.
