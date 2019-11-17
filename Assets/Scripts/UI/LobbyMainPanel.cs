@@ -289,9 +289,10 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
     }
     public void OnPracticeButtonClicked()
     {
-        PhotonNetwork.CurrentRoom.IsOpen = false;
-        PhotonNetwork.CurrentRoom.IsVisible = false;
+        //PhotonNetwork.CurrentRoom.IsOpen = false;
+        //PhotonNetwork.CurrentRoom.IsVisible = false;
         SceneManager.UnloadSceneAsync("Lobby");
+        Debug.Log("Loading practice scene");
         SceneManager.LoadScene("PracticeScene");
     }
 

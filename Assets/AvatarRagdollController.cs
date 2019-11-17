@@ -27,9 +27,6 @@ public class AvatarRagdollController : MonoBehaviour
                 collisionParts[i].GetComponent<Rigidbody>().isKinematic = true;
                 collisionParts[i].GetComponent<Rigidbody>().useGravity = false;
             }
-            Debug.LogError("TurnOffRagdoll called");
-
-
 
             vrIK.enabled = true;
 
@@ -50,13 +47,6 @@ public class AvatarRagdollController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown("space"))
-        {
-            TurnOnRagdoll();
-        }
-        if (Input.GetKeyDown("k"))
-        {
-            TurnOffRagdoll();
-        }
+        
     }
 }

@@ -55,6 +55,7 @@ public class AvatarStateController : MonoBehaviour {
         if(isLobbyMode)
         {
             TurnOffAvatarBodyForLocalPlayer();
+ 
         }
         else
         {
