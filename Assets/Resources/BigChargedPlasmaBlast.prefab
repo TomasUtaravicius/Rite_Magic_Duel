@@ -46,10 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee00b59ba08a304a91f04abb97b84df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 40
+  damage: 60
   manaCost: 30
   hitEffectPrefabName: 
-  spellSpeed: 30
+  spellSpeed: 20
 --- !u!114 &4602252637847665194
 MonoBehaviour:
   m_ObjectHideFlags: 0

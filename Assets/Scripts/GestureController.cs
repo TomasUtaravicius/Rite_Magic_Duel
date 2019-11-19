@@ -40,9 +40,7 @@ public class GestureController : MonoBehaviour
     public bool shouldTrain;
     public VRInputModule vRInputModule;
     public TrailController trailController;
-    [SerializeField]
-    SteamVR_TrackedObject rightControllerTracked;
-    public SteamVR_Controller.Device rightController { get { return SteamVR_Controller.Input((int)rightControllerTracked.index); } }
+   
     // The file from which to load gestures on startup.
     // For example: "Assets/GestureRecognition/sample_gestures.dat"
     [SerializeField] public string LoadGesturesFile;
@@ -195,7 +193,7 @@ public class GestureController : MonoBehaviour
             return;
         }
         //Debug.Log(last_performance_report * 100.0);
-        float trigger_left = Input.GetAxis("LeftControllerTrigger");
+        float trigger_left = vRInputModule.leftController.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x;
         float trigger_right = vRInputModule.rightController.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x;
        
         //float trigger_right = SteamVR_Actions.default_Squeeze.GetAxis(handType);
@@ -287,7 +285,7 @@ public class GestureController : MonoBehaviour
                 {
                     listOfOver30Percent.Add(grresult[i]);
                 }
-                Debug.LogError(grresult[i].ToString() + " " + gestureName);
+                //Debug.LogError(grresult[i].ToString() + " " + gestureName);
                 if (grresult[i] > 0.92 && listOfOver30Percent.Count < 2)
                 {
                     gesture_id = i;

@@ -26,7 +26,7 @@ public class AvatarStateController : MonoBehaviour {
     private int positionIndex;
     public AvatarRagdollController avatarRagdollController;
     [SerializeField]
-    bool isLobbyMode;
+    bool isOfflineMode;
     VRIK avatarScript;
     VRIK deadAvatarScript;
     
@@ -35,8 +35,9 @@ public class AvatarStateController : MonoBehaviour {
     void Start () {
 
 
-        if(isLobbyMode)
+        if(isOfflineMode)
         {
+            PhotonNetwork.OfflineMode = true;
             SpawnAvatarBody();
         }
         if (photonView.IsMine)
@@ -51,28 +52,29 @@ public class AvatarStateController : MonoBehaviour {
     [PunRPC]
     public void SpawnAvatarBody()
     {
-        if(isLobbyMode)
-        {
-            //TurnOffAvatarBodyForLocalPlayer();
- 
-        }
-        else
-        {
+        
             if (!photonView.IsMine)
+            {
+            if(!isOfflineMode)
             {
                 playerCamera.enabled = false;
                 gestureController.enabled = false;
+                foreach (GameObject go in listGO)
+                {
+                    go.SetActive(false);
+                }
+            }
+                
 
             }
             else
             {
 
-                TurnOffAvatarBodyForLocalPlayer();
+               //TurnOffAvatarBodyForLocalPlayer();
             }
-        }
+        
         
         aliveAvatar.SetActive(true);
-        //deadAvatar.SetActive(false);
         avatarRagdollController.TurnOffRagdoll();
         sManager.canCastSpells = true;
         resourceManager.health = 100f;

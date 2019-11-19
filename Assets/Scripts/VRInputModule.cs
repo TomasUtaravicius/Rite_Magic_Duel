@@ -31,25 +31,32 @@ public class VRInputModule : BaseInputModule
         // Hover 
         HandlePointerExitAndEnter(m_Data,m_CurrentObject);
         // Press
+        if(rightController!=null)
+        {
+            if (rightController.GetPressDown(EVRButtonId.k_EButton_SteamVR_Trigger) || Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Debug.Log("Press");
+                ProcessPress(m_Data);
+
+            }
+            // Release
+            if (rightController.GetPressUp(EVRButtonId.k_EButton_SteamVR_Trigger))
+            {
+                ProcessRelease(m_Data);
+            }
+        }
         
-        if (rightController.GetPressDown(EVRButtonId.k_EButton_SteamVR_Trigger) || Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Debug.Log("Press");
-            ProcessPress(m_Data);
-            
-        }
-        // Release
-        if (rightController.GetPressUp(EVRButtonId.k_EButton_SteamVR_Trigger))
-        {
-            ProcessRelease(m_Data);
-        }
     }
     private void Update()
     {
-        if(rightController.GetHairTriggerUp())
+        if(rightController!=null)
         {
-            Debug.LogError("Right controller trigger press up");
+            if (rightController.GetHairTriggerUp())
+            {
+                Debug.LogError("Right controller trigger press up");
+            }
         }
+       
       
     }
     protected override void Awake()

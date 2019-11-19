@@ -32,7 +32,7 @@
             if (loadedScene.name == sceneConstructor.name)
             {
                 VRTK_SDKManager sdkManager = FindObjectOfType<VRTK_SDKManager>();
-                sdkManager.gameObject.SetActive(false);
+                //sdkManager.gameObject.SetActive(false);
                 sdkManager.scriptAliasLeftController = leftScriptAlias;
                 sdkManager.scriptAliasRightController = rightScriptAlias;
                 sdkManager.gameObject.SetActive(true);

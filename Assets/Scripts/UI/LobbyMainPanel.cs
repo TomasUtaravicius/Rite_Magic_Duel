@@ -291,9 +291,18 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
     {
         //PhotonNetwork.CurrentRoom.IsOpen = false;
         //PhotonNetwork.CurrentRoom.IsVisible = false;
+      
+
+        byte maxPlayers;
+        byte.TryParse(MaxPlayersInputField.text, out maxPlayers);
+        maxPlayers = (byte)Mathf.Clamp(maxPlayers, 2, 8);
+
+        RoomOptions options = new RoomOptions { MaxPlayers = maxPlayers };
+        
+        PhotonNetwork.CreateRoom(" ", options, null);
         SceneManager.UnloadSceneAsync("Lobby");
         Debug.Log("Loading practice scene");
-        SceneManager.LoadScene("PracticeScene");
+        PhotonNetwork.LoadLevel("PracticeScene");
     }
 
 

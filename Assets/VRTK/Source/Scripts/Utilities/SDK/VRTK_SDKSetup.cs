@@ -70,6 +70,8 @@ namespace VRTK
         /// <summary>
         /// The info of the SDK to use to utilize room scale boundaries. By setting this to `null` the fallback SDK will be used.
         /// </summary>
+
+        
         public VRTK_SDKInfo boundariesSDKInfo
         {
             get
