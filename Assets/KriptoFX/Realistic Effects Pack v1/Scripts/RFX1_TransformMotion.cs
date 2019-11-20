@@ -186,12 +186,7 @@ public class RFX1_TransformMotion : MonoBehaviour
         CollidedInstances.Clear();
         foreach (var effect in EffectsOnCollision)
         {
-            Debug.LogError("hit: " + hit);
-            Debug.LogError("hit collider: " + hit.collider);
-            Debug.LogError("hit collider gameobject: " + hit.collider.gameObject.name);
-            Debug.LogError("hit collider gameobject parent : " + hit.collider.gameObject.GetComponentInParent<IDamagable>());
-            //Debug.LogError("hit: " + hit);
-            //Debug.LogError("hit: " + hit);
+           
             var instance = Instantiate(effect, hit.point + hit.normal * CollisionOffset, new Quaternion()) as GameObject;
             if (hit.collider.gameObject.GetComponentInParent<IDamagable>() != null)
             {

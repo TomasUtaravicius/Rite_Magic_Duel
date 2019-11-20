@@ -26358,7 +26358,10 @@ MonoBehaviour:
   spellCastingPoint: {fileID: 3047899135868283812}
   BlueBlast: {fileID: 7517615193761686243, guid: 8d36d450871c16a4ca5a33cebc2dfd76,
     type: 3}
-  ProtegoPrefab: {fileID: 1977068142064824, guid: 17836edcd70fc444dbdbfd4bf75647d9,
+  ChargedPlasma: {fileID: 0}
+  FireBolt: {fileID: 0}
+  DarknessBlast: {fileID: 0}
+  ProtegoPrefab: {fileID: 5587369589994897140, guid: a4ec77e722d3c604ab4aef381195aad1,
     type: 3}
   RotationOfProtego: {fileID: 3048222705041930206}
   photonView: {fileID: 3157049851915412160}
@@ -26366,7 +26369,7 @@ MonoBehaviour:
   canCastSpells: 1
   isLobbyMode: 0
   vRInputModule: {fileID: 7766021586481033469}
-  bufferedSpell: 3
+  bufferedSpell: 5
 --- !u!114 &3161459822028306184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26394,7 +26397,7 @@ MonoBehaviour:
   - {fileID: 1742767304436036195}
   - {fileID: 1742767304697776783}
   avatarRagdollController: {fileID: 2377875906284971258}
-  isLobbyMode: 0
+  isOfflineMode: 0
 --- !u!114 &3161211914718900776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34446,6 +34449,9 @@ MonoBehaviour:
   spellCastingPoint: {fileID: 5987785683620768521}
   BlueBlast: {fileID: 7517615193761686243, guid: 8d36d450871c16a4ca5a33cebc2dfd76,
     type: 3}
+  ChargedPlasma: {fileID: 0}
+  FireBolt: {fileID: 0}
+  DarknessBlast: {fileID: 0}
   ProtegoPrefab: {fileID: 1977068142064824, guid: 17836edcd70fc444dbdbfd4bf75647d9,
     type: 3}
   RotationOfProtego: {fileID: 3048222705041930206}
@@ -34482,7 +34488,7 @@ MonoBehaviour:
   - {fileID: 7313877057868293621}
   - {fileID: 7890701729446247300}
   avatarRagdollController: {fileID: 2641480854209706949}
-  isLobbyMode: 0
+  isOfflineMode: 0
 --- !u!114 &4150502427266590515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49296,8 +49302,8 @@ MonoBehaviour:
   activeScriptingDefineSymbolsWithoutSDKClasses: []
   scriptAliasLeftController: {fileID: 1742767304865080202}
   scriptAliasRightController: {fileID: 1742767305062314790}
-  autoManageVRSettings: 0
-  autoLoadSetup: 0
+  autoManageVRSettings: 1
+  autoLoadSetup: 1
   setups:
   - {fileID: 7943018393973372545}
   - {fileID: 1076083937237392130}
