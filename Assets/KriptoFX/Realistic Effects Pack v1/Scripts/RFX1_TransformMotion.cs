@@ -114,14 +114,14 @@ public class RFX1_TransformMotion : MonoBehaviour
             //currentSpeed = Mathf.Clamp(currentSpeed - Speed*Dampeen*Time.deltaTime, MinSpeed, Speed);
             if (Target == null)
             {
-                var currentForwardVector = (Vector3.forward + randomOffset)* Speed * Time.deltaTime;
+                var currentForwardVector = (Vector3.forward + randomOffset)* spellScript.spellSpeed * Time.deltaTime;
                 frameMoveOffset = t.localRotation*currentForwardVector;
                 frameMoveOffsetWorld = startQuaternion*currentForwardVector;
             }
             else
             {
                 var forwardVec = (targetT.position - t.position).normalized;
-                var currentForwardVector = (forwardVec + randomOffset) * Speed * Time.deltaTime;
+                var currentForwardVector = (forwardVec + randomOffset) * spellScript.spellSpeed * Time.deltaTime;
                 frameMoveOffset = currentForwardVector;
                 frameMoveOffsetWorld = currentForwardVector;
             }
@@ -186,7 +186,14 @@ public class RFX1_TransformMotion : MonoBehaviour
         CollidedInstances.Clear();
         foreach (var effect in EffectsOnCollision)
         {
+           
             var instance = Instantiate(effect, hit.point + hit.normal * CollisionOffset, new Quaternion()) as GameObject;
+            if (hit.collider.gameObject.GetComponentInParent<IDamagable>() != null)
+            {
+                
+                Debug.Log("we hit a damageable object");
+                hit.collider.gameObject.transform.parent.gameObject.GetComponent<IDamagable>().GetHit(spellScript.damage);
+            }
             CollidedInstances.Add(instance);
             if (HUE > -0.9f)
             {

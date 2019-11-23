@@ -26,7 +26,7 @@ public class PlayerRotator : MonoBehaviour
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
-                        sManager.CastBlueLightining();
+                        sManager.CastBlueBlast();
                     }
                     if (Input.GetMouseButtonDown(1))
                     {

@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Valve.VR;
+
 public class PointerRotate : MonoBehaviour {
     public GameObject goToRotate;
-    SteamVR_TrackedObject trackedobj;
+    /*SteamVR_TrackedObject trackedobj;
     
     public Transform cameraRotation;
     // Use this for initialization
@@ -36,5 +36,5 @@ public class PointerRotate : MonoBehaviour {
                 goToRotate.transform.localRotation = Quaternion.Euler(0, 0, 0);
             }
         }
-    }
+    }*/
 }

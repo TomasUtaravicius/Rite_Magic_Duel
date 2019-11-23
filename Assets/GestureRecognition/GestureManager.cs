@@ -33,13 +33,13 @@ using System;
 using System.Runtime.InteropServices;
 using UnityEngine.UI;
 using UnityEngine.XR;
-using Valve.VR;
+
 
 public class GestureManager : MonoBehaviour
 {
 
-    public SteamVR_Action_Single triggerValue = SteamVR_Actions.default_Squeeze;
-    public SteamVR_Input_Sources handType = SteamVR_Input_Sources.RightHand;
+    //public SteamVR_Action_Single triggerValue = SteamVR_Actions.default_Squeeze;
+    //public SteamVR_Input_Sources handType = SteamVR_Input_Sources.RightHand;
     // Fields to be controlled by the editor:
     public int numberOfParts = 2;
 
@@ -176,7 +176,8 @@ public class GestureManager : MonoBehaviour
         }
 
         float trigger_left = Input.GetAxis("LeftControllerTrigger");
-        float trigger_right = SteamVR_Actions.default_Squeeze.GetAxis(handType);
+        float trigger_right = Input.GetAxis("RightControllerTrigger");
+        //SteamVR_Actions.default_Squeeze.GetAxis(handType);
 
         // Single Gesture recognition / 1-handed operation
         if (this.gr != null)

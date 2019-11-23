@@ -3,11 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - OffensiveSpell
-  - LethalOffensiveSpell
-  - SimpleDefensiveSpell
-  - Environment
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -17,10 +13,10 @@ TagManager:
   - UI
   - 
   - 
-  - PlayerBody
-  - Environment
-  - Projectile
-  - PostProcessing
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

@@ -38,7 +38,7 @@ public class RFX1_Decal : MonoBehaviour
         ps = GetComponent<ParticleSystem>();
         if (ps != null) psMain = ps.main;
 
-        if (Camera.main.depthTextureMode != DepthTextureMode.Depth) Camera.main.depthTextureMode = DepthTextureMode.Depth;
+        //if (Camera.main.depthTextureMode != DepthTextureMode.Depth) Camera.main.depthTextureMode = DepthTextureMode.Depth;
 
         GetComponent<MeshRenderer>().reflectionProbeUsage = ReflectionProbeUsage.Off;
 

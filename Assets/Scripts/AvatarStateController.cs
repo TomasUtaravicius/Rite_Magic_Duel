@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using AirSig;
 using Photon.Pun;
 
 public class AvatarStateController : MonoBehaviour {
@@ -26,7 +25,8 @@ public class AvatarStateController : MonoBehaviour {
     private List<GameObject> listGO;
     private int positionIndex;
     public AvatarRagdollController avatarRagdollController;
-
+    [SerializeField]
+    bool isOfflineMode;
     VRIK avatarScript;
     VRIK deadAvatarScript;
     
@@ -34,8 +34,13 @@ public class AvatarStateController : MonoBehaviour {
     [PunRPC]
     void Start () {
 
-       
-        if(photonView.IsMine)
+
+        if(isOfflineMode)
+        {
+            PhotonNetwork.OfflineMode = true;
+            SpawnAvatarBody();
+        }
+        if (photonView.IsMine)
         {
             positionIndex = (int)PhotonNetwork.LocalPlayer.CustomProperties["position"];
             photonView.RPC("SpawnAvatarBody", RpcTarget.AllViaServer);
@@ -47,19 +52,29 @@ public class AvatarStateController : MonoBehaviour {
     [PunRPC]
     public void SpawnAvatarBody()
     {
+        
+            if (!photonView.IsMine)
+            {
+            if(!isOfflineMode)
+            {
+                playerCamera.enabled = false;
+                gestureController.enabled = false;
+                foreach (GameObject go in listGO)
+                {
+                    go.SetActive(false);
+                }
+            }
+                
 
-        if(!photonView.IsMine)
-        {
-            playerCamera.enabled = false;
-            gestureController.enabled = false;
+            }
+            else
+            {
 
-        }
-        else
-        {
-            TurnOffAvatarBodyForLocalPlayer();
-        }
+               //TurnOffAvatarBodyForLocalPlayer();
+            }
+        
+        
         aliveAvatar.SetActive(true);
-        //deadAvatar.SetActive(false);
         avatarRagdollController.TurnOffRagdoll();
         sManager.canCastSpells = true;
         resourceManager.health = 100f;
@@ -75,7 +90,6 @@ public class AvatarStateController : MonoBehaviour {
     {
         foreach(SkinnedMeshRenderer meshRenderer in aliveAvatarBody.transform.GetComponentsInChildren<SkinnedMeshRenderer>())
         {
-            Debug.LogError("Turning off the avatar for local player");
             meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
         }
     }

@@ -9105,6 +9105,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4805788057881982}
   - component: {fileID: 114503623341167234}
+  - component: {fileID: 7961978417226205844}
+  - component: {fileID: 8361141762215278209}
   m_Layer: 0
   m_Name: Collision
   m_TagString: Untagged
@@ -9140,6 +9142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UseCollisionDetect: 1
+  Spell: {fileID: 7961978417226205844}
   MaxDistnace: -1
   Mass: 1
   Speed: 80
@@ -9158,6 +9161,34 @@ MonoBehaviour:
   CollisionEffectDestroyAfter: 5
   DeactivateObjectsAfterCollision: []
   HUE: -1
+--- !u!114 &7961978417226205844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526951460247498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cee00b59ba08a304a91f04abb97b84df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
+  manaCost: 0
+  hitEffectPrefabName: 
+  spellSpeed: 15
+--- !u!114 &8361141762215278209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526951460247498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86b6f49c2149194893b813a9c59a56a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1748139164946814
 GameObject:
   m_ObjectHideFlags: 0
