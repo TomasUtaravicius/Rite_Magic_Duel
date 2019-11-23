@@ -35,11 +35,16 @@ public class SpellBook : MonoBehaviour
     {
         SpellData[] spells = loadout.GetSpellArray();
 
+
         for (int i = 0; i < spells.Length; i++)
             if (spells[i])
             {
+                GameObject[] spawnedSpells = new GameObject[5];
+                for (int j = 0; j < 5; j++)
+                    spawnedSpells[i] = SpawnSpell(spells[i], transform, false).gameObject;
+
+                spellPool.DestroyGroup(spawnedSpells);
                 Debug.Log("Spell pooled");
-                spellPool.Destroy(SpawnSpell(spells[i], transform, false).gameObject);
             }
             else
                 Debug.LogWarning("Spell " + (i + 1) + " is null");

@@ -45,4 +45,10 @@ public class SpellPool : MonoBehaviour, IPunPrefabPool
         gameObject.SetActive(false);
         ResourceCache.Add(gameObject.name, gameObject);
     }
+
+    public void DestroyGroup(GameObject[] gameObjects)
+    {
+        for (int i = 0; i < gameObjects.Length; i++)
+            Destroy(gameObjects[i]);
+    }
 }
