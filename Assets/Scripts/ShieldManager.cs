@@ -30,7 +30,7 @@ public class ShieldManager : MonoBehaviour, IDamagable
 
         if (photonView.IsMine)
         {
-            Invoke("DestroyShield", 0.5f);
+            Invoke("DestroyShield", 0.7f);
         }
     }
 
