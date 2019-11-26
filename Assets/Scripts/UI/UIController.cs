@@ -8,7 +8,6 @@ public class UIController : MonoBehaviour
 {
     [SerializeField]
     private GameObject menuUI;
-    public PhotonView photonView;
     //public SteamVR_Action_Boolean menuToggle;
     //public SteamVR_Input_Sources handType;
     public GameObject pointer;
@@ -16,10 +15,7 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(!photonView.IsMine)
-        {
-            Destroy(this);
-        }
+       
     }
 
     public void ResetMenu()

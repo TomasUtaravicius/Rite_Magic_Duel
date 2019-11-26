@@ -29,6 +29,7 @@ public class SpellManager : MonoBehaviour {
     private ResourceManager resourceManager;
     private void Start()
     {
+        vRInputModule = GameObject.Find("PR_VRInputModule").GetComponent<VRInputModule>();
         resourceManager = GetComponent<ResourceManager>();
     }
     

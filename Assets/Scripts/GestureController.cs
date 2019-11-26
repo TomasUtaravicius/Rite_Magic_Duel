@@ -26,6 +26,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+using Photon.Pun;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -37,10 +38,9 @@ public class GestureController : MonoBehaviour
 {
     //public SteamVR_Action_Single triggerValue = SteamVR_Actions.default_Squeeze;
     //public SteamVR_Input_Sources handType = SteamVR_Input_Sources.RightHand;
-    public bool shouldTrain;
     public VRInputModule vRInputModule;
     public TrailController trailController;
-   
+    public PhotonView photonView;
     // The file from which to load gestures on startup.
     // For example: "Assets/GestureRecognition/sample_gestures.dat"
     [SerializeField] public string LoadGesturesFile;
@@ -89,6 +89,11 @@ public class GestureController : MonoBehaviour
     // Initialization:
     private void Start()
     {
+        if(!photonView.IsMine)
+        {
+            Destroy(this);
+        }
+        vRInputModule = GameObject.Find("PR_VRInputModule").GetComponent<VRInputModule>();
         // Load the default set of gestures.
         /*if (gr.loadFromFile(LoadGesturesFile) == false)
         {

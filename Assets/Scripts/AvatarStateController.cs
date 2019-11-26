@@ -57,7 +57,6 @@ public class AvatarStateController : MonoBehaviour {
             {
             if(!isOfflineMode)
             {
-                playerCamera.enabled = false;
                 gestureController.enabled = false;
                 foreach (GameObject go in listGO)
                 {
