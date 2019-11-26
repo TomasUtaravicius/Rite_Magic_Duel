@@ -35,12 +35,14 @@ using UnityEngine.UI;
 
 public class GestureController : MonoBehaviour
 {
+    public enum Gesture { Sandtimer = 0, Circle, ThunderBolt, Fish, SwishAndFlick, NONE }
+
     //public SteamVR_Action_Single triggerValue = SteamVR_Actions.default_Squeeze;
     //public SteamVR_Input_Sources handType = SteamVR_Input_Sources.RightHand;
     public bool shouldTrain;
     public VRInputModule vRInputModule;
     public TrailController trailController;
-   
+
     // The file from which to load gestures on startup.
     // For example: "Assets/GestureRecognition/sample_gestures.dat"
     [SerializeField] public string LoadGesturesFile;
@@ -112,7 +114,7 @@ public class GestureController : MonoBehaviour
 
         // Reset the skybox tint color
         RenderSettings.skybox.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f, 1.0f));
-        
+
     }
 
     private void LoadTheOtherFile()
@@ -132,17 +134,8 @@ public class GestureController : MonoBehaviour
 #if UNITY_EDITOR
         gr.loadFromFile(LoadGesturesFile);
 #else
-                gr.loadFromFile(Application.streamingAssetsPath + "/GestureSet5Gestures180Samples.dat");
+        gr.loadFromFile(Application.streamingAssetsPath + "/GestureSet5Gestures180Samples.dat");
 #endif
-
-        /*if (gr.loadFromFile(LoadGesturesFile))
-        {
-            Debug.LogWarning("Successful load");
-        }
-        else
-        {
-            Debug.LogWarning("Unsuccessful load");
-        }*/
     }
 
     private void StartTraining()
@@ -188,24 +181,24 @@ public class GestureController : MonoBehaviour
         {
             trailController.TurnOffTrail();
         }
-        if (spellManager.bufferedSpell!=SpellManager.Spells.NULL)
+        if (spellManager.bufferedGesture != Gesture.NONE)
         {
             return;
         }
         //Debug.Log(last_performance_report * 100.0);
         float trigger_left = vRInputModule.leftController.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x;
         float trigger_right = vRInputModule.rightController.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x;
-       
+
         //float trigger_right = SteamVR_Actions.default_Squeeze.GetAxis(handType);
 
         // If the user is not yet dragging (pressing the trigger) on either controller, he hasn't started a gesture yet.
         if (active_controller == null)
         {
-            if(vRInputModule.rightController.GetHairTriggerDown())
+            if (vRInputModule.rightController.GetHairTriggerDown())
             {
                 trailController.TurnOnTrail();
             }
-            
+
             // If the user presses either controller's trigger, we start a new gesture.
             if (trigger_right > 0.3)
             {
@@ -232,9 +225,9 @@ public class GestureController : MonoBehaviour
 
         // If we arrive here, the user is currently dragging with one of the controllers.
         // Check if the user is still dragging or if he let go of the trigger button.
-        if (trigger_left > 0.3 || trigger_right > 0.3 && spellManager.bufferedSpell == SpellManager.Spells.NULL)
+        if (trigger_left > 0.3 || trigger_right > 0.3 && spellManager.bufferedGesture == Gesture.NONE)
         {
-            
+
             // The user is still dragging with the controller: continue the gesture.
             Vector3 p = active_controller.transform.localPosition;
             p.z += 0.5f;
@@ -243,7 +236,7 @@ public class GestureController : MonoBehaviour
 
             return;
         }
-        if(spellManager.bufferedSpell == SpellManager.Spells.NULL)
+        if (spellManager.bufferedGesture == Gesture.NONE)
         {
             // else: if we arrive here, the user let go of the trigger, ending a gesture.
             active_controller = null;
@@ -261,31 +254,12 @@ public class GestureController : MonoBehaviour
             int gesture_id = -1;
             for (int i = 0; i < grresult.GetLength(0); i++)
             {
-                if (i == 0)
-                {
-                    gestureName = "Sandtimer";
-                }
-                if (i == 1)
-                {
-                    gestureName = "Circle";
-                }
-                if (i == 2)
-                {
-                    gestureName = "ThunderBolt";
-                }
-                if (i == 3)
-                {
-                    gestureName = "Fish";
-                }
-                if (i == 4)
-                {
-                    gestureName = "SwishAndFlick";
-                }
+                //gesture enum to string
+                gestureName = ((Gesture)i).ToString();
+
                 if (grresult[i] > 0.3)
-                {
                     listOfOver30Percent.Add(grresult[i]);
-                }
-                //Debug.LogError(grresult[i].ToString() + " " + gestureName);
+
                 if (grresult[i] > 0.92 && listOfOver30Percent.Count < 2)
                 {
                     gesture_id = i;
@@ -297,39 +271,15 @@ public class GestureController : MonoBehaviour
                 // Error trying to identify any gesture
                 HUDText.text = "Failed to identify gesture.";
             }
-            //if (similarity > 0.60)
-            // {
-            if (gesture_id == 0)
+            else
             {
-                HUDText.text = "Sandtimer " + grresult[0];
-                //+ (similarity * 100).ToString("#.0");
+                //Enum to string
+                HUDText.text = ((Gesture)gesture_id).ToString() + " " + grresult[gesture_id];
+
                 if (spellManager.canCastSpells)
-                {
-                    spellManager.SetBufferedSpell(SpellManager.Spells.BLUELIGHTNING);
-                }
+                    spellManager.SetBufferedGesture((Gesture)gesture_id); //int to enum
             }
-            else if (gesture_id == 1)
-            {
-                HUDText.text = "Circle " + grresult[1];
-                if (spellManager.canCastSpells)
-                {
-                    spellManager.SetBufferedSpell(SpellManager.Spells.SHIELD);
-                }
-            }
-            else if (gesture_id == 2)
-            {
-                HUDText.text = "ThunderBolt " + grresult[2];
-            }
-            else if (gesture_id == 3)
-            {
-                HUDText.text = "Fish " + grresult[3];
-            }
-            else if (gesture_id == 4)
-            {
-                HUDText.text = "Swish " + grresult[4];
-              
-            }
-            
+
         }
 
     }

@@ -26,11 +26,11 @@ public class PlayerRotator : MonoBehaviour
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
-                        sManager.CastBlueBlast();
+                        sManager.CastSpell(GestureController.Gesture.Sandtimer);
                     }
                     if (Input.GetMouseButtonDown(1))
                     {
-                        sManager.CastShield();
+                        sManager.CastSpell(GestureController.Gesture.Circle);
                     }
                 }
             }

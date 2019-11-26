@@ -6,11 +6,9 @@ public enum SpellType { None, Projectile, Shield }
 
 public class SB_Spell : MonoBehaviourPun, IPunObservable
 {
-
-
-    public virtual SpellType SpellType { get => SpellType.None; }
-
     protected string spellName = "";
+
+    [SerializeField] private bool requiresHeldCast = false;
 
     /// <summary> Amount of health the spell has </summary>
     private float health = 10;
@@ -23,8 +21,14 @@ public class SB_Spell : MonoBehaviourPun, IPunObservable
 
     public float manaCost = 0;
 
-
     [SerializeField] protected string hitEffectPrefabName = "";
+    
+
+    public virtual SpellType SpellType { get => SpellType.None; }
+
+    /// <summary> A held cast spell requires the caster to hold the spell to keep it active and release to deactivate it </summary>
+    public bool RequiresHeldCast { get => requiresHeldCast;}
+
    
 
     public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

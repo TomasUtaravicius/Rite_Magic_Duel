@@ -25,7 +25,7 @@ public class SpellPool : MonoBehaviour, IPunPrefabPool
             }
             else
             {
-                this.ResourceCache.Add(prefabId, res);
+                ResourceCache.Add(prefabId, res);
             }
         }
 

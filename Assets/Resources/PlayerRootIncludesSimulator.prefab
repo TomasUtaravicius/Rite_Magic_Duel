@@ -26322,6 +26322,8 @@ GameObject:
   - component: {fileID: 3160931460838480640}
   - component: {fileID: 3157049851915412160}
   - component: {fileID: 7525548385036475031}
+  - component: {fileID: 7660422050684664430}
+  - component: {fileID: 68514918972492974}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -26355,21 +26357,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73cdb1c871a5bc242b4d5ba524b2d2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellBook: {fileID: 68514918972492974}
   spellCastingPoint: {fileID: 3047899135868283812}
-  BlueBlast: {fileID: 7517615193761686243, guid: 8d36d450871c16a4ca5a33cebc2dfd76,
-    type: 3}
-  ChargedPlasma: {fileID: 0}
-  FireBolt: {fileID: 0}
-  DarknessBlast: {fileID: 0}
-  ProtegoPrefab: {fileID: 5587369589994897140, guid: a4ec77e722d3c604ab4aef381195aad1,
-    type: 3}
-  RotationOfProtego: {fileID: 3048222705041930206}
   photonView: {fileID: 3157049851915412160}
   headTransform: {fileID: 3046164354608021120}
   canCastSpells: 1
   isLobbyMode: 0
   vRInputModule: {fileID: 7766021586481033469}
-  bufferedSpell: 5
+  bufferedGesture: 0
 --- !u!114 &3161459822028306184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26469,6 +26464,33 @@ MonoBehaviour:
   menuUI: {fileID: 2542697353916909691}
   photonView: {fileID: 3157049851915412160}
   pointer: {fileID: 4903525558005641874}
+--- !u!114 &7660422050684664430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3048243459242935886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6503a09508e721c4aaecfd7e29e55364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &68514918972492974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3048243459242935886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb76bc7c58638e41bee5061428b2dfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadout:
+    name: SpellLoadout-New
+    spellSlots: []
 --- !u!1 &3048347636181653850
 GameObject:
   m_ObjectHideFlags: 0
@@ -34446,21 +34468,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73cdb1c871a5bc242b4d5ba524b2d2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellBook: {fileID: 0}
   spellCastingPoint: {fileID: 5987785683620768521}
-  BlueBlast: {fileID: 7517615193761686243, guid: 8d36d450871c16a4ca5a33cebc2dfd76,
-    type: 3}
-  ChargedPlasma: {fileID: 0}
-  FireBolt: {fileID: 0}
-  DarknessBlast: {fileID: 0}
-  ProtegoPrefab: {fileID: 1977068142064824, guid: 17836edcd70fc444dbdbfd4bf75647d9,
-    type: 3}
-  RotationOfProtego: {fileID: 3048222705041930206}
   photonView: {fileID: 432012622471047226}
   headTransform: {fileID: 3046164354608021120}
   canCastSpells: 1
   isLobbyMode: 0
   vRInputModule: {fileID: 7766021586481033469}
-  bufferedSpell: 3
+  bufferedGesture: 0
 --- !u!114 &7054998477292793484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52226,6 +52241,12 @@ PrefabInstance:
       objectReference: {fileID: 2883533888611142773}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 029f5957bc149474c952f24614f244b9, type: 3}
+--- !u!4 &4486842830918908667 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8896661435728234539, guid: 029f5957bc149474c952f24614f244b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 4986397073861669584}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4486842830918908666 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8896661435728234538, guid: 029f5957bc149474c952f24614f244b9,
@@ -52238,9 +52259,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67210b999a00c9f4b976e487ef22e76f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &4486842830918908667 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8896661435728234539, guid: 029f5957bc149474c952f24614f244b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 4986397073861669584}
-  m_PrefabAsset: {fileID: 0}

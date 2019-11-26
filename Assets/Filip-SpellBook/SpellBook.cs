@@ -1,5 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+using static GestureController;
 
+[RequireComponent(typeof(SpellPool))]
 public class SpellBook : MonoBehaviour
 {
     private SpellPool spellPool;
@@ -19,13 +23,13 @@ public class SpellBook : MonoBehaviour
 
     private void TestLoadout()
     {
-        SpellData[] spells = loadout.GetSpellArray();
+        List<SpellData> spells = loadout.spellSlots;
 
-        for (int i = 0; i < spells.Length; i++)
+        for (int i = 0; i < spells.Count; i++)
             if (spells[i])
             {
                 Debug.Log("Spell spawned");
-                SpawnSpell(spells[i], transform, false).FireSpell();
+                SpawnSpell(spells[i], transform).FireSpell();
             }
             else
                 Debug.LogWarning("Spell " + (i + 1) + " is null");
@@ -33,15 +37,15 @@ public class SpellBook : MonoBehaviour
 
     private void PoolSpells()
     {
-        SpellData[] spells = loadout.GetSpellArray();
+        List<SpellData> spells = loadout.spellSlots;
 
 
-        for (int i = 0; i < spells.Length; i++)
+        for (int i = 0; i < spells.Count; i++)
             if (spells[i])
             {
                 GameObject[] spawnedSpells = new GameObject[5];
                 for (int j = 0; j < 5; j++)
-                    spawnedSpells[i] = SpawnSpell(spells[i], transform, false).gameObject;
+                    spawnedSpells[i] = SpawnSpell(spells[i], transform).gameObject;
 
                 spellPool.DestroyGroup(spawnedSpells);
                 Debug.Log("Spell pooled");
@@ -50,15 +54,11 @@ public class SpellBook : MonoBehaviour
                 Debug.LogWarning("Spell " + (i + 1) + " is null");
     }
 
-    
-
-    private SB_Spell SpawnSpell(SpellData spellData, Transform spawnTransform, bool spawnFromPool)
+    private SB_Spell SpawnSpell(SpellData spellData, Transform spawnTransform)
     {
         GameObject spellInstance;
-        if (spawnFromPool)
-            spellInstance = spellPool.Instantiate(spellData.spellName, spawnTransform.position, spawnTransform.rotation);
-        else
-            spellInstance = Instantiate(spellData.spellPrefab, spawnTransform.position, spawnTransform.rotation, null);
+        spellInstance = Instantiate(spellData.spellPrefab, spawnTransform.position, spawnTransform.rotation, null);
+        spellInstance.name = spellData.spellName;
 
         SB_Spell spell = spellInstance.GetComponent<SB_Spell>();
         if (spell)
@@ -84,5 +84,35 @@ public class SpellBook : MonoBehaviour
 
 
         return spell;
+    }
+
+    public SpellData GetSpellData(int gestureIdx)
+    {
+        //try getting spell data
+        SpellData data = null;
+        try { data = loadout.spellSlots[gestureIdx]; }
+        catch (System.IndexOutOfRangeException) { }
+
+        return data;
+    }
+
+    public bool CanCastSpell(int gestureIdx, float manaAmount)
+    {
+        SpellData data = GetSpellData(gestureIdx);
+
+        if (data)
+            return manaAmount > data.manaCost;
+        else
+            return false;
+    }
+
+    public GameObject CastSpell(int gestureIdx, Vector3 position, Quaternion rotation)
+    {
+        SpellData data = GetSpellData(gestureIdx);
+
+        if (data)
+            return spellPool.Instantiate(data.name, position, rotation);
+        else
+            return null;
     }
 }
