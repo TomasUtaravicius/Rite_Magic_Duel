@@ -26,18 +26,18 @@ public class SpellManager : MonoBehaviour {
     public Spells bufferedSpell = Spells.NULL;
     private GameObject currentShield;
     private bool spellInitiated;
-    private ResourceManager resourceManager;
+    public ResourceManager resourceManager;
     private void Start()
     {
-        vRInputModule = GameObject.Find("PR_VRInputModule").GetComponent<VRInputModule>();
-        resourceManager = GetComponent<ResourceManager>();
+
+        
     }
     
     private void Update()
     {
         if(canCastSpells)
         {
-            if((photonView.IsMine ||isLobbyMode) && vRInputModule.rightController.GetHairTriggerDown())
+            if((photonView.IsMine ||isLobbyMode) && vRInputModule.rightController.GetHairTriggerDown() && vRInputModule!=null)
             {
                
                     if (bufferedSpell == Spells.BLUELIGHTNING)
