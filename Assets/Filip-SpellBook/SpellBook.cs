@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Photon.Pun;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static GestureController;
@@ -7,7 +8,7 @@ using static GestureController;
 public class SpellBook : MonoBehaviour
 {
     private SpellPool spellPool;
-    [SerializeField] SpellLoadout loadout = null;
+    [SerializeField] SBLoadout loadout = null;
 
 
     // Start is called before the first frame update
@@ -54,13 +55,13 @@ public class SpellBook : MonoBehaviour
                 Debug.LogWarning("Spell " + (i + 1) + " is null");
     }
 
-    private SB_Spell SpawnSpell(SpellData spellData, Transform spawnTransform)
+    private Spell SpawnSpell(SpellData spellData, Transform spawnTransform)
     {
         GameObject spellInstance;
-        spellInstance = Instantiate(spellData.spellPrefab, spawnTransform.position, spawnTransform.rotation, null);
+        spellInstance = PhotonNetwork.Instantiate(spellData.spellPrefab.name, spawnTransform.position, spawnTransform.rotation, 0);
         spellInstance.name = spellData.spellName;
 
-        SB_Spell spell = spellInstance.GetComponent<SB_Spell>();
+        Spell spell = spellInstance.GetComponent<Spell>();
         if (spell)
         {
             Debug.Log("Spell found");

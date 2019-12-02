@@ -2,14 +2,11 @@
 
 [System.Serializable, CreateAssetMenu(fileName = "SpellData", menuName = "Rite/Spell Data", order = 0)]
 public class SpellData : ScriptableObject
-{
-    /*public bool hasHit;
-    public float manaCost;*/
-    
-    
-    
+{ 
     [Header("Spell")]
     public string spellName = "New Spell";
+
+    public Sprite spellSprite = null;
 
     [Min(0)] public float manaCost = 10;
 

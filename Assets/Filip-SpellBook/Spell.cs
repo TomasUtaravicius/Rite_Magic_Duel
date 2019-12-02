@@ -1,10 +1,9 @@
 ﻿using Photon.Pun;
-using System;
 using UnityEngine;
 
 public enum SpellType { None, Projectile, Shield }
 
-public class SB_Spell : MonoBehaviourPun, IPunObservable
+public class Spell : MonoBehaviourPun, IPunObservable
 {
     protected string spellName = "";
 

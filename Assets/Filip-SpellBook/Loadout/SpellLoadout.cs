@@ -4,20 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class SpellLoadout
+public class SBLoadout
 {
+    public int loadoutNumber;
     public string name;
     public List<SpellData> spellSlots;
 
     public int SpellCount { get => 5; }
 
-    public SpellLoadout()
+    public SBLoadout()
     {
         name = "SpellLoadout-New";
         spellSlots = new List<SpellData>(5);
     }
 
-    public SpellLoadout(int number)
+    public SBLoadout(int number)
     {
         name = "SpellLoadout" + number;
         spellSlots = new List<SpellData>(5);

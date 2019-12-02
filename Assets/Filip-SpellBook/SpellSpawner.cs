@@ -14,7 +14,7 @@ public class SpellSpawner : MonoBehaviour
 
             GameObject spellInstance = Instantiate(spellData.spellPrefab, transform.position, transform.rotation, null);
 
-            SB_Spell spell = spellInstance.GetComponent<SB_Spell>();
+            Spell spell = spellInstance.GetComponent<Spell>();
             if (spell)
             {
                 Debug.Log("Spell found");

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0335ff6bcc3ad3843af7b6d1dbcb5688, type: 3}
-  m_Name: SD_LightningBolt Purple
+  m_Name: SD_FurRoDah
   m_EditorClassIdentifier: 
-  spellName: Lightning Bolt Purple
+  spellName: Fus Ro Dah
+  spellSprite: {fileID: 0}
   manaCost: 5
   health: 1
   damage: 10
@@ -22,9 +23,8 @@ MonoBehaviour:
     type: 3}
   spellScale: {x: 1, y: 1, z: 1}
   shouldTintSpell: 1
-  spellTint: {r: 0.77809405, g: 0, b: 0.9150943, a: 1}
-  spellSound: {fileID: 8300000, guid: be27c05909607254d904f7c69ec0bf33, type: 3}
-  spellSpeed: 7.5
+  spellTint: {r: 0.4764151, g: 0.90259904, b: 1, a: 1}
+  spellSpeed: 15
   hitEffectPrefab: {fileID: 6276298085916153618, guid: cc63bdf410295b844ba15b1aca144f93,
     type: 3}
   hitEffectScale: {x: 1, y: 1, z: 1}

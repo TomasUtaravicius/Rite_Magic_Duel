@@ -4,32 +4,53 @@ using UnityEngine;
 
 public class LoadoutManager : MonoBehaviour
 {
+    /* debug variables for component */
     public bool saveTick = false;
-
     [Range(1, 5)] public int loadoutNo = 1;
-    [SerializeField] SpellLoadout currentlySelectedLoadout = null;
+    [SerializeField] SBLoadout currentlySelectedLoadout = null;
+    
+    private void OnValidate()
+    {
+        if (saveTick)
+        {
+            SaveLoadout(currentlySelectedLoadout, loadoutNo);
+            SetPreferedLoadout(loadoutNo);
+            saveTick = false;
+        }
+    }
 
-    public void SaveSelectedLoadout(int i)
+
+
+
+
+    public static void SetPreferedLoadout(int i)
     {
         Debug.Log("Selected Loadout " + i);
         PlayerPrefs.SetInt("SelectedLoadout", i);
     }
 
-    public static void SaveLoadout(SpellLoadout loadout, int loadoutNumber)
+    public static SBLoadout LoadSelectedLoadout()
+    { return LoadLoadout(PlayerPrefs.GetInt("SelectedLoadout", 1)); }
+
+
+
+    public static void SaveLoadout(SBLoadout loadout, int loadoutNumber)
     {
+        loadout.loadoutNumber = loadoutNumber;
+
         Debug.Log("Saved spell loadout - " + loadout.name + " under name \"SpellLoadout-" + loadoutNumber + "\"");
 
         string bookJSON = JsonUtility.ToJson(loadout);
         PlayerPrefs.SetString("SpellLoadout-" + loadoutNumber, bookJSON);
     }
 
-    public static SpellLoadout LoadSelectedLoadout()
-    { return LoadLoadout(PlayerPrefs.GetInt("SelectedLoadout", 1)); }
-
-    public static SpellLoadout LoadLoadout(int loadoutNumber)
+    public static SBLoadout LoadLoadout(int loadoutNumber)
     {
+        //clamped to hardcoded limit
+        loadoutNumber = Mathf.Clamp(loadoutNumber, 1, 5);
+
         string loadoutJSON = PlayerPrefs.GetString("SpellLoadout-" + loadoutNumber);
-        SpellLoadout loadout = JsonUtility.FromJson<SpellLoadout>(loadoutJSON);
+        SBLoadout loadout = JsonUtility.FromJson<SBLoadout>(loadoutJSON);
         if (loadout != null)
         {
             Debug.Log("Loaded spell loadout - " + loadout.name);
@@ -38,18 +59,13 @@ public class LoadoutManager : MonoBehaviour
         else
         {
             Debug.LogError("Could not find SpellLoadout-" + loadoutNumber);
-            return new SpellLoadout(loadoutNumber);
+            return new SBLoadout(loadoutNumber);
         }
     }
 
 
-    private void OnValidate()
+    public static SpellData[] LoadAllSpellData()
     {
-        if (saveTick)
-        {
-            SaveLoadout(currentlySelectedLoadout, loadoutNo);
-            SaveSelectedLoadout(loadoutNo);
-            saveTick = false;
-        }
+        return Resources.LoadAll<SpellData>("SpellData");
     }
 }

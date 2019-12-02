@@ -72,7 +72,7 @@ public class SpellManager : MonoBehaviour
                 GameObject spellInstance = spellBook.CastSpell(gestureIdx, spellCastingPoint.transform.position, spellCastingPoint.transform.rotation);
                 resourceManager.ReduceMana(spellBook.GetSpellData(gestureIdx).manaCost);
 
-                SB_Spell spell = spellInstance.GetComponent<SB_Spell>();
+                Spell spell = spellInstance.GetComponent<Spell>();
 
                 if (spell == null)
                 {

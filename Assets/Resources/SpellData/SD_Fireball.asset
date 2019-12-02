@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SD_Fireball
   m_EditorClassIdentifier: 
   spellName: Fireball
+  spellSprite: {fileID: 0}
   manaCost: 5
   health: 1
   damage: 10

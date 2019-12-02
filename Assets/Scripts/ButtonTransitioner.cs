@@ -21,6 +21,7 @@ public class ButtonTransitioner : MonoBehaviour,IPointerEnterHandler,IPointerExi
     private Keyboard keyboard;
     private void Awake()
     {
+        buttonClick.AddListener(HandleOnButtonClick);
         m_Image = GetComponent<Image>();
     }
     public void OnInputFieldToggled()
@@ -86,5 +87,5 @@ public class ButtonTransitioner : MonoBehaviour,IPointerEnterHandler,IPointerExi
 
     }
 
-   
+    protected virtual void HandleOnButtonClick() { }
 }

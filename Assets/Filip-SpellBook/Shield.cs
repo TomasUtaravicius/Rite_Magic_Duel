@@ -1,6 +1,6 @@
 ﻿
 
-class Shield: SB_Spell
+class Shield: Spell
 {
     public override SpellType SpellType { get => SpellType.Shield; }
 }
