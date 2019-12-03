@@ -20,10 +20,7 @@ public class Spell : MonoBehaviourPun, IPunObservable
 
     public float manaCost = 0;
 
-    [SerializeField] protected string hitEffectPrefabName = "";
-    
-
-    public virtual SpellType SpellType { get => SpellType.None; }
+    public float spellSpeed = 10;
 
     /// <summary> A held cast spell requires the caster to hold the spell to keep it active and release to deactivate it </summary>
     public bool RequiresHeldCast { get => requiresHeldCast;}
@@ -41,14 +38,14 @@ public class Spell : MonoBehaviourPun, IPunObservable
     { }
 
 
-    public void SetSpellAttributes(string spellName, string hitEffectPrefabName, float health = 10, float damage = 10, float lifeTime = 0)
+    public void SetSpellAttributes(string spellName, float health = 10, float damage = 10, float lifeTime = 0, float spellSpeed = 0)
     {
         gameObject.name = spellName;
         this.spellName = spellName;
-        this.hitEffectPrefabName = hitEffectPrefabName;
         this.health = health;
         this.damage = damage;
         this.lifeTime = lifeTime;
+        this.spellSpeed = spellSpeed;
     }
 
     

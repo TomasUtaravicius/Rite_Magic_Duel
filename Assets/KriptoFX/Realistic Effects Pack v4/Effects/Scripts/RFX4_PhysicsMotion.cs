@@ -9,7 +9,7 @@ public class RFX4_PhysicsMotion : MonoBehaviour
 {
     
     public bool UseCollisionDetect = true;
-    public Projectile Spell;
+    public Spell spell;
     public float MaxDistnace = -1;
     public float Mass = 1;
     public float Speed = 10;
@@ -83,9 +83,9 @@ public class RFX4_PhysicsMotion : MonoBehaviour
         if (FreezeRotation) rigid.constraints = RigidbodyConstraints.FreezeRotation;
         rigid.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         rigid.interpolation = RigidbodyInterpolation.Interpolate;
-        if(Spell!=null)
+        if(spell!=null)
         {
-            rigid.AddForce(transform.forward * (Spell.spellSpeed), ForceMode);
+            rigid.AddForce(transform.forward * (spell.spellSpeed), ForceMode);
         }
       else
         {
@@ -101,7 +101,7 @@ public class RFX4_PhysicsMotion : MonoBehaviour
         if(collision.collider.gameObject.GetComponent<IDamagable>()!=null && !isCollided)
         {
             Debug.Log("we hit a damageable object");
-            collision.collider.gameObject.GetComponent<IDamagable>().GetHit(Spell.damage);
+            collision.collider.gameObject.GetComponent<IDamagable>().GetHit(spell.damage);
         }
         foreach (ContactPoint contact in collision.contacts)
         {

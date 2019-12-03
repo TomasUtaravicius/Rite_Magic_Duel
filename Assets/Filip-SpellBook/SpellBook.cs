@@ -66,21 +66,8 @@ public class SpellBook : MonoBehaviour
         {
             Debug.Log("Spell found");
 
-            spell.SetSpellAttributes(spellData.spellName, spellData.hitEffectPrefab.name, spellData.health, spellData.damage, spellData.lifetime);
+            spell.SetSpellAttributes(spellData.spellName, spellData.health, spellData.damage, spellData.lifetime, spellData.spellSpeed);
             spell.SetSpellVisuals(spellData.shouldTintSpell, spellData.spellTint);
-
-            switch (spell.SpellType)
-            {
-                case SpellType.None:
-                    break;
-
-                case SpellType.Projectile:
-                    ((Projectile)spell).spellSpeed = spellData.spellSpeed;
-                    break;
-
-                case SpellType.Shield:
-                    break;
-            }
         }
 
 

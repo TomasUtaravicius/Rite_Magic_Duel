@@ -21,7 +21,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7517615193761686242}
-  - component: {fileID: 7517615193761686241}
+  - component: {fileID: 3571673531102026715}
   - component: {fileID: 5708047366446880476}
   - component: {fileID: 1254488684776960119}
   m_Layer: 0
@@ -46,7 +46,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7517615193761686241
+--- !u!114 &3571673531102026715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,13 +55,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7517615193761686243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cee00b59ba08a304a91f04abb97b84df, type: 3}
+  m_Script: {fileID: 11500000, guid: 4936af9d258219f4cb88e98e858b6c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
-  manaCost: 20
+  requiresHeldCast: 0
+  damage: 10
+  manaCost: 0
   hitEffectPrefabName: 
-  spellSpeed: 20
 --- !u!114 &5708047366446880476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +158,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spellScript
       value: 
-      objectReference: {fileID: 7517615193761686241}
+      objectReference: {fileID: 0}
     - target: {fileID: 114287051528755172, guid: 45f134f709433794c9fd82ae5c0d5009,
         type: 3}
       propertyPath: CollidesWith.m_Bits

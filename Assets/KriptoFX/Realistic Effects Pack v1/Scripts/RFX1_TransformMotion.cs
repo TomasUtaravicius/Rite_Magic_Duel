@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
@@ -8,7 +7,7 @@ public class RFX1_TransformMotion : MonoBehaviour
 {
     public float Distance = 30;
     public float Speed = 1;
-    public Projectile spellScript;
+    public Spell spell;
     //public float Dampeen = 0;
     //public float MinSpeed = 1;
     public float TimeDelay = 0;
@@ -114,14 +113,14 @@ public class RFX1_TransformMotion : MonoBehaviour
             //currentSpeed = Mathf.Clamp(currentSpeed - Speed*Dampeen*Time.deltaTime, MinSpeed, Speed);
             if (Target == null)
             {
-                var currentForwardVector = (Vector3.forward + randomOffset)* spellScript.spellSpeed * Time.deltaTime;
+                var currentForwardVector = (Vector3.forward + randomOffset)* spell.spellSpeed * Time.deltaTime;
                 frameMoveOffset = t.localRotation*currentForwardVector;
                 frameMoveOffsetWorld = startQuaternion*currentForwardVector;
             }
             else
             {
                 var forwardVec = (targetT.position - t.position).normalized;
-                var currentForwardVector = (forwardVec + randomOffset) * spellScript.spellSpeed * Time.deltaTime;
+                var currentForwardVector = (forwardVec + randomOffset) * spell.spellSpeed * Time.deltaTime;
                 frameMoveOffset = currentForwardVector;
                 frameMoveOffsetWorld = currentForwardVector;
             }
@@ -201,7 +200,7 @@ public class RFX1_TransformMotion : MonoBehaviour
             {
                 
                 Debug.Log("we hit a damageable object");
-                hit.collider.gameObject.transform.parent.gameObject.GetComponent<IDamagable>().GetHit(spellScript.damage);
+                hit.collider.gameObject.transform.parent.gameObject.GetComponent<IDamagable>().GetHit(spell.damage);
             }
           
             CollidedInstances.Add(instance);

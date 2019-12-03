@@ -5,7 +5,8 @@ using System.Collections;
 using UnityEditor;
 #endif
 
-public class FlickeringLight : MonoBehaviour {
+public class FlickeringLight : MonoBehaviour 
+{
 
 
     public delegate void MainLoop();
@@ -19,7 +20,7 @@ public class FlickeringLight : MonoBehaviour {
     [HideInInspector]public bool MakeSourceStationary;
     [HideInInspector]public float positionOffset;
 
-    private Light light;
+    private new Light light;
 
     private float intensityOrigin;
     private float intensityOffset;
