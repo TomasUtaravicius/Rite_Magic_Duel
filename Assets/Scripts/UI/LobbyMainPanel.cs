@@ -38,7 +38,10 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
     public Button StartGameButton;
     public GameObject PlayerListEntryPrefab;
 
-    
+    [Header("Edit Loadout Panel")]
+    public GameObject EditLoadoutPanel;
+
+
     public Keyboard keyboard;
 
     private Dictionary<string, RoomInfo> cachedRoomList;
@@ -305,6 +308,9 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel("PracticeScene");
     }
 
+    public void OnEditLoadoutButtonClicked()
+    { SetActivePanel(EditLoadoutPanel.name); }
+
 
     #endregion UI CALLBACKS
 
@@ -357,6 +363,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         JoinRandomRoomPanel.SetActive(activePanel.Equals(JoinRandomRoomPanel.name));
         RoomListPanel.SetActive(activePanel.Equals(RoomListPanel.name));    // UI should call OnRoomListButtonClicked() to activate this
         InsideRoomPanel.SetActive(activePanel.Equals(InsideRoomPanel.name));
+        EditLoadoutPanel.SetActive(activePanel.Equals(EditLoadoutPanel.name));
     }
 
     private void UpdateCachedRoomList(List<RoomInfo> roomList)

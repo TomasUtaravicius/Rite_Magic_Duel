@@ -24,7 +24,7 @@ public class SpellBook : MonoBehaviour
 
     private void TestLoadout()
     {
-        List<SpellData> spells = loadout.spellSlots;
+        List<SpellData> spells = loadout.spells;
 
         for (int i = 0; i < spells.Count; i++)
             if (spells[i])
@@ -38,7 +38,7 @@ public class SpellBook : MonoBehaviour
 
     private void PoolSpells()
     {
-        List<SpellData> spells = loadout.spellSlots;
+        List<SpellData> spells = loadout.spells;
 
 
         for (int i = 0; i < spells.Count; i++)
@@ -78,7 +78,7 @@ public class SpellBook : MonoBehaviour
     {
         //try getting spell data
         SpellData data = null;
-        try { data = loadout.spellSlots[gestureIdx]; }
+        try { data = loadout.spells[gestureIdx]; }
         catch (System.ArgumentOutOfRangeException) { }
 
         return data;

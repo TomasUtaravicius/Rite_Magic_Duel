@@ -10,6 +10,7 @@ public class ButtonTransitioner : MonoBehaviour,IPointerEnterHandler,IPointerExi
     public Color32 m_NormalColor;
     public Color32 m_HoverColor;
     public Color32 m_DownColor;
+    public Color32 m_DisableColor;
     public UnityEvent buttonClick;
     [SerializeField]
     private bool isToggleButton;
@@ -24,10 +25,23 @@ public class ButtonTransitioner : MonoBehaviour,IPointerEnterHandler,IPointerExi
         buttonClick.AddListener(HandleOnButtonClick);
         m_Image = GetComponent<Image>();
     }
+
+    private void OnEnable()
+    {
+        m_Image.color = m_NormalColor;
+    }
+
+    private void OnDisable()
+    {
+        m_Image.color = m_DisableColor;
+    }
+
+
     public void OnInputFieldToggled()
     {
 
     }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("Pointer Click");

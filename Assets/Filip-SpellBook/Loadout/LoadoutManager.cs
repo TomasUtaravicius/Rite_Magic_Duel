@@ -46,9 +46,6 @@ public class LoadoutManager : MonoBehaviour
 
     public static SBLoadout LoadLoadout(int loadoutNumber)
     {
-        //clamped to hardcoded limit
-        loadoutNumber = Mathf.Clamp(loadoutNumber, 1, 5);
-
         string loadoutJSON = PlayerPrefs.GetString("SpellLoadout-" + loadoutNumber);
         SBLoadout loadout = JsonUtility.FromJson<SBLoadout>(loadoutJSON);
         if (loadout != null)
@@ -66,6 +63,6 @@ public class LoadoutManager : MonoBehaviour
 
     public static SpellData[] LoadAllSpellData()
     {
-        return Resources.LoadAll<SpellData>("SpellData");
+        return Resources.LoadAll<SpellData>("");
     }
 }
