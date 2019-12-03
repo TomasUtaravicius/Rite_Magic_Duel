@@ -452,8 +452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5333532f816c746a5b91a09a5b504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
-  resourceManager: {fileID: 0}
+  photonView: {fileID: 4340403609207380278}
+  resourceManager: {fileID: 7817320785248556322}
 --- !u!1 &537632110573782783
 GameObject:
   m_ObjectHideFlags: 0
@@ -2524,8 +2524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5333532f816c746a5b91a09a5b504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
-  resourceManager: {fileID: 0}
+  photonView: {fileID: 4340403609207380278}
+  resourceManager: {fileID: 7817320785248556322}
 --- !u!1 &2607618707972136176
 GameObject:
   m_ObjectHideFlags: 0
@@ -2815,8 +2815,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5333532f816c746a5b91a09a5b504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
-  resourceManager: {fileID: 0}
+  photonView: {fileID: 4340403609207380278}
+  resourceManager: {fileID: 7817320785248556322}
 --- !u!1 &2696100214868156609
 GameObject:
   m_ObjectHideFlags: 0
@@ -3121,8 +3121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5333532f816c746a5b91a09a5b504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
-  resourceManager: {fileID: 0}
+  photonView: {fileID: 4340403609207380278}
+  resourceManager: {fileID: 7817320785248556322}
 --- !u!1 &2908841765590863849
 GameObject:
   m_ObjectHideFlags: 0
@@ -3703,8 +3703,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5333532f816c746a5b91a09a5b504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
-  resourceManager: {fileID: 0}
+  photonView: {fileID: 4340403609207380278}
+  resourceManager: {fileID: 7817320785248556322}
 --- !u!1 &3450012066614044156
 GameObject:
   m_ObjectHideFlags: 0
@@ -9549,8 +9549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5333532f816c746a5b91a09a5b504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
-  resourceManager: {fileID: 0}
+  photonView: {fileID: 4340403609207380278}
+  resourceManager: {fileID: 7817320785248556322}
 --- !u!1 &4614875192613906665
 GameObject:
   m_ObjectHideFlags: 0
@@ -9883,8 +9883,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5333532f816c746a5b91a09a5b504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
-  resourceManager: {fileID: 0}
+  photonView: {fileID: 4340403609207380278}
+  resourceManager: {fileID: 7817320785248556322}
 --- !u!1 &4929119389956487072
 GameObject:
   m_ObjectHideFlags: 0
@@ -15652,8 +15652,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5333532f816c746a5b91a09a5b504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
-  resourceManager: {fileID: 0}
+  photonView: {fileID: 4340403609207380278}
+  resourceManager: {fileID: 7817320785248556322}
 --- !u!1 &6058096194562894864
 GameObject:
   m_ObjectHideFlags: 0
@@ -17587,8 +17587,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5333532f816c746a5b91a09a5b504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
-  resourceManager: {fileID: 0}
+  photonView: {fileID: 4340403609207380278}
+  resourceManager: {fileID: 7817320785248556322}
 --- !u!1 &7903805764359774809
 GameObject:
   m_ObjectHideFlags: 0
@@ -18110,8 +18110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5333532f816c746a5b91a09a5b504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
-  resourceManager: {fileID: 0}
+  photonView: {fileID: 4340403609207380278}
+  resourceManager: {fileID: 7817320785248556322}
 --- !u!1 &8262290659898356022
 GameObject:
   m_ObjectHideFlags: 0
@@ -18481,8 +18481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5333532f816c746a5b91a09a5b504c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  photonView: {fileID: 0}
-  resourceManager: {fileID: 0}
+  photonView: {fileID: 4340403609207380278}
+  resourceManager: {fileID: 7817320785248556322}
 --- !u!1 &8553391582925005520
 GameObject:
   m_ObjectHideFlags: 0
@@ -19063,7 +19063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellCastingPoint: {fileID: 4615821214633062644}
-  BlueBlast: {fileID: 2098068299979516266, guid: 010f905b6a47b314aadd345e0fb71fb0,
+  BlueBlast: {fileID: 7517615193761686243, guid: 8d36d450871c16a4ca5a33cebc2dfd76,
     type: 3}
   ChargedPlasma: {fileID: 0}
   FireBolt: {fileID: 0}

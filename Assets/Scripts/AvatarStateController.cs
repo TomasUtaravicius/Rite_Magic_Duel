@@ -58,10 +58,7 @@ public class AvatarStateController : MonoBehaviour {
             if(!isOfflineMode)
             {
                 gestureController.enabled = false;
-                foreach (GameObject go in listGO)
-                {
-                    go.SetActive(false);
-                }
+               
             }
                 
 
