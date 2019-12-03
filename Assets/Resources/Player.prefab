@@ -19131,6 +19131,7 @@ MonoBehaviour:
   isLobbyMode: 0
   vRInputModule: {fileID: 0}
   bufferedGesture: 5
+  resourceManager: {fileID: 7817320785248556322}
 --- !u!114 &377918233460296265
 MonoBehaviour:
   m_ObjectHideFlags: 0

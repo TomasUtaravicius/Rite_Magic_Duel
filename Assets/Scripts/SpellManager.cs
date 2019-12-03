@@ -19,6 +19,7 @@ public class SpellManager : MonoBehaviour
     public Gesture bufferedGesture = Gesture.NONE;
     private GameObject heldSpell;
     private bool heldCasting;
+    [SerializeField]
     private ResourceManager resourceManager;
     private void Start()
     {
@@ -90,7 +91,8 @@ public class SpellManager : MonoBehaviour
             else
                 NotEnoughMana();
         }
-        Debug.LogWarning("No spell data found for " + ((Gesture)gestureIdx).ToString() + " gesture!");
+        else
+            Debug.LogWarning("No spell data found for " + ((Gesture)gestureIdx).ToString() + " gesture!");
     }
 
     public void SetBufferedGesture(Gesture value)

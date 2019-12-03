@@ -260,7 +260,7 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
     public void ReturnPlayersToPositions()
     {
         photonView.RPC("ReviveAllPlayers", Photon.Pun.RpcTarget.AllViaServer);
-        Debug.LogError("Returning players to their original positions");
+
         for (int j = 0; j < PhotonNetwork.PlayerList.Length; j++)
         {
             int positionIndex = (int)PhotonNetwork.PlayerList[j].CustomProperties["position"];
@@ -269,7 +269,7 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
             {
                 if (playerList[n].photonID == id)
                 {
-                    Debug.LogError("Moving player with ID:" + playerList[n].photonID + "to spawn point with index: " + positionIndex);
+                    
                     playerList[n].gameObject.transform.parent.transform.position = playerSpawnPoints.GetChild(positionIndex).position;
                 }
             }
@@ -281,7 +281,7 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
     {
         for (int i = 0; i < playerList.Count; i++)
         {
-            Debug.LogError("Calling Revive on all players");
+
             playerList[i].avatarStateController.SpawnAvatarBody();
         }
     }

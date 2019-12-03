@@ -36,7 +36,7 @@ public class ButtonTransitioner : MonoBehaviour,IPointerEnterHandler,IPointerExi
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.LogError("Pointer Down");
+        Debug.Log("Pointer Down");
         m_Image.color = m_DownColor;
         buttonClick.Invoke();
         

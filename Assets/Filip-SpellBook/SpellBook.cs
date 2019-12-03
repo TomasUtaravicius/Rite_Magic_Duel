@@ -99,7 +99,7 @@ public class SpellBook : MonoBehaviour
         SpellData data = GetSpellData(gestureIdx);
 
         if (data)
-            return spellPool.Instantiate(data.name, position, rotation);
+            return spellPool.Instantiate(data.spellName, position, rotation);
         else
             return null;
     }

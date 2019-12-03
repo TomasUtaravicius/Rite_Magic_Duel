@@ -47,13 +47,7 @@ public class VRInputModule : BaseInputModule
     }
     private void Update()
     {
-        if(rightController!=null)
-        {
-            if (rightController.GetHairTriggerUp())
-            {
-                Debug.LogError("Right controller trigger press up");
-            }
-        }
+
        
       
     }

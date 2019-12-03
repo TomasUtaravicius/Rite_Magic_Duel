@@ -2066,6 +2066,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 651147771734670707, guid: 7d4b391de24a5ce4980b0aeb1b289983,
+        type: 3}
+      propertyPath: viewIdField
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 801310625796769215, guid: 7d4b391de24a5ce4980b0aeb1b289983,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2121,11 +2126,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 651147771734670707, guid: 7d4b391de24a5ce4980b0aeb1b289983,
-        type: 3}
-      propertyPath: viewIdField
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 900388303404943540, guid: 7d4b391de24a5ce4980b0aeb1b289983,
         type: 3}
       propertyPath: viewIdField
@@ -2160,6 +2160,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9183894820471382421, guid: 8d8c21c43003cfa47b8872e668ccbb13,
+        type: 3}
+      propertyPath: m_Name
+      value: UI
+      objectReference: {fileID: 0}
     - target: {fileID: 9183894820471382424, guid: 8d8c21c43003cfa47b8872e668ccbb13,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2264,11 +2269,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9183894820471382421, guid: 8d8c21c43003cfa47b8872e668ccbb13,
-        type: 3}
-      propertyPath: m_Name
-      value: UI
       objectReference: {fileID: 0}
     - target: {fileID: 9183894820471382425, guid: 8d8c21c43003cfa47b8872e668ccbb13,
         type: 3}
