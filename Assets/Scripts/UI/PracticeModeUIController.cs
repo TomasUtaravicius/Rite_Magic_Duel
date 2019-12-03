@@ -9,8 +9,13 @@ public class PracticeModeUIController : MonoBehaviour
     private GameObject menuUI;
     [SerializeField]
     private VRInputModule vRInputModule;
-   // public SteamVR_Action_Boolean menuToggle;
-   // public SteamVR_Input_Sources handType;
+    [SerializeField]
+    private GestureController gc;
+    [SerializeField]
+    private GameObject obstacleCourse;
+
+    // public SteamVR_Action_Boolean menuToggle;
+    // public SteamVR_Input_Sources handType;
     public GameObject pointer;
     private bool menuValue;
 
@@ -27,6 +32,7 @@ public class PracticeModeUIController : MonoBehaviour
         {
             if (menuUI.activeSelf == true)
             {
+               
                 DisableUI();
                 return;
             }
@@ -40,13 +46,13 @@ public class PracticeModeUIController : MonoBehaviour
     private void DisableUI()
     {
         menuUI.SetActive(false);
-
+        gc.enabled = true;
         pointer.SetActive(false);
     }
     private void EnableUI()
     {
         menuUI.SetActive(true);
-
+        gc.enabled = false;
         pointer.SetActive(true);
     }
 }

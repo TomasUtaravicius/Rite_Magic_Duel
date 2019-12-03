@@ -188,12 +188,22 @@ public class RFX1_TransformMotion : MonoBehaviour
         {
            
             var instance = Instantiate(effect, hit.point + hit.normal * CollisionOffset, new Quaternion()) as GameObject;
+            if (hit.collider.gameObject.CompareTag("Environment"))
+            {
+                Debug.LogError("Collided with teabag");
+                if (hit.collider.gameObject.GetComponent<Rigidbody>())
+                {
+                    hit.collider.gameObject.GetComponent<Rigidbody>().AddExplosionForce(2000f,this.gameObject.transform.position,20f);
+                }
+
+            }
             if (hit.collider.gameObject.GetComponentInParent<IDamagable>() != null)
             {
                 
                 Debug.Log("we hit a damageable object");
                 hit.collider.gameObject.transform.parent.gameObject.GetComponent<IDamagable>().GetHit(spellScript.damage);
             }
+          
             CollidedInstances.Add(instance);
             if (HUE > -0.9f)
             {

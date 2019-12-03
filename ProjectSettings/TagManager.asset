@@ -10,6 +10,7 @@ TagManager:
   - TeleportIgnore
   - OffensiveSpell
   - VRInputModule
+  - TeaBag
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - 
   - PlayerBody
   - VRTKCollision
-  - 
+  - AnimationTriggerBox
   - 
   - 
   - 

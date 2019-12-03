@@ -5,17 +5,14 @@ using UnityEngine;
 public class AnimationDelay : MonoBehaviour
 {
     Animator animator;
-    public Animation gestureAnimation;
-    public Animation noAnimation;
-    float nextTimeToChangeMode;
-    float intervalBetweenModes=2f;
+
     public ParticleSystem ps;
     bool isAnimationPlaying = true;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        nextTimeToChangeMode = Time.time + intervalBetweenModes;
+        animator.enabled = false;
     }
 
     // Update is called once per frame
@@ -45,18 +42,21 @@ public class AnimationDelay : MonoBehaviour
         
 
     }
-    private void ChangeMode()
+    private void OnTriggerEnter(Collider other)
     {
-        nextTimeToChangeMode = Time.time + intervalBetweenModes;
-        if(isAnimationPlaying)
+
+        if(other.gameObject.CompareTag("Player"))
         {
-            isAnimationPlaying = false;
-           // particles.SetActive(false);
-        }
-        else
-        {
-            isAnimationPlaying = true;
-           // particles.SetActive(true);
+            animator.enabled = true;
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            animator.enabled = false;
+        }
+    }
+
+
 }
