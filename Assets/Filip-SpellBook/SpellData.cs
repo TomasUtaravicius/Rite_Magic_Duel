@@ -2,7 +2,12 @@
 
 [System.Serializable, CreateAssetMenu(fileName = "SpellData", menuName = "Rite/Spell Data", order = 0)]
 public class SpellData : ScriptableObject
-{ 
+{
+#if UNITY_EDITOR
+    /// <summary> Will the spell be used in build or hidden in game </summary>
+    public bool buildReady;
+#endif
+
     [Header("Spell")]
     public string spellName = "New Spell";
 

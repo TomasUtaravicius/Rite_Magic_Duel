@@ -26,8 +26,16 @@ public class EditLoadoutUIPanel : MonoBehaviour
 
             for (int i = 0; i < sd.Length; i++)
             {
+#if UNITY_EDITOR
+                if(sd[i].buildReady)
+                {
+                    spellButtons.Add(Instantiate(spellButtonPrefab, spellPanel.transform).GetComponent<SpellUIButton>());
+                    spellButtons[i].SetSpellData(sd[i]);
+                }
+#else
                 spellButtons.Add(Instantiate(spellButtonPrefab, spellPanel.transform).GetComponent<SpellUIButton>());
                 spellButtons[i].SetSpellData(sd[i]);
+#endif
             }
         }
     }
