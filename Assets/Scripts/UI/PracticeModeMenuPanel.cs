@@ -7,21 +7,21 @@ using UnityEngine.SceneManagement;
 
 public class PracticeModeMenuPanel : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject obstacleCourse;
-    [SerializeField]
-    private GameObject enemyGroup;
-    [SerializeField]
-    private GameObject gestureTutorialProps;
-    [SerializeField]
-    private GameObject baseTutorialProps;
+    
+    public GameObject obstacleCourse;
+   
+    public GameObject enemyGroup;
+    
+    public GameObject gestureTutorialProps;
+   
+    public GameObject baseTutorialProps;
     public TextMeshPro titleText;
     // Start is called before the first frame update
     public void OnCombatPracticeButtonClicked()
     {
         ResetPracticeModeSelection();
         titleText.text = "Combat practice";
-      
+        
         enemyGroup.SetActive(true);
     }
     public void OnGestureTutorialButtonClicked()

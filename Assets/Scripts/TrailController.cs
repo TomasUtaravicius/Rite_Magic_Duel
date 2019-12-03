@@ -34,6 +34,7 @@ public class TrailController : MonoBehaviour {
     public void TurnOffTrail()
     {
         //if(!trailToDestroy)
+        if(trailToDestroy)
         trailToDestroy.transform.parent = null;
     }
     /*publicvoid TurnOffTrail(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)

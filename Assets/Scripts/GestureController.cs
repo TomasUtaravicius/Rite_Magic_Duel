@@ -26,6 +26,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+using Photon.Pun;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -39,10 +40,9 @@ public class GestureController : MonoBehaviour
 
     //public SteamVR_Action_Single triggerValue = SteamVR_Actions.default_Squeeze;
     //public SteamVR_Input_Sources handType = SteamVR_Input_Sources.RightHand;
-    public bool shouldTrain;
     public VRInputModule vRInputModule;
     public TrailController trailController;
-
+    public PhotonView photonView;
     // The file from which to load gestures on startup.
     // For example: "Assets/GestureRecognition/sample_gestures.dat"
     [SerializeField] public string LoadGesturesFile;
@@ -61,7 +61,7 @@ public class GestureController : MonoBehaviour
     private GestureRecognition gr = new GestureRecognition();
 
     // The text field to display instructions.
-    private Text HUDText;
+    public Text HUDText;
 
     // The game object associated with the currently active controller (if any):
     private GameObject active_controller = null;
@@ -91,6 +91,9 @@ public class GestureController : MonoBehaviour
     // Initialization:
     private void Start()
     {
+       
+        
+        
         // Load the default set of gestures.
         /*if (gr.loadFromFile(LoadGesturesFile) == false)
         {
@@ -101,14 +104,14 @@ public class GestureController : MonoBehaviour
 
         //Debug.Log(Application.streamingAssetsPath.ToString()+ "Path");
         // Set the welcome message.
-        HUDText = GameObject.Find("HUDText").GetComponent<Text>();
-        /*HUDText.text = "Welcome to MARUI Gesture Plug-in!\n"
+        //HUDText = GameObject.Find("HUDText").GetComponent<Text>();
+        HUDText.text = "Welcome to MARUI Gesture Plug-in!\n"
                       + "Press the trigger to draw a gesture. Available gestures:\n"
                       + "1 - a circle/ring (creates a cylinder)\n"
                       + "2 - swipe left/right (rotate object)\n"
                       + "3 - shake (delete object)\n"
                       + "4 - draw a sword from your hip,\nhold it over your head (magic)\n"
-                      + "or: press 'A'/'X'/Menu button\nto create new gesture.";*/
+                      + "or: press 'A'/'X'/Menu button\nto create new gesture.";
 
         me = GCHandle.Alloc(this);
 
@@ -116,7 +119,10 @@ public class GestureController : MonoBehaviour
         RenderSettings.skybox.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f, 1.0f));
 
     }
-
+    private void SetUpInputModule()
+    {
+        vRInputModule = GameObject.FindGameObjectWithTag("VRInputModule").GetComponent<VRInputModule>();
+    }
     private void LoadTheOtherFile()
     {
         if (gr.loadFromFile("Assets/GestureRecognition/GestureSet2.dat"))
@@ -177,7 +183,7 @@ public class GestureController : MonoBehaviour
 
             StartTraining();
         }
-        if (vRInputModule.rightController.GetHairTriggerUp())
+        if (vRInputModule!=null &&vRInputModule.rightController.GetHairTriggerUp())
         {
             trailController.TurnOffTrail();
         }

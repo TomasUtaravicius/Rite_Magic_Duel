@@ -22,7 +22,8 @@ public class SpellManager : MonoBehaviour
     private ResourceManager resourceManager;
     private void Start()
     {
-        resourceManager = GetComponent<ResourceManager>();
+
+        
     }
 
     private void Update()
