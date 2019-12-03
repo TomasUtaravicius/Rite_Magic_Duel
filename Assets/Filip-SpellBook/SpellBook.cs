@@ -79,7 +79,7 @@ public class SpellBook : MonoBehaviour
         //try getting spell data
         SpellData data = null;
         try { data = loadout.spellSlots[gestureIdx]; }
-        catch (System.IndexOutOfRangeException) { }
+        catch (System.ArgumentOutOfRangeException) { }
 
         return data;
     }
