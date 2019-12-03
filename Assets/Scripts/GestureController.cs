@@ -201,7 +201,6 @@ public class GestureController : MonoBehaviour
         //Debug.Log(last_performance_report * 100.0);
         float trigger_left = vRInputModule.leftController.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x;
         float trigger_right = vRInputModule.rightController.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x;
-        Debug.Log(trigger_right);
         //float trigger_right = SteamVR_Actions.default_Squeeze.GetAxis(handType);
 
         // If the user is not yet dragging (pressing the trigger) on either controller, he hasn't started a gesture yet.

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2095956264927422450}
   - component: {fileID: 2057344123743917680}
   - component: {fileID: 2058079496491701074}
-  - component: {fileID: 5804017300122083209}
+  - component: {fileID: 6068554182120494162}
   m_Layer: 0
   m_Name: BlueBlast
   m_TagString: OffensiveSpell
@@ -30,7 +30,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2796501267954893270}
+  - {fileID: 2801116266182340211}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
@@ -71,7 +71,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
---- !u!114 &5804017300122083209
+--- !u!114 &6068554182120494162
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,20 +80,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2098068299979516266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cee00b59ba08a304a91f04abb97b84df, type: 3}
+  m_Script: {fileID: 11500000, guid: 55fa643032228f44793cc2205aee8840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 20
   manaCost: 10
   hitEffectPrefabName: 
-  spellSpeed: 20
+  spellSpeed: 15
 --- !u!114 &1328692257786021651
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2799450661579406388}
+  m_GameObject: {fileID: 2801116266182339862}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d86b6f49c2149194893b813a9c59a56a, type: 3}
@@ -158,16 +158,17 @@ PrefabInstance:
         type: 3}
       propertyPath: Spell
       value: 
-      objectReference: {fileID: 5804017300122083209}
-    m_RemovedComponents: []
+      objectReference: {fileID: 6068554182120494162}
+    m_RemovedComponents:
+    - {fileID: 7961978417226205844, guid: 4f14e37b24a0f9c41a81220f59ae87f6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4f14e37b24a0f9c41a81220f59ae87f6, type: 3}
---- !u!1 &2799450661579406388 stripped
+--- !u!1 &2801116266182339862 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1748139164946814, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
     type: 3}
   m_PrefabInstance: {fileID: 2801116266182339914}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2796501267954893270 stripped
+--- !u!4 &2801116266182340211 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4709693737692316, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
     type: 3}
