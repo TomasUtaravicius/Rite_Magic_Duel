@@ -197,11 +197,11 @@ public class RFX1_TransformMotion : MonoBehaviour
                 }
 
             }
-            if (hit.collider.gameObject.GetComponentInParent<IDamagable>() != null)
+            if (hit.collider.gameObject.GetComponent<IDamagable>() != null)
             {
                 
                 Debug.Log("we hit a damageable object");
-                hit.collider.gameObject.transform.parent.gameObject.GetComponent<IDamagable>().GetHit(spellScript.damage);
+                hit.collider.gameObject.GetComponent<IDamagable>().GetHit(spellScript.damage);
             }
           
             CollidedInstances.Add(instance);
