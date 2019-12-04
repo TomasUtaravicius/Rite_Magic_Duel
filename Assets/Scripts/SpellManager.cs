@@ -73,19 +73,19 @@ public class SpellManager : MonoBehaviour
             {
                 GameObject spellInstance = spellBook.CastSpell(gestureIdx, spellCastingPoint.transform.position, spellCastingPoint.transform.rotation);
                 resourceManager.ReduceMana(spellBook.GetSpellData(gestureIdx).manaCost);
-
+                bufferedGesture = Gesture.NONE;
                 Spell spell = spellInstance.GetComponent<Spell>();
 
-                if (spell == null)
-                {
-                    SetBufferedGesture(Gesture.NONE);
-                    return;
-                }
-                else if (spell.RequiresHeldCast)
+                if(spell && spell.RequiresHeldCast)
                 {
                     //TODO disable casting and look for trigger up event to disable spell
                     heldSpell = spellInstance;
                     heldCasting = true;
+                }
+                else
+                {
+                    SetBufferedGesture(Gesture.NONE);
+                    return;
                 }
             }
             else

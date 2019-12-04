@@ -75,6 +75,7 @@ public class SpellBook : MonoBehaviour
     public SpellData GetSpellData(int gestureIdx)
     {
         //try getting spell data
+        Debug.Log("Spell book - spawning spell at index " + gestureIdx);
         SpellData data = null;
         try { data = loadout.spells[gestureIdx]; }
         catch (System.ArgumentOutOfRangeException) { }
