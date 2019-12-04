@@ -1,5 +1,6 @@
 fileFormatVersion: 2
 guid: 7ecbc4e55964e9e42bcc68d8c7a526e7
+<<<<<<< Updated upstream
 timeCreated: 1515567281
 licenseType: Store
 ModelImporter:
@@ -12,10 +13,46 @@ ModelImporter:
     2300000: TexturedDisk
     3300000: TexturedDisk
     4300000: TexturedDisk
+=======
+ModelImporter:
+  serializedVersion: 26
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: TexturedDisk
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: TexturedDisk
+  - first:
+      23: 2300000
+    second: TexturedDisk
+  - first:
+      33: 3300000
+    second: TexturedDisk
+  - first:
+      43: 4300000
+    second: TexturedDisk
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TexturedDiskMat
+    second: {fileID: 2100000, guid: 97556348410e705409138473b355e982, type: 2}
+>>>>>>> Stashed changes
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+<<<<<<< Updated upstream
+=======
+    materialLocation: 0
+>>>>>>> Stashed changes
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -28,12 +65,21 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+<<<<<<< Updated upstream
+=======
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+>>>>>>> Stashed changes
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+<<<<<<< Updated upstream
+=======
+    extraUserProperties: []
+>>>>>>> Stashed changes
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -41,6 +87,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+<<<<<<< Updated upstream
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -48,6 +95,25 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+=======
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 1
+>>>>>>> Stashed changes
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
@@ -57,10 +123,22 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+<<<<<<< Updated upstream
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
+=======
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 3
+>>>>>>> Stashed changes
     human: []
     skeleton: []
     armTwist: 0.5
@@ -70,8 +148,13 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+<<<<<<< Updated upstream
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+=======
+    globalScale: 1
+    rootMotionBoneName: 
+>>>>>>> Stashed changes
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
