@@ -27,14 +27,15 @@ public class ResourceManager : MonoBehaviourPun, IPunObservable
     {
         time += Time.deltaTime;
 
-        if (time >= interval)
+        if (time >= interval && photonView.IsMine)
         {
             time -= interval;
 
-            if (health < 100f)
-                health += 0.01f;
             if (mana < 100f)
-                mana += 0.25f;
+                {
+                    mana += 0.25f;
+                }
+               
             UpdateUI();
         }
     }
@@ -47,7 +48,7 @@ public class ResourceManager : MonoBehaviourPun, IPunObservable
     public void Start()
     {
         health = 100f;
-
+        mana = 100f;
         if (photonView.IsMine)
         {
             photonView.RPC("AddPlayer", Photon.Pun.RpcTarget.AllViaServer, PhotonNetwork.LocalPlayer.ActorNumber);
@@ -112,6 +113,6 @@ public class ResourceManager : MonoBehaviourPun, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-       
+      
     }
 }

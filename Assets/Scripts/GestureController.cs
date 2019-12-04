@@ -117,10 +117,6 @@ public class GestureController : MonoBehaviour
         RenderSettings.skybox.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f, 1.0f));
         
     }
-    private void SetUpInputModule()
-    {
-        vRInputModule = GameObject.FindGameObjectWithTag("VRInputModule").GetComponent<VRInputModule>();
-    }
     private void LoadTheOtherFile()
     {
         if (gr.loadFromFile("Assets/GestureRecognition/GestureSet2.dat"))

@@ -19063,7 +19063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellCastingPoint: {fileID: 4615821214633062644}
-  BlueBlast: {fileID: 7517615193761686243, guid: 8d36d450871c16a4ca5a33cebc2dfd76,
+  BlueBlast: {fileID: 2098068299979516266, guid: 010f905b6a47b314aadd345e0fb71fb0,
     type: 3}
   ChargedPlasma: {fileID: 0}
   FireBolt: {fileID: 0}

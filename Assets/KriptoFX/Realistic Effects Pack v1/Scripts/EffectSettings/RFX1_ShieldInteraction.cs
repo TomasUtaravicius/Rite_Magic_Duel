@@ -15,7 +15,7 @@ public class RFX1_ShieldInteraction : MonoBehaviour
         {
             transformMotion.CollisionEnter += TransformMotion_CollisionEnter;
             coll = transformMotion.gameObject.AddComponent<SphereCollider>();
-            coll.radius = 0.1f;
+            coll.radius = 0.3f;
             coll.isTrigger = true;
         }
 

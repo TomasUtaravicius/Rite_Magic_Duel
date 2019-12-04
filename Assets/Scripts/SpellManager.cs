@@ -35,6 +35,19 @@ public class SpellManager : MonoBehaviour {
     
     private void Update()
     {
+        if(Input.GetMouseButtonDown(0) && photonView.IsMine)
+        {
+            if (resourceManager.mana >= BlueBlast.GetComponent<SB_Spell>().manaCost)
+            {
+                PhotonNetwork.Instantiate(BlueBlast.name, spellCastingPoint.transform.position+ new Vector3(0f,1.5f,0f), spellCastingPoint.transform.rotation, 0);
+                SetBufferedSpell(Spells.NULL);
+                resourceManager.ReduceMana(BlueBlast.GetComponent<SB_Spell>().manaCost);
+            }
+            else
+            {
+                NotEnoughMana();
+            }
+        }
         if(canCastSpells)
         {
             if((photonView.IsMine ||isLobbyMode) && vRInputModule.rightController.GetHairTriggerDown() && vRInputModule!=null)

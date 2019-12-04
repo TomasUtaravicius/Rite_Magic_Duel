@@ -30,7 +30,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2801116266182340211}
+  - {fileID: 2796501267954893270}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
@@ -87,18 +87,36 @@ MonoBehaviour:
   manaCost: 10
   hitEffectPrefabName: 
   spellSpeed: 15
---- !u!114 &1328692257786021651
+--- !u!114 &8392538813440523046
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2801116266182339862}
+  m_GameObject: {fileID: 2799827908850186880}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d86b6f49c2149194893b813a9c59a56a, type: 3}
+  m_Script: {fileID: 11500000, guid: 151e5fb4355af6c4ab88423606b59ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Distance: 30
+  Speed: 1
+  spellScript: {fileID: 6068554182120494162}
+  TimeDelay: 0
+  RandomMoveRadius: 0
+  RandomMoveSpeedScale: 0
+  Target: {fileID: 0}
+  CollidesWith:
+    serializedVersion: 2
+    m_Bits: 2304
+  EffectsOnCollision:
+  - {fileID: 145962, guid: a61618b17590c45429257dd0092ca327, type: 3}
+  CollisionOffset: 0
+  DestroyTimeDelay: 5
+  CollisionEffectInWorldSpace: 1
+  DeactivatedObjectsOnCollision: []
+  HUE: -1
+  CollidedInstances: []
 --- !u!1001 &2801116266182339914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -159,18 +177,24 @@ PrefabInstance:
       propertyPath: Spell
       value: 
       objectReference: {fileID: 6068554182120494162}
+    - target: {fileID: 114503623341167234, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7961978417226205844, guid: 4f14e37b24a0f9c41a81220f59ae87f6, type: 3}
+    - {fileID: 114503623341167234, guid: 4f14e37b24a0f9c41a81220f59ae87f6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4f14e37b24a0f9c41a81220f59ae87f6, type: 3}
---- !u!1 &2801116266182339862 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1748139164946814, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
+--- !u!4 &2796501267954893270 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4709693737692316, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
     type: 3}
   m_PrefabInstance: {fileID: 2801116266182339914}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2801116266182340211 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4709693737692316, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
+--- !u!1 &2799827908850186880 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1526951460247498, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
     type: 3}
   m_PrefabInstance: {fileID: 2801116266182339914}
   m_PrefabAsset: {fileID: 0}
