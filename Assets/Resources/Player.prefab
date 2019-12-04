@@ -14937,10 +14937,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb76bc7c58638e41bee5061428b2dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usePool: 0
   loadout:
     loadoutNumber: 0
     name: SpellLoadout-New
-    spellSlots: []
+    spells:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
 --- !u!1 &5318422003150183481
 GameObject:
   m_ObjectHideFlags: 0
@@ -19125,14 +19131,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellBook: {fileID: 5242161533002800267}
   spellCastingPoint: {fileID: 4615821214633062644}
-  BlueBlast: {fileID: 2098068299979516266, guid: 010f905b6a47b314aadd345e0fb71fb0,
-    type: 3}
-  ChargedPlasma: {fileID: 0}
-  FireBolt: {fileID: 0}
-  DarknessBlast: {fileID: 0}
-  ProtegoPrefab: {fileID: 5587369589994897140, guid: a4ec77e722d3c604ab4aef381195aad1,
-    type: 3}
-  RotationOfProtego: {fileID: 3226883260174997467}
   photonView: {fileID: 4340403609207380278}
   headTransform: {fileID: 8008809767061471572}
   canCastSpells: 1
