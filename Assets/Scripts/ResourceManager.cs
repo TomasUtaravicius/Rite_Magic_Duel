@@ -32,7 +32,7 @@ public class ResourceManager : MonoBehaviourPun, IPunObservable
             time -= interval;
 
             if (health < 100f)
-                health += 0.05f;
+                health += 0.01f;
             if (mana < 100f)
                 mana += 0.25f;
             UpdateUI();

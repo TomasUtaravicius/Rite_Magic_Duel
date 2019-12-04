@@ -15,12 +15,9 @@ public class AvatarRagdollController : MonoBehaviour
     {
         
     }
-    public void TakeDamage()
-    {
-
-    }
     public void TurnOffRagdoll()
     {
+
             for (int i = 0; i < collisionParts.Count; i++)
             {
                 collisionParts[i].GetComponent<Rigidbody>().detectCollisions = true;
