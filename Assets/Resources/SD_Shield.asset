@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0335ff6bcc3ad3843af7b6d1dbcb5688, type: 3}
-  m_Name: SD_Fireball
+  m_Name: SD_Shield
   m_EditorClassIdentifier: 
   buildReady: 1
-  spellName: Fireball
+  spellName: Charged shield
   spellSprite: {fileID: 0}
-  manaCost: 20
+  manaCost: 5
   health: 1
-  damage: 30
-  lifetime: 5
+  damage: 10
+  lifetime: 2
   feedback: 12
-  spellPrefab: {fileID: 7517615193761686243, guid: 8d36d450871c16a4ca5a33cebc2dfd76,
+  spellPrefab: {fileID: 5587369589994897140, guid: a4ec77e722d3c604ab4aef381195aad1,
     type: 3}
   spellScale: {x: 1, y: 1, z: 1}
   shouldTintSpell: 1
-  spellTint: {r: 1, g: 0.13339981, b: 0.10849059, a: 1}
-  spellSpeed: 20
+  spellTint: {r: 0.36822015, g: 0.6792453, b: 0, a: 1}
+  spellSpeed: 1
   hitEffectPrefab: {fileID: 6276298085916153618, guid: cc63bdf410295b844ba15b1aca144f93,
     type: 3}
   hitEffectScale: {x: 1, y: 1, z: 1}

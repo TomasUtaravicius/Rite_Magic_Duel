@@ -113,14 +113,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Distance: 30
   Speed: 1
-  spell: {fileID: 879138839219326165}
+  spellScript: {fileID: 879138839219326165}
   TimeDelay: 0
   RandomMoveRadius: 0
   RandomMoveSpeedScale: 0
   Target: {fileID: 0}
   CollidesWith:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2304
   EffectsOnCollision:
   - {fileID: 168890, guid: 2c936a8ea5b0042458c44a79a667c645, type: 3}
   CollisionOffset: 0
