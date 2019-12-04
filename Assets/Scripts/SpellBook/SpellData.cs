@@ -13,6 +13,9 @@ public class SpellData : ScriptableObject
 
     public Sprite spellSprite = null;
 
+    public bool requiresHeldCast = false;
+    public bool canChargeOnCast = false;
+
     [Min(0)] public float manaCost = 10;
 
     /// <summary> Amount of health the spell has </summary>

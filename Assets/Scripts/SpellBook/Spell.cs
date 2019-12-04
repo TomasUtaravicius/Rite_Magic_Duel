@@ -8,6 +8,7 @@ public class Spell : MonoBehaviourPun, IPunObservable
     protected string spellName = "";
 
     [SerializeField] private bool requiresHeldCast = false;
+    [SerializeField] private bool canChargeOnCast = false;
 
     /// <summary> Amount of health the spell has </summary>
     private float health = 10;
@@ -23,9 +24,10 @@ public class Spell : MonoBehaviourPun, IPunObservable
     public float spellSpeed = 10;
 
     /// <summary> A held cast spell requires the caster to hold the spell to keep it active and release to deactivate it </summary>
-    public bool RequiresHeldCast { get => requiresHeldCast;}
+    public bool RequiresHeldCast { get => requiresHeldCast; }
+    public bool CanChargeOnCast { get => canChargeOnCast; }
 
-   
+
 
     public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -38,10 +40,14 @@ public class Spell : MonoBehaviourPun, IPunObservable
     { }
 
 
-    public void SetSpellAttributes(string spellName, float health = 10, float damage = 10, float lifeTime = 0, float spellSpeed = 0)
+    public void SetSpellAttributes(string spellName, bool requiresHeldCast = false, bool canChargeOnCast = false, float health = 10, float damage = 10, float lifeTime = 0, float spellSpeed = 0)
     {
         gameObject.name = spellName;
         this.spellName = spellName;
+
+        this.requiresHeldCast = requiresHeldCast;
+        this.canChargeOnCast = canChargeOnCast;
+
         this.health = health;
         this.damage = damage;
         this.lifeTime = lifeTime;
