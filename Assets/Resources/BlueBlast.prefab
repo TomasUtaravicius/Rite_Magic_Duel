@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiresHeldCast: 0
+  canChargeOnCast: 0
   damage: 10
   manaCost: 0
   spellSpeed: 10
