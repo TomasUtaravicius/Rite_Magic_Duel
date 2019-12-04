@@ -1,8 +1,5 @@
 ﻿using Photon.Pun;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-using static GestureController;
 
 [RequireComponent(typeof(SpellPool))]
 public class SpellBook : MonoBehaviour
@@ -24,9 +21,9 @@ public class SpellBook : MonoBehaviour
 
     private void TestLoadout()
     {
-        List<SpellData> spells = loadout.spells;
+        SpellData[] spells = loadout.spells;
 
-        for (int i = 0; i < spells.Count; i++)
+        for (int i = 0; i < spells.Length; i++)
             if (spells[i])
             {
                 Debug.Log("Spell spawned");
@@ -38,15 +35,15 @@ public class SpellBook : MonoBehaviour
 
     private void PoolSpells()
     {
-        List<SpellData> spells = loadout.spells;
+        SpellData[] spelldata = loadout.spells;
 
 
-        for (int i = 0; i < spells.Count; i++)
-            if (spells[i])
+        for (int i = 0; i < spelldata.Length; i++)
+            if (spelldata[i])
             {
                 GameObject[] spawnedSpells = new GameObject[5];
                 for (int j = 0; j < 5; j++)
-                    spawnedSpells[i] = SpawnSpell(spells[i], transform).gameObject;
+                    spawnedSpells[i] = SpawnSpell(spelldata[i], transform).gameObject;
 
                 spellPool.DestroyGroup(spawnedSpells);
                 Debug.Log("Spell pooled");

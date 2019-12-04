@@ -14,35 +14,32 @@ public class EditLoadoutUIPanel : MonoBehaviour
 
 
     [Header("Loadout Panel")]
-    [SerializeField] GameObject loadoutPanel = null;
     [SerializeField] UIStepper loadoutStepper = null;
-    [SerializeField] List<SpellUIButton> loadoutSpellButtons = null;
+    [SerializeField] Transform loadoutSpellSlotParent = null;
+    [SerializeField] SpellUIButton[] loadoutSpellButtons = null;
 
     [SerializeField] ButtonTransitioner saveButton = null;
     [SerializeField] ButtonTransitioner resetButton = null;
 
-    private void Start()
+
+
+    private void Awake()
     {
-        if(spellButtonPrefab)
-        {
-            //Spell panel
-            SpellData[] sd = LoadoutManager.LoadAllSpellData();
-            spellButtons = new List<SpellUIButton>(sd.Length);
+        loadoutSpellButtons = new SpellUIButton[SBLoadout.DEFAULT_LOADOUT_SPELL_COUNT];
+        for (int i = 0; i < loadoutSpellButtons.Length; i++)
+            loadoutSpellButtons[i] = Instantiate(spellButtonPrefab, loadoutSpellSlotParent).GetComponent<SpellUIButton>();
 
-            for (int i = 0; i < sd.Length; i++)
+
+        SpellData[] spellArray = LoadoutManager.LoadAllSpellData();
+        spellButtons = new List<SpellUIButton>(spellArray.Length);
+
+        for (int i = 0; i < spellArray.Length; i++)
+            if (spellArray[i].buildReady)
             {
-                if (sd[i].buildReady)
-                {
-                    spellButtons.Add(Instantiate(spellButtonPrefab, spellPanel.transform).GetComponent<SpellUIButton>());
-                    spellButtons[spellButtons.Count-1].SpellData = sd[i];
-                    spellButtons[spellButtons.Count-1].buttonNumber = spellButtons.Count-1;
-                    spellButtons[spellButtons.Count-1].OnSpellSelected += HandleSpellSelected;
-                }
+                spellButtons.Add(Instantiate(spellButtonPrefab, spellPanel.transform).GetComponent<SpellUIButton>());
+                spellButtons[spellButtons.Count - 1].SpellData = spellArray[i];
+                spellButtons[spellButtons.Count - 1].buttonNumber = spellButtons.Count - 1;
             }
-
-            //Loadout panel
-            GetLoadout(1);
-        }
     }
 
     private void OnEnable()
@@ -55,6 +52,13 @@ public class EditLoadoutUIPanel : MonoBehaviour
 
         if (saveButton) saveButton.buttonClick.AddListener(SaveLoadout);
         if (resetButton) resetButton.buttonClick.AddListener(ResetLoadout);
+
+
+        for (int i = 0; i < loadoutSpellButtons.Length; i++)
+            loadoutSpellButtons[i].OnSpellSelected += HandleSpellSlotSelected;
+
+        for (int i = 0; i < spellButtons.Count; i++)
+            spellButtons[i].OnSpellSelected += HandleSpellSelected;
     }
 
     private void OnDisable()
@@ -64,59 +68,38 @@ public class EditLoadoutUIPanel : MonoBehaviour
 
         if (saveButton) saveButton.buttonClick.RemoveListener(SaveLoadout);
         if (resetButton) resetButton.buttonClick.RemoveListener(ResetLoadout);
+
+        for (int i = 0; i < loadoutSpellButtons.Length; i++)
+            loadoutSpellButtons[i].OnSpellSelected -= HandleSpellSlotSelected;
+
+        for (int i = 0; i < spellButtons.Count; i++)
+            spellButtons[i].OnSpellSelected -= HandleSpellSelected;
     }
 
     private void GetLoadout(int index)
     {
-        SBLoadout currentSpellLoadout = LoadoutManager.LoadLoadout(index);
+        currentSpellLoadout = LoadoutManager.LoadLoadout(index);
 
-        int newLoadoutSpellCount = 0;
-        if(currentSpellLoadout != null) newLoadoutSpellCount = currentSpellLoadout.SpellCount;
-
-        //Update loadout spell buttons count
-        if (loadoutSpellButtons.Count > newLoadoutSpellCount)
+        //Update loadout spell buttons spell data and number in list
+        for (int i = 0; i < currentSpellLoadout.SpellCount; i++)
         {
-            SpellUIButton temp;
-            for (int i = loadoutSpellButtons.Count - 1; i >= 0; i--)
-            {
-                temp = loadoutSpellButtons[i];
-                temp.OnSpellSelected -= HandleSpellSelected;
-                loadoutSpellButtons.RemoveAt(i);
-                Destroy(temp.gameObject);
-            }
-        }
-        else if (loadoutSpellButtons.Count < newLoadoutSpellCount)
-        {
-            for (int i = loadoutSpellButtons.Count; i < newLoadoutSpellCount; i++)
-                loadoutSpellButtons.Add(Instantiate(spellButtonPrefab, spellPanel.transform).GetComponent<SpellUIButton>());
+            loadoutSpellButtons[i].SpellData = currentSpellLoadout.spells[i];
+            loadoutSpellButtons[i].buttonNumber = i;
         }
 
-        if(newLoadoutSpellCount > 0)
+
+        //Disable used spells on the spell panel
+        bool isUsed;
+        for (int i = 0; i < spellButtons.Count; i++)
         {
-            //Update loadout spell buttons spell data and number in list
-            for (int i = 0; i < newLoadoutSpellCount; i++)
-            {
-                loadoutSpellButtons[i].SpellData = currentSpellLoadout.spells[i];
-                loadoutSpellButtons[i].buttonNumber = i;
-            }
+            isUsed = false;
 
+            for (int j = 0; j < loadoutSpellButtons.Length; j++)
+                if (spellButtons[i].SpellData == loadoutSpellButtons[j].SpellData)
+                    isUsed = true;
 
-            //Disable used spells on the spell panel
-            bool isUsed;
-            for (int i = 0; i < spellButtons.Count; i++)
-            {
-                isUsed = false;
-
-                for (int j = 0; i < loadoutSpellButtons.Count; j++)
-                    if (spellButtons[i].SpellData == loadoutSpellButtons[j].SpellData)
-                        isUsed = true;
-
-                spellButtons[i].enabled = !isUsed;
-            }
+            spellButtons[i].enabled = !isUsed;
         }
-        else //enable all buttons
-            for (int i = 0; i < spellButtons.Count; i++)
-                spellButtons[i].enabled = true;
     }
 
     /// <summary> Enable selecting the removed spell and clear the spell slot at buttonNo index </summary>
@@ -136,12 +119,13 @@ public class EditLoadoutUIPanel : MonoBehaviour
     private void HandleSpellSelected(int buttonNo)
     {
         //TODO add spell to first empty spell slot in loadout
-        for (int i = 0; i < loadoutSpellButtons.Count; i++)
+        for (int i = 0; i < loadoutSpellButtons.Length; i++)
         {
             if(loadoutSpellButtons[i].SpellData == null)
             {
                 loadoutSpellButtons[i].SpellData = spellButtons[buttonNo].SpellData;
                 spellButtons[buttonNo].enabled = false;
+                return;
             }
         }
     }
@@ -153,8 +137,8 @@ public class EditLoadoutUIPanel : MonoBehaviour
     private void SaveLoadout()
     {
         SBLoadout newLoadout = new SBLoadout();
-        for (int i = 0; i < loadoutSpellButtons.Count; i++)
-            newLoadout.spells.Add(loadoutSpellButtons[i].SpellData);
+        for (int i = 0; i < newLoadout.spells.Length; i++)
+            newLoadout.spells[i] = loadoutSpellButtons[i].SpellData;
 
         LoadoutManager.SaveLoadout(newLoadout, loadoutStepper.CurrentValue);
         Debug.Log("Saved new loadout");

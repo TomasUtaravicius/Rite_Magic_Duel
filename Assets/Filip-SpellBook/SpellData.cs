@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[System.Serializable, CreateAssetMenu(fileName = "SpellData", menuName = "Rite/Spell Data", order = 0)]
+[System.Serializable, CreateAssetMenu(fileName = "SpellDataAsset", menuName = "Rite/Spell Data Asset", order = 0)]
 public class SpellData : ScriptableObject
 {
 //#if UNITY_EDITOR
@@ -64,3 +64,11 @@ public class SpellData : ScriptableObject
     [Tooltip("Sound used by the SpellEffect script")]
     public AudioClip hitEffectSound;
 }
+
+/*
+[System.Serializable, CreateAssetMenu(fileName = "SpellDataAsset", menuName = "Rite/Spell Data Asset", order = 0)]
+public class SpellDataAsset : ScriptableObject
+{
+    public SpellData spellData;
+}
+*/
