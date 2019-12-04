@@ -43,13 +43,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 430534422712864713}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cee00b59ba08a304a91f04abb97b84df, type: 3}
+  m_Script: {fileID: 11500000, guid: 4936af9d258219f4cb88e98e858b6c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 40
-  manaCost: 30
-  hitEffectPrefabName: 
-  spellSpeed: 15
+  requiresHeldCast: 0
+  damage: 10
+  manaCost: 0
+  spellSpeed: 10
 --- !u!114 &3423726609896685638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Distance: 30
   Speed: 1
-  spellScript: {fileID: 879138839219326165}
+  spell: {fileID: 879138839219326165}
   TimeDelay: 0
   RandomMoveRadius: 0
   RandomMoveSpeedScale: 0
@@ -194,7 +194,13 @@ PrefabInstance:
       propertyPath: Spell
       value: 
       objectReference: {fileID: 879138839219326165}
-    m_RemovedComponents: []
+    - target: {fileID: 114303165723437324, guid: 6209dfa15219d234f9737769610fffc9,
+        type: 3}
+      propertyPath: spell
+      value: 
+      objectReference: {fileID: 879138839219326165}
+    m_RemovedComponents:
+    - {fileID: 114303165723437324, guid: 6209dfa15219d234f9737769610fffc9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6209dfa15219d234f9737769610fffc9, type: 3}
 --- !u!4 &7475958956138356252 stripped
 Transform:

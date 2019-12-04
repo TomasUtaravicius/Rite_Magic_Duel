@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 
-[System.Serializable, CreateAssetMenu(fileName = "SpellData", menuName = "Rite/Spell Data", order = 0)]
+[System.Serializable, CreateAssetMenu(fileName = "SpellDataAsset", menuName = "Rite/Spell Data Asset", order = 0)]
 public class SpellData : ScriptableObject
 {
-    /*public bool hasHit;
-    public float manaCost;*/
-    
-    
-    
+//#if UNITY_EDITOR
+    /// <summary> Will the spell be used in build or hidden in game </summary>
+    public bool buildReady;
+//#endif
+
     [Header("Spell")]
     public string spellName = "New Spell";
+
+    public Sprite spellSprite = null;
 
     [Min(0)] public float manaCost = 10;
 
@@ -62,3 +64,11 @@ public class SpellData : ScriptableObject
     [Tooltip("Sound used by the SpellEffect script")]
     public AudioClip hitEffectSound;
 }
+
+/*
+[System.Serializable, CreateAssetMenu(fileName = "SpellDataAsset", menuName = "Rite/Spell Data Asset", order = 0)]
+public class SpellDataAsset : ScriptableObject
+{
+    public SpellData spellData;
+}
+*/

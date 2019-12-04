@@ -10,6 +10,7 @@ public class ButtonTransitioner : MonoBehaviour,IPointerEnterHandler,IPointerExi
     public Color32 m_NormalColor;
     public Color32 m_HoverColor;
     public Color32 m_DownColor;
+    public Color32 m_DisableColor;
     public UnityEvent buttonClick;
     [SerializeField]
     private bool isToggleButton;
@@ -21,21 +22,35 @@ public class ButtonTransitioner : MonoBehaviour,IPointerEnterHandler,IPointerExi
     private Keyboard keyboard;
     private void Awake()
     {
+        buttonClick.AddListener(HandleOnButtonClick);
         m_Image = GetComponent<Image>();
     }
+
+    private void OnEnable()
+    {
+        m_Image.color = m_NormalColor;
+    }
+
+    private void OnDisable()
+    {
+        m_Image.color = m_DisableColor;
+    }
+
+
     public void OnInputFieldToggled()
     {
 
     }
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Pointer Click");
+        //Debug.Log("Pointer Click");
         m_Image.color = m_HoverColor;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.LogError("Pointer Down");
+        //Debug.Log("Pointer Down");
         m_Image.color = m_DownColor;
         buttonClick.Invoke();
         
@@ -66,25 +81,22 @@ public class ButtonTransitioner : MonoBehaviour,IPointerEnterHandler,IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Pointer Enter");
+        //Debug.Log("Pointer Enter");
         m_Image.color = m_HoverColor;
 
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Pointer Exit");
+        //Debug.Log("Pointer Exit");
         m_Image.color = m_NormalColor;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("Pointer Up");
+        //Debug.Log("Pointer Up");
         m_Image.color = m_NormalColor;
-
-
-
     }
 
-   
+    protected virtual void HandleOnButtonClick() { }
 }

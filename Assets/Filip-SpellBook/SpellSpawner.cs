@@ -14,26 +14,13 @@ public class SpellSpawner : MonoBehaviour
 
             GameObject spellInstance = Instantiate(spellData.spellPrefab, transform.position, transform.rotation, null);
 
-            SB_Spell spell = spellInstance.GetComponent<SB_Spell>();
+            Spell spell = spellInstance.GetComponent<Spell>();
             if (spell)
             {
                 Debug.Log("Spell found");
 
-                spell.SetSpellAttributes(spellData.spellName, spellData.hitEffectPrefab.name, spellData.health, spellData.damage, spellData.lifetime);
+                spell.SetSpellAttributes(spellData.spellName, spellData.health, spellData.damage, spellData.lifetime, spellData.spellSpeed);
                 spell.SetSpellVisuals(spellData.shouldTintSpell, spellData.spellTint);
-
-                switch (spell.SpellType)
-                {
-                    case SpellType.None:
-                        break;
-
-                    case SpellType.Projectile:
-                        ((Projectile)spell).spellSpeed = spellData.spellSpeed;
-                        break;
-
-                    case SpellType.Shield:
-                        break;
-                }
             }
         }
         else

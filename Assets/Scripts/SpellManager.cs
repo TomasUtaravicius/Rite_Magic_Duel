@@ -1,17 +1,12 @@
 ﻿using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using static GestureController;
 
-
-public class SpellManager : MonoBehaviour {
+public class SpellManager : MonoBehaviour
+{
+    [SerializeField] private SpellBook spellBook;
     public GameObject spellCastingPoint;
-    public GameObject BlueBlast;
-    public GameObject ChargedPlasma;
-    public GameObject FireBolt;
-    public GameObject DarknessBlast;
-    public GameObject ProtegoPrefab;
-    public GameObject RotationOfProtego;
+
     public PhotonView photonView;
     public Transform headTransform;
     //public SteamVR_Action_Boolean gripPressed;
@@ -21,154 +16,102 @@ public class SpellManager : MonoBehaviour {
     public bool canCastSpells;
     public bool isLobbyMode;
     public VRInputModule vRInputModule;
-    [HideInInspector]
-    public enum Spells {BLUELIGHTNING,CHARGEDPLASMA,SHIELD,FIREBOLT,DARKNESSBLAST,NULL };
-    public Spells bufferedSpell = Spells.NULL;
-    private GameObject currentShield;
-    private bool spellInitiated;
-    public ResourceManager resourceManager;
+    public Gesture bufferedGesture = Gesture.NONE;
+    private GameObject heldSpell;
+    private bool heldCasting;
+    [SerializeField]
+    private ResourceManager resourceManager;
     private void Start()
     {
 
         
     }
-    
+
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0) && photonView.IsMine)
+        if (heldCasting)
         {
-            if (resourceManager.mana >= BlueBlast.GetComponent<SB_Spell>().manaCost)
+            if (vRInputModule.rightController.GetHairTriggerUp())
             {
-                PhotonNetwork.Instantiate(BlueBlast.name, spellCastingPoint.transform.position+ new Vector3(0f,1.5f,0f), spellCastingPoint.transform.rotation, 0);
-                SetBufferedSpell(Spells.NULL);
-                resourceManager.ReduceMana(BlueBlast.GetComponent<SB_Spell>().manaCost);
+                SetBufferedGesture(Gesture.NONE);
+                heldCasting = false;
+
+                //TODO Give back to pool
+                heldSpell?.GetComponent<ShieldManager>().photonView.RPC("TurnOffShield", RpcTarget.AllBufferedViaServer);
+                heldSpell = null;
+            }
+        }
+
+        if (canCastSpells)
+        {
+            if ((photonView.IsMine || isLobbyMode) && vRInputModule.rightController.GetHairTriggerDown())
+            {
+                CastSpell(bufferedGesture);
+            }
+            /*
+            if (spellInitiated)
+            {
+                CastSpell(bufferedGesture);
+            }
+            */
+        }
+
+    }
+
+    [PunRPC]
+    public void CastSpell(Gesture gesture)
+    { CastSpell((int)gesture); }
+
+    [PunRPC]
+    public void CastSpell(int gestureIdx)
+    {
+        SpellData spellData = spellBook.GetSpellData(gestureIdx);
+
+        if (spellData)
+        {
+            if (spellData.manaCost < resourceManager.mana)
+            {
+                GameObject spellInstance = spellBook.CastSpell(gestureIdx, spellCastingPoint.transform.position, spellCastingPoint.transform.rotation);
+                resourceManager.ReduceMana(spellBook.GetSpellData(gestureIdx).manaCost);
+                bufferedGesture = Gesture.NONE;
+                Spell spell = spellInstance.GetComponent<Spell>();
+
+                if(spell && spell.RequiresHeldCast)
+                {
+                    //TODO disable casting and look for trigger up event to disable spell
+                    heldSpell = spellInstance;
+                    heldCasting = true;
+                }
+                else
+                {
+                    SetBufferedGesture(Gesture.NONE);
+                    return;
+                }
             }
             else
-            {
                 NotEnoughMana();
-            }
         }
-        if(canCastSpells)
-        {
-            if((photonView.IsMine ||isLobbyMode) && vRInputModule.rightController.GetHairTriggerDown() && vRInputModule!=null)
-            {
-               
-                    if (bufferedSpell == Spells.BLUELIGHTNING)
-                    {
-                        CastBlueBlast();
-                    }
-                    if (bufferedSpell == Spells.SHIELD)
-                    {
-                        CastShield();
-                    }
-
-
-           }    
-            if(spellInitiated)
-            {
-                if (bufferedSpell == Spells.BLUELIGHTNING)
-                {
-                    CastBlueBlast();
-                }
-                if (bufferedSpell == Spells.SHIELD)
-                {
-                    CastShield();
-                }
-            }
-        }
-        
+        else
+            Debug.LogWarning("No spell data found for " + ((Gesture)gestureIdx).ToString() + " gesture!");
     }
-    public void SetBufferedSpell(Spells value)
+
+    public void SetBufferedGesture(Gesture value)
     {
-        bufferedSpell = value;
+        bufferedGesture = value;
         OnSpellValueChanged?.Invoke();
-    }
-    
-    [PunRPC]
-    public void CastBlueBlast()
-    {
-        //Instantiate a spell over the network.
-        if (resourceManager.mana>= BlueBlast.GetComponent<SB_Spell>().manaCost)
-        {
-            PhotonNetwork.Instantiate(BlueBlast.name, spellCastingPoint.transform.position, spellCastingPoint.transform.rotation, 0);
-            SetBufferedSpell(Spells.NULL);
-            resourceManager.ReduceMana(BlueBlast.GetComponent<SB_Spell>().manaCost);
-        }
-        else
-        {
-            NotEnoughMana();
-        }
-       
-       
-        
-    }
-    public void CastChargedPlasma()
-    {
-        //Instantiate a spell over the network.
-        if (resourceManager.mana >= BlueBlast.GetComponent<SB_Spell>().manaCost)
-        {
-            PhotonNetwork.Instantiate(BlueBlast.name, spellCastingPoint.transform.position, spellCastingPoint.transform.rotation, 0);
-            SetBufferedSpell(Spells.NULL);
-            resourceManager.ReduceMana(BlueBlast.GetComponent<SB_Spell>().manaCost);
-        }
-        else
-        {
-            NotEnoughMana();
-        }
-
-
-
-    }
-    public void CastFireBolt()
-    {
-        //Instantiate a spell over the network.
-        if (resourceManager.mana >= BlueBlast.GetComponent<SB_Spell>().manaCost)
-        {
-            PhotonNetwork.Instantiate(BlueBlast.name, spellCastingPoint.transform.position, spellCastingPoint.transform.rotation, 0);
-            SetBufferedSpell(Spells.NULL);
-            resourceManager.ReduceMana(BlueBlast.GetComponent<SB_Spell>().manaCost);
-        }
-        else
-        {
-            NotEnoughMana();
-        }
-
-
-
-    }
-    public void CastDarknessBlast()
-    {
-        //Instantiate a spell over the network.
-        if (resourceManager.mana >= BlueBlast.GetComponent<SB_Spell>().manaCost)
-        {
-            PhotonNetwork.Instantiate(BlueBlast.name, spellCastingPoint.transform.position, spellCastingPoint.transform.rotation, 0);
-            SetBufferedSpell(Spells.NULL);
-            resourceManager.ReduceMana(BlueBlast.GetComponent<SB_Spell>().manaCost);
-        }
-        else
-        {
-            NotEnoughMana();
-        }
-
-
-
-    }
-    public void CastSpell(Spell spell)
-    {
-
     }
 
     [PunRPC]
     public void CastShield()
     {
-        
-        if(resourceManager.mana>=ProtegoPrefab.GetComponent<ShieldManager>().manaCost && !spellInitiated)
+        /*
+        if (resourceManager.mana >= ProtegoPrefab.GetComponent<ShieldManager>().manaCost && !spellInitiated)
         {
             spellInitiated = true;
-            currentShield=PhotonNetwork.Instantiate(ProtegoPrefab.name, spellCastingPoint.transform.position, RotationOfProtego.transform.rotation, 0);
+            currentShield = PhotonNetwork.Instantiate(ProtegoPrefab.name, spellCastingPoint.transform.position, RotationOfProtego.transform.rotation, 0);
             resourceManager.mana -= ProtegoPrefab.GetComponent<ShieldManager>().manaCost;
         }
-        if(vRInputModule.rightController.GetHairTriggerUp())
+        if (vRInputModule.rightController.GetHairTriggerUp())
         {
             if (!currentShield)
             {
@@ -185,15 +128,15 @@ public class SpellManager : MonoBehaviour {
                 spellInitiated = false;
                 currentShield = null;
             }
-                
+
         }
-        
-        
+
+
         else
         {
             NotEnoughMana();
         }
-        
+        */
 
     }
     private void NotEnoughMana()

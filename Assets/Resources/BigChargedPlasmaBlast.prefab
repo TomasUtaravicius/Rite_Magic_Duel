@@ -43,13 +43,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1781909801254948373}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cee00b59ba08a304a91f04abb97b84df, type: 3}
+  m_Script: {fileID: 11500000, guid: 4936af9d258219f4cb88e98e858b6c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 60
-  manaCost: 30
-  hitEffectPrefabName: 
-  spellSpeed: 20
+  requiresHeldCast: 0
+  damage: 10
+  manaCost: 0
+  spellSpeed: 10
 --- !u!114 &4602252637847665194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UseCollisionDetect: 1
-  Spell: {fileID: 1781909801254948375}
+  spell: {fileID: 0}
   MaxDistnace: -1
   Mass: 1
   Speed: 10
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Distance: 30
   Speed: 1
-  spellScript: {fileID: 1781909801254948375}
+  spell: {fileID: 0}
   TimeDelay: 0
   RandomMoveRadius: 0
   RandomMoveSpeedScale: 0
@@ -169,10 +169,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1781909801254948372}
     m_Modifications:
-    - target: {fileID: 1111292484735420, guid: 75a8b5dd0b15bb14284ccdcac1e3a283, type: 3}
-      propertyPath: m_Name
-      value: Effect16
-      objectReference: {fileID: 0}
     - target: {fileID: 4082758504687966, guid: 75a8b5dd0b15bb14284ccdcac1e3a283, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -216,6 +212,10 @@ PrefabInstance:
     - target: {fileID: 4082758504687966, guid: 75a8b5dd0b15bb14284ccdcac1e3a283, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111292484735420, guid: 75a8b5dd0b15bb14284ccdcac1e3a283, type: 3}
+      propertyPath: m_Name
+      value: Effect16
       objectReference: {fileID: 0}
     - target: {fileID: 114865770840058642, guid: 75a8b5dd0b15bb14284ccdcac1e3a283,
         type: 3}

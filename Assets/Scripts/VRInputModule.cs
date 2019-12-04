@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using Valve.VR;
 
@@ -35,7 +33,7 @@ public class VRInputModule : BaseInputModule
         {
             if (rightController.GetPressDown(EVRButtonId.k_EButton_SteamVR_Trigger) || Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Debug.Log("Press");
+                //Debug.Log("Press");
                 ProcessPress(m_Data);
 
             }
@@ -49,13 +47,7 @@ public class VRInputModule : BaseInputModule
     }
     private void Update()
     {
-        if(rightController!=null)
-        {
-            if (rightController.GetHairTriggerUp())
-            {
-                Debug.LogError("Right controller trigger press up");
-            }
-        }
+
        
       
     }

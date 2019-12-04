@@ -9,7 +9,7 @@ public class RFX4_RaycastCollision : MonoBehaviour
     public GameObject[] Effects;
     public float Offset = 0;
     public float EnableTimeDelay = 0;
-    public Projectile Spell;
+    public Spell spell;
     public float DestroyTime = 3;
     public bool UsePivotPosition;
     public bool UseNormalRotation = true;

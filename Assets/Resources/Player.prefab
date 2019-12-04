@@ -14881,6 +14881,72 @@ Transform:
   m_Father: {fileID: 4466410788190373135}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5251547274223122295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4627452373178483580}
+  - component: {fileID: 4850329361720979411}
+  - component: {fileID: 5242161533002800267}
+  m_Layer: 0
+  m_Name: Spell Book
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4627452373178483580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5251547274223122295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5209538912307061516}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4850329361720979411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5251547274223122295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6503a09508e721c4aaecfd7e29e55364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5242161533002800267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5251547274223122295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb76bc7c58638e41bee5061428b2dfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usePool: 0
+  loadout:
+    loadoutNumber: 0
+    name: SpellLoadout-New
+    spells:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
 --- !u!1 &5318422003150183481
 GameObject:
   m_ObjectHideFlags: 0
@@ -19046,7 +19112,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4627452373178483580}
   m_Father: {fileID: 801310625796769215}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19062,21 +19129,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73cdb1c871a5bc242b4d5ba524b2d2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellBook: {fileID: 5242161533002800267}
   spellCastingPoint: {fileID: 4615821214633062644}
-  BlueBlast: {fileID: 2098068299979516266, guid: 010f905b6a47b314aadd345e0fb71fb0,
-    type: 3}
-  ChargedPlasma: {fileID: 0}
-  FireBolt: {fileID: 0}
-  DarknessBlast: {fileID: 0}
-  ProtegoPrefab: {fileID: 5587369589994897140, guid: a4ec77e722d3c604ab4aef381195aad1,
-    type: 3}
-  RotationOfProtego: {fileID: 3226883260174997467}
   photonView: {fileID: 4340403609207380278}
   headTransform: {fileID: 8008809767061471572}
   canCastSpells: 1
   isLobbyMode: 0
   vRInputModule: {fileID: 0}
-  bufferedSpell: 5
+  bufferedGesture: 5
   resourceManager: {fileID: 7817320785248556322}
 --- !u!114 &377918233460296265
 MonoBehaviour:

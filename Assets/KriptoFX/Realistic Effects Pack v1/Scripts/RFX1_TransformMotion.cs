@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
@@ -8,7 +7,7 @@ public class RFX1_TransformMotion : MonoBehaviour
 {
     public float Distance = 30;
     public float Speed = 1;
-    public Projectile spellScript;
+    public Spell spellScript;
     //public float Dampeen = 0;
     //public float MinSpeed = 1;
     public float TimeDelay = 0;

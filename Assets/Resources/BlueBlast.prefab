@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2095956264927422450}
+  - component: {fileID: 5804017300122083209}
   - component: {fileID: 2057344123743917680}
   - component: {fileID: 2058079496491701074}
-  - component: {fileID: 6068554182120494162}
   m_Layer: 0
   m_Name: BlueBlast
   m_TagString: OffensiveSpell
@@ -34,6 +34,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
+--- !u!114 &5804017300122083209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098068299979516266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4936af9d258219f4cb88e98e858b6c7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiresHeldCast: 0
+  damage: 10
+  manaCost: 0
+  spellSpeed: 10
 --- !u!114 &2057344123743917680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,22 +87,6 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
---- !u!114 &6068554182120494162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2098068299979516266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55fa643032228f44793cc2205aee8840, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 20
-  manaCost: 10
-  hitEffectPrefabName: 
-  spellSpeed: 15
 --- !u!114 &8392538813440523046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Distance: 30
   Speed: 1
-  spellScript: {fileID: 6068554182120494162}
+  spellScript: {fileID: 5804017300122083209}
   TimeDelay: 0
   RandomMoveRadius: 0
   RandomMoveSpeedScale: 0
@@ -176,7 +176,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Spell
       value: 
-      objectReference: {fileID: 6068554182120494162}
+      objectReference: {fileID: 0}
     - target: {fileID: 114503623341167234, guid: 4f14e37b24a0f9c41a81220f59ae87f6,
         type: 3}
       propertyPath: m_Enabled
