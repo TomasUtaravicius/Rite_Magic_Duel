@@ -7,7 +7,7 @@ public class RFX1_TransformMotion : MonoBehaviour
 {
     public float Distance = 30;
     public float Speed = 1;
-    public Spell spell;
+    public Spell spellScript;
     //public float Dampeen = 0;
     //public float MinSpeed = 1;
     public float TimeDelay = 0;
@@ -113,14 +113,14 @@ public class RFX1_TransformMotion : MonoBehaviour
             //currentSpeed = Mathf.Clamp(currentSpeed - Speed*Dampeen*Time.deltaTime, MinSpeed, Speed);
             if (Target == null)
             {
-                var currentForwardVector = (Vector3.forward + randomOffset)* spell.spellSpeed * Time.deltaTime;
+                var currentForwardVector = (Vector3.forward + randomOffset)* spellScript.spellSpeed * Time.deltaTime;
                 frameMoveOffset = t.localRotation*currentForwardVector;
                 frameMoveOffsetWorld = startQuaternion*currentForwardVector;
             }
             else
             {
                 var forwardVec = (targetT.position - t.position).normalized;
-                var currentForwardVector = (forwardVec + randomOffset) * spell.spellSpeed * Time.deltaTime;
+                var currentForwardVector = (forwardVec + randomOffset) * spellScript.spellSpeed * Time.deltaTime;
                 frameMoveOffset = currentForwardVector;
                 frameMoveOffsetWorld = currentForwardVector;
             }
