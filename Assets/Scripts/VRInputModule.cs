@@ -33,7 +33,7 @@ public class VRInputModule : BaseInputModule
         {
             if (rightController.GetPressDown(EVRButtonId.k_EButton_SteamVR_Trigger) || Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Debug.Log("Press");
+                //Debug.Log("Press");
                 ProcessPress(m_Data);
 
             }

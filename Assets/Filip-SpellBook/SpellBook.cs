@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpellBook : MonoBehaviour
 {
     private SpellPool spellPool;
+    [SerializeField] bool usePool = true;
     [SerializeField] SBLoadout loadout = null;
 
 
@@ -16,7 +17,7 @@ public class SpellBook : MonoBehaviour
         Debug.Log(loadout.ToString());
 
         //TestLoadout();
-        PoolSpells();
+        if(usePool) PoolSpells();
     }
 
     private void TestLoadout()
@@ -27,7 +28,7 @@ public class SpellBook : MonoBehaviour
             if (spells[i])
             {
                 Debug.Log("Spell spawned");
-                SpawnSpell(spells[i], transform).FireSpell();
+                SpawnSpell(spells[i], transform.position, transform.rotation).FireSpell();
             }
             else
                 Debug.LogWarning("Spell " + (i + 1) + " is null");
@@ -43,7 +44,7 @@ public class SpellBook : MonoBehaviour
             {
                 GameObject[] spawnedSpells = new GameObject[5];
                 for (int j = 0; j < 5; j++)
-                    spawnedSpells[i] = SpawnSpell(spelldata[i], transform).gameObject;
+                    spawnedSpells[i] = SpawnSpell(spelldata[i], transform.position, transform.rotation).gameObject;
 
                 spellPool.DestroyGroup(spawnedSpells);
                 Debug.Log("Spell pooled");
@@ -52,10 +53,10 @@ public class SpellBook : MonoBehaviour
                 Debug.LogWarning("Spell " + (i + 1) + " is null");
     }
 
-    private Spell SpawnSpell(SpellData spellData, Transform spawnTransform)
+    private Spell SpawnSpell(SpellData spellData, Vector3 spawnPosition, Quaternion spawnRotation)
     {
         GameObject spellInstance;
-        spellInstance = PhotonNetwork.Instantiate(spellData.spellPrefab.name, spawnTransform.position, spawnTransform.rotation, 0);
+        spellInstance = PhotonNetwork.Instantiate(spellData.spellPrefab.name, spawnPosition, spawnRotation, 0);
         spellInstance.name = spellData.spellName;
 
         Spell spell = spellInstance.GetComponent<Spell>();
@@ -93,10 +94,15 @@ public class SpellBook : MonoBehaviour
 
     public GameObject CastSpell(int gestureIdx, Vector3 position, Quaternion rotation)
     {
-        SpellData data = GetSpellData(gestureIdx);
+        SpellData spellData = GetSpellData(gestureIdx);
 
-        if (data)
-            return spellPool.Instantiate(data.spellName, position, rotation);
+        if (spellData)
+        {
+            if (usePool)
+                return spellPool.Instantiate(spellData.spellName, position, rotation);
+            else
+                return SpawnSpell(spellData, position, rotation).gameObject;
+        }
         else
             return null;
     }

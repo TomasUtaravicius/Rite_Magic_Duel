@@ -32,7 +32,7 @@ public class LoadoutManager : MonoBehaviour
 
     public static void SetPreferedLoadout(int i)
     {
-        Debug.Log("Selected Loadout " + i);
+        DebugLog(LogState.Log, "Selected Loadout " + i);
         PlayerPrefs.SetInt("SelectedLoadout", i);
     }
 
@@ -45,13 +45,13 @@ public class LoadoutManager : MonoBehaviour
     {
         loadout.loadoutNumber = loadoutNumber;
 
-        Debug.Log("Saved spell loadout - " + loadout.name + " under name \"SpellLoadout-" + loadoutNumber + "\"");
+        DebugLog(LogState.Log, "Saved spell loadout - " + loadout.name + " under name \"SpellLoadout-" + loadoutNumber + "\"");
 
         string bookJSON = JsonUtility.ToJson(loadout);
         PlayerPrefs.SetString("SpellLoadout-" + loadoutNumber, bookJSON);
     }
 
-    /// <summary> </summary>
+    /// <summary> Loads a loadout saved under passed number. If the loadout does not exist, a blank one will be created with no spell data. If the size of the spell array is not equal to the </summary>
     public static SBLoadout LoadLoadout(int loadoutNumber)
     {
         string loadoutJSON = PlayerPrefs.GetString("SpellLoadout-" + loadoutNumber);
@@ -76,7 +76,7 @@ public class LoadoutManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Could not find SpellLoadout-" + loadoutNumber + ". Creating a empty loadout");
+            DebugLog(LogState.Error, "Could not find SpellLoadout-" + loadoutNumber + ". Creating a empty loadout");
             SaveLoadout(new SBLoadout(), loadoutNumber);
             return LoadLoadout(loadoutNumber);
         }
@@ -84,7 +84,25 @@ public class LoadoutManager : MonoBehaviour
 
 
     public static SpellData[] LoadAllSpellData()
+    { return Resources.FindObjectsOfTypeAll<SpellData>(); }
+
+    private enum LogState { Log, Warning, Error}
+    private static void DebugLog(LogState state, string log)
     {
-        return Resources.LoadAll<SpellData>("");
+        string color = "";
+        switch (state)
+        {
+            case LogState.Log:     color = "green";     break;
+            case LogState.Warning: color = "orange";    break;
+            case LogState.Error:   color = "red";       break;
+        }
+        string output = "<color=" + color + ">[]</color> - " + log;
+
+        switch (state)
+        {
+            case LogState.Log:      Debug.Log(output);          break;
+            case LogState.Warning:  Debug.LogWarning(output);   break;
+            case LogState.Error:    Debug.LogError(output);     break;
+        }
     }
 }

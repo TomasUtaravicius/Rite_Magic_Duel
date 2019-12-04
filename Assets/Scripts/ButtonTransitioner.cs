@@ -44,13 +44,13 @@ public class ButtonTransitioner : MonoBehaviour,IPointerEnterHandler,IPointerExi
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Pointer Click");
+        //Debug.Log("Pointer Click");
         m_Image.color = m_HoverColor;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Pointer Down");
+        //Debug.Log("Pointer Down");
         m_Image.color = m_DownColor;
         buttonClick.Invoke();
         
@@ -81,24 +81,21 @@ public class ButtonTransitioner : MonoBehaviour,IPointerEnterHandler,IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Pointer Enter");
+        //Debug.Log("Pointer Enter");
         m_Image.color = m_HoverColor;
 
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Pointer Exit");
+        //Debug.Log("Pointer Exit");
         m_Image.color = m_NormalColor;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("Pointer Up");
+        //Debug.Log("Pointer Up");
         m_Image.color = m_NormalColor;
-
-
-
     }
 
     protected virtual void HandleOnButtonClick() { }

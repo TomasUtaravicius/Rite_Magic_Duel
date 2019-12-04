@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0335ff6bcc3ad3843af7b6d1dbcb5688, type: 3}
   m_Name: SD_Fart
   m_EditorClassIdentifier: 
-  buildReady: 0
+  buildReady: 1
   spellName: Fart
   spellSprite: {fileID: 0}
   manaCost: 5
