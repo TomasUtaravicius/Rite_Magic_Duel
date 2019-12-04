@@ -1,7 +1,19 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Assets/ShaderForge/Editor/Code/_Evaluator.meta~Stashed changes.meta
 guid: 29972accd6f6aba4cb640a0566bd45dd
 DefaultImporter:
   externalObjects: {}
+=======
+guid: 61fc8facb6cb2a74e9302bd586c1e01b
+<<<<<<< Updated upstream
+timeCreated: 1499702313
+licenseType: Store
+DefaultImporter:
+=======
+DefaultImporter:
+  externalObjects: {}
+>>>>>>> Stashed changes
+>>>>>>> NewTomasBranch:Assets/Plugins/RootMotion/FinalIK/_Integration/VRIK LeapMotion (Unity 5.6.1).unitypackage.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 

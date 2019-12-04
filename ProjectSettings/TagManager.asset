@@ -11,6 +11,7 @@ TagManager:
   - OffensiveSpell
   - VRInputModule
   - TeaBag
+  - projectile
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - PlayerBody
   - VRTKCollision
   - AnimationTriggerBox
-  - 
+  - Environment
   - 
   - 
   - 

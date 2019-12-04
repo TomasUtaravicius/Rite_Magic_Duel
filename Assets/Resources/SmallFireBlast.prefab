@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 3571673531102026715}
   - component: {fileID: 5708047366446880476}
   - component: {fileID: 1254488684776960119}
+  - component: {fileID: 8772183475457476844}
   m_Layer: 0
   m_Name: SmallFireBlast
   m_TagString: Untagged
@@ -99,6 +100,22 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &8772183475457476844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7517615193761686243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55fa643032228f44793cc2205aee8840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
+  manaCost: 20
+  hitEffectPrefabName: 
+  spellSpeed: 20
 --- !u!1001 &634600589031385303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,10 +123,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7517615193761686242}
     m_Modifications:
-    - target: {fileID: 1042962290400280, guid: 45f134f709433794c9fd82ae5c0d5009, type: 3}
-      propertyPath: m_Name
-      value: Effect7
-      objectReference: {fileID: 0}
     - target: {fileID: 4940156315678192, guid: 45f134f709433794c9fd82ae5c0d5009, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -154,6 +167,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1042962290400280, guid: 45f134f709433794c9fd82ae5c0d5009, type: 3}
+      propertyPath: m_Name
+      value: Effect7
+      objectReference: {fileID: 0}
     - target: {fileID: 114287051528755172, guid: 45f134f709433794c9fd82ae5c0d5009,
         type: 3}
       propertyPath: spellScript
@@ -162,7 +179,7 @@ PrefabInstance:
     - target: {fileID: 114287051528755172, guid: 45f134f709433794c9fd82ae5c0d5009,
         type: 3}
       propertyPath: CollidesWith.m_Bits
-      value: 823
+      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45f134f709433794c9fd82ae5c0d5009, type: 3}
