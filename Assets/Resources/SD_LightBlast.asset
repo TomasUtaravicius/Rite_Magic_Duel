@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0335ff6bcc3ad3843af7b6d1dbcb5688, type: 3}
-  m_Name: SD_Fireball
+  m_Name: SD_LightBlast
   m_EditorClassIdentifier: 
   buildReady: 1
-  spellName: Fireball
+  spellName: Light blast
   spellSprite: {fileID: 0}
-  manaCost: 20
+  manaCost: 15
   health: 1
-  damage: 30
-  lifetime: 5
+  damage: 20
+  lifetime: 4
   feedback: 12
-  spellPrefab: {fileID: 7517615193761686243, guid: 8d36d450871c16a4ca5a33cebc2dfd76,
+  spellPrefab: {fileID: 2098068299979516266, guid: 010f905b6a47b314aadd345e0fb71fb0,
     type: 3}
   spellScale: {x: 1, y: 1, z: 1}
   shouldTintSpell: 1
-  spellTint: {r: 1, g: 0.13339981, b: 0.10849059, a: 1}
-  spellSpeed: 20
+  spellTint: {r: 0.6933962, g: 0.9443289, b: 1, a: 1}
+  spellSpeed: 25
   hitEffectPrefab: {fileID: 6276298085916153618, guid: cc63bdf410295b844ba15b1aca144f93,
     type: 3}
   hitEffectScale: {x: 1, y: 1, z: 1}
