@@ -27,6 +27,8 @@ public class SpellData : ScriptableObject
     /// <summary> Lifetime of the spell after being cast. Lifetime of 0 is infinite </summary>
     [Min(0)] public float lifetime = 0;
 
+    [Min(0)] public float spellSpeed = 10;
+
     /// <summary> Spell controller rumble feedback </summary>
     [Min(0)] public float feedback;
 
@@ -44,9 +46,6 @@ public class SpellData : ScriptableObject
     [Tooltip("Multiply the color of the materials and particle effects of the Spell object")]
     public Color spellTint = Color.white;
 
-    [Header("Projectile")]
-    [Min(0)] public float spellSpeed = 10;
-
     [Header("Hit Effect"), Space(10)]
     [Tooltip("Hit Effect object. Requires SpellEffect script in the parent object!")]
     public GameObject hitEffectPrefab = null;
@@ -54,18 +53,11 @@ public class SpellData : ScriptableObject
     [Tooltip("Hit Effect object scaler")]
     public Vector3 hitEffectScale = Vector3.one;
 
-    [Tooltip("Multiplier that is applied to the SpellEffect particle systems")]
-    public float timeMultiplier = 1f;
-
     [Tooltip("Should override the colors of the materials and particle effects of the Hit Effect object")]
     public bool overrideEffectColor = true;
 
     [Tooltip("Multiply the color of the materials and particle effects of the Hit Effect object")]
     public Color hitEffectColorMultiplier = Color.white;
-
-    [Space(5)]
-    [Tooltip("Sound used by the SpellEffect script")]
-    public AudioClip hitEffectSound;
 }
 
 /*

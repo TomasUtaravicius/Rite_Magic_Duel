@@ -24,6 +24,7 @@ public class SpellUIButton : ButtonTransitioner
             if (value)
             {
                 spellImage.sprite = spellData.spellSprite;
+                spellImage.color = Color.white;
                 spellNameText.text = spellData.spellName;
             }
             else
