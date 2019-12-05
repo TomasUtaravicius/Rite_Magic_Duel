@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5038744546762040871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.002, y: 0.002, z: 0.002}
   m_Children: []
   m_Father: {fileID: 5038744547403437659}
   m_RootOrder: 0
@@ -918,7 +918,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 70
+      scalar: 2000
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4763,14 +4763,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5038744547403437659}
   - component: {fileID: 5038744547403437660}
-  - component: {fileID: 5038744547403437661}
+  - component: {fileID: 3453337363054796941}
   m_Layer: 10
-  m_Name: Animation
+  m_Name: CircleAnimationObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5038744547403437659
 Transform:
   m_ObjectHideFlags: 0
@@ -4805,7 +4805,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5038744547403437661
+--- !u!114 &3453337363054796941
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4814,7 +4814,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5038744547403437658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fac6089dbec32f45985dc1a8162a853, type: 3}
+  m_Script: {fileID: 11500000, guid: df01411035f7f81438a4bdd6a061952d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ps: {fileID: 5038744546762040874}

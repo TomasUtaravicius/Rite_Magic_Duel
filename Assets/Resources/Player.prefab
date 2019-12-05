@@ -6015,7 +6015,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5852683996036746774}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0.18301266, y: -0.18301266, z: -0.6830127, w: 0.6830127}
   m_LocalPosition: {x: 1.9, y: -0, z: 3.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6025,7 +6025,7 @@ Transform:
   - {fileID: 2307482249990248622}
   m_Father: {fileID: 5531082167452105389}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: -30, z: -90}
 --- !u!114 &7625274239044852567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7331,7 +7331,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6921962428790175299}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0, z: 0.047}
   m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_Children:
   - {fileID: 575082258457975893}
@@ -9426,7 +9426,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8804492529506062377}
-  m_LocalRotation: {x: -0.07703956, y: 0.8986865, z: 0.17550103, w: 0.39449576}
+  m_LocalRotation: {x: -0.32910785, y: 0.8397979, z: 0.056230992, w: 0.4280953}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -9435,7 +9435,7 @@ Transform:
   - {fileID: 4473135092918091413}
   m_Father: {fileID: 4058648698958666089}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -22.1, y: 132.6, z: 0}
+  m_LocalEulerAnglesHint: {x: -22.1, y: 132.6, z: -33}
 --- !u!1 &8836484302790579113
 GameObject:
   m_ObjectHideFlags: 0
@@ -9842,11 +9842,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CircleAnimationObject
       objectReference: {fileID: 0}
-    - target: {fileID: 5038744547403437658, guid: 334944ed833dedd42a97d9992626bff5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5038744547403437659, guid: 334944ed833dedd42a97d9992626bff5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9902,6 +9897,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5038744546762040874, guid: 334944ed833dedd42a97d9992626bff5,
+        type: 3}
+      propertyPath: moveWithCustomTransform
+      value: 
+      objectReference: {fileID: 1796498562368078643}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 334944ed833dedd42a97d9992626bff5, type: 3}
 --- !u!1 &7043970130577752142 stripped
@@ -9928,11 +9928,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SandClockAnimationObject
       objectReference: {fileID: 0}
-    - target: {fileID: 6915559774669081862, guid: 60163651d833a6a49ad26402af72a042,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6915559774669081860, guid: 60163651d833a6a49ad26402af72a042,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9988,6 +9983,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6915559776018962786, guid: 60163651d833a6a49ad26402af72a042,
+        type: 3}
+      propertyPath: moveWithCustomTransform
+      value: 
+      objectReference: {fileID: 1796498562368078643}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60163651d833a6a49ad26402af72a042, type: 3}
 --- !u!1 &8542622314168846358 stripped
@@ -10013,11 +10013,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SwishAndFlickAnimationObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 7294636156816447870, guid: bf2a5b232ee8b354ab1f0b11276b3157,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7294636156816447871, guid: bf2a5b232ee8b354ab1f0b11276b3157,
         type: 3}
@@ -10074,6 +10069,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7294636156950004564, guid: bf2a5b232ee8b354ab1f0b11276b3157,
+        type: 3}
+      propertyPath: moveWithCustomTransform
+      value: 
+      objectReference: {fileID: 1796498562368078643}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf2a5b232ee8b354ab1f0b11276b3157, type: 3}
 --- !u!4 &6321270543574516979 stripped
@@ -10095,16 +10095,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4112984536616551463}
     m_Modifications:
-    - target: {fileID: 7544835622206056267, guid: 09c6ffbdb889f774bb49e1ca2488628c,
-        type: 3}
-      propertyPath: m_Name
-      value: ThunderBoltAnimationObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 7544835622206056267, guid: 09c6ffbdb889f774bb49e1ca2488628c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7544835622206056266, guid: 09c6ffbdb889f774bb49e1ca2488628c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10160,6 +10150,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7544835622206056267, guid: 09c6ffbdb889f774bb49e1ca2488628c,
+        type: 3}
+      propertyPath: m_Name
+      value: ThunderBoltAnimationObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544835623488548544, guid: 09c6ffbdb889f774bb49e1ca2488628c,
+        type: 3}
+      propertyPath: moveWithCustomTransform
+      value: 
+      objectReference: {fileID: 1796498562368078643}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09c6ffbdb889f774bb49e1ca2488628c, type: 3}
 --- !u!4 &2307482249990248622 stripped

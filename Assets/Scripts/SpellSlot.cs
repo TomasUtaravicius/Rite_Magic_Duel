@@ -59,6 +59,12 @@ public class SpellSlot : MonoBehaviour
             SwishAndFlickAnimation.SetActive(true);
             Debug.Log("Turning the animation to Circle)");
         }
+        else if (spellManager.bufferedGesture == Gesture.ThunderBolt)
+        {
+            ThunderboltAnimation.SetActive(true);
+            Debug.Log("Turning the animation to Circle)");
+        }
+
 
         Debug.Log("Update spell slot");
     }

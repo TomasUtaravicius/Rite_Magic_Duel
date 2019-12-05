@@ -43,6 +43,7 @@ public class GestureController : MonoBehaviour
     public VRInputModule vRInputModule;
     public TrailController trailController;
     public PhotonView photonView;
+    private bool isGestureControllerReady=true;
     // The file from which to load gestures on startup.
     // For example: "Assets/GestureRecognition/sample_gestures.dat"
     [SerializeField] public string LoadGesturesFile;
@@ -167,18 +168,7 @@ public class GestureController : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKeyDown("p"))
-        {
-            Debug.LogError("Pressed the p key");
-            Debug.Log("Player took 15 damage");
-            rManager.TakeDamage(15f);
-        }
-        if (Input.GetKeyDown("l"))
-        {
-            Debug.LogError("Pressed the L key");
-
-            StartTraining();
-        }
+        
         if (vRInputModule!=null &&vRInputModule.rightController.GetHairTriggerUp())
         {
             trailController.TurnOffTrail();
@@ -190,6 +180,14 @@ public class GestureController : MonoBehaviour
         //Debug.Log(last_performance_report * 100.0);
         float trigger_left = vRInputModule.leftController.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x;
         float trigger_right = vRInputModule.rightController.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x;
+        if(vRInputModule.rightController.GetHairTriggerUp())
+        {
+            isGestureControllerReady = true;
+        }
+        if(!isGestureControllerReady)
+        {
+            return;
+        }
         //float trigger_right = SteamVR_Actions.default_Squeeze.GetAxis(handType);
 
         // If the user is not yet dragging (pressing the trigger) on either controller, he hasn't started a gesture yet.
@@ -262,7 +260,7 @@ public class GestureController : MonoBehaviour
                 if (grresult[i] > 0.3)
                     listOfOver30Percent.Add(grresult[i]);
 
-                if (grresult[i] > 0.92 && listOfOver30Percent.Count < 2)
+                if (grresult[i] > 0.8 && listOfOver30Percent.Count < 2)
                 {
                     gesture_id = i;
                     //break;
@@ -279,7 +277,12 @@ public class GestureController : MonoBehaviour
                 HUDText.text = ((Gesture)gesture_id).ToString() + " " + grresult[gesture_id];
 
                 if (spellManager.canCastSpells)
+                {
                     spellManager.SetBufferedGesture((Gesture)gesture_id); //int to enum
+                    isGestureControllerReady = false;
+                }
+                    
+
             }
 
         }
