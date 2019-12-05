@@ -21,17 +21,15 @@ MonoBehaviour:
   health: 1
   damage: 30
   lifetime: 5
+  spellSpeed: 20
   feedback: 12
   spellPrefab: {fileID: 7517615193761686243, guid: 8d36d450871c16a4ca5a33cebc2dfd76,
     type: 3}
   spellScale: {x: 1, y: 1, z: 1}
   shouldTintSpell: 1
   spellTint: {r: 1, g: 0.13339981, b: 0.10849059, a: 1}
-  spellSpeed: 20
   hitEffectPrefab: {fileID: 6276298085916153618, guid: cc63bdf410295b844ba15b1aca144f93,
     type: 3}
   hitEffectScale: {x: 1, y: 1, z: 1}
-  timeMultiplier: 1
   overrideEffectColor: 1
   hitEffectColorMultiplier: {r: 1, g: 1, b: 1, a: 1}
-  hitEffectSound: {fileID: 8300000, guid: f3879393244db3944b97f4fe147be487, type: 3}
