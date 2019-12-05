@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildReady: 1
   spellName: Lightning Bolt Purple
-  spellSprite: {fileID: 0}
+  spellSprite: {fileID: 21300000, guid: de226bd492b80a041899eee9937a2c37, type: 3}
+  requiresHeldCast: 0
+  canChargeOnCast: 0
   manaCost: 5
   health: 1
   damage: 10

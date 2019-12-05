@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildReady: 1
   spellName: Fus Ro Dah
-  spellSprite: {fileID: 0}
+  spellSprite: {fileID: 21300000, guid: 5e93a13d0aab81048b25143ba568ef1b, type: 3}
+  requiresHeldCast: 0
+  canChargeOnCast: 0
   manaCost: 5
   health: 1
   damage: 10

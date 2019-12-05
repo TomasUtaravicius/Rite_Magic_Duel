@@ -71,6 +71,8 @@ public class SpellManager : MonoBehaviour
         {
             if (spellData.manaCost < resourceManager.mana)
             {
+                //TODO add support for canChargeOnCast spells
+
                 GameObject spellInstance = spellBook.CastSpell(gestureIdx, spellCastingPoint.transform.position, spellCastingPoint.transform.rotation);
                 resourceManager.ReduceMana(spellBook.GetSpellData(gestureIdx).manaCost);
                 bufferedGesture = Gesture.NONE;
