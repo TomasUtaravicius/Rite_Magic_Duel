@@ -14,22 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildReady: 1
   spellName: Charged shield
-  spellSprite: {fileID: 0}
+  spellSprite: {fileID: 21300000, guid: 88c47ee50e9dfe240b499f761f7eda42, type: 3}
+  requiresHeldCast: 0
+  canChargeOnCast: 0
   manaCost: 5
   health: 1
   damage: 10
   lifetime: 2
+  spellSpeed: 1
   feedback: 12
   spellPrefab: {fileID: 5587369589994897140, guid: a4ec77e722d3c604ab4aef381195aad1,
     type: 3}
   spellScale: {x: 1, y: 1, z: 1}
   shouldTintSpell: 1
   spellTint: {r: 0.36822015, g: 0.6792453, b: 0, a: 1}
-  spellSpeed: 1
   hitEffectPrefab: {fileID: 6276298085916153618, guid: cc63bdf410295b844ba15b1aca144f93,
     type: 3}
   hitEffectScale: {x: 1, y: 1, z: 1}
-  timeMultiplier: 1
   overrideEffectColor: 1
   hitEffectColorMultiplier: {r: 1, g: 1, b: 1, a: 1}
-  hitEffectSound: {fileID: 8300000, guid: f3879393244db3944b97f4fe147be487, type: 3}
