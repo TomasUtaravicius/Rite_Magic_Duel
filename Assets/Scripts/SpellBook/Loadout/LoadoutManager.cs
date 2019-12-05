@@ -4,6 +4,7 @@ public class LoadoutManager : MonoBehaviour
 {
     /* debug variables for component */
     public bool saveTick = false;
+    public bool loadTick = false;
     [Range(1, 5)] public int loadoutNo = 1;
     [SerializeField] SBLoadout currentlySelectedLoadout = null;
 
@@ -18,6 +19,11 @@ public class LoadoutManager : MonoBehaviour
             SaveLoadout(currentlySelectedLoadout, loadoutNo);
             SetPreferedLoadout(loadoutNo);
             saveTick = false;
+        }
+        if(loadTick)
+        {
+            currentlySelectedLoadout = LoadLoadout(loadoutNo);
+            loadTick = false;
         }
     }
 
@@ -84,7 +90,15 @@ public class LoadoutManager : MonoBehaviour
 
 
     public static SpellData[] LoadAllSpellData()
-    { return Resources.FindObjectsOfTypeAll<SpellData>(); }
+    { 
+        Object[] assets = Resources.FindObjectsOfTypeAll<SpellData>();
+        SpellData[] allSpells = new SpellData[assets.Length];
+        for (int i = 0; i < allSpells.Length; i++)
+            allSpells[i] = (SpellData)assets[i];
+
+        Debug.LogWarning("Found " + assets.Length + " spells in Resources folder!");
+        return allSpells;
+    }
 
     private enum LogState { Log, Warning, Error}
     private static void DebugLog(LogState state, string log)

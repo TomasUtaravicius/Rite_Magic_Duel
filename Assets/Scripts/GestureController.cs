@@ -211,17 +211,18 @@ public class GestureController : MonoBehaviour
                 // Left controller trigger pressed.
                 active_controller = GameObject.Find("Left Hand");
             }
-            else
-            {
-                // If we arrive here, the user is pressing neither controller's trigger:
-                // nothing to do.
-                return;
-            }
             // If we arrive here: either trigger was pressed, so we start the gesture.
             GameObject hmd = head; // alternative: Camera.main.gameObject
             Vector3 hmd_p = hmd.transform.localPosition;
             Quaternion hmd_q = hmd.transform.localRotation;
             gr.startStroke(hmd_p, hmd_q, recording_gesture);
+        }
+
+        if(active_controller == null)
+        {
+            // If we arrive here, the user is pressing neither controller's trigger:
+            // nothing to do.
+            return;
         }
 
         // If we arrive here, the user is currently dragging with one of the controllers.
