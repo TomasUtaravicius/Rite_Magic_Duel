@@ -76,11 +76,10 @@ public class SpellBook : MonoBehaviour
     {
         //try getting spell data
         Debug.Log("Spell book - spawning spell at index " + gestureIdx);
-        SpellData data = null;
-        try { data = loadout.spells[gestureIdx]; }
-        catch (System.ArgumentOutOfRangeException) { }
-
-        return data;
+        if (loadout.spells.Length - 1 < gestureIdx)
+            return null;
+        else
+            return loadout.spells[gestureIdx];
     }
 
     public bool CanCastSpell(int gestureIdx, float manaAmount)

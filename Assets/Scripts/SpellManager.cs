@@ -42,18 +42,12 @@ public class SpellManager : MonoBehaviour
             }
         }
 
-        if (canCastSpells)
+        if (canCastSpells && bufferedGesture != Gesture.NONE)
         {
             if ((photonView.IsMine || isLobbyMode) && vRInputModule.rightController.GetHairTriggerDown())
             {
                 CastSpell(bufferedGesture);
             }
-            /*
-            if (spellInitiated)
-            {
-                CastSpell(bufferedGesture);
-            }
-            */
         }
 
     }
@@ -65,6 +59,9 @@ public class SpellManager : MonoBehaviour
     [PunRPC]
     public void CastSpell(int gestureIdx)
     {
+        if((Gesture)gestureIdx == Gesture.NONE)
+            return;
+
         SpellData spellData = spellBook.GetSpellData(gestureIdx);
 
         if (spellData)
