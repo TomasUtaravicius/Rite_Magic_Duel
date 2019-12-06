@@ -10,26 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0335ff6bcc3ad3843af7b6d1dbcb5688, type: 3}
-  m_Name: SD_DarknessBlast
+  m_Name: SD_Shield
   m_EditorClassIdentifier: 
   buildReady: 1
-  spellName: Darkness Blast
-  spellSprite: {fileID: 21300000, guid: e5f8e29c0eb39d74e9509b0469b5204c, type: 3}
-  requiresHeldCast: 0
+  spellName: Shield
+  spellSprite: {fileID: 21300000, guid: de226bd492b80a041899eee9937a2c37, type: 3}
+  requiresHeldCast: 1
   canChargeOnCast: 0
-  manaCost: 35
+  manaCost: 5
   health: 1
-  damage: 50
-  lifetime: 3
-  spellSpeed: 15
+  damage: 10
+  lifetime: 2
+  spellSpeed: 1
   feedback: 12
-  spellPrefab: {fileID: 430534422712864713, guid: d190ffe2dbcd8c84495beefb5014e72d,
+  spellPrefab: {fileID: 5587369589994897140, guid: a4ec77e722d3c604ab4aef381195aad1,
     type: 3}
   spellScale: {x: 1, y: 1, z: 1}
   shouldTintSpell: 1
-  spellTint: {r: 1, g: 0.13339981, b: 0.10849059, a: 1}
-  hitEffectPrefab: {fileID: 6276298085916153618, guid: cc63bdf410295b844ba15b1aca144f93,
-    type: 3}
+  spellTint: {r: 0.36862746, g: 0.6784314, b: 0, a: 1}
+  hitEffectPrefab: {fileID: 0}
   hitEffectScale: {x: 1, y: 1, z: 1}
-  overrideEffectColor: 1
+  overrideEffectColor: 0
   hitEffectColorMultiplier: {r: 1, g: 1, b: 1, a: 1}

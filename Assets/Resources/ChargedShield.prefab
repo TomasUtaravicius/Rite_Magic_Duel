@@ -19237,6 +19237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5592841706885004344}
   - component: {fileID: 5587369589994897131}
+  - component: {fileID: 5192364422922473773}
   - component: {fileID: 5587369589994897128}
   - component: {fileID: 5587369589994897129}
   - component: {fileID: 5587369589994897142}
@@ -19282,6 +19283,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Color: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &5192364422922473773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5587369589994897140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4936af9d258219f4cb88e98e858b6c7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiresHeldCast: 1
+  canChargeOnCast: 0
+  damage: 10
+  manaCost: 0
+  spellSpeed: 10
+  visibilityScript: {fileID: 5587369589994897143}
 --- !u!114 &5587369589994897128
 MonoBehaviour:
   m_ObjectHideFlags: 0

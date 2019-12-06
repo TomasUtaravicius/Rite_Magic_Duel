@@ -68,5 +68,6 @@ MonoBehaviour:
   - UpdateLeaderboard
   - CastBlueBlast
   - CastSpell
+  - OnSpellReleased
   DisableAutoOpenWizard: 1
   ShowSettings: 0

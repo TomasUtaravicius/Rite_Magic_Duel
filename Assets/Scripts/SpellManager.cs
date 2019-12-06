@@ -21,23 +21,30 @@ public class SpellManager : MonoBehaviour
     private bool heldCasting;
     [SerializeField]
     private ResourceManager resourceManager;
-    private void Start()
-    {
-
-        
-    }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            CastSpell((Gesture)0);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            CastSpell((Gesture)1);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            CastSpell((Gesture)2);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            CastSpell((Gesture)3);
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            CastSpell((Gesture)4);
+
+
         if (heldCasting)
         {
-            if (vRInputModule.rightController.GetHairTriggerUp())
+            if (vRInputModule.rightController.GetHairTriggerUp() || Input.GetKeyUp(KeyCode.Alpha5))
             {
                 SetBufferedGesture(Gesture.NONE);
                 heldCasting = false;
 
                 //TODO Give back to pool
-                heldSpell?.GetComponent<ShieldManager>().photonView.RPC("TurnOffShield", RpcTarget.AllBufferedViaServer);
+                heldSpell?.GetComponent<Spell>().photonView.RPC("OnSpellReleased", RpcTarget.AllBufferedViaServer);
                 heldSpell = null;
             }
         }
@@ -100,44 +107,7 @@ public class SpellManager : MonoBehaviour
         OnSpellValueChanged?.Invoke();
     }
 
-    [PunRPC]
-    public void CastShield()
-    {
-        /*
-        if (resourceManager.mana >= ProtegoPrefab.GetComponent<ShieldManager>().manaCost && !spellInitiated)
-        {
-            spellInitiated = true;
-            currentShield = PhotonNetwork.Instantiate(ProtegoPrefab.name, spellCastingPoint.transform.position, RotationOfProtego.transform.rotation, 0);
-            resourceManager.mana -= ProtegoPrefab.GetComponent<ShieldManager>().manaCost;
-        }
-        if (vRInputModule.rightController.GetHairTriggerUp())
-        {
-            if (!currentShield)
-            {
-                SetBufferedSpell(Spells.NULL);
-                spellInitiated = false;
-                currentShield = null;
-            }
-            else
-            {
-                SetBufferedSpell(Spells.NULL);
-                //currentShield.GetComponent<ShieldManager>().TurnOffShield();
 
-                currentShield.GetComponent<ShieldManager>().photonView.RPC("TurnOffShield", RpcTarget.AllBufferedViaServer);
-                spellInitiated = false;
-                currentShield = null;
-            }
-
-        }
-
-
-        else
-        {
-            NotEnoughMana();
-        }
-        */
-
-    }
     private void NotEnoughMana()
     {
 

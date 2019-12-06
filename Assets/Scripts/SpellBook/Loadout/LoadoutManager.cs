@@ -90,13 +90,10 @@ public class LoadoutManager : MonoBehaviour
 
 
     public static SpellData[] LoadAllSpellData()
-    { 
-        Object[] assets = Resources.FindObjectsOfTypeAll<SpellData>();
-        SpellData[] allSpells = new SpellData[assets.Length];
-        for (int i = 0; i < allSpells.Length; i++)
-            allSpells[i] = (SpellData)assets[i];
+    {
+        SpellData[] allSpells = Resources.LoadAll<SpellData>("SpellData") as SpellData[];
 
-        Debug.LogWarning("Found " + assets.Length + " spells in Resources folder!");
+        Debug.LogWarning("Found " + allSpells.Length + " spells in Resources folder!");
         return allSpells;
     }
 
