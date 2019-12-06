@@ -2266,7 +2266,7 @@ GameObject:
   - component: {fileID: 6842041222048290206}
   m_Layer: 8
   m_Name: challenger_Hips
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
