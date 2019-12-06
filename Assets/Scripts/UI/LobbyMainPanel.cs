@@ -41,7 +41,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
     [Header("Edit Loadout Panel")]
     public GameObject EditLoadoutPanel;
 
-
+    private bool isPracticeGame = false;
     public Keyboard keyboard;
 
     private Dictionary<string, RoomInfo> cachedRoomList;
@@ -72,6 +72,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
     {
         this.SetActivePanel(SelectionPanel.name);
         Debug.LogError("Connected to MASTER");
+        isPracticeGame = false;
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -288,24 +289,32 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
         SceneManager.UnloadSceneAsync("Lobby");
-        PhotonNetwork.LoadLevel("Multiplayer-GameScene");
+        if(isPracticeGame)
+        {
+            PhotonNetwork.LoadLevel("PracticeScene");
+        }
+        else
+        {
+            PhotonNetwork.LoadLevel("Multiplayer-GameScene");
+        }
+        
     }
     public void OnPracticeButtonClicked()
     {
-        //PhotonNetwork.CurrentRoom.IsOpen = false;
-        //PhotonNetwork.CurrentRoom.IsVisible = false;
-      
+
+
+
+        string roomName = "Practice";
+        isPracticeGame = true;
+        roomName = (roomName.Equals(string.Empty)) ? "Room " + Random.Range(1000, 10000) : roomName;
 
         byte maxPlayers;
         byte.TryParse(MaxPlayersInputField.text, out maxPlayers);
-        maxPlayers = (byte)Mathf.Clamp(maxPlayers, 2, 8);
+        maxPlayers = (byte)Mathf.Clamp(maxPlayers, 1, 1);
 
         RoomOptions options = new RoomOptions { MaxPlayers = maxPlayers };
-        
-        PhotonNetwork.CreateRoom(" ", options, null);
-        SceneManager.UnloadSceneAsync("Lobby");
-        Debug.Log("Loading practice scene");
-        PhotonNetwork.LoadLevel("PracticeScene");
+
+        PhotonNetwork.CreateRoom(roomName, options, null);
     }
 
     public void OnEditLoadoutButtonClicked()

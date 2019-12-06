@@ -10,19 +10,25 @@ public class PracticeModeMenuPanel : MonoBehaviour
     
     public GameObject obstacleCourse;
    
-    public GameObject enemyGroup;
+
     
     public GameObject gestureTutorialProps;
    
     public GameObject baseTutorialProps;
     public TextMeshPro titleText;
     // Start is called before the first frame update
+    private void Start()
+    {
+        obstacleCourse = GameObject.Find("ObstacleCourse");
+        gestureTutorialProps = GameObject.Find("GestureTutorialProps");
+        baseTutorialProps = GameObject.Find("BaseTutorialProps");
+    }
     public void OnCombatPracticeButtonClicked()
     {
         ResetPracticeModeSelection();
         titleText.text = "Combat practice";
         
-        enemyGroup.SetActive(true);
+        //enemyGroup.SetActive(true);
     }
     public void OnGestureTutorialButtonClicked()
     {
@@ -56,7 +62,6 @@ public class PracticeModeMenuPanel : MonoBehaviour
     {
         titleText.text = "";
         obstacleCourse.SetActive(false);
-        enemyGroup.SetActive(false);
         gestureTutorialProps.SetActive(false);
         baseTutorialProps.SetActive(false);
     }

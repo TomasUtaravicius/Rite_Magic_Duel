@@ -6794,6 +6794,7 @@ MonoBehaviour:
   photonView: {fileID: 651147771734670707}
   gc: {fileID: 5037992557671221896}
   spellManager: {fileID: 7300414258202454864}
+  isPracticeMode: 0
 --- !u!114 &5037992557671221896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10095,6 +10096,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4112984536616551463}
     m_Modifications:
+    - target: {fileID: 7544835622206056267, guid: 09c6ffbdb889f774bb49e1ca2488628c,
+        type: 3}
+      propertyPath: m_Name
+      value: ThunderBoltAnimationObject
+      objectReference: {fileID: 0}
     - target: {fileID: 7544835622206056266, guid: 09c6ffbdb889f774bb49e1ca2488628c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10149,11 +10155,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7544835622206056267, guid: 09c6ffbdb889f774bb49e1ca2488628c,
-        type: 3}
-      propertyPath: m_Name
-      value: ThunderBoltAnimationObject
       objectReference: {fileID: 0}
     - target: {fileID: 7544835623488548544, guid: 09c6ffbdb889f774bb49e1ca2488628c,
         type: 3}

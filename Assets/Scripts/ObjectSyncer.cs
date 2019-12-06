@@ -14,6 +14,7 @@ public class ObjectSyncer : MonoBehaviour
     public PhotonView photonView;
     public GestureController gc;
     public SpellManager spellManager;
+    public bool isPracticeMode;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,10 @@ public class ObjectSyncer : MonoBehaviour
         if (!photonView.IsMine)
         {
             Destroy(this);
+        }
+        if(isPracticeMode)
+        {
+           GetComponentInChildren<PracticeModeUIController>().vRInputModule = GameObject.Find("PR_VRInputModule").GetComponent<VRInputModule>();
         }
         VRTK_SDKManager sdk = VRTK_SDKManager.instance;
         sdk.loadedSetup.actualBoundaries.transform.position = transform.position;

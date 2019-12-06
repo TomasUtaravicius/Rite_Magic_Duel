@@ -135,10 +135,19 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         int number = PhotonNetwork.LocalPlayer.ActorNumber;
         int positionIndex = (int)PhotonNetwork.LocalPlayer.CustomProperties["position"];
-
-        GameObject spawnPoint = playerSpawnPoints.GetChild(positionIndex).GetChild(0).gameObject;
-        spawnPoint.GetComponent<MeshRenderer>().material.color = RiteGame.GetColor(positionIndex);
-        photonView.RPC("UpdateSpawnPointColor", RpcTarget.Others, positionIndex);
+        GameObject spawnPoint;
+        //Practice mode
+        if (positionIndex==-1)
+        {
+            spawnPoint = playerSpawnPoints.GetChild(1).GetChild(0).gameObject;
+        }
+        else
+        {
+            spawnPoint = playerSpawnPoints.GetChild(positionIndex).GetChild(0).gameObject;
+            spawnPoint.GetComponent<MeshRenderer>().material.color = RiteGame.GetColor(positionIndex);
+            photonView.RPC("UpdateSpawnPointColor", RpcTarget.Others, positionIndex);
+        }
+       
         
 
        
@@ -264,6 +273,11 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
         for (int j = 0; j < PhotonNetwork.PlayerList.Length; j++)
         {
             int positionIndex = (int)PhotonNetwork.PlayerList[j].CustomProperties["position"];
+            //Practice Mode.
+            if(positionIndex==-1)
+            {
+                return;
+            }
             int id = (int)PhotonNetwork.PlayerList[j].ActorNumber;
             for (int n = 0; n < alivePlayerList.Count; n++)
             {

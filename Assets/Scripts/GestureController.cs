@@ -185,7 +185,7 @@ public class GestureController : MonoBehaviour
         float trigger_right = vRInputModule.rightController.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x;
         if(vRInputModule.rightController.GetHairTriggerUp())
         {
-            Invoke("ResetGestureAvailability", 0.1f);
+            Invoke("ResetGestureAvailability", 0.3f);
         }
         if(!isGestureControllerReady)
         {
@@ -252,7 +252,7 @@ public class GestureController : MonoBehaviour
             double similarity = 0;
             String gestureName = "";
             //int gesture_id = gr.endStroke(ref similarity, ref pos, ref scale, ref dir0, ref dir1, ref dir2);
-            gr.endStroke(ref similarity);
+   
             double[] grresult = gr.endStrokeAndGetAllProbabilities();
             List<double> listOfOver30Percent = new List<double>();
             int gesture_id = -1;
@@ -260,7 +260,7 @@ public class GestureController : MonoBehaviour
             {
                 //gesture enum to string
                 gestureName = ((Gesture)i).ToString();
-
+                Debug.Log(gestureName+  "  " + grresult[i]);
                 if (grresult[i] > 0.3)
                     listOfOver30Percent.Add(grresult[i]);
 

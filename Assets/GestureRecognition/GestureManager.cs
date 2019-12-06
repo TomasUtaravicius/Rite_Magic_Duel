@@ -94,10 +94,10 @@ public class GestureManager : MonoBehaviour
     // Whether the user is currently pressing the contoller trigger.
     private bool trigger_pressed_left = false;
     private bool trigger_pressed_right = false;
-
+    private VRInputModule vRInputModule;
     // Wether a gesture was already started
     private bool gesture_started = false;
-
+    private TrailController trailController;
     public GestureManager() : base()
     {
         me = GCHandle.Alloc(this);
@@ -114,7 +114,8 @@ public class GestureManager : MonoBehaviour
                       + "Please use the Inspector for the XR rig.";
 
         me = GCHandle.Alloc(this);
-
+        vRInputModule = GameObject.Find("PR_VRInputModule").GetComponent<VRInputModule>();
+        trailController = GameObject.Find("EndPoint").GetComponent<TrailController>();
         /*GameObject controller_oculus_left = GameObject.Find("controller_oculus_left");
         GameObject controller_oculus_right = GameObject.Find("controller_oculus_right");
         GameObject controller_vive_left = GameObject.Find("controller_vive_left");
@@ -174,9 +175,14 @@ public class GestureManager : MonoBehaviour
                       + "You can stop training in the Inspector for the XR rig.\n";
             return;
         }
+        if (vRInputModule != null && vRInputModule.rightController.GetHairTriggerUp())
+        {
+            trailController.TurnOffTrail();
+        }
 
-        float trigger_left = Input.GetAxis("LeftControllerTrigger");
-        float trigger_right = Input.GetAxis("RightControllerTrigger");
+        float trigger_left = 0;
+        //float trigger_right = Input.GetAxis("RightControllerTrigger");
+        float trigger_right = vRInputModule.rightController.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x;
         //SteamVR_Actions.default_Squeeze.GetAxis(handType);
 
         // Single Gesture recognition / 1-handed operation
@@ -185,11 +191,15 @@ public class GestureManager : MonoBehaviour
             // If the user is not yet dragging (pressing the trigger) on either controller, he hasn't started a gesture yet.
             if (active_controller == null)
             {
+                if (vRInputModule.rightController.GetHairTriggerDown())
+                {
+                    trailController.TurnOnTrail();
+                }
                 // If the user presses either controller's trigger, we start a new gesture.
                 if (trigger_right > 0.8)
                 {
                     // Right controller trigger pressed.
-                    active_controller = GameObject.Find("EndPoint");
+                    active_controller = GameObject.Find("ControllerR");
                 }
                 else if (trigger_left > 0.8)
                 {
@@ -216,6 +226,7 @@ public class GestureManager : MonoBehaviour
             {
                 // The user is still dragging with the controller: continue the gesture.
                 Vector3 p = active_controller.transform.position;
+                p.z += 0.5f;
                 Quaternion q = active_controller.transform.rotation;
                 gr.contdStroke(p, q);
                 addToStrokeTrail(p);
