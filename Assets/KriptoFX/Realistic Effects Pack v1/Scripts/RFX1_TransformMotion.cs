@@ -113,16 +113,37 @@ public class RFX1_TransformMotion : MonoBehaviour
             //currentSpeed = Mathf.Clamp(currentSpeed - Speed*Dampeen*Time.deltaTime, MinSpeed, Speed);
             if (Target == null)
             {
-                var currentForwardVector = (Vector3.forward + randomOffset)* spellScript.spellSpeed * Time.deltaTime;
-                frameMoveOffset = t.localRotation*currentForwardVector;
-                frameMoveOffsetWorld = startQuaternion*currentForwardVector;
+                if(spellScript)
+                {
+                    var currentForwardVector = (Vector3.forward + randomOffset) * spellScript.spellSpeed * Time.deltaTime;
+                    frameMoveOffset = t.localRotation * currentForwardVector;
+                    frameMoveOffsetWorld = startQuaternion * currentForwardVector;
+                }
+                else
+                {
+                    var currentForwardVector = (Vector3.forward + randomOffset) * 10 * Time.deltaTime;
+                    frameMoveOffset = t.localRotation * currentForwardVector;
+                    frameMoveOffsetWorld = startQuaternion * currentForwardVector;
+                }
+             
             }
             else
             {
-                var forwardVec = (targetT.position - t.position).normalized;
-                var currentForwardVector = (forwardVec + randomOffset) * spellScript.spellSpeed * Time.deltaTime;
-                frameMoveOffset = currentForwardVector;
-                frameMoveOffsetWorld = currentForwardVector;
+                if (spellScript)
+                {
+                    var forwardVec = (targetT.position - t.position).normalized;
+                    var currentForwardVector = (forwardVec + randomOffset) * spellScript.spellSpeed * Time.deltaTime;
+                    frameMoveOffset = currentForwardVector;
+                    frameMoveOffsetWorld = currentForwardVector;
+                }
+                else
+                {
+                    var forwardVec = (targetT.position - t.position).normalized;
+                    var currentForwardVector = (forwardVec + randomOffset) * 10 * Time.deltaTime;
+                    frameMoveOffset = currentForwardVector;
+                    frameMoveOffsetWorld = currentForwardVector;
+                }
+                
             }
         }
 
@@ -189,7 +210,6 @@ public class RFX1_TransformMotion : MonoBehaviour
             var instance = Instantiate(effect, hit.point + hit.normal * CollisionOffset, new Quaternion()) as GameObject;
             if (hit.collider.gameObject.CompareTag("Environment"))
             {
-                Debug.LogError("Collided with teabag");
                 if (hit.collider.gameObject.GetComponent<Rigidbody>())
                 {
                     hit.collider.gameObject.GetComponent<Rigidbody>().AddExplosionForce(2000f,this.gameObject.transform.position,20f);
