@@ -63,6 +63,7 @@ MonoBehaviour:
   damage: 10
   manaCost: 0
   spellSpeed: 10
+  visibilityScript: {fileID: 0}
 --- !u!114 &5708047366446880476
 MonoBehaviour:
   m_ObjectHideFlags: 0

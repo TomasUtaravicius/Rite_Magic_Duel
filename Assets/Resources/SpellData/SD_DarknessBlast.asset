@@ -26,10 +26,9 @@ MonoBehaviour:
   spellPrefab: {fileID: 430534422712864713, guid: d190ffe2dbcd8c84495beefb5014e72d,
     type: 3}
   spellScale: {x: 1, y: 1, z: 1}
-  shouldTintSpell: 1
-  spellTint: {r: 1, g: 0.13339981, b: 0.10849059, a: 1}
-  hitEffectPrefab: {fileID: 6276298085916153618, guid: cc63bdf410295b844ba15b1aca144f93,
-    type: 3}
+  shouldTintSpell: 0
+  spellTint: {r: 1, g: 1, b: 1, a: 1}
+  hitEffectPrefab: {fileID: 0}
   hitEffectScale: {x: 1, y: 1, z: 1}
-  overrideEffectColor: 1
+  overrideEffectColor: 0
   hitEffectColorMultiplier: {r: 1, g: 1, b: 1, a: 1}

@@ -29,6 +29,9 @@ public class Spell : MonoBehaviourPun, IPunObservable
 
 
 
+    //Spell effect references
+    [SerializeField] RFX1_EffectSettingVisible visibilityScript;
+
     public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         throw new System.NotImplementedException();
@@ -38,6 +41,25 @@ public class Spell : MonoBehaviourPun, IPunObservable
 
     public virtual void FireSpell()
     { }
+
+    [PunRPC]
+    public void OnSpellReleased()
+    {
+        visibilityScript.IsActive = false;
+
+        if (photonView.IsMine)
+        {
+            Invoke("DestroySpell", 0.7f);
+        }
+    }
+
+    private void DestroySpell()
+    {
+        if (photonView.IsMine)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
+    }
 
 
     public void SetSpellAttributes(string spellName, bool requiresHeldCast = false, bool canChargeOnCast = false, float health = 10, float damage = 10, float lifeTime = 0, float spellSpeed = 0)
@@ -69,6 +91,7 @@ public class Spell : MonoBehaviourPun, IPunObservable
 
     protected virtual void TintSpellColors(Color tintColor)
     {
-        //throw new NotImplementedException();
+        var spellColor = GetComponent<RFX1_EffectSettingColor>();
+        if(spellColor) spellColor.Color = tintColor;
     }
 }

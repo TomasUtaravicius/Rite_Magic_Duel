@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SD_LightBlast
   m_EditorClassIdentifier: 
   buildReady: 1
-  spellName: Light blast
+  spellName: Light Blast
   spellSprite: {fileID: 21300000, guid: adfb16cdb2353684bbf44eb7e5b7128b, type: 3}
   requiresHeldCast: 0
   canChargeOnCast: 0
@@ -27,9 +27,8 @@ MonoBehaviour:
     type: 3}
   spellScale: {x: 1, y: 1, z: 1}
   shouldTintSpell: 1
-  spellTint: {r: 0.6933962, g: 0.9443289, b: 1, a: 1}
-  hitEffectPrefab: {fileID: 6276298085916153618, guid: cc63bdf410295b844ba15b1aca144f93,
-    type: 3}
+  spellTint: {r: 1, g: 0.83948135, b: 0.504717, a: 1}
+  hitEffectPrefab: {fileID: 0}
   hitEffectScale: {x: 1, y: 1, z: 1}
-  overrideEffectColor: 1
+  overrideEffectColor: 0
   hitEffectColorMultiplier: {r: 1, g: 1, b: 1, a: 1}
