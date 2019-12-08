@@ -171,7 +171,10 @@ public class GestureController : MonoBehaviour
     private void Update()
     {
 
-        
+        if(Input.GetKeyDown("k"))
+        {
+            StartTraining();
+        }
         if (vRInputModule!=null &&vRInputModule.rightController.GetHairTriggerUp())
         {
             trailController.TurnOffTrail();
