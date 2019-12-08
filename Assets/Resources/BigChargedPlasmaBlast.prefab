@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1781909801254948375}
   - component: {fileID: 4602252637847665194}
   - component: {fileID: 7026077738998471809}
+  - component: {fileID: -4549656348844814925}
   m_Layer: 0
   m_Name: BigChargedPlasmaBlast
   m_TagString: Untagged
@@ -47,9 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiresHeldCast: 0
+  canChargeOnCast: 0
   damage: 10
   manaCost: 0
-  spellSpeed: 10
+  spellSpeed: 50
+  visibilityScript: {fileID: -4549656348844814925}
 --- !u!114 &4602252637847665194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,6 +90,20 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &-4549656348844814925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781909801254948373}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96596ebc169b414488a8385afd58fd5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsActive: 1
+  FadeOutTime: 3
 --- !u!114 &1781909800391432352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +111,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782414652506368446}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d86b6f49c2149194893b813a9c59a56a, type: 3}
   m_Name: 
@@ -146,14 +163,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Distance: 30
   Speed: 1
-  spell: {fileID: 0}
+  spellScript: {fileID: 1781909801254948375}
   TimeDelay: 0
   RandomMoveRadius: 0
   RandomMoveSpeedScale: 0
   Target: {fileID: 0}
   CollidesWith:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2304
   EffectsOnCollision:
   - {fileID: 1929620577409710, guid: eb550bb3d0f18944ba2272872ad6e2cd, type: 3}
   CollisionOffset: 0
@@ -169,6 +186,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1781909801254948372}
     m_Modifications:
+    - target: {fileID: 1111292484735420, guid: 75a8b5dd0b15bb14284ccdcac1e3a283, type: 3}
+      propertyPath: m_Name
+      value: Effect16
+      objectReference: {fileID: 0}
     - target: {fileID: 4082758504687966, guid: 75a8b5dd0b15bb14284ccdcac1e3a283, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -213,14 +234,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1111292484735420, guid: 75a8b5dd0b15bb14284ccdcac1e3a283, type: 3}
-      propertyPath: m_Name
-      value: Effect16
-      objectReference: {fileID: 0}
     - target: {fileID: 114865770840058642, guid: 75a8b5dd0b15bb14284ccdcac1e3a283,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865770840058642, guid: 75a8b5dd0b15bb14284ccdcac1e3a283,
+        type: 3}
+      propertyPath: spell
+      value: 
+      objectReference: {fileID: 1781909801254948375}
+    - target: {fileID: 114865770840058642, guid: 75a8b5dd0b15bb14284ccdcac1e3a283,
+        type: 3}
+      propertyPath: RealTimeUpdateRaycast
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114865770840058642, guid: 75a8b5dd0b15bb14284ccdcac1e3a283,
+        type: 3}
+      propertyPath: RaycastDistance
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75a8b5dd0b15bb14284ccdcac1e3a283, type: 3}

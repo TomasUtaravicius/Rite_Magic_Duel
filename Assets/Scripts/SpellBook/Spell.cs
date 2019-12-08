@@ -53,13 +53,7 @@ public class Spell : MonoBehaviourPun, IPunObservable
         }
     }
 
-    private void DestroySpell()
-    {
-        if (photonView.IsMine)
-        {
-            PhotonNetwork.Destroy(gameObject);
-        }
-    }
+   
 
 
     public void SetSpellAttributes(string spellName, bool requiresHeldCast = false, bool canChargeOnCast = false, float health = 10, float damage = 10, float lifeTime = 0, float spellSpeed = 0)

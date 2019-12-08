@@ -224,7 +224,7 @@ public class GestureController : MonoBehaviour
 #if UNITY_EDITOR
         gestureRecognition.loadFromFile(LoadGesturesFile);
 #else
-        gr.loadFromFile(Application.streamingAssetsPath + "/GestureSet5Gestures180Samples.dat");
+         gestureRecognition.loadFromFile(Application.streamingAssetsPath + "/GestureSet5Gestures180Samples.dat");
 #endif
     }
 
