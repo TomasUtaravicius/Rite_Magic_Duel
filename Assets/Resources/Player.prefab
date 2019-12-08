@@ -6811,12 +6811,11 @@ MonoBehaviour:
   trailController: {fileID: 6135326038916410559}
   photonView: {fileID: 651147771734670707}
   LoadGesturesFile: Assets/StreamingAssets/GestureSet5Gestures180Samples.dat
-  wandEnd: {fileID: 7915753708031421667}
-  head: {fileID: 5102985537535195914}
+  rightControllerReference: {fileID: 7915753708031421667}
+  playerHeadReference: {fileID: 5102985537535195914}
   SaveGesturesFile: Assets/StreamingAssets/GestureSet5Gestures180Samples.dat
   spellManager: {fileID: 7300414258202454864}
   HUDText: {fileID: 7325495995470342018}
-  rManager: {fileID: 7817320785248556322}
 --- !u!1 &6472883169741715577
 GameObject:
   m_ObjectHideFlags: 0

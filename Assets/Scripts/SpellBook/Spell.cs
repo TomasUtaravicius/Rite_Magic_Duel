@@ -59,6 +59,13 @@ public class Spell : MonoBehaviourPun, IPunObservable
     {
         if (shouldTintColor) TintSpellColors(tintColor);
     }
+    public void DestroySpell()
+    {
+        if(photonView.IsMine)
+        {
+            PhotonNetwork.Destroy(this.gameObject);
+        }
+    }
 
     protected virtual void TintSpellColors(Color tintColor)
     {
