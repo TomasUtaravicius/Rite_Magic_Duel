@@ -27,6 +27,7 @@
  */
 
 using Photon.Pun;
+using Rite.SpellBook;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;

@@ -1,40 +1,43 @@
 ﻿using UnityEngine;
 
-public class SpellSpawner : MonoBehaviour
+namespace Rite.SpellBook
 {
-    public bool testFire = false;
-
-    public SpellData spellData;
-
-    public void Fire()
+    public class SpellSpawner : MonoBehaviour
     {
-        if (spellData)
+        public bool testFire = false;
+
+        public SpellData spellData;
+
+        public void Fire()
         {
-            Debug.Log("Fire!");
-
-            GameObject spellInstance = Instantiate(spellData.spellPrefab, transform.position, transform.rotation, null);
-
-            Spell spell = spellInstance.GetComponent<Spell>();
-            if (spell)
+            if (spellData)
             {
-                Debug.Log("Spell found");
+                Debug.Log("Fire!");
 
-                spell.SetSpellAttributes(spellData.spellName, spellData.requiresHeldCast, spellData.canChargeOnCast ,spellData.health, spellData.damage, spellData.lifetime, spellData.spellSpeed);
-                spell.SetSpellVisuals(spellData.shouldTintSpell, spellData.spellTint);
+                GameObject spellInstance = Instantiate(spellData.spellPrefab, transform.position, transform.rotation, null);
+
+                Spell spell = spellInstance.GetComponent<Spell>();
+                if (spell)
+                {
+                    Debug.Log("Spell found");
+
+                    spell.SetSpellAttributes(spellData.spellName, spellData.requiresHeldCast, spellData.canChargeOnCast, spellData.health, spellData.damage, spellData.lifetime, spellData.spellSpeed);
+                    spell.SetSpellVisuals(spellData.shouldTintSpell, spellData.spellTint);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("No spell data found!");
             }
         }
-        else
-        {
-            Debug.LogWarning("No spell data found!");
-        }
-    }
 
-    private void OnValidate()
-    {
-        if (testFire)
+        private void OnValidate()
         {
-            Fire();
-            testFire = false;
+            if (testFire)
+            {
+                Fire();
+                testFire = false;
+            }
         }
     }
 }

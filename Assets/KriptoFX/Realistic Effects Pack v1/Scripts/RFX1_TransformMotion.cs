@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
+using Rite.SpellBook;
 
 public class RFX1_TransformMotion : MonoBehaviour
 {

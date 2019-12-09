@@ -2,18 +2,27 @@
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using Rite.SpellBook;
 
 namespace Tests
 {
+
+    //Arrange
+
+    //Act
+
+    //Assert
     public class AT_LoadoutManager
     {
         // A Test behaves as an ordinary method
         [Test]
         public void AT_LoadoutManagerSimplePasses()
         {
-            // Use the Assert class to test conditions
+            //Arrange
+            LoadoutManager.CheckForValidLoadouts();
+            SBLoadout spellLoadout = LoadoutManager.LoadLoadout(1);
 
-            Debug.Log("Penis!");
+            //Assert
             Assert.AreEqual(Color.white, Color.white);
         }
 

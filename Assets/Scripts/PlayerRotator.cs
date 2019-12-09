@@ -1,4 +1,5 @@
 ﻿using Photon.Pun;
+using Rite.SpellBook;
 using UnityEngine;
 
 public class PlayerRotator : MonoBehaviour
