@@ -6150,15 +6150,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7356cda5890125248b90b9c75409a830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldTrain: 0
   vRInputModule: {fileID: 7766021586481033469}
   trailController: {fileID: 3161381133648265644}
+  photonView: {fileID: 0}
   LoadGesturesFile: Assets/StreamingAssets/GestureSet5Gestures180Samples.dat
-  wandEnd: {fileID: 758030342992315298}
-  head: {fileID: 758466302345435438}
+  rightControllerReference: {fileID: 0}
+  playerHeadReference: {fileID: 0}
   SaveGesturesFile: Assets/StreamingAssets/GestureSet5Gestures180Samples.dat
   spellManager: {fileID: 3161323410038108956}
-  rManager: {fileID: 3161211914718900776}
+  HUDText: {fileID: 0}
 --- !u!114 &2377875906380215817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7176,6 +7176,7 @@ MonoBehaviour:
   m_DefaultLength: 5
   m_Dot: {fileID: 9095648710113014688}
   m_InputModule: {fileID: 4486842830918908666}
+  objectSyncer: {fileID: 0}
 --- !u!20 &2883533888611142773
 Camera:
   m_ObjectHideFlags: 0
@@ -14686,7 +14687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2542697353916909686
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15025,6 +15026,9 @@ MonoBehaviour:
   m_DownColor:
     serializedVersion: 2
     rgba: 4278190335
+  m_DisableColor:
+    serializedVersion: 2
+    rgba: 0
   buttonClick:
     m_PersistentCalls:
       m_Calls:
@@ -20564,6 +20568,9 @@ MonoBehaviour:
   m_DownColor:
     serializedVersion: 2
     rgba: 4278190335
+  m_DisableColor:
+    serializedVersion: 2
+    rgba: 0
   buttonClick:
     m_PersistentCalls:
       m_Calls:
@@ -26365,6 +26372,7 @@ MonoBehaviour:
   isLobbyMode: 0
   vRInputModule: {fileID: 7766021586481033469}
   bufferedGesture: 0
+  resourceManager: {fileID: 0}
 --- !u!114 &3161459822028306184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26462,7 +26470,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuUI: {fileID: 2542697353916909691}
-  photonView: {fileID: 3157049851915412160}
   pointer: {fileID: 4903525558005641874}
 --- !u!114 &7660422050684664430
 MonoBehaviour:
@@ -26488,9 +26495,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb76bc7c58638e41bee5061428b2dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usePool: 1
   loadout:
+    loadoutNumber: 0
     name: SpellLoadout-New
-    spellSlots: []
+    spells:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
 --- !u!1 &3048347636181653850
 GameObject:
   m_ObjectHideFlags: 0
@@ -34476,6 +34489,7 @@ MonoBehaviour:
   isLobbyMode: 0
   vRInputModule: {fileID: 7766021586481033469}
   bufferedGesture: 0
+  resourceManager: {fileID: 0}
 --- !u!114 &7054998477292793484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34717,6 +34731,7 @@ MonoBehaviour:
   m_DefaultLength: 5
   m_Dot: {fileID: 1424132949146652953}
   m_InputModule: {fileID: 7766021586481033469}
+  objectSyncer: {fileID: 0}
 --- !u!20 &1059633475575348801
 Camera:
   m_ObjectHideFlags: 0
@@ -37252,7 +37267,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellManager: {fileID: 3161323410038108956}
-  animatedSpellSlot: {fileID: 2891287636631254280}
+  NoAnimation: {fileID: 0}
+  SandClockAnimation: {fileID: 0}
+  CircleAnimation: {fileID: 0}
+  ThunderboltAnimation: {fileID: 0}
+  SwishAndFlickAnimation: {fileID: 0}
+  FifthGestureAnimation: {fileID: 0}
 --- !u!1 &5990028858697554986
 GameObject:
   m_ObjectHideFlags: 0
@@ -37717,7 +37737,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellManager: {fileID: 2492741462949548796}
-  animatedSpellSlot: {fileID: 2699443104656337951}
+  NoAnimation: {fileID: 0}
+  SandClockAnimation: {fileID: 0}
+  CircleAnimation: {fileID: 0}
+  ThunderboltAnimation: {fileID: 0}
+  SwishAndFlickAnimation: {fileID: 0}
+  FifthGestureAnimation: {fileID: 0}
 --- !u!1 &6155950100802847423
 GameObject:
   m_ObjectHideFlags: 0
@@ -41144,6 +41169,7 @@ MonoBehaviour:
     lowerPelvisWeight: 1
     liftPelvisWeight: 0
     rootSphereCastRadius: 0.1
+    overstepFallsDown: 1
     quality: 2
   ik: {fileID: 2989633497323852259}
 --- !u!114 &2989633497323852259
@@ -41215,6 +41241,7 @@ MonoBehaviour:
       rotationWeight: 1
       shoulderRotationMode: 0
       shoulderRotationWeight: 0.5
+      shoulderTwistWeight: 1
       bendGoalWeight: 0
       swivelOffset: -70
       wristToPalmAxis: {x: -1, y: -0, z: -0}
@@ -41234,6 +41261,7 @@ MonoBehaviour:
       rotationWeight: 1
       shoulderRotationMode: 0
       shoulderRotationWeight: 0.5
+      shoulderTwistWeight: 1
       bendGoalWeight: 0
       swivelOffset: 70
       wristToPalmAxis: {x: -1, y: -0, z: -0}
@@ -41253,6 +41281,14 @@ MonoBehaviour:
       rotationWeight: 0
       bendGoalWeight: 0
       swivelOffset: 70
+      bendToTargetWeight: 0.5
+      legLengthMlp: 1
+      stretchCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     rightLeg:
       bones: []
       target: {fileID: 0}
@@ -41261,6 +41297,14 @@ MonoBehaviour:
       rotationWeight: 0
       bendGoalWeight: 0
       swivelOffset: -70
+      bendToTargetWeight: 0.5
+      legLengthMlp: 1
+      stretchCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     locomotion:
       weight: 1
       footDistance: 0.2
@@ -49561,15 +49605,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7356cda5890125248b90b9c75409a830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldTrain: 0
   vRInputModule: {fileID: 0}
   trailController: {fileID: 0}
+  photonView: {fileID: 0}
   LoadGesturesFile: 
-  wandEnd: {fileID: 0}
-  head: {fileID: 0}
+  rightControllerReference: {fileID: 0}
+  playerHeadReference: {fileID: 0}
   SaveGesturesFile: 
   spellManager: {fileID: 0}
-  rManager: {fileID: 0}
+  HUDText: {fileID: 0}
 --- !u!114 &2815734757064543946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50780,6 +50824,7 @@ MonoBehaviour:
     lowerPelvisWeight: 1
     liftPelvisWeight: 0
     rootSphereCastRadius: 0.1
+    overstepFallsDown: 1
     quality: 2
   ik: {fileID: 5032443630981340036}
 --- !u!114 &5032443630981340036
@@ -50851,6 +50896,7 @@ MonoBehaviour:
       rotationWeight: 1
       shoulderRotationMode: 0
       shoulderRotationWeight: 0.5
+      shoulderTwistWeight: 1
       bendGoalWeight: 0
       swivelOffset: -70
       wristToPalmAxis: {x: -1, y: -0, z: -0}
@@ -50870,6 +50916,7 @@ MonoBehaviour:
       rotationWeight: 1
       shoulderRotationMode: 0
       shoulderRotationWeight: 0.5
+      shoulderTwistWeight: 1
       bendGoalWeight: 0
       swivelOffset: 70
       wristToPalmAxis: {x: -1, y: -0, z: -0}
@@ -50889,6 +50936,14 @@ MonoBehaviour:
       rotationWeight: 0
       bendGoalWeight: 0
       swivelOffset: 70
+      bendToTargetWeight: 0.5
+      legLengthMlp: 1
+      stretchCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     rightLeg:
       bones: []
       target: {fileID: 0}
@@ -50897,6 +50952,14 @@ MonoBehaviour:
       rotationWeight: 0
       bendGoalWeight: 0
       swivelOffset: -70
+      bendToTargetWeight: 0.5
+      legLengthMlp: 1
+      stretchCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     locomotion:
       weight: 1
       footDistance: 0.2
@@ -52174,6 +52237,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PR_VRInputModule
       objectReference: {fileID: 0}
+    - target: {fileID: 8896661435728234538, guid: 029f5957bc149474c952f24614f244b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8896661435728234538, guid: 029f5957bc149474c952f24614f244b9,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2883533888611142773}
     - target: {fileID: 8896661435728234539, guid: 029f5957bc149474c952f24614f244b9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -52229,16 +52302,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8896661435728234538, guid: 029f5957bc149474c952f24614f244b9,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8896661435728234538, guid: 029f5957bc149474c952f24614f244b9,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 2883533888611142773}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 029f5957bc149474c952f24614f244b9, type: 3}
 --- !u!4 &4486842830918908667 stripped

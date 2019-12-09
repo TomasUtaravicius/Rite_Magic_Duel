@@ -12,6 +12,7 @@ public class ObjectSyncer : MonoBehaviour
     public GameObject actualRightHand;
     public GameObject actualLeftHand;
     public PhotonView photonView;
+    public VRInputModule vRInputModule;
     public GestureController gc;
     public SpellManager spellManager;
     public bool isPracticeMode;
@@ -30,24 +31,26 @@ public class ObjectSyncer : MonoBehaviour
         {
             Destroy(this);
         }
-    
+        vRInputModule = GameObject.Find("PR_VRInputModule").GetComponent<VRInputModule>();
+        if (isPracticeMode)
+        {
+           
+            GetComponentInChildren<PracticeModeUIController>().vRInputModule = vRInputModule;
+        }
+        else
+        {
+            GetComponentInChildren<UIController>().vRInputModule = vRInputModule;
+        }
         VRTK_SDKManager sdk = VRTK_SDKManager.instance;
         sdk.loadedSetup.actualBoundaries.transform.position = transform.position;
         sdk.loadedSetup.actualBoundaries.transform.rotation = transform.rotation;
-        spellManager.vRInputModule = GameObject.Find("PR_VRInputModule").GetComponent<VRInputModule>();
-        gc.vRInputModule = GameObject.Find("PR_VRInputModule").GetComponent<VRInputModule>();
+        spellManager.vRInputModule = vRInputModule;
+        gc.vRInputModule = vRInputModule;
         headTarget = GameObject.Find("LocalPlayerHead").transform;
         leftHandTarget = GameObject.Find("LocalPlayerLeftHand").transform;
         rightHandTarget = GameObject.Find("LocalPlayerRightHand").transform;
     }
 
-
-    /*
-     *     if(isPracticeMode)
-        {
-           GetComponentInChildren<PracticeModeUIController>().vRInputModule = GameObject.Find("PR_VRInputModule").GetComponent<VRInputModule>();
-        }
-     */
     void Awake()
     {
         VRTK_SDKManager.instance.AddBehaviourToToggleOnLoadedSetupChange(this);

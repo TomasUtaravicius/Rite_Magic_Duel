@@ -20,9 +20,8 @@ public class PracticeModeUIController : MonoBehaviour
 
     public void OnEnable()
     {
+
         
-        EnableUI();
-        DisableUI();
     }
     public void ResetMenu()
     {
@@ -33,8 +32,9 @@ public class PracticeModeUIController : MonoBehaviour
     void Update()
     {
         
-        if(vRInputModule.rightController.GetPressDown(SteamVR_Controller.ButtonMask.ApplicationMenu))
+        if(vRInputModule && vRInputModule.rightController.GetPressDown(SteamVR_Controller.ButtonMask.ApplicationMenu))
         {
+            
             if (menuUI.activeSelf == true)
             {
                
@@ -46,6 +46,7 @@ public class PracticeModeUIController : MonoBehaviour
                 EnableUI();
             }
         }
+       
 
     }
     private void DisableUI()

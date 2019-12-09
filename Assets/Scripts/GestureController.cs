@@ -35,7 +35,7 @@ using UnityEngine.UI;
 
 public class GestureController : MonoBehaviour
 {
-    public enum Gesture { Sandtimer = 0, Circle, ThunderBolt, Fish, SwishAndFlick, NONE }
+    public enum Gesture { Sandtimer = 0, Circle, ThunderBolt, SwishAndFlick, NONE }
 
     public VRInputModule vRInputModule;
     public TrailController trailController;
@@ -67,6 +67,10 @@ public class GestureController : MonoBehaviour
     // The game object associated with the currently active controller (if any):
     private GameObject active_controller = null;
 
+
+    // The file from which to load gestures on startup.
+    [SerializeField] public float minimumGesturePerformanceTime =2f;
+    private float nextGestureAvailabilityTime;
     // ID of the gesture currently being recorded,
     // or: -1 if not currently recording a new gesture,
     // or: -2 if the AI is currently trying to learn to identify gestures
@@ -90,33 +94,25 @@ public class GestureController : MonoBehaviour
         {
             StartTraining();
         }
-        if (vRInputModule != null && vRInputModule.rightController.GetHairTriggerUp())
-        {
-            
-        }
-
+   
         //If the gesture is already loaded,do not record.
-        if (spellManager.bufferedGesture != Gesture.NONE || !isGestureControllerReady)
+        if (spellManager.bufferedGesture != Gesture.NONE)
         {
             return;
         }
 
-        //1 Second cooldown after the gesture was perfomed to disable gesture spamming.
-
-        if (vRInputModule != null && vRInputModule.rightController.GetHairTriggerUp())
-        {
-            Invoke("ResetGestureAvailability", 1f);
-        }
-
         //Get trigger value of the right controller
+      
         float trigger_right = vRInputModule.rightController.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x;
         // If the user is not yet dragging (pressing the trigger) on either controller, he hasn't started a gesture yet.
-        if (active_controller == null && isGestureControllerReady)
+        if (active_controller == null)
         {
             // If the user presses controller's trigger, we start a new gesture.
             if (trigger_right > 0.3)
             {
                 active_controller = rightControllerReference;
+                nextGestureAvailabilityTime = Time.time + minimumGesturePerformanceTime;
+                Debug.LogWarning("New Gesture");
             }
 
             // If we arrive here, the user is not pressing controller's trigger:
@@ -130,7 +126,6 @@ public class GestureController : MonoBehaviour
             Vector3 hmdPosition = hmd.transform.localPosition;
             Quaternion hmdRotation = hmd.transform.localRotation;
             gestureRecognition.startStroke(hmdPosition, hmdRotation, recording_gesture);
-
             trailController.TurnOnTrail();
         }
 
@@ -143,7 +138,7 @@ public class GestureController : MonoBehaviour
 
         // If we arrive here, the user is currently dragging with one of the controllers.
         // Check if the user is still dragging or if he let go of the trigger button.
-        if (trigger_right > 0.3 && isGestureControllerReady)
+        if (trigger_right > 0.3)
         {
             // The user is still dragging with the controller: continue the gesture.
             Vector3 position = active_controller.transform.localPosition;
@@ -156,15 +151,15 @@ public class GestureController : MonoBehaviour
 
         //if we arrive here, the user let go of the trigger, ending a gesture.
         active_controller = null;
-
+       
         //Gesture performing has ended.
-        if (spellManager.bufferedGesture == Gesture.NONE)
+        if(nextGestureAvailabilityTime<Time.time)
         {
             trailController.TurnOffTrail();
             String gestureName = "";
             double[] gestureRecogntionResult = gestureRecognition.endStrokeAndGetAllProbabilities();
 
-           
+
             int gesture_id = -1;
 
             for (int i = 0; i < gestureRecogntionResult.GetLength(0); i++)
@@ -173,7 +168,7 @@ public class GestureController : MonoBehaviour
                 gestureName = ((Gesture)i).ToString();
                 Debug.Log(gestureName + "  " + gestureRecogntionResult[i]);
 
-                if (gestureRecogntionResult[i] > 0.9)
+                if (gestureRecogntionResult[i] > 0.8)
                 {
                     gesture_id = i;
                     break;
@@ -189,10 +184,22 @@ public class GestureController : MonoBehaviour
                 if (spellManager.canCastSpells)
                 {
                     spellManager.SetBufferedGesture((Gesture)gesture_id); //int to enum
-                    isGestureControllerReady = false;
+                   
                 }
             }
         }
+        else
+        {
+
+            trailController.TurnOffTrail();
+            double[] gestureRecogntionResult = gestureRecognition.endStrokeAndGetAllProbabilities();
+        }
+            
+        
+    }
+    public void ResetGestureTimer()
+    {
+        nextGestureAvailabilityTime = Time.time + 0.5f;
     }
 
     // Callback function to be called by the gesture recognition plug-in during the learning process.

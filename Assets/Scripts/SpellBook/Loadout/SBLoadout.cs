@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public class SBLoadout
 {
-    public static readonly int DEFAULT_LOADOUT_SPELL_COUNT = 5;
+    public static readonly int DEFAULT_LOADOUT_SPELL_COUNT = 4;
 
     public int loadoutNumber;
     public string name;

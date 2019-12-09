@@ -8,10 +8,11 @@ public class UIController : MonoBehaviour
 {
     [SerializeField]
     private GameObject menuUI;
-    //public SteamVR_Action_Boolean menuToggle;
-    //public SteamVR_Input_Sources handType;
+    public VRInputModule vRInputModule;
     public GameObject pointer;
+    public GestureController gestureController;
     private bool menuValue;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,7 @@ public class UIController : MonoBehaviour
     void Update()
     {
         
-        /*if(menuToggle.GetStateDown(handType))
+        if(vRInputModule && vRInputModule.rightController.GetPressDown(SteamVR_Controller.ButtonMask.ApplicationMenu))
         {
             menuValue = !menuValue;
             if (menuValue)
@@ -39,16 +40,7 @@ public class UIController : MonoBehaviour
                 DisableUI();
             }
         }
-        /*if (menuToggle.GetState(handType)==true)
-        {
-            
-            
-        }
-        if (menuToggle.GetState(handType)==false)
-        {
-            menuValue = false;
-            
-        }*/
+        
        
     }
     private void DisableUI()
@@ -56,12 +48,14 @@ public class UIController : MonoBehaviour
         menuUI.SetActive(false);
 
         pointer.SetActive(false);
+        gestureController.enabled = true;
     }
     private void EnableUI()
     {
         menuUI.SetActive(true);
         
         pointer.SetActive(true);
+        gestureController.enabled = false;
     }
 
 

@@ -247,7 +247,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
     public void OnLoginButtonClicked()
     {
         string playerName = PlayerNameInput.text;
-
+        
         if (!playerName.Equals(""))
         {
             PhotonNetwork.LocalPlayer.NickName = playerName;
@@ -286,10 +286,17 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
 
     public void OnStartGameButtonClicked()
     {
+        GameObject.Find("Camera").GetComponent<VRTK.VRTK_HeadsetFade>().Fade(Color.black, 0.5f);
+        Invoke("StartGameButtonClickInvoke", 0.3f);
+        
+    }
+    private void StartGameButtonClickInvoke()
+    {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
         SceneManager.UnloadSceneAsync("Lobby");
-        if(isPracticeGame)
+
+        if (isPracticeGame)
         {
             PhotonNetwork.LoadLevel("PracticeScene");
         }
@@ -297,7 +304,6 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LoadLevel("Multiplayer-GameScene");
         }
-        
     }
     public void OnPracticeButtonClicked()
     {

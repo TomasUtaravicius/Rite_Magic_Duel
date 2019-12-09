@@ -6,7 +6,7 @@ public class SpellManager : MonoBehaviour
 {
     [SerializeField] private SpellBook spellBook;
     public GameObject spellCastingPoint;
-
+    public GestureController gestureController;
     public PhotonView photonView;
     public Transform headTransform;
     //public SteamVR_Action_Boolean gripPressed;
@@ -91,6 +91,7 @@ public class SpellManager : MonoBehaviour
                 else
                 {
                     SetBufferedGesture(Gesture.NONE);
+                    gestureController.ResetGestureTimer();
                     return;
                 }
             }
