@@ -92,7 +92,7 @@ public class GestureController : MonoBehaviour
         }
         if (vRInputModule != null && vRInputModule.rightController.GetHairTriggerUp())
         {
-            trailController.TurnOffTrail();
+            
         }
 
         //If the gesture is already loaded,do not record.
@@ -103,7 +103,7 @@ public class GestureController : MonoBehaviour
 
         //1 Second cooldown after the gesture was perfomed to disable gesture spamming.
 
-        if (vRInputModule.rightController.GetHairTriggerUp())
+        if (vRInputModule != null && vRInputModule.rightController.GetHairTriggerUp())
         {
             Invoke("ResetGestureAvailability", 1f);
         }
@@ -160,6 +160,7 @@ public class GestureController : MonoBehaviour
         //Gesture performing has ended.
         if (spellManager.bufferedGesture == Gesture.NONE)
         {
+            trailController.TurnOffTrail();
             String gestureName = "";
             double[] gestureRecogntionResult = gestureRecognition.endStrokeAndGetAllProbabilities();
 

@@ -1992,7 +1992,7 @@ PrefabInstance:
     - target: {fileID: 3471607683313120892, guid: bc1ee2e97eb95f3439af3283f7e65d83,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3471607683313120894, guid: bc1ee2e97eb95f3439af3283f7e65d83,
         type: 3}
@@ -3691,7 +3691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testFire: 0
-  spellData: {fileID: 11400000, guid: 661de803eb2757b45a93763f594ffd56, type: 2}
+  spellData: {fileID: 0}
 --- !u!4 &1780333826
 Transform:
   m_ObjectHideFlags: 0
@@ -35211,8 +35211,6 @@ GameObject:
   - component: {fileID: 3743177161229563353}
   - component: {fileID: 3746878050777500697}
   - component: {fileID: 8097353120877524046}
-  - component: {fileID: 9149231089807363808}
-  - component: {fileID: 6330758458966067215}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -35783,7 +35781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73cdb1c871a5bc242b4d5ba524b2d2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellBook: {fileID: 6330758458966067215}
+  spellBook: {fileID: 0}
   spellCastingPoint: {fileID: 3630989527477454205}
   photonView: {fileID: 3746878050777500697}
   headTransform: {fileID: 3632623647686725721}
@@ -40820,12 +40818,11 @@ MonoBehaviour:
   trailController: {fileID: 3742762618434695029}
   photonView: {fileID: 0}
   LoadGesturesFile: Assets/StreamingAssets/GestureSet5Gestures180Samples.dat
-  wandEnd: {fileID: 1345060293907410299}
-  head: {fileID: 1344624329256892407}
+  rightControllerReference: {fileID: 0}
+  playerHeadReference: {fileID: 0}
   SaveGesturesFile: Assets/StreamingAssets/GestureSet5Gestures180Samples.dat
   spellManager: {fileID: 3742714787753205189}
   HUDText: {fileID: 0}
-  rManager: {fileID: 3742892463985941745}
 --- !u!1 &4093882188500962520
 GameObject:
   m_ObjectHideFlags: 0
@@ -46527,28 +46524,6 @@ Transform:
   m_Father: {fileID: 1282370578808805426}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6330758458966067215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3630469643854309527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bb76bc7c58638e41bee5061428b2dfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  usePool: 1
-  loadout:
-    loadoutNumber: 0
-    name: SpellLoadout-New
-    spells:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
 --- !u!1 &6334608773666819223
 GameObject:
   m_ObjectHideFlags: 0
@@ -47227,6 +47202,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: PR_VRInputModule
       objectReference: {fileID: 0}
+    - target: {fileID: 8896661435728234538, guid: 029f5957bc149474c952f24614f244b9,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 3471100391681278311, guid: ae43e4d08c8614f4d94e18eaa10a6f75,
+        type: 3}
     - target: {fileID: 8896661435728234539, guid: 029f5957bc149474c952f24614f244b9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -47282,12 +47263,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8896661435728234538, guid: 029f5957bc149474c952f24614f244b9,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 3471100391681278311, guid: ae43e4d08c8614f4d94e18eaa10a6f75,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 029f5957bc149474c952f24614f244b9, type: 3}
 --- !u!54 &6713884938642567743
@@ -57932,7 +57907,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &8508646066514332032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59292,18 +59267,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &9149231089807363808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3630469643854309527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6503a09508e721c4aaecfd7e29e55364, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9153027607153654984
 GameObject:
   m_ObjectHideFlags: 0

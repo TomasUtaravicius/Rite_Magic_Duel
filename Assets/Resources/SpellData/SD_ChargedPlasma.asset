@@ -21,7 +21,7 @@ MonoBehaviour:
   health: 1
   damage: 10
   lifetime: 2
-  spellSpeed: 1
+  spellSpeed: 50
   feedback: 12
   spellPrefab: {fileID: 1781909801254948373, guid: a599aacd66b56534e877e7743d67778b,
     type: 3}
