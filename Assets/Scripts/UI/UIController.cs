@@ -16,7 +16,10 @@ public class UIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+       if(!gameObject.GetComponent<PhotonView>().IsMine)
+        {
+            Destroy(this);
+        }
     }
 
     public void ResetMenu()
