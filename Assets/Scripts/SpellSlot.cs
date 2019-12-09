@@ -1,5 +1,4 @@
-﻿using Rite.SpellBook;
-using UnityEngine;
+﻿using UnityEngine;
 using static GestureController;
 
 public class SpellSlot : MonoBehaviour
@@ -23,7 +22,7 @@ public class SpellSlot : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
     private void OnEnable()
     {
@@ -42,7 +41,7 @@ public class SpellSlot : MonoBehaviour
             TurnOffSpellAnimations();
             Debug.Log("Turning the animation off");
         }
-        else if(spellManager.bufferedGesture == Gesture.Sandtimer)
+        else if (spellManager.bufferedGesture == Gesture.Sandtimer)
         {
 
             SandClockAnimation.SetActive(true);
@@ -53,7 +52,7 @@ public class SpellSlot : MonoBehaviour
             CircleAnimation.SetActive(true);
             Debug.Log("Turning the animation to Circle)");
         }
-        else if(spellManager.bufferedGesture == Gesture.SwishAndFlick)
+        else if (spellManager.bufferedGesture == Gesture.SwishAndFlick)
         {
             SwishAndFlickAnimation.SetActive(true);
             Debug.Log("Turning the animation to Circle)");

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Rite.SpellBook;
 
 public class AvatarStateController : MonoBehaviour {
 
