@@ -41,14 +41,19 @@ public class ObjectSyncer : MonoBehaviour
         {
             GetComponentInChildren<UIController>().vRInputModule = vRInputModule;
         }
-        VRTK_SDKManager sdk = VRTK_SDKManager.instance;
-        sdk.loadedSetup.actualBoundaries.transform.position = transform.position;
-        sdk.loadedSetup.actualBoundaries.transform.rotation = transform.rotation;
-        spellManager.vRInputModule = vRInputModule;
-        gc.vRInputModule = vRInputModule;
-        headTarget = GameObject.Find("LocalPlayerHead").transform;
-        leftHandTarget = GameObject.Find("LocalPlayerLeftHand").transform;
-        rightHandTarget = GameObject.Find("LocalPlayerRightHand").transform;
+        if(photonView.IsMine)
+        {
+            VRTK_SDKManager sdk = VRTK_SDKManager.instance;
+           
+            sdk.loadedSetup.actualBoundaries.transform.position = GameObject.Find("PlayerSpawnPoints").transform.GetChild(PhotonNetwork.LocalPlayer.ActorNumber).GetChild(0).gameObject.transform.position;
+            sdk.loadedSetup.actualBoundaries.transform.rotation = GameObject.Find("PlayerSpawnPoints").transform.GetChild(PhotonNetwork.LocalPlayer.ActorNumber).GetChild(0).gameObject.transform.rotation;
+            spellManager.vRInputModule = vRInputModule;
+            gc.vRInputModule = vRInputModule;
+            headTarget = GameObject.Find("LocalPlayerHead").transform;
+            leftHandTarget = GameObject.Find("LocalPlayerLeftHand").transform;
+            rightHandTarget = GameObject.Find("LocalPlayerRightHand").transform;
+        }
+       
     }
 
     void Awake()
