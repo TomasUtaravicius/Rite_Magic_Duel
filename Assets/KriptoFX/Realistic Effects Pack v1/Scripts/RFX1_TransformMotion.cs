@@ -208,6 +208,12 @@ public class RFX1_TransformMotion : MonoBehaviour
         {
            
             var instance = Instantiate(effect, hit.point + hit.normal * CollisionOffset, new Quaternion()) as GameObject;
+            if (hit.collider.gameObject.GetComponent<IDamagable>() != null)
+            {
+
+                Debug.Log("we hit a damageable object");
+                hit.collider.gameObject.GetComponent<IDamagable>().GetHit(spellScript.damage);
+            }
             if (hit.collider.gameObject.CompareTag("Environment"))
             {
                 if (hit.collider.gameObject.GetComponent<Rigidbody>())
@@ -216,12 +222,7 @@ public class RFX1_TransformMotion : MonoBehaviour
                 }
 
             }
-            if (hit.collider.gameObject.GetComponent<IDamagable>() != null)
-            {
-                
-                Debug.Log("we hit a damageable object");
-                hit.collider.gameObject.GetComponent<IDamagable>().GetHit(spellScript.damage);
-            }
+           
           
             CollidedInstances.Add(instance);
             if (HUE > -0.9f)

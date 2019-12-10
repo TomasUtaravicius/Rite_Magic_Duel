@@ -48,9 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiresHeldCast: 0
   canChargeOnCast: 0
-  damage: 10
-  manaCost: 0
-  spellSpeed: 10
+  damage: 60
+  manaCost: 40
+  spellSpeed: 15
   visibilityScript: {fileID: 0}
 --- !u!114 &3423726609896685638
 MonoBehaviour:
@@ -5027,7 +5027,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   CollidesWith:
     serializedVersion: 2
-    m_Bits: 14592
+    m_Bits: 10496
   EffectsOnCollision:
   - {fileID: 168890, guid: 2c936a8ea5b0042458c44a79a667c645, type: 3}
   CollisionOffset: 0

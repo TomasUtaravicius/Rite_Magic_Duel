@@ -16,9 +16,9 @@ public class RFX4_CameraShake : MonoBehaviour
     public bool canUpdate;
 
     void PlayShake()
-    {
-        StopAllCoroutines();
-        StartCoroutine(Shake());
+    {//
+       // StopAllCoroutines();
+      //  StartCoroutine(Shake());
     }
 
     void Update()

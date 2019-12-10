@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 630552135845590065}
-  - component: {fileID: 673440600056692531}
   - component: {fileID: 697897744533226948}
+  - component: {fileID: 673440600056692531}
   m_Layer: 12
   m_Name: Collision
   m_TagString: Untagged
@@ -40,6 +40,18 @@ Transform:
   m_Father: {fileID: 639230584206171431}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &697897744533226948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632796255358161733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86b6f49c2149194893b813a9c59a56a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &673440600056692531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +73,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   CollidesWith:
     serializedVersion: 2
-    m_Bits: 14592
+    m_Bits: 10496
   EffectsOnCollision:
   - {fileID: 1148325190646528, guid: 9984e606f8e60e149b1d4d55c0235548, type: 3}
   CollisionOffset: 0
@@ -74,18 +86,6 @@ MonoBehaviour:
   - {fileID: 633665588979118637}
   HUE: -1
   CollidedInstances: []
---- !u!114 &697897744533226948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 632796255358161733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d86b6f49c2149194893b813a9c59a56a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &632813441561617395
 GameObject:
   m_ObjectHideFlags: 0
@@ -23308,9 +23308,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiresHeldCast: 0
   canChargeOnCast: 0
-  damage: 10
-  manaCost: 0
-  spellSpeed: 10
+  damage: 40
+  manaCost: 25
+  spellSpeed: 25
   visibilityScript: {fileID: 0}
 --- !u!114 &5708047366446880476
 MonoBehaviour:
