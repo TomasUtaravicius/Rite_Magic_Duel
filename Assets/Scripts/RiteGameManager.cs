@@ -124,15 +124,13 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
 
     private void StartGame()
     {
-        if(photonView.IsMine)
-        {
             Hashtable props = new Hashtable
             {
                 {"position", PhotonNetwork.LocalPlayer.ActorNumber}
             };
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);
             int number = PhotonNetwork.LocalPlayer.ActorNumber;
-            int positionIndex = (int)PhotonNetwork.LocalPlayer.CustomProperties["position"];
+            int positionIndex = PhotonNetwork.LocalPlayer.ActorNumber;
             GameObject spawnPoint;
 
 
@@ -143,8 +141,7 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
             Debug.LogWarning("MY Position index is: " + positionIndex);
             GameObject go = PhotonNetwork.Instantiate(steamVrPlayerPrefab.name,
                 spawnPoint.transform.position, spawnPoint.transform.rotation, 0) as GameObject;
-        }
-     
+
     }
 
     [PunRPC]
