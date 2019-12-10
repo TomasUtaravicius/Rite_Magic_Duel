@@ -415,6 +415,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         {
             GameObject entry = Instantiate(RoomListEntryPrefab, Vector3.zero, Quaternion.identity, RoomListContent.transform);
             entry.transform.localScale = Vector3.one;
+            entry.transform.localPosition = new Vector3(entry.transform.localPosition.x, entry.transform.localPosition.y, 0f);
             entry.GetComponent<RoomListEntry>().Initialize(info.Name, (byte)info.PlayerCount, info.MaxPlayers);
 
             roomListEntries.Add(info.Name, entry);

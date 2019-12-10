@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1780079342086514552}
   - component: {fileID: 1814669873964675978}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Effect16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,8 +71,8 @@ GameObject:
   - component: {fileID: 4602252637847665194}
   - component: {fileID: 7026077738998471809}
   - component: {fileID: -4549656348844814925}
-  m_Layer: 0
-  m_Name: BigChargedPlasmaBlast
+  m_Layer: 12
+  m_Name: Plasma
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,11 +171,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1777420261247796598}
-  - component: {fileID: 1811159855469569332}
   - component: {fileID: 1781909800391432352}
-  - component: {fileID: 1781909800391432355}
   - component: {fileID: 1781909801379079556}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,32 +198,6 @@ Transform:
   m_Father: {fileID: 1780079342086514552}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1811159855469569332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782414652506368446}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75bcd4d4aef247d48915d2aa7cc7bc3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RaycastDistance: 20
-  Effects:
-  - {fileID: 1929620577409710, guid: eb550bb3d0f18944ba2272872ad6e2cd, type: 3}
-  Offset: 0
-  EnableTimeDelay: 0
-  spell: {fileID: 1781909801254948375}
-  DestroyTime: 5
-  UsePivotPosition: 0
-  UseNormalRotation: 1
-  IsWorldSpace: 1
-  RealTimeUpdateRaycast: 1
-  DestroyAfterDisabling: 0
-  HUE: -1
-  CollidedInstances: []
 --- !u!114 &1781909800391432352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,44 +205,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782414652506368446}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d86b6f49c2149194893b813a9c59a56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1781909800391432355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782414652506368446}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9320f3afef659b64cb7316ce3c0bfbab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UseCollisionDetect: 1
-  spell: {fileID: 0}
-  MaxDistnace: -1
-  Mass: 1
-  Speed: 10
-  RandomSpeedOffset: 0
-  AirDrag: 0.1
-  UseGravity: 1
-  ForceMode: 1
-  AddRealtimeForce: {x: 0, y: 0, z: 0}
-  MinSpeed: 0
-  ColliderRadius: 0.05
-  FreezeRotation: 0
-  UseTargetPositionAfterCollision: 0
-  EffectOnCollision: {fileID: 1929620577409710, guid: eb550bb3d0f18944ba2272872ad6e2cd,
-    type: 3}
-  CollisionEffectInWorldSpace: 1
-  LookAtNormal: 1
-  CollisionEffectDestroyAfter: 5
-  DeactivateObjectsAfterCollision: []
-  HUE: -1
 --- !u!114 &1781909801379079556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +251,7 @@ GameObject:
   - component: {fileID: 1777303874573846050}
   - component: {fileID: 1908111846971112942}
   - component: {fileID: 1909073244778534918}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5125,7 +5064,7 @@ GameObject:
   - component: {fileID: 1907861017695128866}
   - component: {fileID: 1908982601309794436}
   - component: {fileID: 1813976150749227818}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShotTrail2_Distance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9959,7 +9898,7 @@ GameObject:
   - component: {fileID: 1777360151503862798}
   - component: {fileID: 1908347317128954746}
   - component: {fileID: 1907731969566486064}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SubEmitter0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14712,7 +14651,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1777268396310015478}
   - component: {fileID: 1817686429104486970}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14803,7 +14742,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1780389719964714118}
   - component: {fileID: 1846133543947149246}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14933,7 +14872,7 @@ GameObject:
   - component: {fileID: 1908989139879885424}
   - component: {fileID: 1813848787890946016}
   - component: {fileID: 1814378874667005942}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShotTrail_Distance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19780,7 +19719,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1780569762179522020}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}

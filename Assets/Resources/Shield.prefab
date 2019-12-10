@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5714550822450017184}
   - component: {fileID: 5713198093840759528}
   - component: {fileID: 5483767565463418904}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Trails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4671,7 +4671,7 @@ GameObject:
   - component: {fileID: 5714666944828769284}
   - component: {fileID: 5713515137677929702}
   - component: {fileID: 5484029078023433266}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ShieldAdd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9397,7 +9397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5585361866157396336}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9428,7 +9428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5585481110754660654}
   - component: {fileID: 5484252526384317620}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PerPlatformSettings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9475,7 +9475,7 @@ GameObject:
   - component: {fileID: 5585507229069297644}
   - component: {fileID: 5480232921430997630}
   - component: {fileID: 5483790687516758048}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9608,7 +9608,7 @@ GameObject:
   - component: {fileID: 5714525734436664536}
   - component: {fileID: 5714790841778472858}
   - component: {fileID: 5484199099099592280}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14332,7 +14332,7 @@ GameObject:
   - component: {fileID: 5592726914306517986}
   - component: {fileID: 5714263592554336388}
   - component: {fileID: 5713202116055223116}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18842,7 +18842,7 @@ GameObject:
   - component: {fileID: 5592610929165106826}
   - component: {fileID: 5483548037728373344}
   - component: {fileID: 5578357182369833316}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TriggerEnter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18906,7 +18906,7 @@ GameObject:
   - component: {fileID: 5592464255322606954}
   - component: {fileID: 5483881083460883220}
   - component: {fileID: 5524134257061064046}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19072,7 +19072,7 @@ GameObject:
   - component: {fileID: 5585375947595204588}
   - component: {fileID: 5483904459746635652}
   - component: {fileID: 5524165708654652912}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19242,8 +19242,8 @@ GameObject:
   - component: {fileID: 5587369589994897129}
   - component: {fileID: 5587369589994897142}
   - component: {fileID: 5587369589994897143}
-  m_Layer: 0
-  m_Name: ChargedShield
+  m_Layer: 13
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19380,7 +19380,7 @@ GameObject:
   - component: {fileID: 5706996287160102016}
   - component: {fileID: 5713257648633656120}
   - component: {fileID: 5483858252149375624}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ShieldFringe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24106,7 +24106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5585210639887494672}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -26,8 +26,8 @@ TagManager:
   - VRTKCollision
   - AnimationTriggerBox
   - Environment
-  - 
-  - 
+  - Projectile
+  - Shield
   - 
   - 
   - 
