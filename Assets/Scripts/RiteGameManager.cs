@@ -138,7 +138,7 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
         spawnPoint.GetComponent<MeshRenderer>().material.color = RiteGame.GetColor(positionIndex);
         photonView.RPC("UpdateSpawnPointColor", RpcTarget.Others, positionIndex);
 
-
+        Debug.LogWarning("MY Position index is: " + positionIndex);
         GameObject go = PhotonNetwork.Instantiate(steamVrPlayerPrefab.name, 
             spawnPoint.transform.position, spawnPoint.transform.rotation, 0) as GameObject;
     }

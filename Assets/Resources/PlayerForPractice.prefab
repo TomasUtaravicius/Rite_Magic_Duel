@@ -10595,16 +10595,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5038744546762040871, guid: 334944ed833dedd42a97d9992626bff5,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 5038744546762040874, guid: 334944ed833dedd42a97d9992626bff5,
         type: 3}
       propertyPath: moveWithCustomTransform
       value: 
       objectReference: {fileID: 2800972151235187233}
+    - target: {fileID: 5038744546762040871, guid: 334944ed833dedd42a97d9992626bff5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 334944ed833dedd42a97d9992626bff5, type: 3}
 --- !u!4 &6913105946518294877 stripped
