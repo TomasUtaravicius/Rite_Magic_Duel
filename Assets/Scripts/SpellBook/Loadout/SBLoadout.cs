@@ -44,6 +44,29 @@ public class SBLoadout
 
         return output;
     }
+
+    public override bool Equals(object obj)
+    {
+        SBLoadout compared = (SBLoadout) obj;
+
+        if (name != compared.name)
+            return false;
+
+        if (loadoutNumber != compared.loadoutNumber)
+            return false;
+
+        int minLenght = 0;
+        if (spells.Length >= compared.spells.Length)
+            minLenght = compared.spells.Length;
+        else
+            minLenght = spells.Length;
+
+        for (int i = 0; i < minLenght; i++)
+            if (spells[i] != compared.spells[i])
+                return false;
+
+        return true;
+    }
 }
 
 

@@ -13,26 +13,43 @@ namespace Tests
     //Assert
     public class AT_LoadoutManager
     {
-        // A Test behaves as an ordinary method
-        [Test]
-        public void AT_LoadoutManagerSimplePasses()
+        
+
+        [UnityTest]
+        public void LoadoutManager_SaveLoadoutTest()
         {
             //Arrange
             LoadoutManager.CheckForValidLoadouts();
             SBLoadout spellLoadout = LoadoutManager.LoadLoadout(1);
+            SBLoadout spellLoadout2 = spellLoadout;
+
+            spellLoadout2.name += " delta";
+            LoadoutManager.SaveLoadout(spellLoadout2, 1);
+            spellLoadout = LoadoutManager.LoadLoadout(1);
 
             //Assert
-            Assert.AreEqual(Color.white, Color.white);
+            Assert.AreEqual(spellLoadout2, spellLoadout, spellLoadout2.name + " is not equal " + spellLoadout.name + "!");
         }
+
+        
 
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
         // `yield return null;` to skip a frame.
         [UnityTest]
-        public IEnumerator AT_LoadoutManagerWithEnumeratorPasses()
+        public IEnumerator LoadoutManager_LoadLoadoutTest()
         {
-            // Use the Assert class to test conditions.
-            // Use yield to skip a frame.
-            yield return null;
+            //Arrange
+            SBLoadout newSpellLoadout = new SBLoadout();
+            newSpellLoadout.spells[0] = ScriptableObject.CreateInstance<SpellData>();
+            newSpellLoadout.spells[0].spellName = "TestSpell";
+            LoadoutManager.SaveLoadout(newSpellLoadout, 3);
+
+            SBLoadout loadedLoadout = LoadoutManager.LoadLoadout(3);
+
+            yield return new WaitForFixedUpdate();
+
+            //Assert
+            //Assert.AreEqual(newSpellLoadout, loadedLoadout, "The loaded spell was not the same as the one saved!");
         }
     }
 }
