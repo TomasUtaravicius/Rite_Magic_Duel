@@ -155,6 +155,7 @@ public class GestureController : MonoBehaviour
         //Gesture performing has ended.
         if(nextGestureAvailabilityTime<Time.time)
         {
+            Debug.LogWarning("Gesture recognition system begin calculation " + Time.time);
             trailController.TurnOffTrail();
             String gestureName = "";
             double[] gestureRecogntionResult = gestureRecognition.endStrokeAndGetAllProbabilities();
@@ -197,6 +198,7 @@ public class GestureController : MonoBehaviour
             
         
     }
+   
     public void ResetGestureTimer()
     {
         nextGestureAvailabilityTime = Time.time + 0.5f;

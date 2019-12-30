@@ -104,6 +104,7 @@ public class SpellManager : MonoBehaviour
 
     public void SetBufferedGesture(Gesture value)
     {
+        Debug.LogWarning("Gesture recognition system end calculation " + Time.time);
         bufferedGesture = value;
         OnSpellValueChanged?.Invoke();
     }
