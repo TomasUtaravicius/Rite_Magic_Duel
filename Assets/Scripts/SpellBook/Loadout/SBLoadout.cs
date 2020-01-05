@@ -44,10 +44,15 @@ public class SBLoadout
 
         return output;
     }
-
+    
     public override bool Equals(object obj)
     {
-        SBLoadout compared = (SBLoadout) obj;
+        SBLoadout compared;
+        try
+        { compared = (SBLoadout)obj; }
+        catch (Exception e)
+        { return false; }
+
 
         if (name != compared.name)
             return false;

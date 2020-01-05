@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [System.Serializable, CreateAssetMenu(fileName = "SpellDataAsset", menuName = "Rite/Spell Data Asset", order = 0)]
 public class SpellData : ScriptableObject
@@ -30,7 +31,7 @@ public class SpellData : ScriptableObject
     [Min(0)] public float spellSpeed = 10;
 
     /// <summary> Spell controller rumble feedback </summary>
-    [Min(0)] public float feedback;
+    [Min(0)] public float feedback = 0;
 
     //Spell visuals and audio
     [Space(10)]
@@ -58,4 +59,23 @@ public class SpellData : ScriptableObject
 
     [Tooltip("Multiply the color of the materials and particle effects of the Hit Effect object")]
     public Color hitEffectColorMultiplier = Color.white;
+
+    /// <summary> returns true if this spell data was just instantiated and never altered </summary>
+    internal bool IsDefaultSpellData()
+    {
+        return spellName.Equals("New Spell")
+            && spellSprite == null
+            && requiresHeldCast == false
+            && canChargeOnCast == false
+            && manaCost == 10
+            && health == 10
+            && damage == 10
+            && lifetime == 0
+            && spellSpeed == 10
+            && feedback == 10
+            && spellPrefab == null
+            && spellScale == Vector3.one
+            && shouldTintSpell == true
+            && spellTint == Color.white;
+    }
 }

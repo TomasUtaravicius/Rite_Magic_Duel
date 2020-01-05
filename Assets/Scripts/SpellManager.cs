@@ -18,32 +18,18 @@ public class SpellManager : MonoBehaviour
     public VRInputModule vRInputModule;
     public Gesture bufferedGesture = Gesture.NONE;
     private GameObject heldSpell;
-    private bool heldCasting;
+    private bool isCastingHeld;
     [SerializeField]
     private ResourceManager resourceManager;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            CastSpell((Gesture)0);
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            CastSpell((Gesture)1);
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            CastSpell((Gesture)2);
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-            CastSpell((Gesture)3);
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-            CastSpell((Gesture)4);
-
-
-        if (heldCasting)
+        if (isCastingHeld)
         {
-            if (vRInputModule.rightController.GetHairTriggerUp() || Input.GetKeyUp(KeyCode.Alpha5))
+            if (vRInputModule.rightController.GetHairTriggerUp())
             {
+                isCastingHeld = false;
                 SetBufferedGesture(Gesture.NONE);
-                heldCasting = false;
-
-                //TODO Give back to pool
                 heldSpell?.GetComponent<Spell>().photonView.RPC("OnSpellReleased", RpcTarget.AllBufferedViaServer);
                 heldSpell = null;
             }
@@ -56,7 +42,6 @@ public class SpellManager : MonoBehaviour
                 CastSpell(bufferedGesture);
             }
         }
-
     }
 
     [PunRPC]
@@ -75,24 +60,20 @@ public class SpellManager : MonoBehaviour
         {
             if (spellData.manaCost < resourceManager.mana)
             {
-                //TODO add support for canChargeOnCast spells
+                GameObject spellInstance = spellBook.ConstructSpell(gestureIdx, 
+                                                                    spellCastingPoint.transform.position, 
+                                                                    spellCastingPoint.transform.rotation);
 
-                GameObject spellInstance = spellBook.CastSpell(gestureIdx, spellCastingPoint.transform.position, spellCastingPoint.transform.rotation);
                 resourceManager.ReduceMana(spellBook.GetSpellData(gestureIdx).manaCost);
-                bufferedGesture = Gesture.NONE;
                 Spell spell = spellInstance.GetComponent<Spell>();
 
                 if (spell && spell.RequiresHeldCast)
                 {
-                    //TODO disable casting and look for trigger up event to disable spell
                     heldSpell = spellInstance;
-                    heldCasting = true;
+                    isCastingHeld = true;
                 }
                 else
-                {
                     SetBufferedGesture(Gesture.NONE);
-                    return;
-                }
             }
             else
                 NotEnoughMana();
@@ -110,6 +91,6 @@ public class SpellManager : MonoBehaviour
 
     private void NotEnoughMana()
     {
-
+        //TODO no implementation!
     }
 }

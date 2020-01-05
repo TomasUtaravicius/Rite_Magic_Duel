@@ -258,6 +258,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
             Debug.LogError("Player Name is invalid.");
         }
     }
+
     public void RejoinLobby(string name)
     {
         string playerName = name;

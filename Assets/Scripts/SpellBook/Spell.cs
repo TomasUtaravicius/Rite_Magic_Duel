@@ -19,34 +19,29 @@ public class Spell : MonoBehaviourPun, IPunObservable
     /// <summary> Lifetime of the spell after being cast. Lifetime of 0 is infinite </summary>
     private float lifeTime = 0;
 
+    /// <summary> The amount of mana required to cast this spell </summary>
     public float manaCost = 0;
-
+    
     public float spellSpeed = 10;
+
+
 
     /// <summary> A held cast spell requires the caster to hold the spell to keep it active and release to deactivate it </summary>
     public bool RequiresHeldCast { get => requiresHeldCast; }
     public bool CanChargeOnCast { get => canChargeOnCast; }
-
-
 
     //Spell effect references
     [SerializeField] RFX1_EffectSettingVisible visibilityScript;
 
     public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        throw new System.NotImplementedException();
+        
     }
-
-
-
-    public virtual void FireSpell()
-    { }
 
     [PunRPC]
     public void OnSpellReleased()
     {
         visibilityScript.IsActive = false;
-
         if (photonView.IsMine)
         {
             Invoke("DestroySpell", 0.7f);

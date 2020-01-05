@@ -17,13 +17,26 @@ public class LoadoutManager : MonoBehaviour
         if (saveTick)
         {
             SaveLoadout(currentlySelectedLoadout, loadoutNo);
-            SetPreferedLoadout(loadoutNo);
+            SelectedLoadoutNum = loadoutNo;
             saveTick = false;
         }
         if (loadTick)
         {
             currentlySelectedLoadout = LoadLoadout(loadoutNo);
             loadTick = false;
+        }
+    }
+
+
+    /////////////-Static implementation-////////////////
+
+    public static int SelectedLoadoutNum
+    {
+        get => PlayerPrefs.GetInt("SelectedLoadout", 1);
+        set
+        {
+            DebugLog(LogState.Log, "Selected Loadout " + value);
+            PlayerPrefs.SetInt("SelectedLoadout", value);
         }
     }
 
@@ -35,11 +48,29 @@ public class LoadoutManager : MonoBehaviour
             LoadLoadout(i + 1);
     }
 
-
-    public static void SetPreferedLoadout(int i)
+    public static void ClearAllData()
     {
-        DebugLog(LogState.Log, "Selected Loadout " + i);
-        PlayerPrefs.SetInt("SelectedLoadout", i);
+        PlayerPrefs.DeleteKey("SelectedLoadout");
+
+        for (int i = 1; i <= 20; i++)
+        {
+            PlayerPrefs.DeleteKey("SpellLoadout-" + i);
+        }
+
+        DebugLog(LogState.Log, "Cleared all player loadout preferences");
+    }
+
+    public static void SaveLoadout(SBLoadout loadout, int loadoutNumber)
+    {
+        loadout.loadoutNumber = loadoutNumber;
+
+        DebugLog(LogState.Log, "Saved spell loadout - " 
+                              + loadout.name 
+                              + " under name \"SpellLoadout-" 
+                              + loadoutNumber + "\"");
+
+        string bookJSON = JsonUtility.ToJson(loadout);
+        PlayerPrefs.SetString("SpellLoadout-" + loadoutNumber, bookJSON);
     }
 
     public static SBLoadout LoadSelectedLoadout()
@@ -47,17 +78,11 @@ public class LoadoutManager : MonoBehaviour
 
 
 
-    public static void SaveLoadout(SBLoadout loadout, int loadoutNumber)
-    {
-        loadout.loadoutNumber = loadoutNumber;
-
-        DebugLog(LogState.Log, "Saved spell loadout - " + loadout.name + " under name \"SpellLoadout-" + loadoutNumber + "\"");
-
-        string bookJSON = JsonUtility.ToJson(loadout);
-        PlayerPrefs.SetString("SpellLoadout-" + loadoutNumber, bookJSON);
-    }
-
-    /// <summary> Loads a loadout saved under passed number. If the loadout does not exist, a blank one will be created with no spell data. If the size of the spell array is not equal to the </summary>
+    /// <summary> 
+    /// Loads a loadout saved under passed number. 
+    /// If the loadout does not exist, a blank one will be created with no spell data. 
+    /// If the size of the spell array is not equal to the 
+    /// </summary>
     public static SBLoadout LoadLoadout(int loadoutNumber)
     {
         string loadoutJSON = PlayerPrefs.GetString("SpellLoadout-" + loadoutNumber);
@@ -68,10 +93,10 @@ public class LoadoutManager : MonoBehaviour
             {
                 SpellData[] newSpellsArray = new SpellData[SBLoadout.DEFAULT_LOADOUT_SPELL_COUNT];
                 for (int i = 0; i < newSpellsArray.Length; i++)
-                    if (loadout.spells[i] != null)
+                    if (loadout.spells.Length > i && loadout.spells[i] != null)
                         newSpellsArray[i] = loadout.spells[i];
                     else
-                        newSpellsArray[i] = new SpellData();
+                        newSpellsArray[i] = ScriptableObject.CreateInstance<SpellData>();
 
                 loadout.spells = newSpellsArray;
                 SaveLoadout(loadout, loadoutNumber);
@@ -107,7 +132,7 @@ public class LoadoutManager : MonoBehaviour
             case LogState.Warning: color = "orange"; break;
             case LogState.Error: color = "red"; break;
         }
-        string output = "<color=" + color + ">[]</color> - " + log;
+        string output = "<color=" + color + ">[LoadoutManager]</color> - " + log;
 
         switch (state)
         {

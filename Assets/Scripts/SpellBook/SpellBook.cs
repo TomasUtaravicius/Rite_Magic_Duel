@@ -4,34 +4,22 @@ using UnityEngine;
 [RequireComponent(typeof(SpellPool))]
 public class SpellBook : MonoBehaviour
 {
+    [SerializeField] public static bool USE_POOLING = false;
+
     private SpellPool spellPool;
-    [SerializeField] bool usePool = true;
     [SerializeField] SBLoadout loadout = null;
 
+    public SBLoadout Loadout { get => loadout;}
 
-    // Start is called before the first frame update
+
+    // Start is called before the first frame updatess
     void Start()
     {
         spellPool = GetComponent<SpellPool>();
         loadout = LoadoutManager.LoadSelectedLoadout();
         Debug.Log(loadout.ToString());
-
-        //TestLoadout();
-        if (usePool) PoolSpells();
-    }
-
-    private void TestLoadout()
-    {
-        SpellData[] spells = loadout.spells;
-
-        for (int i = 0; i < spells.Length; i++)
-            if (spells[i])
-            {
-                Debug.Log("Spell spawned");
-                SpawnSpell(spells[i], transform.position, transform.rotation).FireSpell();
-            }
-            else
-                Debug.LogWarning("Spell " + (i + 1) + " is null");
+        
+        if (USE_POOLING) PoolSpells();
     }
 
     private void PoolSpells()
@@ -53,10 +41,13 @@ public class SpellBook : MonoBehaviour
                 Debug.LogWarning("Spell " + (i + 1) + " is null");
     }
 
-    private Spell SpawnSpell(SpellData spellData, Vector3 spawnPosition, Quaternion spawnRotation)
+    public static Spell SpawnSpell(SpellData spellData, Vector3 spawnPosition, Quaternion spawnRotation, bool isOffline = false)
     {
         GameObject spellInstance;
-        spellInstance = PhotonNetwork.Instantiate(spellData.spellPrefab.name, spawnPosition, spawnRotation, 0);
+        //spawn spell offline or online through PhotonNetwork
+        spellInstance = isOffline ? Instantiate(spellData.spellPrefab, spawnPosition, spawnRotation)
+                                  : PhotonNetwork.Instantiate(spellData.spellPrefab.name, spawnPosition, spawnRotation, 0);
+
         spellInstance.name = spellData.spellName;
 
         Spell spell = spellInstance.GetComponent<Spell>();
@@ -76,7 +67,10 @@ public class SpellBook : MonoBehaviour
     {
         //try getting spell data
         Debug.Log("Spell book - spawning spell at index " + gestureIdx);
-        if (loadout.spells.Length - 1 < gestureIdx)
+        if (loadout == null 
+            || loadout.spells.Length <= gestureIdx 
+            || 0 > gestureIdx
+            || loadout.spells[gestureIdx].IsDefaultSpellData())
             return null;
         else
             return loadout.spells[gestureIdx];
@@ -92,13 +86,13 @@ public class SpellBook : MonoBehaviour
             return false;
     }
 
-    public GameObject CastSpell(int gestureIdx, Vector3 position, Quaternion rotation)
+    public GameObject ConstructSpell(int gestureIdx, Vector3 position, Quaternion rotation)
     {
         SpellData spellData = GetSpellData(gestureIdx);
 
         if (spellData)
         {
-            if (usePool)
+            if (USE_POOLING)
                 return spellPool.Instantiate(spellData.spellName, position, rotation);
             else
                 return SpawnSpell(spellData, position, rotation).gameObject;

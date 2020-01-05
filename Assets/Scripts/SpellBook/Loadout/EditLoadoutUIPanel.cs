@@ -140,6 +140,8 @@ public class EditLoadoutUIPanel : MonoBehaviour
             newLoadout.spells[i] = loadoutSpellButtons[i].SpellData;
 
         LoadoutManager.SaveLoadout(newLoadout, loadoutStepper.CurrentValue);
+        //TODO remove this and add a UI element for selecting a loadout by number
+        LoadoutManager.SelectedLoadoutNum = loadoutStepper.CurrentValue;
         Debug.Log("Saved new loadout");
     }
 

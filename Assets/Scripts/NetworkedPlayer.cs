@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class NetworkedPlayer : MonoBehaviour {
-
+public class NetworkedPlayer : MonoBehaviour
+{
     public ResourceManager healthManager;
     public AvatarStateController avatarStateController;
     public string name;
