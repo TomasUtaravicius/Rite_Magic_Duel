@@ -12,6 +12,7 @@ TagManager:
   - VRInputModule
   - TeaBag
   - projectile
+  - ReferenceHolder
   layers:
   - Default
   - TransparentFX
@@ -25,8 +26,8 @@ TagManager:
   - VRTKCollision
   - AnimationTriggerBox
   - Environment
-  - 
-  - 
+  - Projectile
+  - Shield
   - 
   - 
   - 

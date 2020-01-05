@@ -13,12 +13,13 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
 
     [SerializeField]
     private GameObject steamVrPlayerPrefab;
+
     private GameObject spawnPoints;
     public List<NetworkedPlayer> playerList;
     public List<NetworkedPlayer> alivePlayerList;
 
     public delegate void UpdateScoreEvent(int playerID);
-
+    public int winConditionRoundAmount;
     public event UpdateScoreEvent UpdateScore;
 
     public Leaderboard leaderboard;
@@ -45,8 +46,7 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
             };
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         PhotonNetwork.ConnectUsingSettings();
-        
-        
+
         StartGame();
     }
 
@@ -82,7 +82,6 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Lobby");
-        
     }
 
     public override void OnLeftRoom()
@@ -99,12 +98,10 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
-
         if (!PhotonNetwork.IsMasterClient)
         {
             return;
@@ -127,26 +124,28 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
 
     private void StartGame()
     {
-        
-        Hashtable props = new Hashtable
+            Hashtable props = new Hashtable
             {
                 {"position", PhotonNetwork.LocalPlayer.ActorNumber}
             };
-        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-        int number = PhotonNetwork.LocalPlayer.ActorNumber;
-        int positionIndex = (int)PhotonNetwork.LocalPlayer.CustomProperties["position"];
+            PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+            int number = PhotonNetwork.LocalPlayer.ActorNumber;
+            int positionIndex = PhotonNetwork.LocalPlayer.ActorNumber;
+            GameObject spawnPoint;
 
-        GameObject spawnPoint = playerSpawnPoints.GetChild(positionIndex).GetChild(0).gameObject;
-        spawnPoint.GetComponent<MeshRenderer>().material.color = RiteGame.GetColor(positionIndex);
-        photonView.RPC("UpdateSpawnPointColor", RpcTarget.Others, positionIndex);
-        
 
-       
-        GameObject go = PhotonNetwork.Instantiate(steamVrPlayerPrefab.name, spawnPoint.transform.position, spawnPoint.transform.rotation, 0) as GameObject;
+            spawnPoint = playerSpawnPoints.GetChild(positionIndex).GetChild(0).gameObject;
+            spawnPoint.GetComponent<MeshRenderer>().material.color = RiteGame.GetColor(positionIndex);
+            photonView.RPC("UpdateSpawnPointColor", RpcTarget.Others, positionIndex);
+
+            Debug.LogWarning("MY Position index is: " + positionIndex);
+            GameObject go = PhotonNetwork.Instantiate(steamVrPlayerPrefab.name,
+                spawnPoint.transform.position, spawnPoint.transform.rotation, 0) as GameObject;
 
     }
+
     [PunRPC]
-    void UpdateSpawnPointColor(int positionIndex)
+    private void UpdateSpawnPointColor(int positionIndex)
     {
         GameObject spawnPoint = playerSpawnPoints.GetChild(positionIndex).GetChild(0).gameObject;
         spawnPoint.GetComponent<MeshRenderer>().material.color = RiteGame.GetColor(positionIndex);
@@ -201,49 +200,49 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void PlayerDeath(int id)
     {
-        
-            for (int n = 0; n < alivePlayerList.Count; n++)
+        for (int n = 0; n < alivePlayerList.Count; n++)
+        {
+            if (alivePlayerList[n].photonID == id)
             {
-                if (alivePlayerList[n].photonID == id)
-                {
-                    alivePlayerList[n].GetComponent<AvatarStateController>().ChangeAvatarToDead();
-                    alivePlayerList.Remove(alivePlayerList[n]);
-                }
+                alivePlayerList[n].GetComponent<AvatarStateController>().ChangeAvatarToDead();
+                alivePlayerList.Remove(alivePlayerList[n]);
             }
+        }
 
-            if (alivePlayerList.Count == 1)
-            {
-                PlayerWinRound(alivePlayerList[0].photonID);
-            }
-        
-        
+        if (alivePlayerList.Count == 1)
+        {
+            PlayerWinRound(alivePlayerList[0].photonID);
+        }
     }
- 
+
     [PunRPC]
     public void PlayerWinRound(int playerID)
     {
-        Debug.LogError("PLAYER WON ROUND");
 
         IncrementPlayerScore(playerID);
         Invoke("RoundStart", 3f);
-
     }
-    void IncrementPlayerScore(int playerID)
+
+    private void IncrementPlayerScore(int playerID)
     {
-        foreach(NetworkedPlayer nPlayer in playerList)
+        foreach (NetworkedPlayer nPlayer in playerList)
         {
-            if(nPlayer.photonID==playerID)
+            if (nPlayer.photonID == playerID)
             {
                 nPlayer.score++;
+                if(nPlayer.score>=winConditionRoundAmount)
+                {
+                    this.photonView.RPC("FinishGame", RpcTarget.AllViaServer, nPlayer.name);
+                }
                 this.photonView.RPC("UpdateLeaderboard", RpcTarget.AllViaServer);
-                
+
                 break;
             }
         }
-        
     }
+
     [PunRPC]
-    void UpdateLeaderboard()
+    private void UpdateLeaderboard()
     {
         List<string> playerNameList = new List<string>();
         List<int> playerScoreList = new List<int>();
@@ -264,12 +263,16 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
         for (int j = 0; j < PhotonNetwork.PlayerList.Length; j++)
         {
             int positionIndex = (int)PhotonNetwork.PlayerList[j].CustomProperties["position"];
+            //Practice Mode.
+            if (positionIndex == -1)
+            {
+                return;
+            }
             int id = (int)PhotonNetwork.PlayerList[j].ActorNumber;
             for (int n = 0; n < alivePlayerList.Count; n++)
             {
                 if (playerList[n].photonID == id)
                 {
-                    
                     playerList[n].gameObject.transform.parent.transform.position = playerSpawnPoints.GetChild(positionIndex).position;
                 }
             }
@@ -281,7 +284,6 @@ public class RiteGameManager : MonoBehaviourPunCallbacks
     {
         for (int i = 0; i < playerList.Count; i++)
         {
-
             playerList[i].avatarStateController.SpawnAvatarBody();
         }
     }

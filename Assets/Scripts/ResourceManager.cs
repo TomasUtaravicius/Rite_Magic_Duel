@@ -51,7 +51,8 @@ public class ResourceManager : MonoBehaviourPun, IPunObservable
         mana = 100f;
         if (photonView.IsMine)
         {
-            photonView.RPC("AddPlayer", Photon.Pun.RpcTarget.AllViaServer, PhotonNetwork.LocalPlayer.ActorNumber);
+            photonView.RPC("AddPlayer", Photon.Pun.RpcTarget.AllViaServer
+                , PhotonNetwork.LocalPlayer.ActorNumber);
         }
     }
 

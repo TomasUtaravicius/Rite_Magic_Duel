@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: SD_LightningBolt
   m_EditorClassIdentifier: 
   buildReady: 1
-  spellName: LightningBolt
-  spellSprite: {fileID: 21300000, guid: de226bd492b80a041899eee9937a2c37, type: 3}
+  spellName: Thunderbolt
+  spellSprite: {fileID: 21300000, guid: d1cd1b2ae3ff39744a111f9b8e46203d, type: 3}
   requiresHeldCast: 0
   canChargeOnCast: 0
-  manaCost: 5
+  manaCost: 10
   health: 1
-  damage: 10
-  lifetime: 2
-  spellSpeed: 7.5
+  damage: 25
+  lifetime: 5
+  spellSpeed: 40
   feedback: 12
-  spellPrefab: {fileID: 2098068299979516266, guid: 010f905b6a47b314aadd345e0fb71fb0,
+  spellPrefab: {fileID: 5512758728300107477, guid: 8afabf95ae46b0142b87657e77116eb7,
     type: 3}
   spellScale: {x: 1, y: 1, z: 1}
   shouldTintSpell: 1
-  spellTint: {r: 0.77647066, g: 0, b: 0.91372555, a: 1}
+  spellTint: {r: 1, g: 0.83948135, b: 0.504717, a: 1}
   hitEffectPrefab: {fileID: 0}
   hitEffectScale: {x: 1, y: 1, z: 1}
   overrideEffectColor: 0

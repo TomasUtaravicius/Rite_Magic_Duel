@@ -41,7 +41,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
     [Header("Edit Loadout Panel")]
     public GameObject EditLoadoutPanel;
 
-
+    private bool isPracticeGame = false;
     public Keyboard keyboard;
 
     private Dictionary<string, RoomInfo> cachedRoomList;
@@ -72,6 +72,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
     {
         this.SetActivePanel(SelectionPanel.name);
         Debug.LogError("Connected to MASTER");
+        isPracticeGame = false;
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -224,7 +225,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
 
         byte maxPlayers;
         byte.TryParse(MaxPlayersInputField.text, out maxPlayers);
-        maxPlayers = (byte)Mathf.Clamp(maxPlayers, 2, 8);
+        maxPlayers = (byte)Mathf.Clamp(maxPlayers, 2, 4);
 
         RoomOptions options = new RoomOptions { MaxPlayers = maxPlayers };
         
@@ -246,7 +247,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
     public void OnLoginButtonClicked()
     {
         string playerName = PlayerNameInput.text;
-
+        
         if (!playerName.Equals(""))
         {
             PhotonNetwork.LocalPlayer.NickName = playerName;
@@ -286,27 +287,41 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
 
     public void OnStartGameButtonClicked()
     {
+        GameObject.Find("Camera").GetComponent<VRTK.VRTK_HeadsetFade>().Fade(Color.black, 0.5f);
+        Invoke("StartGameButtonClickInvoke", 0.3f);
+        
+    }
+    private void StartGameButtonClickInvoke()
+    {
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
         SceneManager.UnloadSceneAsync("Lobby");
-        PhotonNetwork.LoadLevel("Multiplayer-GameScene");
+
+        if (isPracticeGame)
+        {
+            PhotonNetwork.LoadLevel("PracticeScene");
+        }
+        else
+        {
+            PhotonNetwork.LoadLevel("Multiplayer-GameScene");
+        }
     }
     public void OnPracticeButtonClicked()
     {
-        //PhotonNetwork.CurrentRoom.IsOpen = false;
-        //PhotonNetwork.CurrentRoom.IsVisible = false;
-      
+
+
+
+        string roomName = "Practice";
+        isPracticeGame = true;
+        roomName = (roomName.Equals(string.Empty)) ? "Room " + Random.Range(1000, 10000) : roomName;
 
         byte maxPlayers;
         byte.TryParse(MaxPlayersInputField.text, out maxPlayers);
-        maxPlayers = (byte)Mathf.Clamp(maxPlayers, 2, 8);
+        maxPlayers = (byte)Mathf.Clamp(maxPlayers, 1, 1);
 
         RoomOptions options = new RoomOptions { MaxPlayers = maxPlayers };
-        
-        PhotonNetwork.CreateRoom(" ", options, null);
-        SceneManager.UnloadSceneAsync("Lobby");
-        Debug.Log("Loading practice scene");
-        PhotonNetwork.LoadLevel("PracticeScene");
+
+        PhotonNetwork.CreateRoom(roomName, options, null);
     }
 
     public void OnEditLoadoutButtonClicked()
@@ -401,6 +416,7 @@ public class LobbyMainPanel : MonoBehaviourPunCallbacks
         {
             GameObject entry = Instantiate(RoomListEntryPrefab, Vector3.zero, Quaternion.identity, RoomListContent.transform);
             entry.transform.localScale = Vector3.one;
+            entry.transform.localPosition = new Vector3(entry.transform.localPosition.x, entry.transform.localPosition.y, 0f);
             entry.GetComponent<RoomListEntry>().Initialize(info.Name, (byte)info.PlayerCount, info.MaxPlayers);
 
             roomListEntries.Add(info.Name, entry);

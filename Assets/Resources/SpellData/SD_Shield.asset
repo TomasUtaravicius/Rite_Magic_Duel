@@ -17,10 +17,10 @@ MonoBehaviour:
   spellSprite: {fileID: 21300000, guid: de226bd492b80a041899eee9937a2c37, type: 3}
   requiresHeldCast: 1
   canChargeOnCast: 0
-  manaCost: 5
-  health: 1
-  damage: 10
-  lifetime: 2
+  manaCost: 20
+  health: 50
+  damage: 0
+  lifetime: 5
   spellSpeed: 0
   feedback: 12
   spellPrefab: {fileID: 5587369589994897140, guid: a4ec77e722d3c604ab4aef381195aad1,

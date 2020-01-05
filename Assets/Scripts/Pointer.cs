@@ -7,6 +7,7 @@ public class Pointer : MonoBehaviour
     public float m_DefaultLength = 5.0f;
     public GameObject m_Dot;
     public VRInputModule m_InputModule;
+    public ObjectSyncer objectSyncer;
 
     private LineRenderer m_LineRenderer = null;
     private void Awake()
@@ -36,6 +37,10 @@ public class Pointer : MonoBehaviour
             //Set linerenderer
             m_LineRenderer.SetPosition(0, transform.position);
             m_LineRenderer.SetPosition(1, endPosition);
+        }
+        else
+        {
+            m_InputModule = objectSyncer.vRInputModule;
         }
     }
     private RaycastHit CreateRaycast(float length)

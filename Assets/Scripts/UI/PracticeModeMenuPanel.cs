@@ -10,33 +10,45 @@ public class PracticeModeMenuPanel : MonoBehaviour
     
     public GameObject obstacleCourse;
    
-    public GameObject enemyGroup;
+
     
     public GameObject gestureTutorialProps;
    
     public GameObject baseTutorialProps;
     public TextMeshPro titleText;
+    private ReferenceHolderForPracticeModeUI referenceHolder;
     // Start is called before the first frame update
+    private void Start()
+    {
+
+       
+    }
+    private void OnEnable()
+    {
+        referenceHolder = GameObject.FindGameObjectWithTag("ReferenceHolder").GetComponent<ReferenceHolderForPracticeModeUI>();
+        ResetPracticeModeSelection();
+        //this.gameObject.transform.parent.gameObject.SetActive(false);
+    }
     public void OnCombatPracticeButtonClicked()
     {
         ResetPracticeModeSelection();
         titleText.text = "Combat practice";
         
-        enemyGroup.SetActive(true);
+        //enemyGroup.SetActive(true);
     }
     public void OnGestureTutorialButtonClicked()
     {
         ResetPracticeModeSelection();
         titleText.text = "Gesture tutorial";
-        
-        gestureTutorialProps.SetActive(true);
+
+        referenceHolder.gestureTutorial.SetActive(true);
     }
     public void OnObstacleCourseButtonClicked()
     {
         ResetPracticeModeSelection();
         titleText.text = "Obstacle course";
         
-        obstacleCourse.SetActive(true);
+        referenceHolder.obstacleCourse.SetActive(true);
     }
     public void OnLeaveButtonPressed()
     {
@@ -49,15 +61,14 @@ public class PracticeModeMenuPanel : MonoBehaviour
     {
         ResetPracticeModeSelection();
         titleText.text = "Base tutorial";
-      
-        baseTutorialProps.SetActive(true);
+
+        referenceHolder.baseTutorial.SetActive(true);
     }
     public void ResetPracticeModeSelection()
     {
         titleText.text = "";
-        obstacleCourse.SetActive(false);
-        enemyGroup.SetActive(false);
-        gestureTutorialProps.SetActive(false);
-        baseTutorialProps.SetActive(false);
+        referenceHolder.obstacleCourse.SetActive(false);
+        referenceHolder.gestureTutorial.SetActive(false);
+        referenceHolder.baseTutorial.SetActive(false);
     }
 }

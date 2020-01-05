@@ -12,8 +12,10 @@ public class ObjectSyncer : MonoBehaviour
     public GameObject actualRightHand;
     public GameObject actualLeftHand;
     public PhotonView photonView;
+    public VRInputModule vRInputModule;
     public GestureController gc;
     public SpellManager spellManager;
+    public bool isPracticeMode;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,15 +31,31 @@ public class ObjectSyncer : MonoBehaviour
         {
             Destroy(this);
         }
-        VRTK_SDKManager sdk = VRTK_SDKManager.instance;
-        sdk.loadedSetup.actualBoundaries.transform.position = transform.position;
-        sdk.loadedSetup.actualBoundaries.transform.rotation = transform.rotation;
-        spellManager.vRInputModule = GameObject.Find("PR_VRInputModule").GetComponent<VRInputModule>();
-        gc.vRInputModule = GameObject.Find("PR_VRInputModule").GetComponent<VRInputModule>();
-        headTarget = GameObject.Find("LocalPlayerHead").transform;
-        leftHandTarget = GameObject.Find("LocalPlayerLeftHand").transform;
-        rightHandTarget = GameObject.Find("LocalPlayerRightHand").transform;
+        vRInputModule = GameObject.Find("PR_VRInputModule").GetComponent<VRInputModule>();
+        if (isPracticeMode)
+        {
+           
+            GetComponentInChildren<PracticeModeUIController>().vRInputModule = vRInputModule;
+        }
+        else
+        {
+            GetComponentInChildren<UIController>().vRInputModule = vRInputModule;
+        }
+        if(photonView.IsMine)
+        {
+            VRTK_SDKManager sdk = VRTK_SDKManager.instance;
+           
+            sdk.loadedSetup.actualBoundaries.transform.position = GameObject.Find("PlayerSpawnPoints").transform.GetChild(PhotonNetwork.LocalPlayer.ActorNumber).GetChild(0).gameObject.transform.position;
+            sdk.loadedSetup.actualBoundaries.transform.rotation = GameObject.Find("PlayerSpawnPoints").transform.GetChild(PhotonNetwork.LocalPlayer.ActorNumber).GetChild(0).gameObject.transform.rotation;
+            spellManager.vRInputModule = vRInputModule;
+            gc.vRInputModule = vRInputModule;
+            headTarget = GameObject.Find("LocalPlayerHead").transform;
+            leftHandTarget = GameObject.Find("LocalPlayerLeftHand").transform;
+            rightHandTarget = GameObject.Find("LocalPlayerRightHand").transform;
+        }
+       
     }
+
     void Awake()
     {
         VRTK_SDKManager.instance.AddBehaviourToToggleOnLoadedSetupChange(this);
