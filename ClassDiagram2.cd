@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EditLoadoutUIPanel" Collapsed="true">
+    <Position X="12" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgDAgJQAAAAABBAAAAAIAAAAABIAAQKAABAAAgACEA=</HashCode>
+      <FileName>Assets\Scripts\SpellBook\Loadout\EditLoadoutUIPanel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SpellUIButton" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LoadoutManager" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="LoadoutManager.LogState" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\SpellBook\Loadout\LoadoutManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>gAAAQAKEAAAAAAAAAAWAAgAAAAQAAIAAAAAAAAAAAUg=</HashCode>
+      <FileName>Assets\Scripts\SpellBook\Loadout\LoadoutManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SBLoadout" Collapsed="true">
+    <Position X="6.75" Y="2.75" Width="1.5" />
+    <AssociationLine Name="SpellData" Type="SpellData">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.074" Y="0.601" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAEgAAAAAAAAAAMEAAAASCAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SpellBook\Loadout\SBLoadout.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SpellData" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpellUIButton" Collapsed="true">
+    <Position X="12" Y="6.5" Width="1.5" />
+    <AssociationLine Name="SpellData1" Type="SpellData">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-3.292" Y="0.409" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAABAAAIgQCAAAAAABAAAAAAAABgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SpellBook\Loadout\SpellUIButton.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SpellData1" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Spell" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="1.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAABAIAAYAAAwAAAAAAAwAAAIAAAQAACQAAAAAABAAk=</HashCode>
+      <FileName>Assets\Scripts\SpellBook\Spell.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SpellBook" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAACAIAAAACAACABAAAAAARAgAEEAAAQAIAAA=</HashCode>
+      <FileName>Assets\Scripts\SpellBook\SpellBook.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SBLoadout" />
+      <Property Name="SpellPool" />
+      <Property Name="LoadoutManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpellData" Collapsed="true">
+    <Position X="6.75" Y="4.5" Width="1.5" />
+    <AssociationLine Name="SpellType" Type="SpellType" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.125" Y="5.199" />
+        <Point X="7.125" Y="5.599" />
+        <Point X="6.812" Y="5.599" />
+        <Point X="6.812" Y="6" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>gQAAgAAIASAQgAIggAAAgAAAAABAAAAGQAAQAABBAAg=</HashCode>
+      <FileName>Assets\Scripts\SpellBook\SpellData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SpellType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpellPool" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAABAAABAAAAAIAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SpellBook\SpellPool.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SpellSpawner" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAFAAAAAQAAAAAAEAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SpellBook\SpellSpawner.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SpellData" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SpellManager" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="SpellManager.SpellValueChanged" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\SpellManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CASAAAgAAIAYAAQACAAAAAASAVAAAAAAAAAAAgAAQAI=</HashCode>
+      <FileName>Assets\Scripts\SpellManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SpellBook" />
+    </ShowAsAssociation>
+  </Class>
+  <Enum Name="SpellType" Collapsed="true">
+    <Position X="6" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAEAIAA=</HashCode>
+      <FileName>Assets\Scripts\SpellBook\Spell.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9.16" />
+</ClassDiagram>
