@@ -19,7 +19,7 @@ public class SpellSpawner : MonoBehaviour
             {
                 Debug.Log("Spell found");
 
-                spell.SetSpellAttributes(spellData.spellName, spellData.requiresHeldCast, spellData.canChargeOnCast, spellData.health, spellData.damage, spellData.lifetime, spellData.spellSpeed);
+                spell.SetSpellAttributes(spellData.spellName, spellData.requiresHeldCast, spellData.canChargeOnCast, spellData.health, spellData.damage, spellData.lifeTime, spellData.spellSpeed);
                 spell.SetSpellVisuals(spellData.shouldTintSpell, spellData.spellTint);
             }
         }

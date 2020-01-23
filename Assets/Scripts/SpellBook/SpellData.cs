@@ -26,7 +26,7 @@ public class SpellData : ScriptableObject
     [Min(0)] public float damage = 10;
 
     /// <summary> Lifetime of the spell after being cast. Lifetime of 0 is infinite </summary>
-    [Min(0)] public float lifetime = 0;
+    [Min(0)] public float lifeTime = 0;
 
     [Min(0)] public float spellSpeed = 10;
 
@@ -58,7 +58,7 @@ public class SpellData : ScriptableObject
     public bool overrideEffectColor = true;
 
     [Tooltip("Multiply the color of the materials and particle effects of the Hit Effect object")]
-    public Color hitEffectColorMultiplier = Color.white;
+    public Color hitEffectColorTint = Color.white;
 
     /// <summary> returns true if this spell data was just instantiated and never altered </summary>
     internal bool IsDefaultSpellData()
@@ -70,7 +70,7 @@ public class SpellData : ScriptableObject
             && manaCost == 10
             && health == 10
             && damage == 10
-            && lifetime == 0
+            && lifeTime == 0
             && spellSpeed == 10
             && feedback == 10
             && spellPrefab == null

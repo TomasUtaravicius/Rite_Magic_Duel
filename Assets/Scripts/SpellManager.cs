@@ -56,7 +56,7 @@ public class SpellManager : MonoBehaviour
 
         SpellData spellData = spellBook.GetSpellData(gestureIdx);
 
-        if (spellData)
+        if (spellData)
         {
             if (spellData.manaCost < resourceManager.mana)
             {

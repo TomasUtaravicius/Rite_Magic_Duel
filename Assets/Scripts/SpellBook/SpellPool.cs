@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpellPool : MonoBehaviour, IPunPrefabPool
 {
     /// <summary>Contains a GameObject per prefabId, to speed up instantiation.</summary>
-    public readonly Dictionary<string, GameObject> ResourceCache = new Dictionary<string, GameObject>();
+    private readonly Dictionary<string, GameObject> ResourceCache = new Dictionary<string, GameObject>();
 
     /// <summary>Returns an inactive instance of a networked GameObject, to be used by PUN.</summary>
     /// <param name="prefabId">String identifier for the networked object.</param>

@@ -1,8 +1,6 @@
 ﻿using Photon.Pun;
 using UnityEngine;
 
-public enum SpellType { None, Projectile, Shield }
-
 public class Spell : MonoBehaviourPun, IPunObservable
 {
     protected string spellName = "";
@@ -14,29 +12,27 @@ public class Spell : MonoBehaviourPun, IPunObservable
     private float health = 10;
 
     /// <summary> Amount of damage the spell deals when touching a overlapped gameObject </summary>
-    public float damage = 10;
+    private float damage = 10;
 
     /// <summary> Lifetime of the spell after being cast. Lifetime of 0 is infinite </summary>
     private float lifeTime = 0;
 
     /// <summary> The amount of mana required to cast this spell </summary>
-    public float manaCost = 0;
+    private float manaCost = 0;
     
     public float spellSpeed = 10;
-
+    //Spell effect references
+    [SerializeField] RFX1_EffectSettingVisible visibilityScript;
+
 
 
     /// <summary> A held cast spell requires the caster to hold the spell to keep it active and release to deactivate it </summary>
     public bool RequiresHeldCast { get => requiresHeldCast; }
     public bool CanChargeOnCast { get => canChargeOnCast; }
 
-    //Spell effect references
-    [SerializeField] RFX1_EffectSettingVisible visibilityScript;
 
-    public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        
-    }
+    public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    { }
 
     [PunRPC]
     public void OnSpellReleased()
@@ -48,12 +44,9 @@ public class Spell : MonoBehaviourPun, IPunObservable
         }
     }
 
-    private void DestroySpell()
-    {
-        if (photonView.IsMine)
-        {
-            PhotonNetwork.Destroy(gameObject);
-        }
+    private void DestroySpell()
+    {
+        if (photonView.IsMine) PhotonNetwork.Destroy(gameObject);
     }
 
 

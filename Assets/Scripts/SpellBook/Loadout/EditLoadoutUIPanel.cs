@@ -46,7 +46,7 @@ public class EditLoadoutUIPanel : MonoBehaviour
         if (loadoutStepper)
         {
             loadoutStepper.OnValueChanged += HandleStepperValueChanged;
-            GetLoadout(loadoutStepper.CurrentValue);
+            SetLoadoutInUI(loadoutStepper.CurrentValue);
         }
 
         if (saveButton) saveButton.buttonClick.AddListener(SaveLoadout);
@@ -75,7 +75,7 @@ public class EditLoadoutUIPanel : MonoBehaviour
             spellButtons[i].OnSpellSelected -= HandleSpellSelected;
     }
 
-    private void GetLoadout(int index)
+    private void SetLoadoutInUI(int index)
     {
         currentSpellLoadout = LoadoutManager.LoadLoadout(index);
 
@@ -131,7 +131,7 @@ public class EditLoadoutUIPanel : MonoBehaviour
 
 
     private void HandleStepperValueChanged(int value)
-    { GetLoadout(value); }
+    { SetLoadoutInUI(value); }
 
     private void SaveLoadout()
     {
@@ -147,6 +147,6 @@ public class EditLoadoutUIPanel : MonoBehaviour
 
     private void ResetLoadout()
     {
-        GetLoadout(loadoutStepper.CurrentValue);
+        SetLoadoutInUI(loadoutStepper.CurrentValue);
     }
 }
