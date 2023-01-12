@@ -1,128 +1,117 @@
 ﻿using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Valve.VR;
+using static GestureController;
 
-public class SpellManager : MonoBehaviour {
+public class SpellManager : MonoBehaviour
+{
+    [SerializeField] private SpellBook spellBook;
     public GameObject spellCastingPoint;
-    public GameObject ExpelliarmusPrefab;
-    public GameObject StupefyPrefab;
-    public GameObject LethalPrefab;
-    public GameObject ProtegoPrefab;
-    public GameObject RotationOfProtego;
+    public GestureController gestureController;
     public PhotonView photonView;
     public Transform headTransform;
-    public SteamVR_Action_Boolean gripPressed;
-    public SteamVR_Input_Sources handType;
+    //public SteamVR_Action_Boolean gripPressed;
+    //public SteamVR_Input_Sources handType;
     public delegate void SpellValueChanged();
     public SpellValueChanged OnSpellValueChanged;
     public bool canCastSpells;
-    [HideInInspector]
-    public enum Spells {BLUELIGHTNING,REDLIGHTNING,SHIELD,NULL };
-    public Spells bufferedSpell = Spells.NULL;
-    [HideInInspector]
-    public Information Expelliarmus;
-    [HideInInspector]
-    public Information Stupefy;
-    [HideInInspector]
-    public Information Lethal;
-    [HideInInspector]
-    public bool castExpelliarmus;
-    [HideInInspector]
-    public bool castStupefy;
-    [HideInInspector]
-    public bool castLethal;
-    [HideInInspector]
-    public bool castProtego;
-    private void Start()
-    {
-        Expelliarmus = ExpelliarmusPrefab.GetComponent<Information>();
-        Stupefy = StupefyPrefab.GetComponent<Information>();
-        Lethal = LethalPrefab.GetComponent<Information>();
-        castExpelliarmus = false;
-        castStupefy = false;
-        castLethal = false;
-        castProtego = false;
-    }
-    
+    public bool isLobbyMode;
+    public VRInputModule vRInputModule;
+    public Gesture bufferedGesture = Gesture.NONE;
+    private GameObject heldSpell;
+    private bool heldCasting;
+    [SerializeField]
+    private ResourceManager resourceManager;
+
     private void Update()
     {
-        if(canCastSpells)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            CastSpell((Gesture)0);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            CastSpell((Gesture)1);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            CastSpell((Gesture)2);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            CastSpell((Gesture)3);
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            CastSpell((Gesture)4);
+
+
+        if (heldCasting)
         {
-            if(photonView.IsMine)
+            if (vRInputModule.rightController.GetHairTriggerUp() || Input.GetKeyUp(KeyCode.Alpha5))
             {
-                if(gripPressed.GetStateDown(handType))
-                {
-                    Debug.LogError("GripPressed");
-                }
-                if(bufferedSpell!=Spells.NULL && gripPressed.GetStateDown(handType))
-                {
-                    if (bufferedSpell==Spells.BLUELIGHTNING)
-                    {
-                        CastBlueLightining();
-                    }
-                    if (bufferedSpell == Spells.SHIELD)
-                    {
-                        CastShield();
-                    } 
-                    if (castStupefy == true)
-                    {
-                        CastStupefy();
-                    }
-                    if (castLethal == true)
-                    {
-                        CastLethal();
-                    }
-                }
-           }    
+                SetBufferedGesture(Gesture.NONE);
+                heldCasting = false;
+
+                //TODO Give back to pool
+                heldSpell?.GetComponent<Spell>().photonView.RPC("OnSpellReleased", RpcTarget.AllBufferedViaServer);
+                heldSpell = null;
+            }
         }
-        
+
+        if (canCastSpells && bufferedGesture != Gesture.NONE)
+        {
+            if ((photonView.IsMine || isLobbyMode) && vRInputModule.rightController.GetHairTriggerDown())
+            {
+                CastSpell(bufferedGesture);
+            }
+        }
+
     }
-    public void SetBufferedSpell(Spells value)
+
+    [PunRPC]
+    public void CastSpell(Gesture gesture)
+    { CastSpell((int)gesture); }
+
+    [PunRPC]
+    public void CastSpell(int gestureIdx)
     {
-        bufferedSpell = value;
+        if((Gesture)gestureIdx == Gesture.NONE)
+            return;
+
+        SpellData spellData = spellBook.GetSpellData(gestureIdx);
+
+        if (spellData)
+        {
+            if (spellData.manaCost < resourceManager.mana)
+            {
+                //TODO add support for canChargeOnCast spells
+
+                GameObject spellInstance = spellBook.CastSpell(gestureIdx, spellCastingPoint.transform.position, spellCastingPoint.transform.rotation);
+                resourceManager.ReduceMana(spellBook.GetSpellData(gestureIdx).manaCost);
+                bufferedGesture = Gesture.NONE;
+                Spell spell = spellInstance.GetComponent<Spell>();
+
+                if(spell && spell.RequiresHeldCast)
+                {
+                    //TODO disable casting and look for trigger up event to disable spell
+                    heldSpell = spellInstance;
+                    heldCasting = true;
+                }
+                else
+                {
+                    SetBufferedGesture(Gesture.NONE);
+                    gestureController.ResetGestureTimer();
+                    return;
+                }
+            }
+            else
+                NotEnoughMana();
+        }
+        else
+            Debug.LogWarning("No spell data found for " + ((Gesture)gestureIdx).ToString() + " gesture!");
+    }
+
+    public void SetBufferedGesture(Gesture value)
+    {
+        Debug.LogWarning("Gesture recognition system end calculation " + Time.time);
+        bufferedGesture = value;
         OnSpellValueChanged?.Invoke();
     }
-    
-    [PunRPC]
-    public void CastBlueLightining()
-    {
-        //Instatiate a spell over the network.
-        PhotonNetwork.Instantiate("Expelliarmus", spellCastingPoint.transform.position,spellCastingPoint.transform.rotation, 0);
 
-        SetBufferedSpell(Spells.NULL);
-       
-        
-    }
-    [PunRPC]
-    public void CastStupefy()
-    {
-        castStupefy = false;
-        //Instantiate the spell
-        PhotonNetwork.Instantiate("Stupefy", spellCastingPoint.transform.position,
-              spellCastingPoint.transform.rotation, 0);
-    }
-    public void CastLethal()
-    {
-        castLethal = false;
-        //Instantiate the spell
-        var spell = (GameObject)Instantiate(
-            LethalPrefab,
-            spellCastingPoint.transform.position,
-            spellCastingPoint.transform.rotation);
-        //Fire it
-        spell.GetComponent<Rigidbody>().velocity = spell.transform.forward * Lethal.speed;
-        // Destroy
-        Destroy(spell, 4.0f);
-    }
-    [PunRPC]
-    public void CastShield()
-    {
-        //Instatiate a spell over the network.
-        PhotonNetwork.Instantiate(ProtegoPrefab.name, headTransform.position, RotationOfProtego.transform.rotation, 0);
 
-        SetBufferedSpell(Spells.NULL);
+    private void NotEnoughMana()
+    {
 
     }
 }

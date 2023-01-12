@@ -1,44 +1,44 @@
 ﻿using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+public class Holder : MonoBehaviour
+{
+    public PhotonView photonView;
 
-    public class Holder : MonoBehaviour
-    {
+    [SerializeField]
+    private Transform _holderTarget;
 
-        public PhotonView photonView;
-        [SerializeField]
-        Transform _holderTarget;
     [SerializeField]
     public Vector3 offset;
 
-        protected void Awake()
+    [SerializeField]
+    private bool recordMode;
+
+    protected void Awake()
+    {
+        if (!recordMode)
         {
-            
-            /*if (!photonView.IsMine)
+            if (!photonView.IsMine)
             {
                 Destroy(this);
-            
             }
             if (_holderTarget == null)
             {
-            Debug.Log("Destroying target holder target null");
-            Destroy(this);
-            }*/
-        }
-
-        void Update()
-        {
-            //Syncrhoize transform with target transform
-            if (_holderTarget == null)
-            {
-                return;
+                Debug.Log("Destroying target holder target null");
+                Destroy(this);
             }
-
-            transform.position = _holderTarget.position-offset;
-            transform.rotation = _holderTarget.rotation;
-
         }
     }
 
+    private void Update()
+    {
+        //Syncrhoize transform with target transform
+        if (_holderTarget == null)
+        {
+            return;
+        }
+
+        transform.position = _holderTarget.position - offset;
+        transform.rotation = _holderTarget.rotation;
+    }
+}

@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using AirSig;
 using Photon.Pun;
 
 public class AvatarStateController : MonoBehaviour {
@@ -12,7 +11,7 @@ public class AvatarStateController : MonoBehaviour {
     public Transform leftArm;
     public Transform rightArm;
     public PhotonView photonView;
-    public HealthManager hManager;
+    public ResourceManager resourceManager;
     public GameObject aliveAvatar;
     public GameObject deadAvatar;
     public SpellManager sManager;
@@ -21,9 +20,13 @@ public class AvatarStateController : MonoBehaviour {
     [SerializeField]
     private GameObject aliveAvatarBody;
     [SerializeField]
+    private GestureController gestureController;
+    [SerializeField]
     private List<GameObject> listGO;
     private int positionIndex;
-
+    public AvatarRagdollController avatarRagdollController;
+    [SerializeField]
+    bool isOfflineMode;
     VRIK avatarScript;
     VRIK deadAvatarScript;
     
@@ -31,14 +34,16 @@ public class AvatarStateController : MonoBehaviour {
     [PunRPC]
     void Start () {
 
-       
-        if(photonView.IsMine)
+
+        if(isOfflineMode)
         {
-           
+            PhotonNetwork.OfflineMode = true;
+            SpawnAvatarBody();
+        }
+        if (photonView.IsMine)
+        {
             positionIndex = (int)PhotonNetwork.LocalPlayer.CustomProperties["position"];
             photonView.RPC("SpawnAvatarBody", RpcTarget.AllViaServer);
-            
-
         }
         
 
@@ -47,21 +52,29 @@ public class AvatarStateController : MonoBehaviour {
     [PunRPC]
     public void SpawnAvatarBody()
     {
+        
+            if (!photonView.IsMine)
+            {
+            if(!isOfflineMode)
+            {
+                gestureController.enabled = false;
+               
+            }
+                
 
-        if(!photonView.IsMine)
-        {
-            playerCamera.enabled = false;
-        }
-        else
-        {
-            aliveAvatarBody.SetActive(false);
-        }
+            }
+            else
+            {
+
+               //TurnOffAvatarBodyForLocalPlayer();
+            }
+        
+        
         aliveAvatar.SetActive(true);
-        deadAvatar.SetActive(false);
-        aliveAvatar.GetComponent<SpawnInfo>().playerReference = this.gameObject;
-        aliveAvatar.GetComponent<SpawnInfo>().AwakeAvatar();
+        avatarRagdollController.TurnOffRagdoll();
         sManager.canCastSpells = true;
-        hManager.health = 100f;
+        resourceManager.health = 100f;
+        resourceManager.mana = 100f;
         avatarScript = aliveAvatar.GetComponent<VRIK>();
         avatarScript.solver.spine.headTarget = head;
         avatarScript.solver.leftArm.target = leftArm;
@@ -69,23 +82,37 @@ public class AvatarStateController : MonoBehaviour {
         
 
     }
+    private void TurnOffAvatarBodyForLocalPlayer()
+    {
+        foreach(SkinnedMeshRenderer meshRenderer in aliveAvatarBody.transform.GetComponentsInChildren<SkinnedMeshRenderer>())
+        {
+            meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
+        }
+    }
+    private void TurnOnAvatarBodyForLocalPlayer()
+    {
+        foreach (SkinnedMeshRenderer meshRenderer in aliveAvatarBody.transform.GetComponentsInChildren<SkinnedMeshRenderer>())
+        {
+            Debug.LogError("Turning on the avatar for local player");
+            meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
+        }
+    }
     [PunRPC]
     public void ChangeAvatarToDead()
     {
         if(photonView.IsMine)
         {
-            aliveAvatarBody.SetActive(true);
+            TurnOnAvatarBodyForLocalPlayer();
         }
+        avatarRagdollController.TurnOnRagdoll();
         sManager.canCastSpells = false;
-        aliveAvatar.SetActive(false);
-        deadAvatar.SetActive(true);
-        deadAvatar.GetComponent<SpawnInfo>().playerReference = this.gameObject;
-        
+        //aliveAvatar.SetActive(false);
+        //deadAvatar.SetActive(true);
 
-        deadAvatarScript = deadAvatar.GetComponent<VRIK>();
+       /* deadAvatarScript = deadAvatar.GetComponent<VRIK>();
         deadAvatarScript.solver.spine.headTarget = head;
         deadAvatarScript.solver.leftArm.target = leftArm;
-        deadAvatarScript.solver.rightArm.target = rightArm;
+        deadAvatarScript.solver.rightArm.target = rightArm;*/
         
     }
    

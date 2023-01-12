@@ -4,10 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - OffensiveSpell
-  - LethalOffensiveSpell
-  - SimpleDefensiveSpell
   - Environment
+  - SimpleDefensiveSpell
+  - ExcludeTeleport
+  - TeleportIgnore
+  - OffensiveSpell
+  - VRInputModule
+  - TeaBag
+  - projectile
+  - ReferenceHolder
   layers:
   - Default
   - TransparentFX
@@ -17,12 +22,12 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PlayerBody
+  - VRTKCollision
+  - AnimationTriggerBox
+  - Environment
+  - Projectile
+  - Shield
   - 
   - 
   - 

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0335ff6bcc3ad3843af7b6d1dbcb5688, type: 3}
+  m_Name: SD_DarknessBlast
+  m_EditorClassIdentifier: 
+  buildReady: 1
+  spellName: Darkness Blast
+  spellSprite: {fileID: 21300000, guid: e5f8e29c0eb39d74e9509b0469b5204c, type: 3}
+  requiresHeldCast: 0
+  canChargeOnCast: 0
+  manaCost: 50
+  health: 1
+  damage: 70
+  lifetime: 5
+  spellSpeed: 20
+  feedback: 12
+  spellPrefab: {fileID: 430534422712864713, guid: d190ffe2dbcd8c84495beefb5014e72d,
+    type: 3}
+  spellScale: {x: 1, y: 1, z: 1}
+  shouldTintSpell: 0
+  spellTint: {r: 1, g: 1, b: 1, a: 1}
+  hitEffectPrefab: {fileID: 0}
+  hitEffectScale: {x: 1, y: 1, z: 1}
+  overrideEffectColor: 0
+  hitEffectColorMultiplier: {r: 1, g: 1, b: 1, a: 1}

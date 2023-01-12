@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Valve.VR;
+
 public class TrailController : MonoBehaviour {
-    public SteamVR_Action_Boolean trigger;
-    public SteamVR_Input_Sources handType;
+    
     private TrailRenderer tRenderer;
     private GameObject trailToDestroy;
     public GameObject trail;
@@ -14,8 +13,8 @@ public class TrailController : MonoBehaviour {
     }
     void OnEnable()
     {
-        trigger.AddOnStateDownListener(TurnOnTrail,handType);
-        trigger.AddOnStateUpListener(TurnOffTrail, handType);
+        //trigger.AddOnStateDownListener(TurnOnTrail,handType);
+       // trigger.AddOnStateUpListener(TurnOffTrail, handType);
       
     }
     
@@ -23,18 +22,24 @@ public class TrailController : MonoBehaviour {
 
     void OnDisable()
     {
-        trigger.RemoveOnStateDownListener(TurnOnTrail, handType);
-        trigger.RemoveOnStateUpListener(TurnOffTrail, handType);
+        //trigger.RemoveOnStateDownListener(TurnOnTrail, handType);
+        //trigger.RemoveOnStateUpListener(TurnOffTrail, handType);
     }
 
     
-    void TurnOnTrail(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+    public void TurnOnTrail()
     {
         trailToDestroy=Instantiate(trail,gameObject.transform);
     }
-    void TurnOffTrail(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+    public void TurnOffTrail()
+    {
+        //if(!trailToDestroy)
+        if(trailToDestroy)
+        trailToDestroy.transform.parent = null;
+    }
+    /*publicvoid TurnOffTrail(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
     {
         trailToDestroy.transform.parent = null;
         
-    }
+    }*/
 }

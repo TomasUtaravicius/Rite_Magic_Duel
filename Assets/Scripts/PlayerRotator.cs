@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerRotator : MonoBehaviour
 {
+    
     public GameObject cameraObject;
     public PhotonView photonView;
     public Transform spellCastingPoint;
@@ -25,11 +26,11 @@ public class PlayerRotator : MonoBehaviour
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
-                        sManager.CastBlueLightining();
+                        sManager.CastSpell(GestureController.Gesture.Sandtimer);
                     }
                     if (Input.GetMouseButtonDown(1))
                     {
-                        sManager.CastShield();
+                        sManager.CastSpell(GestureController.Gesture.Circle);
                     }
                 }
             }

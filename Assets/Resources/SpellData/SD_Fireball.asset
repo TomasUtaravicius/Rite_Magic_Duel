@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0335ff6bcc3ad3843af7b6d1dbcb5688, type: 3}
+  m_Name: SD_Fireball
+  m_EditorClassIdentifier: 
+  buildReady: 1
+  spellName: Fireball
+  spellSprite: {fileID: 21300000, guid: 09afc7129c6400947ab194811d1e314b, type: 3}
+  requiresHeldCast: 0
+  canChargeOnCast: 0
+  manaCost: 40
+  health: 1
+  damage: 60
+  lifetime: 5
+  spellSpeed: 25
+  feedback: 12
+  spellPrefab: {fileID: 7517615193761686243, guid: 8d36d450871c16a4ca5a33cebc2dfd76,
+    type: 3}
+  spellScale: {x: 1, y: 1, z: 1}
+  shouldTintSpell: 1
+  spellTint: {r: 1, g: 0.2607861, b: 0.16509432, a: 1}
+  hitEffectPrefab: {fileID: 0}
+  hitEffectScale: {x: 1, y: 1, z: 1}
+  overrideEffectColor: 0
+  hitEffectColorMultiplier: {r: 1, g: 1, b: 1, a: 1}
